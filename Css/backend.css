@@ -21,12 +21,6 @@ button {
    font-family: 'Poppins', sans-serif;
 }
 
-.tip {
-    font-size: 20px;
-    margin: 40px auto 50px;
-    text-align: center;
-}
-
 .cont {
     border-radius: 20px;
     overflow: hidden;
@@ -259,32 +253,12 @@ select {
     text-align: center;
 }
 
-
-
-.forgot-pass {
-    margin-top: 15px;
-    text-align: center;
-    font-size: 12px;
-    color: #000000;
-}
-
 .submit {
     margin-top: 40px;
     margin-bottom: 20px;
     background:  #4EA685;
     text-transform: uppercase;
 }
-/*
-.fb-btn {
-    border: 2px solid #d3dae9;
-    color: #8fa1c7;
-}
-
-.fb-btn span {
-    font-weight: bold;
-    color: #455a81;
-}
-*/
 
 .sign-in {
     -webkit-transition-timing-function: ease-out;
