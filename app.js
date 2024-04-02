@@ -14,3 +14,19 @@ app.listen(9362);
 app.get('/',(req, res) => {
     res.render('login');
 });
+
+app.get('/backend',(req, res) => {
+    res.render('backend');
+});
+
+app.get('/backend2',(req, res) => {
+    res.render('backend2');
+});
+
+app.get('/fiter',(req, res) => {
+    res.render('fiter');
+});
+
+app.get('/tailor',(req, res) => {
+    res.render('tailor');
+});
