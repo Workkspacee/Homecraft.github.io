@@ -1,6 +1,15 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
+
+//connection to mongodb
+const dbURI = 'mongodb+srv://workspace:workspace123@homecraft.mdiguvg.mongodb.net/Homecraft?retryWrites=true&w=majority&appName=Homecraft'
+mongoose.connect(dbURI)
+.then((result) => {
+    app.listen(9362);
+    console.log('connection established.')})
+    .catch((err) => console.log(err));
 
 // view engine dynamic data use karva ma help kare 
 app.set('view engine','ejs');
@@ -8,10 +17,6 @@ app.set('view engine','ejs');
 //for linking static file(css files)
 app.use(express.static('css'));
 app.use(express.static('Script'));
-
-app.listen(9362);
-
-console.log('connection established');
 
 app.get('/', (req, res) => res.render('login'));
 app.get('/backend', (req, res) => res.render('backend'));
