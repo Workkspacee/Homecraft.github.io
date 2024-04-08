@@ -8,26 +8,40 @@ body {
     background-repeat: no-repeat;
 }
 .container {
-    max-width: 400px;
+    max-width: 1000px; 
     margin: 100px auto;
     padding: 20px;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
-	align-items: center;
+	align-items: top;
 	justify-content: center;
 	min-height: 100vh;
-}
-
-.screen__content {
-	z-index: 1;
-	position: relative;	
-	height: 100%;
 }
 
 .login {
 	width: 1100px;
 	padding: 30px;
 	padding-top: 10px;
+}
+
+.login__field {
+	padding: 10px 0px;	
+	position: relative;	
+}
+
+.login__input {
+	border: none;
+	border-bottom: 2px solid #a29f9f;
+	background: none;
+	padding: 1px;
+	padding-left: 1px;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+}
+
+.table1 {
+	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 }
