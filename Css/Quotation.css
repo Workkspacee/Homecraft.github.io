@@ -30,3 +30,7 @@ body{
 	width: 75%;
 	transition: .2s;
 }
+
+.table1 {
+	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
+}
