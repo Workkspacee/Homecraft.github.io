@@ -8,7 +8,7 @@ var counter = 1; // Counter for unique labels and names
 
     // Create a unique label and name
     var label = document.createElement("label");
-    label.innerHTML = "Room number " + " : ";
+    label.innerHTML = "Room number " + " : "+ counter;
     var name = "Room number" + counter;
 
     // Set name and id attribute for the text field
@@ -56,8 +56,6 @@ var counter = 1; // Counter for unique labels and names
 
 
 
-var count = 1; // Counter for unique labels and names
-
   function addTextFieldforwindow() {      // function for add window
 
      // Create a new text field
@@ -67,8 +65,8 @@ var count = 1; // Counter for unique labels and names
  
      // Create a unique label and name
      var label = document.createElement("label");
-     label.innerHTML = "Window number " + " : ";
-     var name = "Window number" + count;
+     label.innerHTML = "Window number " + " : "+ counter;
+     var name = "Window number" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -91,7 +89,7 @@ var count = 1; // Counter for unique labels and names
     // Create a unique label and name
     var label = document.createElement("label");
     label.innerHTML = "Width (inch) " + " : ";
-    var name = "Width" + count;
+    var name = "Width" + counter;
 
     // Set name and id attribute for the text field
     textField.setAttribute("name", name);
@@ -113,7 +111,7 @@ var count = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Height (inch) " + " : ";
-     var name = "Height" + count;
+     var name = "Height" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -134,7 +132,7 @@ var count = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Type of curtain " + " : ";
-     var name = "Type of curtain" + count;
+     var name = "Type of curtain" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -158,7 +156,7 @@ var count = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Fabric " + " : ";
-      var name = "Fabric" + count;
+      var name = "Fabric" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
@@ -181,7 +179,7 @@ var count = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Fabric req (meter) " + " : ";
-      var name = "Fabric req" + count;
+      var name = "Fabric req" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
@@ -205,7 +203,7 @@ var count = 1; // Counter for unique labels and names
        // Create a unique label and name
        var label = document.createElement("label");
        label.innerHTML = "Blackout " + " : ";
-       var name = "Blackout" + count;
+       var name = "Blackout" + counter;
    
        // Set name and id attribute for the text field
        textField.setAttribute("name", name);
@@ -228,7 +226,7 @@ var count = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Blackout req (meter) " + " : ";
-      var name = "Blackout req" + count;
+      var name = "Blackout req" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
@@ -244,6 +242,6 @@ var count = 1; // Counter for unique labels and names
  
 
     // Increment the counter for the next label and name
-    count++;
+    counter++;
   }
 
