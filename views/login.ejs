@@ -15,7 +15,7 @@
 			<!-- SIGN UP -->
 			<div class="col align-items-center flex-col sign-up"> <!--left column-->
 				<div class="form-wrapper align-items-center"> <!--akha form ne ek ma wrap karine center ma align karse-->
-					<form action="/User" method="post">
+					<form action="/signup" method="post">
 						<div class="form sign-up">
 							<div class="input-group">
 								<i class="fas fa-user"></i>
@@ -23,22 +23,22 @@
 							</div>
 							<div class="input-group">
 								<i class="fas fa-user-edit"></i>
-								<select>
-									<option>Admin</option>
-									<option>Backend</option>
-									<option>Fitter</option>
-									<option>Tailor</option>
+								<select name="role">
+									<option value="admin">Admin</option>
+									<option value="backend">Backend</option>
+									<option value="fiter">Fitter</option>
+									<option value="tailor">Tailor</option>
 								</select>
 							</div>
 							<div class="input-group">
 								<i class="fas fa-lock"></i>
-								<input type="password" placeholder="Password">
+								<input type="password" placeholder="Password" name="password">
 							</div>
-							<div class="input-group">
+							<!--<div class="input-group">
 								<i class="fas fa-unlock-alt"></i>
 								<input type="password" placeholder="Confirm password">
-							</div>
-							<button>
+							</div>-->
+							<button type="submit">
 								Sign up
 							</button>
 							<p>
@@ -58,17 +58,17 @@
 			<!-- SIGN IN -->  <!--login page-->
 			<div class="col align-items-center flex-col sign-in">
 				<div class="form-wrapper align-items-center">
-					<form action="/User" method="post">
+					<form action="/login" method="post">
 						<div class="form sign-in">
 							<div class="input-group">
 								<i class="fas fa-user-circle"></i>
-								<input type="text" placeholder="Username">
+								<input type="text" placeholder="Username" name="username">
 							</div>
 							<div class="input-group">
 								<i class="fas fa-unlock-alt"></i>
-								<input type="password" placeholder="Password">
+								<input type="password" placeholder="Password" name="password">
 							</div>
-							<button>
+							<button type="submit">
 								Sign in
 							</button>
 							<p>
