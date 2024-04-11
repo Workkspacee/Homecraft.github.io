@@ -92,5 +92,6 @@ module.exports = router;
 // footer ma nice corner par made with love by @ names
 // auto genreated motivation quotes ? header uper ?
 // header ma vache username prine karaviaa
+//our team
 
 // fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
