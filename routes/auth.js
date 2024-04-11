@@ -85,4 +85,12 @@ module.exports = router;
 // chechk box for showing password
 // Quotation 
 // signup limitation
-//
+// work order status in all 
+
+// add footer and header add karvu che? 
+// homecraft and their logo in headder and logout button ?
+// footer ma nice corner par made with love by @ names
+// auto genreated motivation quotes ? header uper ?
+// header ma vache username prine karaviaa
+
+// fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
