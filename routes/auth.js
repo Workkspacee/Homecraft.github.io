@@ -77,3 +77,10 @@ router.get('/logout', (req, res) => {
 });
 
 module.exports = router;
+
+
+
+// logout button
+// re enter password
+// chechk box for showing password
+// Quotation 
