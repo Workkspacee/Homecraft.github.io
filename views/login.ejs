@@ -5,6 +5,7 @@
   <title>login/signup</title>
   <link rel="stylesheet" href="/login.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css" />
 </head>
 
 <body>
@@ -66,7 +67,8 @@
 							</div>
 							<div class="input-group">
 								<i class="fas fa-unlock-alt"></i>
-								<input type="password" placeholder="Password" name="password">
+								<input type="password" placeholder="Password" id="password" name="password">
+								<input type="checkbox" id="showPassword" class="check">
 							</div>
 							<button type="submit">
 								Login
@@ -86,6 +88,16 @@
 							</p>
 						</div>
 					</form>
+					<script>
+						const passwordInput = document.getElementById('password');
+						const showPasswordCheckbox = document.getElementById('showPassword');
+				
+						showPasswordCheckbox.addEventListener('change', function() {
+							const isChecked = this.checked;
+							passwordInput.type = isChecked ? 'text' : 'password';
+						});
+					</script>
+				
 				</div>
 				<div class="form-wrapper">
 		

@@ -81,6 +81,14 @@ body {
     color: var(--gray-2);
 }
 
+.check {
+    position: absolute;
+    top: 50%;
+    left: 130px;
+    transform: translateY(-50%);
+}
+
+
 .input-group input {
     width: 100%;
     padding: 1rem 3rem;
@@ -90,6 +98,7 @@ body {
     border: 0.125rem solid var(--white);
     outline: none;
 }
+
 
 .input-group input:focus {
     border: 0.125rem solid var(--primary-color);
@@ -288,6 +297,7 @@ body {
     right: 50%;
 }
 
+
 /* RESPONSIVE */
 
 @media only screen and (max-width: 425px) {
@@ -357,3 +367,4 @@ body {
         font-size: 2rem;
     }
 }
+
