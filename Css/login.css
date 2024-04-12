@@ -81,13 +81,6 @@ body {
     color: var(--gray-2);
 }
 
-.check {
-    position: absolute;
-    top: 50%;
-    left: 130px;
-    transform: translateY(-50%);
-}
-
 
 .input-group input {
     width: 100%;
@@ -366,5 +359,9 @@ body {
         margin: .5rem;
         font-size: 2rem;
     }
+}
+
+.check{
+    align-content: start;
 }
 
