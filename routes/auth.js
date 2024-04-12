@@ -102,3 +102,8 @@ module.exports = router;
 
 // fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
 //add float label ?
+
+//back back2 header footer done and is perfect
+//admin footer done but ek vaar joi karvanu brbr nathi lagtu mane
+//fiter done fiter2 error footer brbr nai fiter ma
+//
