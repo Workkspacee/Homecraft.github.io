@@ -20,7 +20,7 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', async (req, res) => {
   try {
-    const { username, password, role } = req.body;
+    const { username, password, conpassword, role} = req.body;
     
     // Check if username already exists
     const existingUser = await User.findOne({ username });
@@ -29,6 +29,12 @@ router.post('/signup', async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Check if passwords match
+    if (password !== conpassword) {
+      return res.status(400).send("Passwords don't match");
+    }
+
     const user = new User({ username, password: hashedPassword, role });
     await user.save();
     res.redirect('/login');
@@ -42,11 +48,11 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'Authentication failed' });
+      return res.status(401).json({ message: 'User name is not matched' });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Authentication failed' });
+      return res.status(401).json({ message: 'Password is wrong' });
     }
     req.session.user = { id: user._id, username: user.username, role: user.role };
     res.redirect('/dashboard');
