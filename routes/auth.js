@@ -105,5 +105,5 @@ module.exports = router;
 
 //back back2 header footer done and is perfect
 //admin footer done but ek vaar joi karvanu brbr nathi lagtu mane
-//fiter done fiter2 error footer brbr nai fiter ma
+//fiter done but brbr nai avtun and fiter2(remaining)
 //
