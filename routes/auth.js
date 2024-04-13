@@ -106,4 +106,4 @@ module.exports = router;
 //back back2 header footer done and is perfect
 //admin footer done but ek vaar joi karvanu brbr nathi lagtu mane
 //fiter done but brbr nai avtun and fiter2(remaining)
-//
+// difference shu che backend and bija pages ma aa jovanu che atle khbr pde k footer nd haeder km different ave che
