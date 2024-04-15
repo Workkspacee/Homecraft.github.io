@@ -362,9 +362,11 @@ body {
 }
 
 .check{
-    display: flex; 
-    align-items: center; 
-    margin-left: 10px;
+
+    align-content: start;
+    padding-bottom: 20px;
+    color: #757575;
+
 }
 
 

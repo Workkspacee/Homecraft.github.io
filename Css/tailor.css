@@ -1,3 +1,9 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 body {
@@ -7,6 +13,11 @@ body {
     background-position: center;
     background-repeat: no-repeat;
 }
+
+form {
+    text-align: center;
+}
+
 .container {
     max-width: 400px;
     margin: 100px auto;
@@ -53,4 +64,46 @@ body {
 
 .submit-btn:hover {
     background-color: #179c6b;
+}
+
+.header1 {
+    width: auto;
+    height: 100px;
+    background-color: white;
+}
+
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 120px;
+    margin-left: 25px;
+    margin-right: 75px;
+}
+
+nav img{
+    height: 70px;
+}
+
+nav h3{
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+
+nav a{
+    color: #4EA685;
+    display: block;
+}
+
+.footer{
+    width: auto;
+    height: 100px;
+    background-color: white;
+    border-bottom: #000000;
+    padding-top: 40px;
+}
+
+p{
+    font-size: 20px;
+    color: #4EA685;
 }

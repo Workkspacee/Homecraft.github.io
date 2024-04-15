@@ -102,3 +102,9 @@ module.exports = router;
 
 // fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
 //add float label ?
+
+//back back2 header footer done and is perfect
+//tailor and tailor2 h & f done perfectly and tailor.ejs ma br tag comment kareli che aa rakhvi k ni aa jovanu che
+//admin footer done but ek vaar joi karvanu brbr nathi lagtu mane
+//fiter done but brbr nai avtun and fiter2(remaining) and quotation also remaining
+// difference shu che backend and bija pages ma aa jovanu che atle khbr pde k footer nd haeder km different ave che
