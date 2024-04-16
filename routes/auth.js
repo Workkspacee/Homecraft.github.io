@@ -98,5 +98,5 @@ module.exports = router;
 // fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
 // add float label ?
 
-//admin footer done but ek vaar joi karvanu brbr nathi lagtu mane
-//fiter done but brbr nai avtun and fiter2(remaining) and quotation also remaining
+//admin footer after data show
+//fiter2(remaining) and quotation also remaining
