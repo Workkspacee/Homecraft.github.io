@@ -83,16 +83,22 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-router.post('/details', (req,res) =>{
+//saving data in datadase
+router.post('/dashboard', (req,res) =>{
+  console.log(req.body);
   const data = new Data(req.body);
 
-  Data.save()
+   data.save()
     .then((result) => {
-      res.redirect('/details');
+      res.redirect('/backend');
     })
     .catch((err) => {
       console.log(err);
     });
+});
+
+router.get('/details', async(req,res) => {
+  res.redirect('/dashboard');
 });
 
 module.exports = router;
