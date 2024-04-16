@@ -19,53 +19,55 @@
     <br>
     
     <div class="cont">
-        <div class="form sign-in">
-            <h2>Create New Work Order</h2>
-            <label>
-                <span>Work Order No</span>
-                <input type="text" name="work_no" required/>
-            </label>
-            <label>
-                <span>Date</span>
-                <input type="date" name="date" />
-            </label>
-            <label>
-                <span>Delivery Date</span>
-                <input type="date" name="d_date" />
-            </label>
-            <label>
-                <span>Phone Number</span>
-                <input type="tel" maxlength="10" name="p_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
-            </label>
-            <label>
-                <span>Address</span>
-                <textarea name="add" cols="30" rows="5"></textarea><br>
-            </label>
-            <label>
-                <span>Fabric Type</span>
-                <input type="text" name="f_type"/>
-            </label>
-            <label>
-                <span>Fabric Order Status</span>
-                <select name="f_status">
-                    <option>Order Pending</option>
-                    <option>Delivery Pending</option>
-                    <option>Delivered</option>
-                </select>
-            </label>
-            <label>
-                <span>Work Order Status</span>
-                <select name="w_status">
-                    <option>Details Pending</option>
-                    <option>Measurement Pending</option>
-                    <option>Given for Stiching</option>
-                    <option>Delivery Pending</option>
-                    <option>Order Delivered</option>
-                </select>
-            </label>
-            <button type="button" class="submit">Submit</button>
-         
-        </div>
+        <form action="/details">
+            <div class="form sign-in">
+                <h2>Create New Work Order</h2>
+                <label>
+                    <span>Work Order No</span>
+                    <input type="text" name="work_no" required/>
+                </label>
+                <label>
+                    <span>Date</span>
+                    <input type="date" name="date" />
+                </label>
+                <label>
+                    <span>Delivery Date</span>
+                    <input type="date" name="d_date" />
+                </label>
+                <label>
+                    <span>Phone Number</span>
+                    <input type="tel" maxlength="10" name="p_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                </label>
+                <label>
+                    <span>Address</span>
+                    <textarea name="add" cols="30" rows="5"></textarea><br>
+                </label>
+                <label>
+                    <span>Fabric Type</span>
+                    <input type="text" name="f_type"/>
+                </label>
+                <label>
+                    <span>Fabric Order Status</span>
+                    <select name="f_status">
+                        <option>Order Pending</option>
+                        <option>Delivery Pending</option>
+                        <option>Delivered</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Work Order Status</span>
+                    <select name="w_status">
+                        <option>Details Pending</option>
+                        <option>Measurement Pending</option>
+                        <option>Given for Stiching</option>
+                        <option>Delivery Pending</option>
+                        <option>Order Delivered</option>
+                    </select>
+                </label>
+                <button class="submit" type="submit">Submit</button>
+            
+            </div>
+        </form>
         <div class="sub-cont">
             <div class="img">
                 <div class="img__text m--up">
