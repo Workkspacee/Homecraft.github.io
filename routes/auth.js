@@ -68,7 +68,7 @@ router.get('/dashboard', (req, res) => {
   }
   const { role } = req.session.user;
   if (role === 'admin') {
-    return res.render('admin', { username: req.session.user.username }, work_no);
+    return res.render('admin', { username: req.session.user.username });
   } else if (role === 'backend') {
     return res.render('backend', { username: req.session.user.username });
   } else if (role === 'fiter') {
