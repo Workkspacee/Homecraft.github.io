@@ -88,7 +88,7 @@ router.post('/details', async(req,res) => {
   try {
     const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
     
-    // Check if username already exists
+    // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
     if (existingno) {
       return res.status(400).json({ message: 'Order number already exists' });
