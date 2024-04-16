@@ -3,6 +3,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+const Data = require('../models/data');
 
 const router = express.Router();
 
@@ -82,7 +83,20 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+router.post('/details', (req,res) =>{
+  const data = new Data(req.body);
+
+  Data.save()
+    .then((result) => {
+      res.redirect('/details');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 module.exports = router;
+
 
 
 

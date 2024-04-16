@@ -12,4 +12,5 @@ const dataSchema = new mongoose.Schema({
     w_status: { type: String, enum: ['details pending', 'measurement pending', 'given for stiching', 'delivery pending', 'order delivered'], default: 'pending'},
 });
 
-module.exports = mongoose.model('data', dataSchema);
+const Data = mongoose.model('Data', dataSchema);
+module.exports = Data;
