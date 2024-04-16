@@ -161,11 +161,21 @@ router.get('/backend', async(req,res) => {
 
 
 
-
-
 module.exports = router;
 
+//to display work orders on admin page
+// router.get('/dashboard', async (req, res) => {
+//   try {
+//     // Fetch work orders from the database
+//     const workOrders = await Data.find();
 
+//     // Render the HTML page with work orders
+//     res.render('dashboard', { workOrders });
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).send('Internal Server Error');
+//   }
+// });
 
 
 
