@@ -84,6 +84,7 @@ router.get('/logout', (req, res) => {
 });
 
 //saving data in datadase
+
 router.post('/details', async(req,res) => {
   try {
     const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
@@ -107,6 +108,60 @@ router.post('/details', async(req,res) => {
 router.get('/details', async(req,res) => {
   res.redirect('/dashboard');
 });
+
+router.post('/edit', async(req,res) => {
+  const { work_no } = req.body;
+
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('backend2', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+
+router.get('/edit', async(req,res) =>{
+  res.redirect('backend2');
+});
+
+
+router.post('/update-edit', async (req, res) => {
+  try {
+    const { work_no, date, d_date, p_no, add, f_type, f_status, w_status } = req.body;
+
+    // Find the document by work_no and update it
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+      { date: date, d_date: d_date, p_no: p_no, add: add, f_type: f_type, f_status: f_status, w_status: w_status },
+      { new: true }
+    );
+
+    if (!updatedData) {
+      // If the document with the specified work_no is not found, return an error
+      return res.status(404).send('Order not found');
+    }
+
+    // Redirect to a success page after the update
+    res.redirect('backend');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
+router.get('/backend', async(req,res) => {
+  res.render('backend');
+});
+
+
+
+
 
 module.exports = router;
 

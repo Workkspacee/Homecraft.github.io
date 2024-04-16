@@ -20,53 +20,55 @@
 <br>
 <br>
     <div class="cont">
-        <div class="form sign-in">
-            <h2>Edit Work Order</h2>
-            <label>
-                <span>Work Order No</span>
-                <input type="text" />
-            </label>
-            <label>
-                <span>Date</span>
-                <input type="date" />
-            </label>
-            <label>
-                <span>Delivery Date</span>
-                <input type="date" />
-            </label>
-            <label>
-                <span>Phone Number</span>
-                <input type="tel" maxlength="10" />
-            </label>
-            <label>
-                <span>Address</span>
-                <textarea name="name" cols="30" rows="5"></textarea><br>
-            </label>
-            <label>
-                <span>Fabric Type</span>
-                <input type="text" />
-            </label>
-            <label>
-                <span>Fabric Order Status</span>
-                <select>
-                    <option>Order Pending</option>
-                    <option>Delivery Pending</option>
-                    <option>Delivered</option>
-                </select>
-            </label>
-            <label>
-                <span>Work Order Status</span>
-                <select>
-                    <option>Details Pending</option>
-                    <option>Measurement Pending</option>
-                    <option>Given for Stiching</option>
-                    <option>Delivery Pending</option>
-                    <option>Order Delivered</option>
-                </select>
-            </label>
-            <button type="button" class="submit">Submit</button>
-         
-        </div>
+        <form action="/update-edit" method="post">
+            <div class="form sign-in">
+                <h2>Edit Work Order</h2>
+                <label>
+                    <span>Work Order No</span>
+                    <input type="text" name="work_no" value="<%= no.work_no %>" readonly />
+                </label>
+                <label> 
+                    <span>Date</span>
+                    <input type="date" name="date" value="<%= no.date %>"/>
+                </label>
+                <label>
+                    <span>Delivery Date</span>
+                    <input type="date" name="d_date" value="<%= no.d_date %>"/>
+                </label>
+                <label>
+                    <span>Phone Number</span>
+                    <input type="tel" maxlength="10" name="p_no" value="<%= no.p_no %>" />
+                </label>
+                <label>
+                    <span>Address</span>
+                    <textarea name="add" cols="30" rows="5" value="<%= no.add %>"></textarea><br>
+                </label>
+                <label>
+                    <span>Fabric Type</span>
+                    <input type="text" name="f_type" value="<%= no.f_type %>"/>
+                </label>
+                <label>
+                    <span>Fabric Order Status</span>
+                    <select name="f_status" value="<%= no.f_status %>">
+                        <option>Order Pending</option>
+                        <option>Delivery Pending</option>
+                        <option>Delivered</option>
+                    </select>
+                </label>
+                <label>
+                    <span>Work Order Status</span>
+                    <select name="w_status" value="<%= no.w_status %>">
+                        <option>Details Pending</option>
+                        <option>Measurement Pending</option>
+                        <option>Given for Stiching</option>
+                        <option>Delivery Pending</option>
+                        <option>Order Delivered</option>
+                    </select>
+                </label>
+                <button type="submit" class="submit">Submit</button>
+            
+            </div>
+        </form>
         <div class="sub-cont">
             <div class="img">
             </div>
