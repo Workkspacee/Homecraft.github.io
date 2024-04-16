@@ -68,7 +68,7 @@ router.get('/dashboard', (req, res) => {
   }
   const { role } = req.session.user;
   if (role === 'admin') {
-    return res.render('admin', { username: req.session.user.username });
+    return res.render('admin', { username: req.session.user.username }, work_no);
   } else if (role === 'backend') {
     return res.render('backend', { username: req.session.user.username });
   } else if (role === 'fiter') {
@@ -84,7 +84,6 @@ router.get('/logout', (req, res) => {
 });
 
 //saving data in datadase
-
 router.post('/details', async(req,res) => {
   try {
     const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
@@ -164,19 +163,7 @@ router.get('/backend', async(req,res) => {
 
 module.exports = router;
 
-//to display work orders on admin page
-// router.get('/dashboard', async (req, res) => {
-//   try {
-//     // Fetch work orders from the database
-//     const workOrders = await Data.find();
 
-//     // Render the HTML page with work orders
-//     res.render('dashboard', { workOrders });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Internal Server Error');
-//   }
-// });
 
 
 
