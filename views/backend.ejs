@@ -23,31 +23,31 @@
             <h2>Create New Work Order</h2>
             <label>
                 <span>Work Order No</span>
-                <input type="text" />
+                <input type="text" name="work_no" required/>
             </label>
             <label>
                 <span>Date</span>
-                <input type="date" />
+                <input type="date" name="date" />
             </label>
             <label>
                 <span>Delivery Date</span>
-                <input type="date" />
+                <input type="date" name="d_date" />
             </label>
             <label>
                 <span>Phone Number</span>
-                <input type="tel" maxlength="10" />
+                <input type="tel" maxlength="10" name="p_no" oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
             </label>
             <label>
                 <span>Address</span>
-                <textarea name="name" cols="30" rows="5"></textarea><br>
+                <textarea name="add" cols="30" rows="5"></textarea><br>
             </label>
             <label>
                 <span>Fabric Type</span>
-                <input type="text" />
+                <input type="text" name="f_type"/>
             </label>
             <label>
                 <span>Fabric Order Status</span>
-                <select>
+                <select name="f_status">
                     <option>Order Pending</option>
                     <option>Delivery Pending</option>
                     <option>Delivered</option>
@@ -55,7 +55,7 @@
             </label>
             <label>
                 <span>Work Order Status</span>
-                <select>
+                <select name="w_status">
                     <option>Details Pending</option>
                     <option>Measurement Pending</option>
                     <option>Given for Stiching</option>
