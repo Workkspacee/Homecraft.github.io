@@ -84,18 +84,25 @@ router.get('/logout', (req, res) => {
 });
 
 //saving data in datadase
-router.post('/dashboard', (req,res) =>{
-  console.log(req.body);
-  const data = new Data(req.body);
+router.post('/details', async(req,res) => {
+  try {
+    const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
+    
+    // Check if username already exists
+    const existingno = await Data.findOne({ work_no });
+    if (existingno) {
+      return res.status(400).json({ message: 'Order number already exists' });
+    }
 
-   data.save()
-    .then((result) => {
-      res.redirect('/backend');
-    })
-    .catch((err) => {
+    const data = new Data({work_no, date, d_date, p_no, add, f_type, f_status, w_status});
+    await data.save()
+    res.redirect('/dashboard');
+  }
+    catch (error) {
       console.log(err);
-    });
+    }
 });
+
 
 router.get('/details', async(req,res) => {
   res.redirect('/dashboard');
