@@ -86,9 +86,8 @@ module.exports = router;
 
 
 
-// logout button
-// re enter password
-// chechk box for showing password
+
+
 // Quotation 
 // signup limitation
 // work order status in all 
