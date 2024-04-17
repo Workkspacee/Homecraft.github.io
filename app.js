@@ -41,4 +41,5 @@ app.get('/fiter2', (req, res) => res.render('fiter2'));
 //app.get('/tailor', (req, res) => res.render('tailor'));
 app.get('/tailor2', (req, res) => res.render('tailor2'));
 //app.get('/admin', (req, res) => res.render('admin'));
+app.get('/quotation', (req, res) => res.render('Quotation'));
 
