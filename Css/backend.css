@@ -9,8 +9,9 @@
 
 body {
    font-family: 'Poppins', sans-serif;
-    background: url("ext.jpg");
+    background: url("ext.jpg") no-repeat;
     background-size: cover;
+
 }
 
 input,
@@ -20,6 +21,7 @@ button {
     background: none;
    font-family: 'Poppins', sans-serif;
 }
+
 
 .cont {
     border-radius: 20px;
@@ -329,3 +331,4 @@ p{
     font-size: 20px;
     color: #4EA685;
 }
+
