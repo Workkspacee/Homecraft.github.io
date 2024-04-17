@@ -29,11 +29,11 @@
                 </label>
                 <label> 
                     <span>Date</span>
-                    <input type="date" name="date" value="<%= no.date %>"/>
+                    <input type="date" name="date" value="<%= no.date.toISOString().split('T')[0] %>"/>
                 </label>
                 <label>
                     <span>Delivery Date</span>
-                    <input type="date" name="d_date" value="<%= no.d_date %>"/>
+                    <input type="date" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>"/>
                 </label>
                 <label>
                     <span>Phone Number</span>
@@ -41,7 +41,7 @@
                 </label>
                 <label>
                     <span>Address</span>
-                    <textarea name="add" cols="30" rows="5" value="<%= no.add %>"></textarea><br>
+                    <textarea name="add" cols="30" rows="5" ><%= no.add %></textarea><br>
                 </label>
                 <label>
                     <span>Fabric Type</span>
@@ -49,20 +49,22 @@
                 </label>
                 <label>
                     <span>Fabric Order Status</span>
-                    <select name="f_status" value="<%= no.f_status %>">
-                        <option>Order Pending</option>
-                        <option>Delivery Pending</option>
-                        <option>Delivered</option>
+                    <select name="f_status">
+                        <option><%= no.f_status %></option>
+                        <option value="Order Pending">Order Pending</option>
+                        <option value="Delivery Pending">Delivery Pending</option>
+                        <option value="Delivered">Delivered</option>
                     </select>
                 </label>
                 <label>
                     <span>Work Order Status</span>
-                    <select name="w_status" value="<%= no.w_status %>">
-                        <option>Details Pending</option>
-                        <option>Measurement Pending</option>
-                        <option>Given for Stiching</option>
-                        <option>Delivery Pending</option>
-                        <option>Order Delivered</option>
+                    <select name="w_status">
+                        <option><%= no.w_status %></option>
+                        <option value="Details Pending">Details Pending</option>
+                        <option value="Measurement Pending">Measurement Pending</option>
+                        <option value="Given for Stiching">Given for Stiching</option>
+                        <option value="Delivery Pending">Delivery Pending</option>
+                        <option value="Order Delivered">Order Delivered</option>
                     </select>
                 </label>
                 <button type="submit" class="submit">Submit</button>
