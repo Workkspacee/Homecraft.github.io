@@ -83,7 +83,7 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
-//saving data in datadase
+//saving data in datadase from backend
 router.post('/details', async(req,res) => {
   try {
     const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
@@ -108,6 +108,7 @@ router.get('/details', async(req,res) => {
   res.redirect('/dashboard');
 });
 
+//searching data from work_no in backend
 router.post('/edit', async(req,res) => {
   const { work_no } = req.body;
 
@@ -130,7 +131,7 @@ router.get('/edit', async(req,res) =>{
 });
 
 
-
+// backend 2 ma aavela data edit karva
 router.post('/update-edit', async (req, res) => {
   try {
     const { work_no, date, d_date, p_no, add, f_type, f_status, w_status } = req.body;
