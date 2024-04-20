@@ -19,27 +19,28 @@ form {
 }
 
 .container {
-    width: 400px;
-    margin: 200px auto;
-    padding: 20px;
+    width: 24.89rem;
+    max-width: 24.89rem;
+    margin: 12.44rem auto;
+    padding: 1.244rem;
     background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 0.622rem;
+    box-shadow: 0 0 0.622rem rgba(0, 0, 0, 0.1);
 }
 
 .container h2 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 1.244rem;
 }
 
 .input-field{
     border: none;
-    border-bottom: 1px solid #131314;
-    margin-bottom: 40px;
-    margin-top: 10px;
+    border-bottom: 0.062rem solid #131314;
+    margin-bottom: 2.489rem;
+    margin-top: 0.622rem;
     background: none;
-    padding: 10px;
-    padding-left: 34px;
+    padding: 0.622rem;
+    padding-left: 2.11rem;
     font-weight: 700;
     width: 75%;
     transition: .2s;
@@ -53,11 +54,11 @@ form {
 
 .submit-btn {
     width: 25%;
-    padding: 10px;
+    padding: 0.622rem;
     background-color: #4EA685;
     color: #fff;
     border: none;
-    border-radius: 6px;
+    border-radius: 0.373rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -68,7 +69,7 @@ form {
 
 .header1 {
     width: auto;
-    height: 100px;
+    height: 6.22rem;
     background-color: white;
 }
 
@@ -76,18 +77,18 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 120px;
-    margin-left: 25px;
-    margin-right: 75px;
+    margin-bottom: 7047rem;
+    margin-left: 1.56rem;
+    margin-right: 4.67rem;
 }
 
 nav img{
-    height: 70px;
+    height: 4.35rem;
 }
 
 nav h3{
-    margin-bottom: 10px;
-    font-size: 25px;
+    margin-bottom: 0.622rem;
+    font-size: 1.56rem;
 }
 
 nav a{
@@ -97,13 +98,39 @@ nav a{
 
 .footer{
     width: auto;
-    height: 100px;
+    height: 6.22rem;
     background-color: white;
     border-bottom: #000000;
-    padding-top: 40px;
+    padding-top: 2.489rem;
 }
 
 p{
-    font-size: 20px;
+    font-size: 1.244rem;
     color: #4EA685;
+}
+
+@media screen and (max-width: 425px) {
+    .container {
+        width: 90%;
+        max-width: 90%;
+        margin: 1.244rem auto;
+        padding: 1.244rem;
+    }
+
+    .input-field {
+        width: 100%;
+    }
+
+    .submit-btn {
+        width: 100%;
+    }
+
+    nav {
+        margin-left: 0.622rem;
+        margin-right: 0.622rem;
+    }
+
+    nav h3 {
+        font-size: 1.244rem;
+    }
 }
