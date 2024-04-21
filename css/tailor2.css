@@ -14,10 +14,12 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    margin: 0;
 }
 .container {
-    max-width: 80.89rem; 
-    margin: 6.22rem auto;
+    width: 90%;
+    min-width: 80.89rem; 
+    margin: 6.22rem auto 1.24rem;
     margin-top: 9.33rem;
     padding: 3.11rem;
     background-color: rgba(255, 255, 255, 0.8);
@@ -30,7 +32,8 @@ body {
 }
 
 .login {
-	width: 68.44rem;
+    width: 100%;
+	max-width: 68.44rem;
 	padding: 1.867rem;
 	padding-top: 0.622rem;
 }
@@ -56,7 +59,7 @@ body {
 }
 
 .header1 {
-    width: auto;
+    width: 100%;
     height: 6.22rem;
     background-color: white;
     border-bottom: #000000;
@@ -90,7 +93,7 @@ a:hover{
     color: #4EA685;
 }
 .footer{
-    width: auto;
+    width: 100%;
     height: 6.22rem;
     background-color: white;
     border-bottom: #000000;
@@ -103,8 +106,22 @@ p{
     color: #4EA685;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 700px) {
     .container {
         margin: 1.244rem auto;
+        margin-top: 8rem;
+        padding: 1.244rem;
+    }
+
+    body{
+        background-size: 137rem;
+    }
+
+    .footer{
+        width: 81rem;
+    }
+
+    .header1{
+        width: 81rem;
     }
 }
