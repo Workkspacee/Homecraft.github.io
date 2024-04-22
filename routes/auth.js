@@ -149,15 +149,53 @@ router.post('/update-edit', async (req, res) => {
     }
 
     // Redirect to a success page after the update
-    res.redirect('backend');
+    res.render('backend');
   } catch (error) {
     console.error(error);
     res.status(500).send('Error updating order');
   }
 });
 
-router.get('/backend', async(req,res) => {
-  res.render('backend');
+//  tailor ma work no nakhvathi eni details aave
+
+router.post('/tai', async(req,res) => {
+  const { work_no } = req.body;
+
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('tailor2', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+router.get('/tai', async(req,res) =>{
+  res.redirect('tailor2');
+});
+
+//w_status edit karva
+router.post('/edit-tai', async (req, res) => {
+  try {
+    const { work_no, w_status } = req.body;
+
+    // Find the document by work_no and update it
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+      { w_status: w_status },
+      { new: true }
+    );
+
+    // Redirect to a success page after the update
+    res.render('tailor');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
 });
 
 

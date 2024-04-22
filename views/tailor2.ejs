@@ -21,19 +21,19 @@
         </nav>
     </header>
     <div class="container"> 
-        <form class="login" >
+        <form class="login" action="/edit-tai" method="post">
             <div class="row">
                 <div class="col-3 login__field">
                 <h6 align="center">Work order number :</h6>
                 </div>
                 <div class="col-3 login__field">
-                    <input type="text" class="login__input">
+                    <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly />
                 </div>
                 <div class="col-3 login__field">
                     <h6 align="center">Date :</h6>
                 </div>
                 <div class="col-3 login__field">
-                    <input type="text" class="login__input">
+                    <input type="text" class="login__input" name="date" value="<%= no.date.toISOString().split('T')[0] %>" readonly />
                 </div>
             </div>
 
@@ -42,13 +42,13 @@
                 <h6 align="center">Phone number :</h6>
                 </div>
                 <div class="col-3 login__field">
-                    <input type="text" class="login__input">
+                    <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
                 </div>
                 <div class="col-3 login__field">
                     <h6 align="center">Delivery date :</h6>
                 </div>
                 <div class="col-3 login__field">
-                    <input type="text" class="login__input">
+                    <input type="text" class="login__input" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>" readonly />
                 </div>
             </div>
 
@@ -56,7 +56,7 @@
                 <div class="col-3">
                     <h6 align="center">Address :</h6>
                 </div> 
-                <input type="text" class="login__input">
+                <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
             </div>
 
             <br/> <br/>
@@ -234,16 +234,20 @@
                             <td><input type="number" class="login__input"></td>
                         </tr>
                     </tbody> 
-                </table>
+                </table><br/>
                 <div class="row login__field row">
                     <h6 class="col-3">Work Order Status</h6>
-                    <select class="login__input col-4">
+                    <select class="login__input col-4" name="w_status">
+                        <option><%= no.w_status %></option>
                         <option>Details Pending</option>
                         <option>Measurement Pending</option>
                         <option>Given for Stiching</option>
                         <option>Delivery Pending</option>
                         <option>Order Delivered</option>
                     </select>
+                </div><br/><br/>
+                <div>
+                   <center> <button type="submit" class="but">Submit</button> </center>
                 </div>
         </form>  
     </div>

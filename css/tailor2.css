@@ -106,6 +106,17 @@ p{
     color: #4EA685;
 }
 
+.but{
+    width: 15%;
+    padding: 0.622rem;
+    background-color: #817e7e;
+    color: #fff;
+    border: none;
+    border-radius: 0.373rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
 @media screen and (max-width: 700px) {
     .container {
         margin: 1.244rem auto;
