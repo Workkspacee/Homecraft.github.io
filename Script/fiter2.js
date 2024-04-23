@@ -9,7 +9,7 @@ var counter = 1; // Counter for unique labels and names
     // Create a unique label and name
     var label = document.createElement("label");
     label.innerHTML = "Room number " + " : ";
-    var name = "Room number" + counter;
+    var name = "room_number" + counter;
 
     // Set name and id attribute for the text field
     textField.setAttribute("name", name);
@@ -32,7 +32,7 @@ var counter = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Room name " + " : ";
-     var name = "Room name" + counter;
+     var name = "room_name" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -66,7 +66,7 @@ var counter = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Window number " + " : ";
-     var name = "Window number" + counter;
+     var name = "window_number" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -89,7 +89,7 @@ var counter = 1; // Counter for unique labels and names
     // Create a unique label and name
     var label = document.createElement("label");
     label.innerHTML = "Width (inch) " + " : ";
-    var name = "Width" + counter;
+    var name = "width" + counter;
 
     // Set name and id attribute for the text field
     textField.setAttribute("name", name);
@@ -111,7 +111,7 @@ var counter = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Height (inch) " + " : ";
-     var name = "Height" + counter;
+     var name = "height" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -132,7 +132,7 @@ var counter = 1; // Counter for unique labels and names
      // Create a unique label and name
      var label = document.createElement("label");
      label.innerHTML = "Type of curtain " + " : ";
-     var name = "Type of curtain" + counter;
+     var name = "curtain" + counter;
  
      // Set name and id attribute for the text field
      textField.setAttribute("name", name);
@@ -156,7 +156,7 @@ var counter = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Fabric " + " : ";
-      var name = "Fabric" + counter;
+      var name = "fabric" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
@@ -179,7 +179,7 @@ var counter = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Fabric req (meter) " + " : ";
-      var name = "Fabric req" + counter;
+      var name = "fabric_req" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
@@ -203,7 +203,7 @@ var counter = 1; // Counter for unique labels and names
        // Create a unique label and name
        var label = document.createElement("label");
        label.innerHTML = "Blackout " + " : ";
-       var name = "Blackout" + counter;
+       var name = "blackout" + counter;
    
        // Set name and id attribute for the text field
        textField.setAttribute("name", name);
@@ -226,7 +226,7 @@ var counter = 1; // Counter for unique labels and names
       // Create a unique label and name
       var label = document.createElement("label");
       label.innerHTML = "Blackout req (meter) " + " : ";
-      var name = "Blackout req" + counter;
+      var name = "blackout_req" + counter;
   
       // Set name and id attribute for the text field
       textField.setAttribute("name", name);
