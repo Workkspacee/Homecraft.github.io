@@ -215,6 +215,17 @@ router.post('/fit', async(req,res) => {
     }
 });
 
+//fitter add room 
+router.post('/addroom', async(req,res) => {
+  try{
+    const data = req.body;
+    await data.save()
+    res.render('fiter2');
+  } catch(err) {
+    console.log (err);
+  }
+});
+
 module.exports = router;
 
 
