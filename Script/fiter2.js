@@ -8,7 +8,7 @@ var counter = 1; // Counter for unique labels and names
 
     // Create a unique label and name
     var label = document.createElement("label");
-    label.innerHTML = "Room number " + " : "+ counter;
+    label.innerHTML = "Room number " + " : ";
     var name = "Room number" + counter;
 
     // Set name and id attribute for the text field
@@ -65,7 +65,7 @@ var counter = 1; // Counter for unique labels and names
  
      // Create a unique label and name
      var label = document.createElement("label");
-     label.innerHTML = "Window number " + " : "+ counter;
+     label.innerHTML = "Window number " + " : ";
      var name = "Window number" + counter;
  
      // Set name and id attribute for the text field
