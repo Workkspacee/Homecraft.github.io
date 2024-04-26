@@ -28,7 +28,7 @@
         <div class="screen">
             <div class="screen__content">
 
-                <form class="login">
+                <form class="login" action="/addroom" method="post" id="myForm"> 
                     <div class="row">
                         <div class="col-3 login__field">
                         <h6 align="center">Work order number :</h6>
@@ -65,13 +65,37 @@
                         </div> 
                         <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
                     </div>
+
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-8 login__field">
+                            <label>
+                                <span>Work Order Status : </span> 
+                            </label>
+                            <select class="login__option" name="w_status">
+                                <option><%= no.w_status %></option>
+                                <option>Details Pending</option>
+                                <option>Measurement Pending</option>
+                                <option>Given for Stiching</option>
+                                <option>Delivery Pending</option>
+                                <option>Order Delivered</option>
+                            </select>
+                        </div>
+                        <div class="col-3">
+                            <button class="button login__submit" type="submit">
+                                <span class="button__text">Create Quotation</span>
+                                <i class="button__icon fas fa-chevron-right"></i>
+                            </button>	
+                        </div>
+                    </div>
+                    
                 </form>
 
-                <form id="myForm" class="login" action="/addroom" method="post">   
-                    <!--  Text fields will be added here -->
-                </form>	
+               <!-- <form id="myForm" class="login" action="/addroom" method="post">   
+                     Text fields will be added here 
+                </form>	-->
 
-                <form class="login" action="/addroom" method="post">
+                <form class="login" >
                     <div class="row">
                         <div class="col-2"></div>
                         <div class="col-3">
@@ -89,31 +113,8 @@
                         </div>
                     </div>	
                     <br/>
-                    <div class="row">
-                        <div class="col-3"></div>
-                        <div class="col-9 login__field">
-                            <label>
-                                <span>Work Order Status</span> 
-                            </label>
-                            <select class="login__option">
-                                <option>Details Pending</option>
-                                <option>Measurement Pending</option>
-                                <option>Given for Stiching</option>
-                                <option>Delivery Pending</option>
-                                <option>Order Delivered</option>
-                            </select>
-                            
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4"></div>
-                        <div class="col-3">
-                            <button class="button login__submit" type="submit">
-                                <span class="button__text">Create Quotation</span>
-                                <i class="button__icon fas fa-chevron-right"></i>
-                            </button>	
-                        </div>
-                    </div>
+
+                    
                         
                 </form>
 
@@ -131,3 +132,5 @@
 
 </body>
 </html>
+
+<!-- aapde container na background ne bahar nu background kari daiaa and andar grey or green tone single rakhiaa-->
