@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
 }
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
 body {
@@ -338,7 +339,7 @@ p{
     color: #4EA685;
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 26.563rem) {
     .cont,
     .form,
     .sub-cont,
