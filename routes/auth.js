@@ -226,8 +226,12 @@ router.post('/addroom', async(req,res) => {
       { new: true }
     );
 
-    // Redirect to a success page after the update
-    res.render('Quotation');
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('Quotation', { no });
+
   } catch (error) {
     console.error(error);
     res.status(500).send('Error updating order');
