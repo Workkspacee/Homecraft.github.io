@@ -218,30 +218,20 @@ router.post('/fit', async(req,res) => {
 //fitter add room 
 router.post('/addroom', async(req,res) => {
   try{
-    const {work_no, room_number1,    room_name1,    window_number1,    width1,    height1,    curtain1,    fabric1,    fabric_req1,    blackout1,    blackout_req1 } = req.body;
+    const {work_no, room_number1,    room_name1,    window_number1,    width1,    height1,    curtain1,    fabric1,    fabric_req1,    blackout1,    blackout_req1 , w_status} = req.body;
 
-    const room = await Data.findOne({ work_no });
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+      { room_number1: room_number1, room_name1: room_name1, window_number1: window_number1, width1: width1, height1: height1, curtain1: curtain1, fabric1: fabric1 , fabric_req1: fabric_req1, blackout1: blackout1, blackout_req1: blackout_req1 , w_status: w_status },
+      { new: true }
+    );
 
-    if(!room){
-      return res.status(404).json({ error: 'Work order not found' });
-    }
-  
-    room.room_number1 = room_number1;
-    room.room_name1 = room_name1;
-    room.window_number1 = window_number1;
-    room.width1 = width1;
-    room.height1 = height1;
-    room.curtain1 = curtain1;
-    room.fabric1 = fabric1;
-    room.fabric_req1 = fabric_req1; 
-    room.blackout1 = blackout1; 
-    room.blackout_req1 = blackout_req1;
-
-    await room.save();
-
-  } catch (err) {
-  res.status(500).json({ error: err.message });
-}
+    // Redirect to a success page after the update
+    res.render('Quotation');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
 });
 
 module.exports = router;
