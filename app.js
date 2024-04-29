@@ -35,11 +35,11 @@ app.use('/', authRoutes);
 
 //app.get('/', (req, res) => res.render('login'));
 //app.get('/backend', (req, res) => res.render('backend'));
-  app.get('/backend2', (req, res) => res.render('backend2'));
+//app.get('/backend2', (req, res) => res.render('backend2'));
 //app.get('/fiter', (req, res) => res.render('fiter'));
-app.get('/fiter2', (req, res) => res.render('fiter2'));
+//app.get('/fiter2', (req, res) => res.render('fiter2'));
 //app.get('/tailor', (req, res) => res.render('tailor'));
-app.get('/tailor2', (req, res) => res.render('tailor2'));
+//app.get('/tailor2', (req, res) => res.render('tailor2'));
 //app.get('/admin', (req, res) => res.render('admin'));
 app.get('/quotation', (req, res) => res.render('Quotation'));
 
