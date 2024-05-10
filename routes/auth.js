@@ -244,7 +244,7 @@ module.exports = router;
 
 
 
-//footer: admin fiter2   Header: fiter2
+//footer: admin fiter2   
 //media: admin fiter fiter2 quotation
 //rem: fiter fiter2 quotation 
 
