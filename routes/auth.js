@@ -243,7 +243,9 @@ module.exports = router;
 
 
 
-
+//footer: admin fiter2   Header: fiter2
+//media: admin fiter fiter2 quotation
+//rem: fiter fiter2 quotation 
 
 // Quotation 
 // signup limitation
@@ -252,8 +254,6 @@ module.exports = router;
 // header ma vache username print karaviaa
 //our team
 
-// fiter page sarkhu nai lagtu suit nai thatu maybe background white nathi atle 
 // add float label ?
 
-//admin footer after data show
-//fiter2(remaining) and quotation also remaining
+
