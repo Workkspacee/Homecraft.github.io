@@ -90,19 +90,22 @@ p{
     color: #4EA685;
 }
 
-/* Media query for mobile devices with max-width 700px */
-@media (max-width: 700px) {
+@media only screen and (max-width: 768px) {
     .container {
-        padding-top: 1.5rem; /* Adjust padding for mobile */
+        padding-top: 2rem;
     }
 
     .login {
-        padding: 1.25rem; /* Adjust padding for mobile */
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        padding-top: 1rem;
     }
 
-    nav {
-        margin-bottom: 1rem; /* Adjust margin for mobile */
-        margin-left: 1rem;
-        margin-right: 1rem; /* Adjust margin for mobile */
+    .login {
+        width: 95%;
     }
 }
