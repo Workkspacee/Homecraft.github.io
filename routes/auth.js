@@ -218,11 +218,12 @@ router.post('/fit', async(req,res) => {
 //fitter add room 
 router.post('/addroom', async(req,res) => {
   try{
-    const {work_no, room_number1,    room_name1,    window_number1,    width1,    height1,    curtain1,    fabric1,    fabric_req1,    blackout1,    blackout_req1 , w_status} = req.body;
+    const {work_no} = req.body;
+    const body = req.body;
 
     const updatedData = await Data.findOneAndUpdate(
       { work_no: work_no },
-      { room_number1: room_number1, room_name1: room_name1, window_number1: window_number1, width1: width1, height1: height1, curtain1: curtain1, fabric1: fabric1 , fabric_req1: fabric_req1, blackout1: blackout1, blackout_req1: blackout_req1 , w_status: w_status },
+        body ,
       { new: true }
     );
 
