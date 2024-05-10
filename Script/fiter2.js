@@ -244,4 +244,6 @@ var counter = 1; // Counter for unique labels and names
     // Increment the counter for the next label and name
     counter++;
   }
+  
+  module.exports = counter; // Export the counter variable
 

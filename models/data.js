@@ -1,5 +1,6 @@
 const { text } = require('express');
 const mongoose = require('mongoose');
+const counter = require('../Script/fiter2');
 
 const dataSchema = new mongoose.Schema({
     work_no: { type: String, required: true, unique: true },
@@ -13,7 +14,7 @@ const dataSchema = new mongoose.Schema({
     
 });
 
-for (let i = 1; i <= 10; i++) {
+for (let i = 1; i <= counter; i++) {
     dataSchema.add({
         ['room_number' + i]: { type: Number },
         ['room_name' + i]: { type: String },
