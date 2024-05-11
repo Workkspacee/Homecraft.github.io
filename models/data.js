@@ -14,7 +14,7 @@ const dataSchema = new mongoose.Schema({
     
 });
 
-for (let i = 1; i <= counter; i++) {
+for (let i = 1; i <= 20; i++) {
     dataSchema.add({
         ['room_number' + i]: { type: Number },
         ['room_name' + i]: { type: String },
