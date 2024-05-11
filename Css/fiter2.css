@@ -5,10 +5,13 @@
 	margin: 0;
 	padding: 0;	
 	font-family: 'Poppins', sans-serif;
+	background-attachment: fixed;
 }
 
 body {
-	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
+	/* background: linear-gradient(90deg, #bee6d8, #3c9f7a); */	
+	background: linear-gradient(90deg, #4EA685, #a1dbc7);
+	background-attachment: fixed;
 }
 
 .container {
@@ -19,7 +22,8 @@ body {
 }
 
 .screen {		
-	background: linear-gradient(90deg, #4EA685, #a1dbc7);		
+	/* background: linear-gradient(90deg, #4EA685, #a1dbc7); */
+	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 	position: relative;	
 	background-size: auto;
 	box-shadow: 0px 0px 24px #000000;
@@ -157,13 +161,15 @@ body {
 }
 
 .header1 {
-    width: auto;
     height: 100px;
     background-color: white;
     border-bottom: #000000;
     padding-top: 20px;
 }
 
+.header {
+	width: 100%;
+}
 
 img{
     height: 70px;

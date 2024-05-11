@@ -244,9 +244,11 @@ module.exports = router;
 
 
 
-//footer: admin fiter2   
+//footer: admin fiter2 fiter(error)
+//fiter is not responsive   
 //media: admin fiter fiter2 quotation
 //rem: fiter fiter2 quotation 
+//Quotation error of counter in html file
 
 // Quotation 
 // signup limitation
