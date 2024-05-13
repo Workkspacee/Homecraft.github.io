@@ -12,10 +12,13 @@ body{
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(90deg, #bee6d8, #3c9f7a);
     background-attachment: fixed;
+    width: 100vh;
+    height: 100vh;
 }
 
 .container {
 	padding-top: 3.125rem;
+    width: 100vh;
 }
 
 .login {
