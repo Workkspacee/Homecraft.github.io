@@ -62,21 +62,79 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// router.get('/dashboard', (req, res) => {
+//   if (!req.session.user) {
+//     return res.redirect('/login');
+//   }
+//   const { role } = req.session.user;
+//   if (role === 'admin') {
+//     return res.render('admin', { username: req.session.user.username });
+//   } else if (role === 'backend') {
+//     return res.render('backend', { username: req.session.user.username });
+//   } else if (role === 'fiter') {
+//     return res.render('fiter', { username: req.session.user.username });
+//   } else if (role === 'tailor') {
+//     return res.render('tailor', { username: req.session.user.username });
+//   }
+// });
+
+//-----------------------------------------------------------
+
 router.get('/dashboard', (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login');
   }
   const { role } = req.session.user;
   if (role === 'admin') {
-    return res.render('admin', { username: req.session.user.username });
+    return res.redirect('/admin');
   } else if (role === 'backend') {
-    return res.render('backend', { username: req.session.user.username });
+    return res.redirect('/backend');
   } else if (role === 'fiter') {
-    return res.render('fiter', { username: req.session.user.username });
+    return res.redirect('/fiter');
   } else if (role === 'tailor') {
-    return res.render('tailor', { username: req.session.user.username });
+    return res.redirect('/tailor');
   }
 });
+
+router.get('/admin', async (req, res) => {
+  if (req.session.user && req.session.user.role === 'admin') {
+    try {
+      const workNumbers = await Data.find({}, 'work_no'); // Fetch all work_no
+      res.render('admin', { username: req.session.user.username, workNumbers });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+    }
+  } else {
+    return res.redirect('/login');
+  }
+});
+
+// Similarly, add routes for 'backend', 'fiter', and 'tailor'
+router.get('/backend', (req, res) => {
+  if (req.session.user && req.session.user.role === 'backend') {
+    return res.render('backend', { username: req.session.user.username });
+  } else {
+    return res.redirect('/login');
+  }
+});
+
+router.get('/fiter', (req, res) => {
+  if (req.session.user && req.session.user.role === 'fiter') {
+    return res.render('fiter', { username: req.session.user.username });
+  } else {
+    return res.redirect('/login');
+  }
+});
+
+router.get('/tailor', (req, res) => {
+  if (req.session.user && req.session.user.role === 'tailor') {
+    return res.render('tailor', { username: req.session.user.username });
+  } else {
+    return res.redirect('/login');
+  }
+});
+// --------------------------------------------------------
 
 
 router.get('/logout', (req, res) => {
@@ -126,11 +184,9 @@ router.post('/edit', async(req,res) => {
     }
 });
 
-
 router.get('/edit', async(req,res) =>{
   res.redirect('backend2');
 });
-
 
 // backend 2 ma aavela data edit karva
 router.post('/update-edit', async (req, res) => {
@@ -245,16 +301,15 @@ router.post('/addroom', async(req,res) => {
 
 
 
+
+
+
+
+
+
+
 module.exports = router;
 
-
-
-
-//footer: admin fiter2 fiter(error)
-//fiter is not responsive   
-//media: admin fiter fiter2 quotation
-//rem: fiter fiter2 quotation 
-//Quotation error of counter in html file
 
 // Quotation 
 // signup limitation

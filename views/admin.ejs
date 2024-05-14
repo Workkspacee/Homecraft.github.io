@@ -23,6 +23,15 @@
         </form>
     </center>
 
+    <div class="work-no-list">
+        <h2>All Work Orders</h2>
+        <ul>
+            <% workNumbers.forEach(function(work) { %>
+                <li><%= work.work_no %></li>
+            <% }); %>
+        </ul>
+    </div>
+
     <div class="footer">
         <nav>
             <p> &copy; 2024 All Rights Reserved.</p>

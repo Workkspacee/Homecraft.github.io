@@ -73,9 +73,31 @@ nav a{
     border-bottom: #000000;
     padding-top: 2.468rem;
     margin-bottom: 0px;
+    margin-top: 300px;
 }
 
 p{
     font-size: 1.2444rem;
     color: #4EA685;
+}
+
+.work-no-list {
+    margin-top: 20px;
+    margin-left: 60px;
+}
+
+h2 {
+    color: #222b28;
+}
+
+.work-no-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.work-no-list li {
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
 }
