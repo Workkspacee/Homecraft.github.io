@@ -78,6 +78,7 @@ router.get('/dashboard', (req, res) => {
   }
 });
 
+
 router.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/login');
@@ -238,6 +239,11 @@ router.post('/addroom', async(req,res) => {
     res.status(500).send('Error updating order');
   }
 });
+
+
+//for geting details with their id.
+
+
 
 module.exports = router;
 
