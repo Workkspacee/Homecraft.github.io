@@ -311,6 +311,13 @@ router.post('/addroom', async(req,res) => {
 module.exports = router;
 
 
+
+
+
+
+//fiter 2 ma fabric b upper ni details ma print karavu che ?? 
+//reason: k backend pse aa loko fabric kayu use karvu aa lakhvse to fitter ne khbr hovi joia already
+// bcz backend pelaj order kari dese ne ?? or else home craft ma puchvanu che k backend karse k fiter aj ??
 // Quotation 
 // signup limitation
 
