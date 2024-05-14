@@ -188,6 +188,20 @@ h3 a:hover{
 	color: #4EA685;
 }
 
+.footer{
+    width: auto;
+    height: 100px;
+    background-color: white;
+    border-bottom: #000000;
+    padding-top: 40px;
+	margin-top: 65px;
+}
+
+p{
+    font-size: 20px;
+    color: #4EA685;
+}
+
 @media only screen and (max-width: 768px) {
     .login {
         padding: 20px;
