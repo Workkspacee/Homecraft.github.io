@@ -29,11 +29,11 @@
                 </label>
                 <label> 
                     <span>Date</span>
-                    <input type="date" name="date" value="<%= no.date.toISOString().split('T')[0] %>"/>
+                    <input type="date" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> />
                 </label>
                 <label>
                     <span>Delivery Date</span>
-                    <input type="date" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>"/>
+                    <input type="date" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> />
                 </label>
                 <label>
                     <span>Phone Number</span>
