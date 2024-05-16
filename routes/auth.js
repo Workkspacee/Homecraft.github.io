@@ -62,23 +62,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// router.get('/dashboard', (req, res) => {
-//   if (!req.session.user) {
-//     return res.redirect('/login');
-//   }
-//   const { role } = req.session.user;
-//   if (role === 'admin') {
-//     return res.render('admin', { username: req.session.user.username });
-//   } else if (role === 'backend') {
-//     return res.render('backend', { username: req.session.user.username });
-//   } else if (role === 'fiter') {
-//     return res.render('fiter', { username: req.session.user.username });
-//   } else if (role === 'tailor') {
-//     return res.render('tailor', { username: req.session.user.username });
-//   }
-// });
-
-//-----------------------------------------------------------
 
 router.get('/dashboard', (req, res) => {
   if (!req.session.user) {
@@ -134,7 +117,7 @@ router.get('/tailor', (req, res) => {
     return res.redirect('/login');
   }
 });
-// --------------------------------------------------------
+
 
 
 router.get('/logout', (req, res) => {
