@@ -281,7 +281,7 @@ router.post('/addroom', async(req,res) => {
 
 
 //for geting details with their id.
-router.get('/admin/:id',async (req,res)=>{             // blogcontroller ma add kari dedhu
+router.get('/admin/:id',async (req,res)=>{            
        const id = req.params.id;
 
         try {
