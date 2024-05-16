@@ -298,7 +298,35 @@ router.post('/addroom', async(req,res) => {
 
 
 //for geting details with their id.
+router.get('/admin/:id',async (req,res)=>{             // blogcontroller ma add kari dedhu
+       const id = req.params.id;
 
+        try {
+        const no = await Data.findById(id);
+        if (!no) {
+          return res.status(404).send('id not found');
+        }
+        res.render('detail', { no });
+    
+        } catch (err) {
+            console.error(err);
+            res.status(500).send('Server error');
+        }
+});
+
+router.delete('/:id', (req,res)=>{
+     const id = req.params.id;
+  
+     Blog.findByIdAndDelete(id)
+         .then(result =>{
+             res.json({ redirect: '/blogs' })
+         })
+         .catch(err =>{
+            console.log(err);
+         })
+});
+  
+  
 
 
 
