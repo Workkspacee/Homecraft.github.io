@@ -27,8 +27,8 @@
         <h2>All Work Orders</h2>
         <ul>
             <% workNumbers.forEach(function(work) { %>
-                <li><%= work.work_no %></li>
-            <% }); %>
+                <li> <a href="/admin/<%= work._id %>"> <%= work.work_no %></a></li>
+            <% }); %>            
         </ul>
     </div>
 
