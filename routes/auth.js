@@ -128,7 +128,7 @@ router.get('/logout', (req, res) => {
 //saving data in datadase from backend
 router.post('/details', async(req,res) => {
   try {
-    const {work_no, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
+    const {work_no, name, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
     
     // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
@@ -136,7 +136,7 @@ router.post('/details', async(req,res) => {
       return res.status(400).json({ message: 'Order number already exists' });
     }
 
-    const data = new Data({work_no, date, d_date, p_no, add, f_type, f_status, w_status});
+    const data = new Data({work_no, name, date, d_date, p_no, add, f_type, f_status, w_status});
     await data.save()
     res.redirect('/dashboard');
   }
@@ -174,12 +174,12 @@ router.get('/edit', async(req,res) =>{
 // backend 2 ma aavela data edit karva
 router.post('/update-edit', async (req, res) => {
   try {
-    const { work_no, date, d_date, p_no, add, f_type, f_status, w_status } = req.body;
+    const { work_no, name, date, d_date, p_no, add, f_type, f_status, w_status } = req.body;
 
     // Find the document by work_no and update it
     const updatedData = await Data.findOneAndUpdate(
       { work_no: work_no },
-      { date: date, d_date: d_date, p_no: p_no, add: add, f_type: f_type, f_status: f_status, w_status: w_status },
+      { date: date, name: name, d_date: d_date, p_no: p_no, add: add, f_type: f_type, f_status: f_status, w_status: w_status },
       { new: true }
     );
 
@@ -329,6 +329,7 @@ module.exports = router;
 //fiter 2 ma fabric b upper ni details ma print karavu che ?? 
 //reason: k backend pse aa loko fabric kayu use karvu aa lakhvse to fitter ne khbr hovi joia already
 // bcz backend pelaj order kari dese ne ?? or else home craft ma puchvanu che k backend karse k fiter aj ??
+
 // Quotation 
 // signup limitation
 

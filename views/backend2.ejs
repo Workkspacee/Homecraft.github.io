@@ -27,6 +27,10 @@
                     <span>Work Order No</span>
                     <input type="text" name="work_no" value="<%= no.work_no %>" readonly />
                 </label>
+                <label>
+                    <span>Name:</span>
+                    <input type="text" name="name" value="<%= no.name %>" required/>
+                </label>
                 <label> 
                     <span>Date</span>
                     <input type="date" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> />

@@ -34,16 +34,31 @@
                 <form class="login" action="/addroom" method="post" id="myForm"> 
                     <div class="row">
                         <div class="col-3 login__field">
-                        <h6 align="center">Work order number :</h6>
+                            <h6 align="center">Work order number :</h6>
                         </div>
                         <div class="col-3 login__field">
                             <input type="text" class="login__input"  name="work_no" value="<%= no.work_no %>" readonly />
                         </div>
                         <div class="col-3 login__field">
-                            <h6 align="center">Date :</h6>
+                            <h6 align="center">Name :</h6>
                         </div>
                         <div class="col-3 login__field">
-                            <input type="text" class="login__input" name="date" value="<%= no.date.toISOString().split('T')[0] %>" readonly />
+                            <input type="text" class="login__input"  name="name" value="<%= no.name %>" readonly />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-3 login__field">
+                                <h6 align="center">Date :</h6>
+                            </div>
+                            <div class="col-3 login__field">
+                                <input type="text" class="login__input" name="date" value="<%= no.date.toISOString().split('T')[0] %>" readonly />
+                            </div>
+                            <div class="offset-1 col-2 login__field">
+                                <h6 align="center">Delivery date :</h6>
+                            </div>
+                            <div class="col-3 login__field">
+                                <input type="text" class="login__input" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>" readonly/>
+                            </div>
                         </div>
                     </div>
 
@@ -54,12 +69,7 @@
                         <div class="col-3 login__field">
                             <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
                         </div>
-                        <div class="col-3 login__field">
-                            <h6 align="center">Delivery date :</h6>
-                        </div>
-                        <div class="col-3 login__field">
-                            <input type="text" class="login__input" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>" readonly/>
-                        </div>
+                        
                     </div>
 
                     <div class="row login__field">

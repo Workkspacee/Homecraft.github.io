@@ -4,6 +4,7 @@ const counter = require('../Script/fiter2');
 
 const dataSchema = new mongoose.Schema({
     work_no: { type: String, required: true, unique: true },
+    name: { type: String},
     date: { type: Date},
     d_date: { type: Date},
     p_no: { type: Number},
