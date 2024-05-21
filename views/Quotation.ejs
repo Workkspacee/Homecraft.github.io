@@ -109,6 +109,25 @@
                                     <% ring += Math.ceil(no['width' + i] / 20); %>
                                 <% } %>
 
+
+                                
+                                <%
+                                    var D12 = no['curtain' + i];
+                                    var E12 = no['width' + i];
+                                    var F12 = no['height' + i];
+
+                                    function calculateValue(D12, E12, F12) {
+                                        if (D12 === "") {
+                                            return "";
+                                        } else if (D12 === "Roman") {
+                                            return Math.ceil(((F12 + 12) / 39) * Math.ceil((E12 / 50), 0) * 0.25) / 0.25;
+                                        } else {
+                                            return Math.ceil(((F12 + 12) / 39) * Math.ceil((E12 / 20), 0) * 0.25) / 0.25;
+                                        }
+                                    }
+                                    var result = calculateValue(D12, E12, F12);
+                                %>
+
                                     <tr>
                                         <td><%= no['room_number' + i] %></td>
                                         <td><%= no['room_name' + i]  %></td>
@@ -116,7 +135,7 @@
                                         <td><%= no['width' + i]  %></td>
                                         <td><%= no['height' + i]  %></td>
                                         <td><%= no['fabric' + i]  %></td>
-                                        <td><%= no['fabric_req' + i]  %></td>
+                                        <td><input type="number" class="login__input" value="<%= result %>" readonly></td>
                                         <td><%= no['blackout' + i]  %></td>
                                         <td><%= no['blackout_req' + i]  %></td>
                                     </tr>                           
@@ -135,6 +154,7 @@
                             <td></td>
                             <td></td>
                             </tr>
+
                             <tr>
                             <td></td>
                             <td>Total Fabrics</td>
