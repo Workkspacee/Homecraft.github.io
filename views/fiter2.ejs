@@ -43,7 +43,6 @@
                             <h6 align="center">Name :</h6>
                         </div>
                         <div class="col-3 login__field">
-<<<<<<< Updated upstream
                             <input type="text" class="login__input"  name="name" value="<%= no.name %>" readonly />
                         </div>
 
@@ -52,17 +51,14 @@
                                 <h6 align="center">Date :</h6>
                             </div>
                             <div class="col-3 login__field">
-                                <input type="text" class="login__input" name="date" value="<%= no.date.toISOString().split('T')[0] %>" readonly />
+                                <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
                             </div>
                             <div class="offset-1 col-2 login__field">
                                 <h6 align="center">Delivery date :</h6>
                             </div>
                             <div class="col-3 login__field">
-                                <input type="text" class="login__input" name="d_date" value="<%= no.d_date.toISOString().split('T')[0] %>" readonly/>
+                                <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
                             </div>
-=======
-                            <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly />
->>>>>>> Stashed changes
                         </div>
                     </div>
 
@@ -73,16 +69,6 @@
                         <div class="col-3 login__field">
                             <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
                         </div>
-<<<<<<< Updated upstream
-                        
-=======
-                        <div class="col-3 login__field">
-                            <h6 align="center">Delivery date :</h6>
-                        </div>
-                        <div class="col-3 login__field">
-                            <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                        </div>
->>>>>>> Stashed changes
                     </div>
 
                     <div class="row login__field">
