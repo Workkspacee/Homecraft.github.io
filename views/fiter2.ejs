@@ -45,20 +45,17 @@
                         <div class="col-3 login__field">
                             <input type="text" class="login__input"  name="name" value="<%= no.name %>" readonly />
                         </div>
-
-                        <div class="row">
-                            <div class="col-3 login__field">
-                                <h6 align="center">Date :</h6>
-                            </div>
-                            <div class="col-3 login__field">
-                                <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                            </div>
-                            <div class="offset-1 col-2 login__field">
-                                <h6 align="center">Delivery date :</h6>
-                            </div>
-                            <div class="col-3 login__field">
-                                <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                            </div>
+                        <div class="col-3 login__field">
+                            <h6 align="center">Date :</h6>
+                        </div>
+                        <div class="col-3 login__field">
+                            <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
+                        </div>
+                        <div class="col-3 login__field">
+                            <h6 align="center">Delivery date :</h6>
+                        </div>
+                        <div class="col-3 login__field">
+                            <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
                         </div>
                     </div>
 
