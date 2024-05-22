@@ -338,4 +338,6 @@ module.exports = router;
 
 // add float label ?
 
+//dynamic table dynamic variable for data.js , table
+
 
