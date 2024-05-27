@@ -78,6 +78,8 @@ nav a{
 
 nav a:hover {color: #4EA685; }
 
+
+
 .footer{
     width: auto;
     height: 6.22rem;
@@ -96,6 +98,59 @@ p{
     overflow-x: auto;
     max-width: 100%;
 }
+
+
+.submit {
+    appearance: none;
+    background-color: #4EA685;
+    border: 1px solid rgba(27, 31, 35, .15);
+    border-radius: 6px;
+    box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.submit:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.submit:hover {
+  background-color: #4EA685;
+}
+
+.submit:focus {
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  outline: none;
+}
+
+.submit:disabled {
+  background-color: #94d3a2;
+  border-color: rgba(27, 31, 35, .1);
+  color: rgba(255, 255, 255, .8);
+  cursor: default;
+}
+
+.submit:active {
+  background-color: #4EA685;
+  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+}
+
 
 @media only screen and (max-width: 768px) {
     .container {
@@ -116,3 +171,7 @@ p{
         width: 95%;
     }
 }
+
+
+
+
