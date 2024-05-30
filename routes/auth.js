@@ -323,7 +323,7 @@ module.exports = router;
 
 
 
-
+//fiter ma work status done
 
 //fiter 2 ma fabric b upper ni details ma print karavu che ?? 
 //reason: k backend pse aa loko fabric kayu use karvu aa lakhvse to fitter ne khbr hovi joia already

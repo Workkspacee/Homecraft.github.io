@@ -45,6 +45,17 @@ body{
 	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 }
 
+.but{
+    width: 15%;
+    padding: 0.622rem;
+    background-color: #4EA685;
+    color: #fff;
+    border: none;
+    border-radius: 0.373rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
 .header1 {
     width: auto;
     height: 6.22rem;
