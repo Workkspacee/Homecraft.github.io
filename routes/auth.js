@@ -317,7 +317,13 @@ router.delete('/:id', (req,res)=>{
 
 
 
+router.get('/bill', (req,res) =>{
+  res.render('bill');
+});
 
+router.get('/bill2', (req,res) =>{
+  res.render('bill2');
+});
 module.exports = router;
 
 

@@ -1,0 +1,184 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
+        .invoice-box table tr.top table td.title {
+            line-height: 45px;
+            color: #333;
+        }
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
+        .invoice-box table tr.item td {
+            border-bottom: 1px solid #eee;
+        }
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <h2>Homecraft</h2>
+                                <p>Plot No. 521, Road No. 5, Near Paliwal Chowkdi, GIDC Sachin, Surat - 394230</p>
+                                <p>Phone no.: +91-9328282823</p>
+                                <p>GSTIN: 24ARFPR5413C1Z5, State: 24-Gujarat</p>
+                            </td>
+                            <td>
+                                <p>Invoice No. : INV-12</p>
+                                <p>Date : 16-04-2024</p>
+                                <p>Due Date : 16-05-2024</p>
+                                <p>Place of supply: 24-Gujarat</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                <h3>Bill To:</h3>
+                                <p>Atul Prabhulal Pujara</p>
+                                <p>A-1/2 Panchvati Society, Nr. Sarjan Society, Ichanath Road, Surat</p>
+                                <p>Contact No. : +91-9825134948</p>
+                                <p>State: 24-Gujarat</p>
+                            </td>
+                            <td>
+                                <h3>Ship To:</h3>
+                                <p>A-1/2 Panchvati Society, Nr. Sarjan Society, Ichanath Road, Surat</p>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>Transportation Details</td>
+                <td></td>
+            </tr>
+            <tr class="details">
+                <td>Driver Name: Sonubhai</td>
+                <td>Vehicle Number: GJ05CT2947</td>
+            </tr>
+            <tr class="details">
+                <td>Delivery Date: 16/04/2024</td>
+                <td>Location: Surat, Gujarat</td>
+            </tr>
+
+            <tr class="heading">
+                <td>Item</td>
+                <td>Price</td>
+            </tr>
+
+            <tr class="item">
+                <td>Natural Sheer # 19 (44 Mtr @ ₹275.00)</td>
+                <td>₹ 12,705.00</td>
+            </tr>
+            <tr class="item">
+                <td>Constellation's # 111 (48 Mtr @ ₹400.00)</td>
+                <td>₹ 20,160.00</td>
+            </tr>
+            <tr class="item">
+                <td>Dimout # 004 (44 Mtr @ ₹140.00)</td>
+                <td>₹ 6,468.00</td>
+            </tr>
+
+            <tr class="total">
+                <td></td>
+                <td>Total: ₹ 39,333.00</td>
+            </tr>
+
+            <tr class="heading">
+                <td>Tax type</td>
+                <td>Tax amount</td>
+            </tr>
+            <tr class="item">
+                <td>SGST (2.5%)</td>
+                <td>₹ 936.50</td>
+            </tr>
+            <tr class="item">
+                <td>CGST (2.5%)</td>
+                <td>₹ 936.50</td>
+            </tr>
+
+            <tr class="total">
+                <td></td>
+                <td>Grand Total: ₹ 39,333.00</td>
+            </tr>
+
+            <tr class="details">
+                <td colspan="2">
+                    <h4>Terms and Conditions</h4>
+                    <p>- We reserve the right of recovery before due date at any time.</p>
+                    <p>- Goods once sold cannot be returned. Any defect in the material received should be brought into notice within 48 hours of delivery.</p>
+                    <p>- The sale is understood to have been made after due consideration of the quality of goods and prevailing rates.</p>
+                    <p>- The payment of this bill shall be made by the due date, failing which interest @ 1.5% per month shall be charged from the due date.</p>
+                </td>
+            </tr>
+            <tr class="details">
+                <td colspan="2">
+                    <h4>Bank Details</h4>
+                    <p>Name: HDFC BANK</p>
+                    <p>Account No.: 50200023386178</p>
+                    <p>IFSC code: HDFC0000955</p>
+                    <p>Account holder's name: Homecraft</p>
+                </td>
+            </tr>
+
+            <tr class="details">
+                <td colspan="2">
+                    <p>Invoice Amount In Words: Thirty Nine Thousand Three Hundred Thirty Three Rupees only</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
