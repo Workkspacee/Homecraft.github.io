@@ -35,16 +35,36 @@
         <br>
         <center><h3>Tax Invoice</h3></center> 
         <br>
+        <br>
 
         <table>
             <form action="" method="post">
                 <tr>
                     <td>
-                        <h4>Bill To</h4>
+                        <h4>Bill To</h4><br>
                         <input type="text" placeholder="Name" class=""/><br>
-                        <textarea placeholder="Address"></textarea>
-                        <p>Contact No: <input type="tel" maxlength="10"></p>
-                        <p>State: <input type="text" placeholder="State"></p>
+                        <input type="text" placeholder="Address"/><br>
+                        <label>Contact No: <input type="tel" maxlength="10"></label><br>
+                        <label>State: <input type="text" placeholder="State"></label>
+                    </td>
+                    <td>
+                        <h4>Ship To</h4><br>
+                        <input type="text" placeholder="Address"/>
+                    </td>
+                    <td>
+                        <h4>Transportation Details</h4><br>
+                        <label>Driver Name: <input type="text" placeholder="Name"/></label><br>
+                        <label>Vehicle Number: <input type="text" placeholder="GJ05FR9362"/></label><br>
+                        <label>Delivery Date: <input type="date" placeholder="date"/></label><br>
+                        <label>Location:<input type="text" placeholder="Surat"></label><br>
+                        <label>LR Number: <input type="text"></label>
+                    </td>
+                    <td>
+                        <h4>Invoice Details</h4><br>
+                        <label>Invoice No:<input type="text"></label><br>
+                        <label>Date: <input type="date"></label><br>
+                        <label>Place of supply:<input type="text"></label><br>
+                        <label>Due Date: <input type="date"></label>
                     </td>
                 </tr>
             </form>

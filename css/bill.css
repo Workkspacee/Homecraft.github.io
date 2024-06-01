@@ -21,16 +21,13 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
-.info{
-    width: 1450px;
-}
 
 
 
 
 
 
-.header1 {
+/* .header1 {
     width: auto;
     height: 6.22rem;
     background-color: white;
@@ -75,4 +72,4 @@ nav a:hover {color: #4EA685; }
 p{
     font-size: 1.2444rem;
     color: #4EA685;
-}
+} */
