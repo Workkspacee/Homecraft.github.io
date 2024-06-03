@@ -330,7 +330,7 @@ module.exports = router;
 
 
 //fiter ma work status done
-
+//bill ma tax type valu table ma entry ni khbr nai atle atiyare same paste karyu che
 //fiter 2 ma fabric b upper ni details ma print karavu che ?? 
 //reason: k backend pse aa loko fabric kayu use karvu aa lakhvse to fitter ne khbr hovi joia already
 // bcz backend pelaj order kari dese ne ?? or else home craft ma puchvanu che k backend karse k fiter aj ??

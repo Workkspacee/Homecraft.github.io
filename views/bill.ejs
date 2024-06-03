@@ -18,10 +18,10 @@
     </div> -->
 
     <div class="container">
-        <table class="info">
+        <table class="info" style="width:100%">
             <tr>
                 <td>
-                    <img src="/logo.png" alt="logo">
+                    <img src="/logo.png" alt="logo" height="120px">
                 </td>
                 <td align="right">
                     <h2>Homecraft</h2>
@@ -37,38 +37,198 @@
         <br>
         <br>
 
-        <table>
+        <table style="width:100%">
             <form action="" method="post">
                 <tr>
                     <td>
                         <h4>Bill To</h4><br>
-                        <input type="text" placeholder="Name" class=""/><br>
-                        <input type="text" placeholder="Address"/><br>
-                        <label>Contact No: <input type="tel" maxlength="10"></label><br>
-                        <label>State: <input type="text" placeholder="State"></label>
+                        <input type="text" class="input_field" placeholder="Name" class=""/><br>
+                        <input type="text" class="input_field" placeholder="Address"/><br>
+                        <label>Contact No: <input type="tel" class="input_field" maxlength="10"></label><br>
+                        <label>State: <input type="text" class="input_field" placeholder="State"></label>
                     </td>
                     <td>
                         <h4>Ship To</h4><br>
-                        <input type="text" placeholder="Address"/>
+                        <input type="text" class="input_field" placeholder="Address"/>
                     </td>
                     <td>
                         <h4>Transportation Details</h4><br>
-                        <label>Driver Name: <input type="text" placeholder="Name"/></label><br>
-                        <label>Vehicle Number: <input type="text" placeholder="GJ05FR9362"/></label><br>
-                        <label>Delivery Date: <input type="date" placeholder="date"/></label><br>
-                        <label>Location:<input type="text" placeholder="Surat"></label><br>
-                        <label>LR Number: <input type="text"></label>
+                        <label>Driver Name: <input type="text" class="input_field" placeholder="Name"/></label><br>
+                        <label>Vehicle Number: <input type="text" class="input_field" placeholder="GJ05FR9362"/></label><br>
+                        <label>Delivery Date: <input type="date" class="input_field" placeholder="date"/></label><br>
+                        <label>Location:<input type="text" class="input_field" placeholder="Surat"></label><br>
+                        <label>LR Number: <input type="text" class="input_field"></label>
                     </td>
                     <td>
                         <h4>Invoice Details</h4><br>
-                        <label>Invoice No:<input type="text"></label><br>
-                        <label>Date: <input type="date"></label><br>
-                        <label>Place of supply:<input type="text"></label><br>
-                        <label>Due Date: <input type="date"></label>
+                        <label>Invoice No:<input type="text" class="input_field"></label><br>
+                        <label>Date: <input type="date" class="input_field"></label><br>
+                        <label>Place of supply:<input type="text" class="input_field"></label><br>
+                        <label>Due Date: <input type="date" class="input_field"></label>
                     </td>
                 </tr>
             </form>
+        </table><br>
+
+        <table class="bill" cellspacing="5">
+            <tr>
+                <th>#</th>
+                <th colspan="2">Item Name</th>
+                <th>HSN/SAC</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Price/Unit</th>
+                <th>GST</th>
+                <th>Amount</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td colspan="2"></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <th colspan="2">Total</th>
+                <td></td>
+                <th></th>
+                <td></td>
+                <td></td>
+                <th></th>
+                <th></th>
+            </tr>
+        </table><br>
+
+        <!--dont know how to make this table-->
+        <table class="tax" style="width: 100%;">
+            <tr>
+                <th>Tax Type</th>
+                <th>Taxable amount</th>
+                <th>Rate</th>
+                <th>Tax amount</th>
+                <th>Amounts</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>SGST</td>
+                <td>₹ 37,460.00</td>
+                <td>2.5%</td>
+                <td>₹ 936.50</td>
+                <td>Sub Total</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>₹ 39,333.00</td>
+            </tr>
+            <tr>
+                <td>CGST</td>
+                <td>₹ 37,460.00</td>
+                <td>2.5%</td>
+                <td>₹ 936.50</td>
+                <th style="background-color: #eee;">Total</th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="background-color: #eee;">₹ 39,333.00</td> 
+            </tr>
+            <tr></tr>
+            <tr></tr>
+        </table><br>
+
+        <table class="ivoice_words">
+            <tr>
+                <th align="left"><h3>Invoice Amount In Words</h3></th>
+            </tr>
+            <tr></tr>
+            <tr></tr><tr></tr>
+            <tr>
+                <td>Thirty Nine Thousand Three Hundred Thirty Three Rupees only</td>
+            </tr>
+        </table><br>
+
+        <table class="terms">
+            <tr>
+                <td>
+                    <h3>Terms and Conditions</h3>
+                    <p>- We reserve the right of recovery before due date at any time.</p>
+                    <p>- Goods once sold cannot be returned. Any defect in the material</p>
+                    <p>received should be brought into notice withim the 48 hours of delivery.</p>
+                    <p>- The sale is understood to have been made after due consideration of </p>
+                    <p>the quality of goods and prevailing rates.</p>
+                    <p>- The payment of this bill shall be made by the due date failing which interest</p>
+                    <p>@ 1.5% Per Month shall be charged from the due date.</p>
+                </td>
+            </tr>
+        </table><br>
+
+        <table style="width: 100%;">
+            <tr>
+                <td>
+                    <h3>Bank Details</h3><br>
+                    <p>Name: HDFC BANK</p><br>
+                    <p>Account No.: 50200023386178</p><br>
+                    <p>IFSC code: HDFC0000955</p><br>
+                    <p>Account holder's name: Homecraft</p><br>
+                </td>
+                <td>
+                    <p>For: Homecraft</p>
+                    <br><br><br>
+                    <br><br>
+                    <h3>Authorized Signatory</h3>
+                </td>
+            </tr>
         </table>
+
     </div>
 
     <!-- <div class="footer">

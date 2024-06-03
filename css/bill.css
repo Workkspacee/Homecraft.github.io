@@ -13,7 +13,7 @@ body{
 }
 
 .container{
-    max-width: 1500px;
+    max-width: 1000px;
     margin: auto;
     margin-top: 40px;
     padding: 30px;
@@ -21,7 +21,44 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+.img{
+    
+}
 
+.input_field {
+    position: relative;
+	border: none;
+	border-bottom: 0.125rem solid #D1D1D4;
+	background: none;
+	padding: 0.063rem;
+	padding-left: 0.063rem;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+}
+
+.bill{
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table.bill th{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+table.bill td{
+    border: 1px solid black;
+    padding: 8px;
+    text-align: right;
+}
+
+table.tax td{
+    padding: 8px;
+    text-align: center;
+}
 
 
 
