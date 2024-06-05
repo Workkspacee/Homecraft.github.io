@@ -13,6 +13,20 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   
     <link rel="stylesheet" href="/Quotation.css">
+
+    <script>
+        document.getElementById('btn1').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('mainForm').action = '/page1';
+            document.getElementById('mainForm').submit();
+        });
+
+        document.getElementById('btn2').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('mainForm').action = '/page2';
+            document.getElementById('mainForm').submit();
+        });
+    </script>
 </head>
 
 <body>
@@ -26,7 +40,7 @@
 
     <div class="container">
         <div class="row jumbotron">            
-            <form class="login">   
+            <form id="mainForm" class="login" method="post">   
                 <div class="row">                 
                     <div class="col-2 login__field">
                         <h6 align="center">Work order number : </h6>
@@ -185,7 +199,7 @@
                             </tr>
                         </tbody> 
                     </table><br/><br/>
-                    <center><button type="submit" class="submit"> Re-Submit </button></center>
+                    <center><button id= "btn1" type="submit" class="submit" > Save </button></center>
 
                 </div>
                   
@@ -356,9 +370,9 @@
                     </select>
                 </div><br/><br/>
                 <div>
-                   <center> <button type="submit" class="but">Submit</button> </center>
+                    <center><button id= "btn2" type="submit" class="submit" > Save </button></center>
                 </div>
-
+                    <center> <button type="submit" class="but">Bill</button> </center>
             </form>
         </div>
     </div>

@@ -279,6 +279,56 @@ router.post('/addroom', async(req,res) => {
   }
 });
 
+// for resubmit the quotation page 
+
+router.post('/page1', async(req,res) => {
+  try{
+    const {work_no} = req.body;
+    const body = req.body;
+
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+        body ,
+      { new: true }
+    );
+
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('Quotation', { no });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
+router.post('/page2', async(req,res) => {
+  try{
+    const {work_no} = req.body;
+    const body = req.body;
+
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+        body ,
+      { new: true }
+    );
+
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('Quotation', { no });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
+
+
 
 //for geting details with their id.
 router.get('/admin/:id',async (req,res)=>{            
