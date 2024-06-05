@@ -21,8 +21,16 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
-.img{
-    
+.but{
+    width: 15%;
+    padding: 0.622rem;
+    background-color: #4EA685;
+    color: #fff;
+    border: none;
+    border-radius: 0.373rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
 }
 
 .input_field {
