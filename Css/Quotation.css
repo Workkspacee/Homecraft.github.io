@@ -85,9 +85,10 @@ nav h3{
 nav a{
     color: #4EA685;
     display: block;
+    text-decoration: none;
 }
 
-nav a:hover {color: #4EA685; }
+nav a:hover {color: #4EA685; text-decoration: none; }
 
 
 
