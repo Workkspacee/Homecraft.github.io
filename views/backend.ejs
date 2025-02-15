@@ -19,7 +19,7 @@
     <br>
     
     <div class="cont">
-        <form action="/details" method="post">
+        <form method="post">
             <div class="form sign-in">
                 <h2>Create New Work Order</h2>
                 <label>
@@ -68,8 +68,10 @@
                         <option value="Order Delivered">Order Delivered</option>
                     </select>
                 </label>
-                <button class="submit" type="submit">Submit</button>
-            
+
+                <button class="submit" type="submit" formaction="/details"> Submit </button>
+                <button class="submit" type="submit" formaction="/measure"> Measurement </button>
+
             </div>
         </form>
         <div class="sub-cont">
@@ -87,14 +89,16 @@
                     <span class="m--in">New Order</span>
                 </div>
             </div>
-            <form action="/edit" method="post">
+            <form method="post">
                 <div class="form sign-up">
                     <h2>View Work Order</h2>
                     <label>
                         <span>Work Order No.</span>
                         <input type="text" name="work_no"/>
                     </label>
-                    <button type="submit" class="submit">View Order</button>
+                    <button class="submit" type="submit" formaction="/edit">View Order </button>
+                    <button class="submit" type="submit" formaction="/mea">Open Measurement </button>
+                    <button class="submit" type="submit" formaction="/quota">Open Quitation </button>
                 </div>
             </form>
         </div>

@@ -145,10 +145,32 @@ router.post('/details', async(req,res) => {
     }
 });
 
-
 router.get('/details', async(req,res) => {
   res.redirect('/dashboard');
 });
+
+
+// For opening measurement page with saving details and showing that details 
+router.post('/measure', async(req,res) => {
+  try {
+    const {work_no, name, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
+    
+    // Check if work order no already exists
+    const existingno = await Data.findOne({ work_no });
+    if (existingno) {
+      return res.status(400).json({ message: 'Order number already exists' });
+    }
+
+    const data = new Data({work_no, name, date, d_date, p_no, add, f_type, f_status, w_status});
+    await data.save()
+    
+    const no = await Data.findOne({ work_no });
+    res.render('measurement',{ no });
+  }
+    catch (error) {
+      console.log(err);
+    }
+ });
 
 //searching data from work_no in backend
 router.post('/edit', async(req,res) => {
@@ -167,8 +189,38 @@ router.post('/edit', async(req,res) => {
     }
 });
 
-router.get('/edit', async(req,res) =>{
-  res.redirect('backend2');
+// Find workno and open measurement for it in backend
+router.post('/mea', async(req,res) => {
+  const { work_no } = req.body;
+
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('measurement', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
+// Find workno and open quotation for it in backend
+router.post('/quota', async(req,res) => {
+  const { work_no } = req.body;
+
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('Quotation', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
 });
 
 // backend 2 ma aavela data edit karva
