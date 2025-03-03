@@ -299,36 +299,12 @@ router.post('/fit', async(req,res) => {
     if (!no) {
       return res.status(404).send('Work order not found');
     }
-    res.render('fiter2', { no });
+    res.render('measurefitter', { no });
 
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
-});
-
-//fitter add room 
-router.post('/addroom', async(req,res) => {
-  try{
-    const {work_no} = req.body;
-    const body = req.body;
-
-    const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-        body ,
-      { new: true }
-    );
-
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('Quotation', { no });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating order');
-  }
 });
 
 // for resubmit the quotation page 

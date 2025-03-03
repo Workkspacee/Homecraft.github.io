@@ -1,6 +1,5 @@
 const { text } = require('express');
 const mongoose = require('mongoose');
-const counter = require('../Script/fiter2');
 
 const dataSchema = new mongoose.Schema({
     work_no: { type: String, required: true, unique: true },
