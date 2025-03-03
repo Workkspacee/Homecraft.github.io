@@ -26,7 +26,7 @@
 
     <div class="container">
         <div class="row jumbotron">            
-            <form id="mainForm" class="login" method="post">   
+            <form class="login" method="post">   
                 <div class="row">                 
                     <div class="col-2 login__field">
                         <h6 align="center">Work order number : </h6>
@@ -132,16 +132,17 @@
                                 <%  no['blackout_req' + i] = no['fabric_req' + i]   %>
                                    
                                 <tr>
-                                    <td><%= no['room_number' + i] %></td>
-                                    <td><%= no['room_name' + i]  %></td>
-                                    <td><%= no['curtain' + i]  %></td>
-                                    <td><%= no['width' + i]  %></td>
-                                    <td><%= no['height' + i]  %></td>
-                                    <td><%= no['fabric' + i]  %></td>
-                                    <td><%= no['fabric_req' + i] %></td>
-                                    <td><%= no['blackout' + i]  %></td>
-                                    <td><%= no['blackout_req' + i]  %></td>
-                                </tr>                           
+                                    <td><input class="login__input" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
+                                    <td><input type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
+                                    <td><input type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" readonly></td>
+                                    <td><input type="number" name="width<%= i %>" value="<%= no['width' + i] %>" readonly></td>
+                                    <td><input type="number" name="height<%= i %>" value="<%= no['height' + i] %>" readonly></td>
+                                    <td><input type="String" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" ></td>
+                                    <td><input type="number" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" readonly></td>
+                                    <td><input type="String" name="blackout<%= i %>" value="<%= no['blackout' + i] %>" readonly></td>
+                                    <td><input type="number" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>" readonly></td>
+                                </tr>
+
                             <% } %>
                             
                             <%
@@ -185,7 +186,7 @@
                             </tr>
                         </tbody> 
                     </table><br/><br/>
-                    <center><button id= "btn1" type="submit" class="submit" > Save </button></center>
+                    <center><button id= "btn1" type="submit" class="submit" formaction="/measure-save" > Save </button></center>
 
                 </div>
             </form>

@@ -1,0 +1,61 @@
+Change work status in all 
+1. Backend 
+
+All done
+
+2. Backend nu measurement 
+
+add respective buttons ( quotation button ) ( save & exit )
+class = login_input nu jovu sarkhu and sarkhu karvu.(Table ma text field bov gandi dekhay che)
+and blackout required and all auto calculated formula needed ? yes 
+and save this auto field to the database 
+edit measurement table. add window number, room number so backend easily add blank room and windows. 
+add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
+type of curtain ma options
+Fabric using master file 
+backend and fitter bane 1 time par 1 field bhare to shu thase?
+
+3. Backend nu quotation 
+
+auto table
+add respective buttons and also give print button which contain quotation and measurement so they can send to client 
+so basically new white page like bill page (we can see sample in workspace mail id).
+add master file for material, Rate, Gst 
+so now we need auto calculation formulas for sub total and grand total also less discounts. 
+
+4. Fitter 
+
+delete fitter2 page 
+add measurement page after giving work no. and in this we need some other not readonly fields.
+Change and make easy fitter work done thing for them.
+and save button
+
+5. Tailor 
+
+things want to change is maybe in your notebook so read and add it. 
+
+6. Admin 
+
+also add client name and delete button with confirmation option in it.
+
+7. 2 bill pages 
+
+auto fill everything in it.
+and main thing print buttons 
+
+8. client page 
+
+maybe in 2nd update. 
+
+
+-> In master file we need 
+item name or item code (Fabric in measurement)
+Rate
+GST	
+HSN / SAC 
+What about unit ? you need auto or manual ?
+
+-> Backend ma shu shu karyu ?
+1. table editable
+2. save button action measure-save
+3.

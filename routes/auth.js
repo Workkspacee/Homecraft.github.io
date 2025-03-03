@@ -248,8 +248,31 @@ router.post('/update-edit', async (req, res) => {
   }
 });
 
-//  tailor ma work no nakhvathi eni details aave
+// Measurement page ma data save karva and edit karva 
+router.post('/measure-save', async(req,res) => {
+  try{
+    const {work_no} = req.body;
+    const body = req.body;
 
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+        body ,
+      { new: true }
+    );
+
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('measurement', { no });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
+//  tailor ma work no nakhvathi eni details aave
 router.post('/tai', async(req,res) => {
   const { work_no } = req.body;
 
@@ -308,29 +331,6 @@ router.post('/fit', async(req,res) => {
 });
 
 // for resubmit the quotation page 
-
-router.post('/page1', async(req,res) => {
-  try{
-    const {work_no} = req.body;
-    const body = req.body;
-
-    const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-        body ,
-      { new: true }
-    );
-
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('Quotation', { no });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating order');
-  }
-});
 
 router.post('/page2', async(req,res) => {
   try{
