@@ -41,6 +41,17 @@ body{
 	transition: .2s;
 }
 
+.table_cell {
+	border: none;
+	border-bottom: none;
+	background: none;
+	padding: 0.063rem;
+	padding-left: 0.063rem;
+	width: 200px;
+    height: auto;
+	transition: .2s;
+}
+
 .table1 {
 	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 }

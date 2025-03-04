@@ -14,6 +14,24 @@
   
     <link rel="stylesheet" href="/Quotation.css">
 
+    <style>
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        .table_cell {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+
     <script>
         $(document).ready(function () {
             function calculateFabricRequirement(curtainType, width, height) {
@@ -80,6 +98,8 @@
             // Run the function initially to set values
             updateTotals();
         });
+
+        
     </script>
 </head>
 
@@ -159,15 +179,15 @@
                             <% for (let i = 1; i <= 20; i++) { %>  
 
                                 <tr>
-                                    <td><input class="login__input" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
-                                    <td><input type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
-                                    <td><input type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
-                                    <td><input type="number" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
-                                    <td><input type="number" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
-                                    <td><input type="String" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" ></td>
-                                    <td><input type="number" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" ></td>
-                                    <td><input type="String" name="blackout<%= i %>" value="<%= no['blackout' + i] %>"></td>
-                                    <td><input type="number" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>"></td>
+                                    <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
+                                    <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
+                                    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
+                                    <td><input class="table_cell" type="String" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" ></td>
+                                    <td><input class="table_cell" type="String" name="blackout<%= i %>" value="<%= no['blackout' + i] %>"></td>
+                                    <td><input class="table_cell" type="number" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>"></td>
                                 </tr>
 
                             <% } %>
