@@ -11,11 +11,11 @@ const dataSchema = new mongoose.Schema({
     f_type: { type: String},
     f_status: { type: String, enum: ['Order Pending','Delivery Pending', 'Delivered']},
     w_status: { type: String, enum: ['Details Pending', 'Measurement Pending', 'Given for Stiching', 'Delivery Pending', 'Order Delivered']},
-    roman: { type: Number},
-    american: { type: Number},
-    ring: { type: Number},
-    total_fab_req: { type: Number},
-    total_black_req: { type: Number},
+    roman: { type: Number, default: 0},
+    american: { type: Number, default: 0},
+    ring: { type: Number, default: 0},
+    total_fab_req: { type: Number, default: 0},
+    total_black_req: { type: Number, default: 0},
 });
 
 for (let i = 1; i <= 20; i++) {
@@ -28,8 +28,8 @@ for (let i = 1; i <= 20; i++) {
         ['curtain' + i]: { type: String },
         ['fabric' + i]: { type: String },
         ['fabric_req' + i]: { type: Number },
-        ['blackout' + i]: { type: String },
-        ['blackout_req' + i]: { type: String }
+        ['blackout' + i]: { type: Number },
+        ['blackout_req' + i]: { type: Number }
     });
 }
 
