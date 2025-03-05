@@ -11,7 +11,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
+
     <link rel="stylesheet" href="/Quotation.css">
 
     <style>
@@ -30,19 +30,20 @@
             width: 100%;
             box-sizing: border-box;
         }
-    </style>
+    </style> 
 
     <script>
         $(document).ready(function () {
             function calculateFabricRequirement(curtainType, width, height) {
                 if (!curtainType || curtainType.trim() === "") {
-                    return "";
+                    return 0;
                 }
                 if (curtainType.toLowerCase() === "roman") {
                     return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
                 } else {
                     return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
                 }
+                return isNaN(fabricReq) ? 0 : fabricReq;  // Ensure it's always a number
             }
     
             function updateTotals() {
@@ -60,24 +61,27 @@
     
                     // Calculate Fabric Requirement
                     let fabricReq = calculateFabricRequirement(curtainType, width, height);
-                    $(`input[name="fabric_req${i}"]`).val(fabricReq);
+                    fabricReq = isNaN(fabricReq) ? 0 : fabricReq;
+                    $(`input[name="fabric_req${i}"]`).val(fabricReq > 0 ? fabricReq.toFixed(2) : "");
     
                     // Ensure blackout_req is summed even if empty
                     let blackoutReq = blackout !== "" ? fabricReq : 0;
-                    $(`input[name="blackout_req${i}"]`).val(blackout !== "" ? fabricReq : ""); 
+                    blackoutReq = isNaN(blackoutReq) ? 0 : blackoutReq; // Ensure it's a number
+                    $(`input[name="blackout_req${i}"]`).val(blackout !== "" && blackoutReq > 0 ? blackoutReq.toFixed(2) : "");
 
                     totalFabric += fabricReq;
-                    totalBlackout += parseFloat(blackoutReq) || 0; // Ensure empty values are treated as 0
+                    totalBlackout += blackoutReq; // Ensure empty values are treated as 0
 
     
                     // Calculate Total Parts
-                    if (curtainType.toLowerCase() === "roman") {
+                    let type = curtainType.toLowerCase();
+                    if (type === "roman") {
                         roman += (width * height) / 144;
                     }
-                    if (curtainType.toLowerCase() === "american") {
+                    if (type === "american") {
                         american += Math.ceil(width / 20);
                     }
-                    if (curtainType.toLowerCase() === "ring") {
+                    if (type === "ring") {
                         ring += Math.ceil(width / 20);
                     }
                 }
@@ -182,12 +186,12 @@
                                     <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
                                     <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
                                     <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
-                                    <td><input class="table_cell" type="number" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
-                                    <td><input class="table_cell" type="number" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
                                     <td><input class="table_cell" type="String" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" ></td>
-                                    <td><input class="table_cell" type="number" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" ></td>
-                                    <td><input class="table_cell" type="String" name="blackout<%= i %>" value="<%= no['blackout' + i] %>"></td>
-                                    <td><input class="table_cell" type="number" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout<%= i %>" value="<%= no['blackout' + i] %>"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>"></td>
                                 </tr>
 
                             <% } %>
@@ -214,11 +218,11 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <input type="number"  class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
+                                <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
                             </td>
                             <td></td>
                             <td>
-                                <input type="number" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
+                                <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
                             </td> 
                             </tr>
                         </tbody> 
