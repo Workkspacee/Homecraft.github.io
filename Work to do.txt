@@ -6,14 +6,12 @@ All done
 2. Backend nu measurement 
 
 add respective buttons ( quotation button ) ( save & exit )
-class = login_input nu jovu sarkhu and sarkhu karvu.(Table ma text field bov gandi dekhay che)
-and blackout required and all auto calculated formula needed ? yes 
-and save this auto field to the database 
 edit measurement table. add window number, room number so backend easily add blank room and windows. 
 add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
-type of curtain ma options
+type of curtain ma options (Ring , Roman and American)
 Fabric using master file 
 backend and fitter bane 1 time par 1 field bhare to shu thase?
+make readonly fields for backend. 
 
 3. Backend nu quotation 
 
@@ -25,8 +23,7 @@ so now we need auto calculation formulas for sub total and grand total also less
 
 4. Fitter 
 
-delete fitter2 page 
-add measurement page after giving work no. and in this we need some other not readonly fields.
+add measurement page after giving work no. (done) and in this we need some other not readonly fields.
 Change and make easy fitter work done thing for them.
 and save button
 
