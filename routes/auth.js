@@ -273,6 +273,7 @@ router.post('/measure-save', async(req,res) => {
   }
 });
 
+//link to quotation page on measurement page 
 router.post('/measure-quotation', async(req,res) => {
   const { work_no } = req.body;
 
@@ -372,9 +373,6 @@ router.post('/page2', async(req,res) => {
   }
 });
 
-
-
-
 //for geting details with their id.
 router.get('/admin/:id',async (req,res)=>{            
        const id = req.params.id;
@@ -391,22 +389,7 @@ router.get('/admin/:id',async (req,res)=>{
         }
 });
 
-router.get("/admin/search", async (req, res) => {
-    try {
-        const workNo = req.query.work_no;
-        const order = await WorkOrder.findOne({ work_no: workNo });
-
-        if (!order) {
-            return res.json({ error: "No order found" });
-        }
-
-        res.json({ work_no: order.work_no, name: order.name });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Server Error" });
-    }
-});
-
+//to delete the order from admin page
 router.delete('/delete/:id', async (req, res) => {
   try {
       const { id } = req.params;
