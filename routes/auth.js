@@ -4,6 +4,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
+const { name } = require('ejs');
 
 const router = express.Router();
 
@@ -82,8 +83,8 @@ router.get('/dashboard', (req, res) => {
 router.get('/admin', async (req, res) => {
   if (req.session.user && req.session.user.role === 'admin') {
     try {
-      const workNumbers = await Data.find({}, 'work_no'); // Fetch all work_no
-      res.render('admin', { username: req.session.user.username, workNumbers });
+      const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work_no
+      res.render('admin', { username: req.session.user.username, workNumbers});
     } catch (error) {
       console.error(error);
       res.status(500).send('Server error');
@@ -272,6 +273,22 @@ router.post('/measure-save', async(req,res) => {
   }
 });
 
+router.post('/measure-quotation', async(req,res) => {
+  const { work_no } = req.body;
+
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('Quotation', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
+
 //  tailor ma work no nakhvathi eni details aave
 router.post('/tai', async(req,res) => {
   const { work_no } = req.body;
@@ -374,16 +391,34 @@ router.get('/admin/:id',async (req,res)=>{
         }
 });
 
-router.delete('/:id', (req,res)=>{
-     const id = req.params.id;
-  
-     Blog.findByIdAndDelete(id)
-         .then(result =>{
-             res.json({ redirect: '/blogs' })
-         })
-         .catch(err =>{
-            console.log(err);
-         })
+router.get("/admin/search", async (req, res) => {
+    try {
+        const workNo = req.query.work_no;
+        const order = await WorkOrder.findOne({ work_no: workNo });
+
+        if (!order) {
+            return res.json({ error: "No order found" });
+        }
+
+        res.json({ work_no: order.work_no, name: order.name });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Server Error" });
+    }
+});
+
+router.delete('/delete/:id', async (req, res) => {
+  try {
+      const { id } = req.params;
+      const deletedWork = await Data.findByIdAndDelete(id);
+      if (!deletedWork) {
+          return res.status(404).json({ success: false, message: "Work order not found" });
+      }
+      res.json({ success: true });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: "Server error" });
+  }
 });
   
   

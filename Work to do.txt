@@ -5,7 +5,7 @@ All done
 
 2. Backend nu measurement 
 
-add respective buttons ( quotation button ) ( save & exit )
+add respective buttons ( quotation button---done ) ( save & exit )
 edit measurement table. add window number, room number so backend easily add blank room and windows. 
 add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
 type of curtain ma options (Ring , Roman and American)
@@ -31,9 +31,9 @@ and save button
 
 things want to change is maybe in your notebook so read and add it. 
 
-6. Admin 
+6. Admin (fully done ) review once
 
-also add client name and delete button with confirmation option in it.
+also add client name(----done) and delete button with confirmation option in it.(---done)
 
 7. 2 bill pages 
 
