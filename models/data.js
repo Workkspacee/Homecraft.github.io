@@ -29,7 +29,10 @@ for (let i = 1; i <= 20; i++) {
         ['fabric' + i]: { type: String },
         ['fabric_req' + i]: { type: Number },
         ['blackout' + i]: { type: Number },
-        ['blackout_req' + i]: { type: Number }
+        ['blackout_req' + i]: { type: Number },
+        ['rate' + i]: { type: Number },
+        ['hsn' + i]: { type: Number },
+        ['gst' + i]: { type: Number }
     });
 }
 
