@@ -18,9 +18,10 @@ mongoose.connect(dbURI)
 // view engine dynamic data use karva ma help kare 
 app.set('view engine','ejs');
 
-//for linking static file(css/js files)
+//for linking static file(css/js/json files)
 app.use(express.static('css'));
 app.use(express.static('Script'));
+app.use(express.static('Json'));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));

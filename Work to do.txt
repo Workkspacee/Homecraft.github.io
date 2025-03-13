@@ -50,7 +50,16 @@ item name or item code (Fabric in measurement)
 Rate
 GST	
 HSN / SAC 
-What about unit ? you need auto or manual ?
+What about unit ? you need auto or manual ?  
+
+https://tableconvert.com/excel-to-json this is best website for making json file. in this we need array json file.
+like [
+    {
+        "name": "Accessories",
+        "hsn": "85014090",
+        "rate": "1200",
+        "gst": "18%"
+    } ] this. 
 
 -> Backend ma shu shu karyu ?
 1. table editable
