@@ -30,6 +30,7 @@ and save button
 5. Tailor 
 
 things want to change is maybe in your notebook so read and add it. 
+and main thing is that you should change measurement table in it because it is with auto calculated system.
 
 6. Admin (fully done ) review once
 
