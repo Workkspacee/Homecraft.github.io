@@ -189,25 +189,40 @@
         
             // KEYBOARD NAVIGATION
             $input.on("keydown", function (e) {
-              const $list = $(".autocomplete-list");
-              const $items = $list.find("li");
-              if ($items.length === 0) return;
-        
-              if (e.key === "ArrowDown") {
-                currentIndex = (currentIndex + 1) % $items.length;
-                $items.removeClass("selected");
-                $items.eq(currentIndex).addClass("selected");
-                e.preventDefault();
-              } else if (e.key === "ArrowUp") {
-                currentIndex = (currentIndex - 1 + $items.length) % $items.length;
-                $items.removeClass("selected");
-                $items.eq(currentIndex).addClass("selected");
-                e.preventDefault();
-              } else if (e.key === "Enter" && currentIndex >= 0) {
-                $items.eq(currentIndex).click();
-                e.preventDefault();
-              }
+                const $list = $(".autocomplete-list");
+                const $items = $list.find("li");
+                if ($items.length === 0) return;
+
+                if (e.key === "ArrowDown") {
+                    currentIndex = (currentIndex + 1) % $items.length;
+                    $items.removeClass("selected");
+                    const $current = $items.eq(currentIndex).addClass("selected");
+                    scrollItemIntoView($current, $list);
+                    e.preventDefault();
+                } else if (e.key === "ArrowUp") {
+                    currentIndex = (currentIndex - 1 + $items.length) % $items.length;
+                    $items.removeClass("selected");
+                    const $current = $items.eq(currentIndex).addClass("selected");
+                    scrollItemIntoView($current, $list);
+                    e.preventDefault();
+                } else if (e.key === "Enter" && currentIndex >= 0) {
+                    $items.eq(currentIndex).click();
+                    e.preventDefault();
+                }
             });
+
+            function scrollItemIntoView($item, $list) {
+                const listTop = $list.scrollTop();
+                const listBottom = listTop + $list.height();
+                const itemTop = $item.position().top + listTop;
+                const itemBottom = itemTop + $item.outerHeight();
+
+                if (itemBottom > listBottom) {
+                    $list.scrollTop(itemBottom - $list.height());
+                } else if (itemTop < listTop) {
+                    $list.scrollTop(itemTop);
+                }
+            }
         
             // Close on outside click
             $(document).on("click", function (e) {
