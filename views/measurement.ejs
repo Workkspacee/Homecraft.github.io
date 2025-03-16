@@ -77,7 +77,7 @@
                 let ring = 0;
     
                 for (let i = 1; i <= 20; i++) {
-                    let curtainType = $(`input[name="curtain${i}"]`).val();
+                    let curtainType = $(`[name="curtain${i}"]`).val();
                     let width = parseFloat($(`input[name="width${i}"]`).val()) || 0;
                     let height = parseFloat($(`input[name="height${i}"]`).val()) || 0;
                     let blackout = $(`input[name="blackout${i}"]`).val().trim();
@@ -97,7 +97,7 @@
 
     
                     // Calculate Total Parts
-                    let type = curtainType.toLowerCase();
+                    let type = (curtainType || "").toLowerCase();
                     if (type === "roman") {
                         roman += (width * height) / 144;
                     }
@@ -317,14 +317,14 @@
                                 <tr>
                                     <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
                                     <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
-                                    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
-                             
-                                <!--    <td><select class="table_cell" name="curtain<%= i %>">
+                                <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
+                             -->
+                                    <td><select class="table_cell" name="curtain<%= i %>">
                                         <option><%= no['curtain' + i] %></option>
                                         <option>American</option>
                                         <option>Ring</option>
                                         <option>Roman</option>
-                                    </select></td>-->
+                                    </select></td>
 
                                     <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
                                     <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>

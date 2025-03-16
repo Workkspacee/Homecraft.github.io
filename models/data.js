@@ -25,7 +25,7 @@ for (let i = 1; i <= 20; i++) {
         ['window_number' + i]: { type: Number },
         ['width' + i]: { type: Number },
         ['height' + i]: { type: Number },
-        ['curtain' + i]: { type: String },
+        ['curtain' + i]: { type: String, enum: ['American','Ring', 'Roman']},
         ['fabric' + i]: { type: String },
         ['fabric_req' + i]: { type: Number },
         ['blackout' + i]: { type: Number },
