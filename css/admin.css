@@ -125,6 +125,11 @@ h2 {
     color: #cc0000;
 }
 
+.search-btn {
+    background-color: #3c9f7a;
+    border: none ;
+    font-size: 28px;
+}
 
 /* Modal Styling */
 .modal {
