@@ -83,7 +83,7 @@ router.get('/admin', async (req, res) => {
   if (req.session.user && req.session.user.role === 'admin') {
     try {
       const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work_no
-      res.render('admin', { username: req.session.user.username, workNumbers});
+      res.render('admin', { username: req.session.user.username, workNumbers, searchedWork: null});
     } catch (error) {
       console.error(error);
       res.status(500).send('Server error');
@@ -402,8 +402,38 @@ router.delete('/delete/:id', async (req, res) => {
       res.status(500).json({ success: false, message: "Server error" });
   }
 });
-  
- 
+
+//to search order
+router.post('/admin/search', async (req, res) => {
+  try {
+      const { work_no } = req.body;
+      const work = await Data.findOne({ work_no });
+
+      const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work orders
+
+      res.render('admin', { 
+          searchedWork: work || null, 
+          workNumbers,  // Ensure the work list is still displayed
+          username: req.session.user.username // Pass username
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
+});
+
+//to get dropdown list for the suggestion 
+router.get('/admin/suggestions', async (req, res) => {
+  try {
+      const query = req.query.query;
+      const suggestions = await Data.find({ work_no: new RegExp(query, 'i') }).limit(5);
+
+      res.json(suggestions);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
+}); 
 
 
 
