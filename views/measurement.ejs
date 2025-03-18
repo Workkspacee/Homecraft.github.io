@@ -53,6 +53,22 @@
             background-color: #eee;
         }
 
+        /* Hover-only Dropdown Arrow */ 
+
+        .custom-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+
+        .hover-arrow {
+            appearance: none;
+        }
+
+        .hover-arrow:hover {
+            appearance: auto;
+        }
+
     </style> 
 
     <script>
@@ -163,9 +179,22 @@
                 return;
               }
         
-              const results = fabricsData.filter(item =>
-                item.name.toLowerCase().includes(query)
-              );
+              const results = fabricsData
+                .map(item => {
+                    const name = item.name.toLowerCase();
+
+                    if (name.startsWith(query)) {
+                    return { ...item, priority: 1 }; // starts with input
+                    } else if (name.includes(query)) {
+                    return { ...item, priority: 2 }; // contains input
+                    } else if (isFuzzyMatch(name, query)) {
+                    return { ...item, priority: 3 }; // close match like arun vs arjun
+                    } else {
+                    return null;
+                    }
+                })
+                .filter(Boolean)
+                .sort((a, b) => a.priority - b.priority);
         
               const $list = $("<ul>").addClass("autocomplete-list");
               results.forEach((item, index) => {
@@ -186,6 +215,15 @@
                 $input.after($list);
               }
             });
+
+            function isFuzzyMatch(str, pattern) {
+            let i = 0, j = 0;
+            while (i < str.length && j < pattern.length) {
+                if (str[i] === pattern[j]) j++;
+                i++;
+            }
+            return j === pattern.length;
+            }
         
             // KEYBOARD NAVIGATION
             $input.on("keydown", function (e) {
@@ -319,12 +357,14 @@
                                     <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
                                 <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
                              -->
-                                    <td><select class="table_cell" name="curtain<%= i %>">
-                                        <option><%= no['curtain' + i] %></option>
-                                        <option>American</option>
-                                        <option>Ring</option>
-                                        <option>Roman</option>
-                                    </select></td>
+                                    <td>
+                                        <select class="table_cell hover-arrow" name="curtain<%= i %>">
+                                        <option> </option>
+                                        <option value="American" <%= no['curtain' + i] === 'American' ? 'selected' : '' %>>American</option>
+                                        <option value="Ring" <%= no['curtain' + i] === 'Ring' ? 'selected' : '' %>>Ring</option>
+                                        <option value="Roman" <%= no['curtain' + i] === 'Roman' ? 'selected' : '' %>>Roman</option>
+                                        </select>
+                                    </td>                              
 
                                     <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
                                     <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
