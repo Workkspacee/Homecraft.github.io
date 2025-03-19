@@ -32,9 +32,11 @@ and save button
 things want to change is maybe in your notebook so read and add it. 
 and main thing is that you should change measurement table in it because it is with auto calculated system.
 
-6. Admin (fully done ) review once
+6. Admin 
 
-also add client name(----done) and delete button with confirmation option in it.(---done)
+search oder by name
+work order detail page
+error: getting suggestion of the seached order number only and new entered order, it is not displaying old orders.
 
 7. 2 bill pages 
 
