@@ -27,6 +27,10 @@ add measurement page after giving work no. (done) and in this we need some other
 Change and make easy fitter work done thing for them.
 and save button
 
+Fittermeasure page:= 
+Add routes for their actions. 
+save button , delete quotation button. 
+
 5. Tailor 
 
 things want to change is maybe in your notebook so read and add it. 
