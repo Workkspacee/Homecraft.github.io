@@ -352,7 +352,7 @@
                         <tbody id="tableBody">
                             <% for (let i = 1; i <= 20; i++) { %>  
 
-                                <tr>
+                                <tr class="data-row">
                                     <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
                                     <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
                                 <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
@@ -375,7 +375,7 @@
                                     <td><input  type="number"  id="rate<%= i %>" name="rate<%= i %>" value="<%= no['rate' + i] %>"></td>
                                     <td><input  type="number"  id="hsn<%= i %>" name="hsn<%= i %>" value="<%= no['hsn' + i] %>"></td>
                                     <td><input  type="number"  id="gst<%= i %>" name="gst<%= i %>" value="<%= no['gst' + i] %>"></td>
-    
+                                    <td> <button type="button">Add Row</button> <button type="button">Delete Row</button> </td>
                                 </tr>
 
                                <!-- <input  type="hidden"  id="rate<%= i %>" name="rate<%= i %>" value="<%= no['rate' + i] %>">
@@ -384,7 +384,7 @@
 -->
                             <% } %>
 
-                            <tr>
+                            <tr class="summary-row">
                             <td></td>
                             <td>Total Parts</td>
                             <td></td>
@@ -398,7 +398,7 @@
                             <td></td>
                             </tr>
 
-                            <tr>
+                            <tr class="summary-row">
                             <td></td>
                             <td>Total Fabrics</td>
                             <td></td>
@@ -425,4 +425,71 @@
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function () {
+        const totalRows = 20;
+    
+        // Show only the first data row initially, hide the rest
+        $('#tableBody tr.data-row').each(function (index) {
+            if (index < 15) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    
+        // Handle Add Row
+        $('#tableBody').on('click', 'button:contains("Add Row")', function () {
+            const $currentRow = $(this).closest('tr');
+            const $nextHidden = $('#tableBody tr.data-row:hidden').first();
+    
+            if ($nextHidden.length) {
+                $nextHidden.insertAfter($currentRow).show();
+                reindexRows();
+            } else {
+                alert('All 18 rows are already visible.');
+            }
+        });
+    
+        // Handle Delete Row
+        $('#tableBody').on('click', 'button:contains("Delete Row")', function () {
+            const $row = $(this).closest('tr');
+    
+            // Prevent deleting the first data-row
+            if ($('#tableBody tr.data-row:visible').first().is($row)) {
+                alert('The first row cannot be deleted.');
+                return;
+            }
+    
+            $row.find('input, select').val('');
+            $row.hide();
+    
+            // Move it before totals
+            const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
+            $row.insertBefore($beforeTotals);
+    
+            reindexRows();
+        });
+    
+        function reindexRows() {
+            $('#tableBody tr.data-row:visible').each(function (index) {
+                const i = index + 1;
+                $(this).find('input, select').each(function () {
+                    const nameAttr = $(this).attr('name');
+                    const idAttr = $(this).attr('id');
+    
+                    if (nameAttr) {
+                        const newName = nameAttr.replace(/\d+$/, i);
+                        $(this).attr('name', newName);
+                    }
+    
+                    if (idAttr) {
+                        const newId = idAttr.replace(/\d+$/, i);
+                        $(this).attr('id', newId);
+                    }
+                });
+            });
+        }
+    });
+    </script>
 </html>
