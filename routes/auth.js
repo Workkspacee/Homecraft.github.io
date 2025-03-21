@@ -406,32 +406,47 @@ router.delete('/delete/:id', async (req, res) => {
 //to search order
 router.post('/admin/search', async (req, res) => {
   try {
-      const { work_no } = req.body;
-      const work = await Data.findOne({ work_no });
+    const { query } = req.body; // Accept search input
 
-      const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work orders
+    // Search for work_no OR name (case-insensitive)
+    const work = await Data.findOne({
+      $or: [
+        { work_no: query },
+        { name: { $regex: query, $options: 'i' } }
+      ]
+    });
 
-      res.render('admin', { 
-          searchedWork: work || null, 
-          workNumbers,  // Ensure the work list is still displayed
-          username: req.session.user.username // Pass username
-      });
+    const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work orders
+
+    res.render('admin', { 
+      searchedWork: work || null, 
+      workNumbers,
+      username: req.session.user.username
+    });
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
+    console.error(error);
+    res.status(500).send('Server error');
   }
 });
+
 
 //to get dropdown list for the suggestion 
 router.get('/admin/suggestions', async (req, res) => {
   try {
-      const query = req.query.query;
-      const suggestions = await Data.find({ work_no: new RegExp(query, 'i') }).limit(5);
+    const query = req.query.query;
+    const suggestions = await Data.find({
+      $or: [
+        { work_no: new RegExp(query, 'i') },
+        { name: new RegExp(query, 'i') }
+      ]
+    })
+    .limit(5)
+    .select('work_no name');
 
-      res.json(suggestions);
+    res.json(suggestions);
   } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
+    console.error(error);
+    res.status(500).send('Server error');
   }
 }); 
 
