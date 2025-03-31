@@ -406,49 +406,35 @@ router.delete('/delete/:id', async (req, res) => {
 //to search order
 router.post('/admin/search', async (req, res) => {
   try {
-    const { query } = req.body; // Accept search input
+      const { work_no } = req.body;
+      const searchedWork = await Data.findOne({ work_no });
+      const workNumbers = await Data.find(); // Get all work orders
 
-    // Search for work_no OR name (case-insensitive)
-    const work = await Data.findOne({
-      $or: [
-        { work_no: query },
-        { name: { $regex: query, $options: 'i' } }
-      ]
-    });
-
-    const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work orders
-
-    res.render('admin', { 
-      searchedWork: work || null, 
-      workNumbers,
-      username: req.session.user.username
-    });
+      res.render('admin', { workNumbers, searchedWork });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+      console.error(error);
+      res.status(500).send('Server error');
   }
 });
-
 
 //to get dropdown list for the suggestion 
 router.get('/admin/suggestions', async (req, res) => {
   try {
-    const query = req.query.query;
-    const suggestions = await Data.find({
-      $or: [
-        { work_no: new RegExp(query, 'i') },
-        { name: new RegExp(query, 'i') }
-      ]
-    })
-    .limit(5)
-    .select('work_no name');
+      const query = req.query.query;
+      if (!query) return res.json([]); // Return empty array if no input
 
-    res.json(suggestions);
+      const suggestions = await Data.find(
+          { work_no: { $regex: `^${query}`, $options: 'i' } }, // Match from the start
+          'work_no'
+      ).limit(5);
+
+      res.json(suggestions);
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Server error');
+      console.error(error);
+      res.status(500).send('Server error');
   }
-}); 
+});
+
 
 
 
