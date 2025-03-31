@@ -24,7 +24,7 @@
     
         document.getElementById("confirmDelete").addEventListener("click", function() {
             if (deleteId) {
-                fetch(/admin/delete/${deleteId}, { method: 'DELETE' })
+                fetch(/admin/delete/$, {deleteId}, { method: 'DELETE' })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
@@ -48,7 +48,7 @@
                 return;
             }
             try {
-                const response = await fetch(/admin/suggestions?query=${query});
+                const response = await fetch(/admin/suggestions?query=$: {query});
                 const data = await response.json();
 
                 let suggestionsHTML = "";
