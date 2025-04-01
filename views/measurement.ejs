@@ -429,9 +429,21 @@
     $(document).ready(function () {
         const totalRows = 20;
     
-        // Show only the first data row initially, hide the rest
-        $('#tableBody tr.data-row').each(function (index) {
-            if (index < 15) {
+        // Function to check if a row contains any data
+        function hasData($row) {
+            let hasValue = false;
+            $row.find('input, select').each(function () {
+                if ($(this).val().trim() !== '') {
+                    hasValue = true;
+                    return false; // Exit loop early
+                }
+            });
+            return hasValue;
+        }
+
+        // Show rows that have at least one value, hide the rest
+        $('#tableBody tr.data-row').each(function () {
+            if (hasData($(this))) {
                 $(this).show();
             } else {
                 $(this).hide();
