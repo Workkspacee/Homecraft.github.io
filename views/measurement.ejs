@@ -441,15 +441,15 @@
             return hasValue;
         }
 
-        // Show rows that have at least one value, hide the rest
-        $('#tableBody tr.data-row').each(function () {
-            if (hasData($(this))) {
+        // Show rows that have data or are the first row, hide the rest
+        $('#tableBody tr.data-row').each(function (index) {
+            if (index === 0 || hasData($(this))) {
                 $(this).show();
             } else {
                 $(this).hide();
             }
         });
-    
+   
         // Handle Add Row
         $('#tableBody').on('click', 'button:contains("Add Row")', function () {
             const $currentRow = $(this).closest('tr');
@@ -466,19 +466,37 @@
         // Handle Delete Row
         $('#tableBody').on('click', 'button:contains("Delete Row")', function () {
             const $row = $(this).closest('tr');
-    
-            // Prevent deleting the first data-row
-            if ($('#tableBody tr.data-row:visible').first().is($row)) {
-                alert('The first row cannot be deleted.');
-                return;
-            }
-    
-            $row.find('input, select').val('');
-            $row.hide();
-    
-            // Move it before totals
-            const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
-            $row.insertBefore($beforeTotals);
+
+            // Clear all fields in the row
+            $row.find('input, select').each(function () {
+                $(this).val('');
+            });
+
+            // Do not move or hide the first row even if blank
+            const isFirstRow = $row.index() === 0;
+            if (!isFirstRow) {
+    const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
+    $row.insertBefore($beforeTotals);
+} else {
+    // Check if any other data rows (excluding the first one) have data
+    const $rows = $('#tableBody tr.data-row');
+    const $otherRows = $rows.slice(1); // rows 2 to 20
+
+    let otherRowsHaveData = false;
+    $otherRows.each(function () {
+        if ($(this).find('input, select').filter(function () {
+            return $(this).val().trim() !== '';
+        }).length > 0) {
+            otherRowsHaveData = true;
+            return false; // exit loop early
+        }
+    });
+
+    if (otherRowsHaveData) {
+        const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
+        $row.insertBefore($beforeTotals);
+    }
+}
     
             reindexRows();
         });
