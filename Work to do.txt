@@ -5,7 +5,7 @@ All done
 
 2. Backend nu measurement 
 
-add respective buttons ( quotation button---done ) ( save & exit )
+add respective buttons ( save & exit or Back )
 edit measurement table. add window number, room number so backend easily add blank room and windows. 
 add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
 type of curtain ma options (Ring , Roman and American)
