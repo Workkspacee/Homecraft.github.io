@@ -474,30 +474,33 @@
 
             // Do not move or hide the first row even if blank
             const isFirstRow = $row.index() === 0;
+
             if (!isFirstRow) {
-    const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
-    $row.insertBefore($beforeTotals);
-} else {
-    // Check if any other data rows (excluding the first one) have data
-    const $rows = $('#tableBody tr.data-row');
-    const $otherRows = $rows.slice(1); // rows 2 to 20
 
-    let otherRowsHaveData = false;
-    $otherRows.each(function () {
-        if ($(this).find('input, select').filter(function () {
-            return $(this).val().trim() !== '';
-        }).length > 0) {
-            otherRowsHaveData = true;
-            return false; // exit loop early
-        }
-    });
+                const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
+                $row.insertBefore($beforeTotals);
+            
+            } else {
 
-    if (otherRowsHaveData) {
-        const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
-        $row.insertBefore($beforeTotals);
-    }
-}
-    
+                // Check if any other data rows (excluding the first one) have data
+                const $rows = $('#tableBody tr.data-row');
+                const $otherRows = $rows.slice(1); // rows 2 to 20
+
+                let otherRowsHaveData = false;
+                $otherRows.each(function () {
+                    if ($(this).find('input, select').filter(function () {
+                        return $(this).val().trim() !== '';
+                    }).length > 0) {
+                        otherRowsHaveData = true;
+                        return false; // exit loop early
+                    }
+                });
+
+                if (otherRowsHaveData) {
+                    const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
+                    $row.insertBefore($beforeTotals);
+                }
+            }
             reindexRows();
         });
     
