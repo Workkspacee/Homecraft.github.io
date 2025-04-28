@@ -435,23 +435,6 @@ router.get('/admin/suggestions', async (req, res) => {
   }
 });
 
-router.get('/admin-quotation', async(req,res) => {
-  const { work_no } = req.body;
-
-  try {
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('Quotation', { no });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
-    }
-});
-
-
 
 
 
