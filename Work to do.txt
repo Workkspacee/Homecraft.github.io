@@ -45,7 +45,7 @@ admin page error:
     2.while searching with name , only one ouput is displyed
 
 details page
-links for bill and quotation remaining
+links for bill remaining
 
 7. 2 bill pages 
 
