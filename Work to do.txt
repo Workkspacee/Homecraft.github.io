@@ -40,8 +40,12 @@ and main thing is that you should change measurement table in it because it is w
 
 search oder by name
 work order detail page
-error: 1.getting suggestion of the seached order number only and new entered order, it is not displaying old orders.
-       2.while searching with name , only one ouput is displyed
+admin page error: 
+    1.getting suggestion of the seached order number only and new entered order, it is not displaying old orders.
+    2.while searching with name , only one ouput is displyed
+
+details page
+links for bill and quotation remaining
 
 7. 2 bill pages 
 
