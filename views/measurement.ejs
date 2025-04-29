@@ -340,6 +340,7 @@
                             <tr>
                                 <th>Room No.</th>
                                 <th>Room Name</th>
+                                <th>Window Number</th>
                                 <th>Type of Curtain</th>
                                 <th>Width (in)</th>
                                 <th>Height (in)</th>
@@ -355,7 +356,8 @@
                                 <tr class="data-row">
                                     <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
                                     <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
-                                <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
+                                    <td><input class="table_cell" type="number" name="window_number<%= i %>" value="<%= no['window_number' + i] %>"></td>
+                                    <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
                              -->
                                     <td>
                                         <select class="table_cell hover-arrow" name="curtain<%= i %>">
@@ -396,11 +398,13 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             </tr>
 
                             <tr class="summary-row">
                             <td></td>
                             <td>Total Fabrics</td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
