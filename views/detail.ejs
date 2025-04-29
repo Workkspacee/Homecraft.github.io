@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Details</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <link rel="stylesheet" href="/detail.css"/>
     
 </head>
@@ -15,10 +22,73 @@
             <h3><a href="/logout">Log out</a></h3>
         </nav>
     </div>
-
+    
     <div class="container">
-        <h2>Work No: <%= no.work_no %></h2>
-        <!-- Display other details -->
+        <div class="row jumbotron">
+            <form class="login" method="POST">
+                <div class="row">
+                    <div class="col-2 login__field">
+                        <h6 align="center">Work Number:</h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly/>
+                    </div>
+                    <div class="col-2 login__field">
+                        <h6 align="center">Client Name : </h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="text" class="login__input" name="name" value="<%= no.name %>" readonly/>
+                    </div>
+
+                    <div class="col-2 login__field">
+                        <h6 align="center">Order Status : </h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="text" class="login__input" name="w_status" value="<%= no.w_status %>" readonly/>
+                    </div>
+                    <div class="col-2 login__field">
+                        <h6 align="center">Date : </h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
+                    </div>
+
+                    <div class="col-2 login__field">
+                        <h6 align="center">Phone no. : </h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
+                    </div>
+                    <div class="col-2 login__field">
+                        <h6 align="center">Delivery Date : </h6>
+                    </div>  
+                    <div class="col-1"></div> 
+                    <div class="col-3 login__field">
+                        <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
+                    </div>
+                    <div class="col-2 login__field">
+                        <h6 align="center">Address</h6>
+                    </div>
+                    <div class="col-10 login__field">
+                        <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
+                    </div>
+                </div>
+
+                <center>
+                    <button id= "btn1" type="submit" class="submit" formaction="/measure-quotation" > Quotation </button>
+                    <button id= "btn1" type="submit" class="submit" formaction="/bill" > Bill </button>
+                </center>
+
+            </form>
+        </div>
+
+        
+
     </div>
 
     <div class="footer">

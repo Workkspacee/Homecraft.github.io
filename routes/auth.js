@@ -440,9 +440,6 @@ router.get('/admin/suggestions', async (req, res) => {
 
 
 
-
-
-
 router.get('/bill', (req,res) =>{
   res.render('bill');
 });

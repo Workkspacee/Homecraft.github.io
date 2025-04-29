@@ -16,10 +16,6 @@ body {
 	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 }
 
-form{
-    margin-top: 3.75rem;
-}
-
 .header1 {
     width: auto;
     height: 6.22rem;
@@ -51,6 +47,71 @@ nav h3{
 nav a{
     color: #4EA685;
     display: block;
+}
+
+.container {
+	padding-top: 3.125rem;
+}
+
+.login {
+	width: 68.75rem;
+	padding-left: 2.5rem;
+}
+
+.login__field {
+	padding: 0.625rem 0rem;	
+	position: relative;	
+}
+
+.login__input {
+	border: none;
+	border-bottom: 0.125rem solid #D1D1D4;
+	background: none;
+	padding: 0.063rem;
+	padding-left: 0.063rem;
+	font-weight: 700;
+	width: 75%;
+	transition: .2s;
+}
+
+.submit {
+    width: 15%;
+    padding: 0.622rem;
+    background-color: #4EA685;
+    color: #fff;
+    border: none;
+    border-radius: 0.373rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 700;
+    font-size: large;
+    margin-top: 40px;
+}
+
+.submit:focus:not(:focus-visible):not(.focus-visible) {
+    box-shadow: none;
+    outline: none;
+}
+  
+.submit:hover {
+    background-color: #4EA685;
+}
+  
+.submit:focus {
+    box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+    outline: none;
+}
+  
+.submit:disabled {
+    background-color: #94d3a2;
+    border-color: rgba(27, 31, 35, .1);
+    color: rgba(255, 255, 255, .8);
+    cursor: default;
+}
+  
+.submit:active {
+    background-color: #4EA685;
+    box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
 }
 
 .footer{
