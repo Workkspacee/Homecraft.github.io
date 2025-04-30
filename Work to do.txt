@@ -30,7 +30,8 @@ save button , delete quotation button.
 
 5. Tailor 
 
-things want to change is maybe in your notebook so read and add it. 
+background white
+change colour of table header
 and main thing is that you should change measurement table in it because it is with auto calculated system.
 
 6. Admin 
