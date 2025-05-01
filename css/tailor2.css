@@ -16,19 +16,9 @@ body {
     background-repeat: no-repeat;
     margin: 0;
 }
+
 .container {
-    width: 90%;
-    min-width: 80.89rem; 
-    margin: 6.22rem auto 1.24rem;
-    margin-top: 9.33rem;
-    padding: 3.11rem;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 0.622rem;
-    box-shadow: 0 0 0.622rem rgba(0, 0, 0, 0.1);
-    display: flex;
-	align-items: top;
-	justify-content: center;
-	min-height: 100vh;
+    padding-top: 3.125rem;
 }
 
 .login {
@@ -41,21 +31,44 @@ body {
 .login__field {
 	padding: 0.622rem 0px;	
 	position: relative;	
+    table-layout: auto;
 }
 
 .login__input {
 	border: none;
-	border-bottom: 0.124rem solid #a29f9f;
+	border-bottom: 0.125rem solid #D1D1D4;
 	background: none;
-	padding: 0.0622rem;
-	padding-left: 0.0622rem;
+	padding: 0.063rem;
+	padding-left: 0.063rem;
 	font-weight: 700;
 	width: 75%;
 	transition: .2s;
 }
 
+.table_cell {
+	border: none;
+	border-bottom: none;
+	background: none;
+	padding: 0.063rem;
+	padding-left: 0.063rem;
+	width: 200px;
+    height: auto;
+	transition: .2s;
+}
+
 .table1 {
 	background: #817e7e;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* For Firefox */
+    -webkit-appearance: none;   /* For Chrome, Safari, and Opera */
+    appearance: none;           /* For modern browsers */
+}
+  
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* For Chrome, Safari, and Opera */
+    margin: 0;
 }
 
 .header1 {

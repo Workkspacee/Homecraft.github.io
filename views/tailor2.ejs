@@ -12,6 +12,24 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/tailor2.css">
+
+    <style>
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+
+        .table_cell {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
     <header class="header1">
@@ -21,186 +39,138 @@
         </nav>
     </header>
     <div class="container"> 
-        <form class="login" action="/edit-tai" method="post">
-            <div class="row">
-                <div class="col-3 login__field">
-                <h6 align="center">Work order number :</h6>
-                </div>
-                <div class="col-3 login__field">
-                    <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly />
-                </div>
-                <div class="col-3 login__field">
-                    <h6 align="center">Name :</h6>
+        <div class="row jumbotron">
+            <form class="login" action="/edit-tai" method="post">
+                <div class="row">
+                    <div class="col-3 login__field">
+                    <h6 align="center">Work order number :</h6>
                     </div>
                     <div class="col-3 login__field">
-                        <input type="text" class="login__input" name="name" value="<%= no.name %>" readonly />
+                        <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly />
                     </div>
-                <div class="col-3 login__field">
-                    <h6 align="center">Date :</h6>
+                    <div class="col-3 login__field">
+                        <h6 align="center">Name :</h6>
+                        </div>
+                        <div class="col-3 login__field">
+                            <input type="text" class="login__input" name="name" value="<%= no.name %>" readonly />
+                        </div>
+                    <div class="col-3 login__field">
+                        <h6 align="center">Date :</h6>
+                    </div>
+                    <div class="col-3 login__field">
+                        <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
+                    </div>
+                    <div class="col-3 login__field">
+                        <h6 align="center">Delivery date :</h6>
+                    </div>
+                    <div class="col-3 login__field">
+                        <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
+                    </div>
                 </div>
-                <div class="col-3 login__field">
-                    <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                </div>
-                <div class="col-3 login__field">
-                    <h6 align="center">Delivery date :</h6>
-                </div>
-                <div class="col-3 login__field">
-                    <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-3 login__field">
-                <h6 align="center">Phone number :</h6>
-                </div>
-                <div class="col-3 login__field">
-                    <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
-                </div>
-            </div>
-
-            <div class="row login__field">
-                <div class="col-3">
-                    <h6 align="center">Address :</h6>
-                </div> 
-                <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
-            </div>
-
-            <br/> <br/>
                 <div class="row">
-                    <div class="col-4"></div>
-                    <div class="col-6">
-                        <h3>Measurement Table</h3>  
+                    <div class="col-3 login__field">
+                    <h6 align="center">Phone number :</h6>
                     </div>
-                    <div class="col-2"></div>
-                </div>    <br/>
-           
-                <table class="table table-hover table-bordered">
-                    <thead class="table1">
-                        <tr>
-                            <th>Room No.</th>
-                            <th>Room Name</th>
-                            <th>Type of Curtain</th>
-                            <th>Width (in)</th>
-                            <th>Height (in)</th>
-                            <th>Fabric</th>
-                            <th>Fabric Required (meter)</th>
-                            <th>Blackout</th>
-                            <th>Blackout Required (meter)</th>
-                        </tr>
-                    </thead>                                        
-                    <tbody id="tableBody">
-                        <% let totalParts = 0; %>
-                        <% let american = 0; %>
-                        <% let ring = 0; %>
-                        <% for (let i = 1; i <= 20; i++) { %>  
-                            
-                            <% if (no['curtain' + i] && no['curtain' + i].toLowerCase() === 'roman') { %>
-                                <% let width = parseFloat(no['width' + i]); %>
-                                <% let height = parseFloat(no['height' + i]); %>
-                                <% totalParts += ((width * height) / 144); %>
-                            <% } %>   
-
-                            <% if (no['curtain' + i] && no['curtain' + i].toLowerCase() === 'american') { %>
-                                <% let width = parseFloat(no['width' + i]); %>
-                                <% american += Math.ceil(no['width' + i] / 20); %>
-                            <% } %>
-
-                            <% if (no['curtain' + i] && no['curtain' + i].toLowerCase() === 'ring') { %>
-                                <% let width = parseFloat(no['width' + i]); %>
-                                <% ring += Math.ceil(no['width' + i] / 20); %>
-                            <% } %>
-
-                            <%
-                                var D12 = no['curtain' + i]; 
-                                var E12 = no['width' + i]; 
-                                var F12 = no['height' + i];  
-
-                                function calculateValue(D12, E12, F12) {    
-                                    if (typeof D12 !== 'string' || D12.trim() === "") { 
-                                            return ""; 
-                                        } else if (D12.toLowerCase() === "roman") { 
-                                            return Math.ceil(((F12 + 12) / 39) * Math.ceil(E12 / 50) * 4) / 4; 
-                                        } else { 
-                                            return Math.ceil(((F12 + 12) / 39) * Math.ceil(E12 / 20) * 4) / 4; 
-                                    } 
-                                } 
-                                    
-                                if ( no['fabric_req' + i] == null ) { 
-                                    no['fabric_req' + i] = calculateValue(D12, E12, F12); 
-                                } 
-                            %>
-
-                            <%  no['blackout_req' + i] = no['fabric_req' + i]   %>
-                               
-                            <tr>
-                                <td><%= no['room_number' + i] %></td>
-                                <td><%= no['room_name' + i]  %></td>
-                                <td><%= no['curtain' + i]  %></td>
-                                <td><%= no['width' + i]  %></td>
-                                <td><%= no['height' + i]  %></td>
-                                <td><%= no['fabric' + i]  %></td>
-                                <td><%= no['fabric_req' + i] %></td>
-                                <td><%= no['blackout' + i]  %></td>
-                                <td><%= no['blackout_req' + i]  %></td>
-                            </tr>                           
-                        <% } %>
-                        
-                        <%
-                            function total_fab_req() {
-                                var total = 0;  
-                                for (var i = 0; i <= 20; i++) {
-                                    total += no['fabric_req' + i] || 0; 
-                                }
-                                return total;
-                            }
-                        %>
-
-                        <tr>
-                        <td></td>
-                        <td>Total Parts</td>
-                        <td></td>
-                        <td>
-                            <input type="number" id="totalParts" class="login__input" value="<%= totalParts %>" readonly>
-                        </td>
-                        <td><input type="number" id="american" class="login__input" value="<%= american %>" readonly></td>
-                        <td><input type="number" id="ring" class="login__input" value="<%= ring %>" readonly></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        </tr>
-
-                        <tr>
-                        <td></td>
-                        <td>Total Fabrics</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <input type="number"  class="login__input" value="<%= total_fab_req() %>" readonly>
-                        </td>
-                        <td></td>
-                        <td>
-                            <input type="number" class="login__input" value="<%= total_fab_req() %>" readonly>
-                        </td> <!-- temporary fab nu total blackout ma nakhi dedhu che-->
-                        </tr>
-                    </tbody> 
-                </table><br/>
-                <div class="row login__field row">
-                    <h6 class="col-3">Work Order Status:</h6>
-                    <select class="login__input col-4" name="w_status">
-                        <option><%= no.w_status %></option>
-                        <option>Details Pending</option>
-                        <option>Measurement Pending</option>
-                        <option>Given for Stiching</option>
-                        <option>Delivery Pending</option>
-                        <option>Order Delivered</option>
-                    </select>
-                </div><br/><br/>
-                <div>
-                   <center> <button type="submit" class="but">Submit</button> </center>
+                    <div class="col-3 login__field">
+                        <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
+                    </div>
                 </div>
-        </form>  
+
+                <div class="row login__field">
+                    <div class="col-3">
+                        <h6 align="center">Address :</h6>
+                    </div> 
+                    <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
+                </div>
+
+                <br/> <br/>
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-6">
+                            <h3>Measurement Table</h3>  
+                        </div>
+                        <div class="col-2"></div>
+                    </div>    <br/>
+            
+                    <table class="table table-hover table-bordered">
+                        <thead class="table1">
+                            <tr>
+                                <th>Room No.</th>
+                                <th>Room Name</th>
+                                <th>Type of Curtain</th>
+                                <th>Width (in)</th>
+                                <th>Height (in)</th>
+                                <th>Fabric</th>
+                                <th>Fabric Required (meter)</th>
+                                <th>Blackout</th>
+                                <th>Blackout Required (meter)</th>
+                            </tr>
+                        </thead>                                        
+                        <tbody id="tableBody">
+                            <% for (let i = 1; i <= 20; i++) { %>  
+
+                                <tr class="data-row">
+                                    <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="text" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" readonly></td>                             
+                                    <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="String" id="fabric<%= i %>" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" autocomplete="off" readonly / ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout<%= i %>" value="<%= no['blackout' + i] %>" readonly / ></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>" readonly / ></td>
+                                </tr>
+                            <% } %>
+
+                            <tr class="summary-row">
+                            <td></td>
+                            <td>Total Parts</td>
+                            <td></td>
+                            <td>
+                                <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
+                            </td>
+                            <td><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
+                            <td><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+
+                            <tr class="summary-row">
+                            <td></td>
+                            <td>Total Fabrics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
+                            </td> 
+                            </tr>
+                        </tbody> 
+                    </table><br/><br/>
+
+                    <div class="row login__field row">
+                        <h6 class="col-3">Work Order Status:</h6>
+                        <select class="login__input col-4" name="w_status">
+                            <option><%= no.w_status %></option>
+                            <option>Details Pending</option>
+                            <option>Measurement Pending</option>
+                            <option>Given for Stiching</option>
+                            <option>Delivery Pending</option>
+                            <option>Order Delivered</option>
+                        </select>
+                    </div><br/><br/>
+                    <div>
+                    <center> <button type="submit" class="but">Submit</button> </center>
+                    </div>
+            </form>
+        </div>  
     </div>
 
     <br>
