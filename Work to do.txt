@@ -28,11 +28,10 @@ Fittermeasure page:=
 Add routes for their actions. 
 save button , delete quotation button. 
 
-5. Tailor 
+5. Tailor (not resposive)
 
-background white
 change colour of table header
-and main thing is that you should change measurement table in it because it is with auto calculated system.
+Error: row dynamic, this is it should not show blank rows.  
 
 6. Admin 
 

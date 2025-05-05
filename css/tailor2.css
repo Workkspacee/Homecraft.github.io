@@ -19,6 +19,18 @@ body {
 
 .container {
     padding-top: 3.125rem;
+    overflow-x: auto;
+}
+
+.table-container {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 .login {
@@ -54,11 +66,14 @@ body {
 	width: 200px;
     height: auto;
 	transition: .2s;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .table1 {
 	background: #817e7e;
 }
+
 input[type="number"] {
     -moz-appearance: textfield; /* For Firefox */
     -webkit-appearance: none;   /* For Chrome, Safari, and Opera */
