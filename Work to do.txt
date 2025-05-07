@@ -30,8 +30,7 @@ save button , delete quotation button.
 
 5. Tailor (not resposive)
 
-change colour of table header
-Error: row dynamic, this is it should not show blank rows.  
+both Tailor pages are not resposive   
 
 6. Admin 
 
