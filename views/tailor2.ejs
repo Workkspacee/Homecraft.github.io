@@ -100,13 +100,13 @@
                                 <tr class="data-row">
                                 <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>" readonly /></td>
                                 <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>" readonly /></td>
-                                <% 
+                                <!--<% 
                                 let curtainType = no['curtain' + i];
                                 let curtainClass = '';
                                 if (curtainType === 'Roman') curtainClass = 'curtain-roman';      // blue
                                 else if (curtainType === 'American') CurtainClass = 'curtain-american'; // yellow
                                 else if (curtainType === 'Ring') CurtainClass = 'curtain-ring';     // green
-                                %>
+                                %>-->
                                 <td class="<%= curtainClass %>"><input class="table_cell" type="text" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" readonly /></td>
                                 <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" readonly /></td>
                                 <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" readonly /></td>

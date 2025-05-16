@@ -31,6 +31,7 @@ save button , delete quotation button.
 5. Tailor (not resposive)
 
 both Tailor pages are not resposive   
+colour for curtain type is remaining
 
 6. Admin 
 

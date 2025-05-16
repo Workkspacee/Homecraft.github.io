@@ -86,7 +86,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-.curtain-roman {
+/*.curtain-roman {
     background-color: #6e92bc;
 }
 .curtain-american {
@@ -94,7 +94,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .curtain-ring {
     background-color: #67b877;
-}
+}*/
 
 
 .header1 {
