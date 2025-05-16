@@ -249,28 +249,108 @@ router.post('/update-edit', async (req, res) => {
 });
 
 // Measurement page ma data save karva and edit karva 
-router.post('/measure-save', async(req,res) => {
-  try{
-    const {work_no} = req.body;
-    const body = req.body;
+router.post('/measure-save', async (req, res) => {
+  try {
+    const {
+      work_no,
+      name,
+      date,
+      d_date,
+      p_no,
+      add,
+      f_type,
+      f_status,
+      w_status,
+      roman,
+      american,
+      ring,
+      total_fab_req,
+      total_black_req,
+      room_number = [],
+      room_name = [],
+      window_number = [],
+      curtain = [],
+      width = [],
+      height = [],
+      fabric = [],
+      fabric_req = [],
+      blackout = [],
+      blackout_req = [],
+      rate = [],
+      hsn = [],
+      gst = []
+    } = req.body;
+
+    const rows = [];
+
+    // Build row objects from the arrays
+    for (let i = 0; i < room_number.length; i++) {
+      const isRowFilled =
+        room_number[i]?.trim?.() ||
+        room_name[i]?.trim?.() ||
+        window_number[i]?.trim?.() ||
+        curtain[i]?.trim?.() ||
+        width[i]?.trim?.() ||
+        height[i]?.trim?.() ||
+        fabric[i]?.trim?.() ||
+        fabric_req[i]?.trim?.() ||
+        blackout[i]?.trim?.() ||
+        blackout_req[i]?.trim?.() ||
+        rate[i]?.trim?.() ||
+        hsn[i]?.trim?.() ||
+        gst[i]?.trim?.();
+
+      if (isRowFilled) {
+        rows.push({
+          room_number: room_number[i] !== "" ? Number(room_number[i]) : null,
+          room_name: room_name[i] || '',
+          window_number: window_number[i] !== "" ? Number(window_number[i]) : null,
+          curtain: curtain[i] || '',
+          width: width[i] !== "" ? Number(width[i]) : null,
+          height: height[i] !== "" ? Number(height[i]) : null,
+          fabric: fabric[i] || '',
+          fabric_req: fabric_req[i] !== "" ? Number(fabric_req[i]) : null,
+          blackout: blackout[i] || '',
+          blackout_req: blackout_req[i] !== "" ? Number(blackout_req[i]) : null,
+          rate: rate[i] !== "" ? Number(rate[i]) : null,
+          hsn: hsn[i] !== "" ? Number(hsn[i]) : null,
+          gst: gst[i] !== "" ? Number(gst[i]) : null
+        });
+      }
+    }
+
+    const updateObject = {
+      work_no,
+      name,
+      date,
+      d_date,
+      p_no,
+      add,
+      f_type,
+      f_status,
+      w_status,
+      roman: roman !== "" ? Number(roman) : null,
+      american: american !== "" ? Number(american) : null,
+      ring: ring !== "" ? Number(ring) : null,
+      total_fab_req: total_fab_req !== "" ? Number(total_fab_req) : null,
+      total_black_req: total_black_req !== "" ? Number(total_black_req) : null,
+      rows
+    };
 
     const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-        body ,
-      { new: true }
+      { work_no },
+      updateObject,
+      { new: true, upsert: true }
     );
 
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('measurement', { no });
+    res.render('measurement', { no: updatedData });
 
   } catch (error) {
-    console.error(error);
+    console.error('Error in /measure-save:', error);
     res.status(500).send('Error updating order');
   }
 });
+
 
 //link to quotation page on measurement page 
 router.post('/measure-quotation', async(req,res) => {

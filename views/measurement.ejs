@@ -72,209 +72,215 @@
     </style> 
 
     <script>
-        $(document).ready(function () {
-            function calculateFabricRequirement(curtainType, width, height) {
-                if (!curtainType || curtainType.trim() === "") {
-                    return 0;
-                }
-                if (curtainType.toLowerCase() === "roman") {
-                    return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
-                } else {
-                    return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
-                }
-                return isNaN(fabricReq) ? 0 : fabricReq;  // Ensure it's always a number
+    $(document).ready(function () {
+        function calculateFabricRequirement(curtainType, width, height) {
+            if (!curtainType || curtainType.trim() === "") {
+                return 0;
             }
-    
-            function updateTotals() {
-                let totalFabric = 0;
-                let totalBlackout = 0;
-                let roman = 0;
-                let american = 0;
-                let ring = 0;
-    
-                for (let i = 1; i <= 20; i++) {
-                    let curtainType = $(`[name="curtain${i}"]`).val();
-                    let width = parseFloat($(`input[name="width${i}"]`).val()) || 0;
-                    let height = parseFloat($(`input[name="height${i}"]`).val()) || 0;
-                    let blackout = $(`input[name="blackout${i}"]`).val().trim();
-    
-                    // Calculate Fabric Requirement
-                    let fabricReq = calculateFabricRequirement(curtainType, width, height);
-                    fabricReq = isNaN(fabricReq) ? 0 : fabricReq;
-                    $(`input[name="fabric_req${i}"]`).val(fabricReq > 0 ? fabricReq.toFixed(2) : "");
-    
-                    // Ensure blackout_req is summed even if empty
-                    let blackoutReq = blackout !== "" ? fabricReq : 0;
-                    blackoutReq = isNaN(blackoutReq) ? 0 : blackoutReq; // Ensure it's a number
-                    $(`input[name="blackout_req${i}"]`).val(blackout !== "" && blackoutReq > 0 ? blackoutReq.toFixed(2) : "");
-
-                    totalFabric += fabricReq;
-                    totalBlackout += blackoutReq; // Ensure empty values are treated as 0
-
-    
-                    // Calculate Total Parts
-                    let type = (curtainType || "").toLowerCase();
-                    if (type === "roman") {
-                        roman += (width * height) / 144;
-                    }
-                    if (type === "american") {
-                        american += Math.ceil(width / 20);
-                    }
-                    if (type === "ring") {
-                        ring += Math.ceil(width / 20);
-                    }
-                }
-    
-                // Update total fields
-                $("#roman").val(roman.toFixed(2));
-                $("#american").val(american);
-                $("#ring").val(ring);
-                $("input[name='total_fab_req']").val(totalFabric.toFixed(2));
-                $("input[name='total_black_req']").val(totalBlackout.toFixed(2));
+            if (curtainType.toLowerCase() === "roman") {
+                return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
+            } else {
+                return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
             }
-    
-            // Event listeners for real-time calculation
-            $(document).on("input", "input[name^='width'], input[name^='height'], input[name^='curtain'], input[name^='blackout']", function () {
-                updateTotals();
-            });
-    
-            // Run the function initially to set values
+        }
+
+        function updateTotals() {
+            let totalFabric = 0;
+            let totalBlackout = 0;
+            let roman = 0;
+            let american = 0;
+            let ring = 0;
+
+            // Get arrays of all inputs by their names (jQuery returns array-like objects)
+            const curtains = $("select[name='curtain[]'], input[name='curtain[]']");
+            const widths = $("input[name='width[]']");
+            const heights = $("input[name='height[]']");
+            const blackouts = $("input[name='blackout[]']");
+            const fabricReqs = $("input[name='fabric_req[]']");
+            const blackoutReqs = $("input[name='blackout_req[]']");
+
+            // Loop through all rows based on curtains.length
+            for (let i = 0; i < curtains.length; i++) {
+                let curtainType = $(curtains[i]).val();
+                let width = parseFloat($(widths[i]).val()) || 0;
+                let height = parseFloat($(heights[i]).val()) || 0;
+                let blackout = $(blackouts[i]).val().trim();
+
+                let fabricReq = calculateFabricRequirement(curtainType, width, height);
+                fabricReq = isNaN(fabricReq) ? 0 : fabricReq;
+
+                $(fabricReqs[i]).val(fabricReq > 0 ? fabricReq.toFixed(2) : "");
+
+                // If blackout is checked/non-empty, blackout_req equals fabricReq, else zero
+                let blackoutReq = blackout !== "" ? fabricReq : 0;
+                blackoutReq = isNaN(blackoutReq) ? 0 : blackoutReq;
+
+                $(blackoutReqs[i]).val(blackout !== "" && blackoutReq > 0 ? blackoutReq.toFixed(2) : "");
+
+                totalFabric += fabricReq;
+                totalBlackout += blackoutReq;
+
+                // Total parts calculations:
+                let type = (curtainType || "").toLowerCase();
+                if (type === "roman") {
+                    roman += (width * height) / 144;
+                }
+                if (type === "american") {
+                    american += Math.ceil(width / 20);
+                }
+                if (type === "ring") {
+                    ring += Math.ceil(width / 20);
+                }
+            }
+
+            // Update total fields — adjust selectors if needed
+            $("#roman").val(roman.toFixed(2));
+            $("#american").val(american);
+            $("#ring").val(ring);
+            $("input[name='total_fab_req']").val(totalFabric.toFixed(2));
+            $("input[name='total_black_req']").val(totalBlackout.toFixed(2));
+        }
+
+        // Event listeners on dynamic inputs
+        $(document).on("input change", "input[name='width[]'], input[name='height[]'], select[name='curtain[]'], input[name='blackout[]']", function () {
             updateTotals();
         });
 
+        // Run initially
+        updateTotals();
+    });
     </script>
+
     <script>
         let fabricsData = [];
-        
+
         $(document).ready(function () {
-          // Load fabric data once
-          $.getJSON("/fabrics.json", function (data) {
+        // Load fabric data once
+        $.getJSON("/fabrics.json", function (data) {
             fabricsData = data;
-          });
-        
-          function attachAutocomplete(fabricInputId, rateId, hsnId, gstId) {
-            const $input = $("#" + fabricInputId);
-        
-            let currentIndex = -1;
-            // If input is empty, clear other fields
-            $input.on("input", function () {
-              const query = $(this).val().toLowerCase();
-              currentIndex = -1;
-        
-              if (!query) {
-                $("#" + rateId).val('');
-                $("#" + hsnId).val('');
-                $("#" + gstId).val('');
-                $(".autocomplete-list").remove();
-                return;
-              }
-        
-              // Auto-fill if exact match is typed manually
-              const exactMatch = fabricsData.find(item => item.name.toLowerCase() === query);
-              if (exactMatch) {
-                $("#" + rateId).val(exactMatch.rate);
-                $("#" + hsnId).val(exactMatch.hsn);
-                $("#" + gstId).val(exactMatch.gst);
-                $(".autocomplete-list").remove();
-                return;
-              }
-        
-              const results = fabricsData
-                .map(item => {
-                    const name = item.name.toLowerCase();
+        });
 
-                    if (name.startsWith(query)) {
-                    return { ...item, priority: 1 }; // starts with input
-                    } else if (name.includes(query)) {
-                    return { ...item, priority: 2 }; // contains input
-                    } else if (isFuzzyMatch(name, query)) {
-                    return { ...item, priority: 3 }; // close match like arun vs arjun
-                    } else {
-                    return null;
-                    }
-                })
-                .filter(Boolean)
-                .sort((a, b) => a.priority - b.priority);
-        
-              const $list = $("<ul>").addClass("autocomplete-list");
-              results.forEach((item, index) => {
-                const $item = $("<li>").text(item.name);
-                $item.attr("data-index", index);
-                $item.on("click", function () {
-                  $input.val(item.name);
-                  $("#" + rateId).val(item.rate);
-                  $("#" + hsnId).val(item.hsn);
-                  $("#" + gstId).val(item.gst);
-                  $(".autocomplete-list").remove();
-                });
-                $list.append($item);
-              });
-        
-              $(".autocomplete-list").remove();
-              if (results.length > 0) {
-                $input.after($list);
-              }
-            });
-
-            function isFuzzyMatch(str, pattern) {
+        function isFuzzyMatch(str, pattern) {
             let i = 0, j = 0;
             while (i < str.length && j < pattern.length) {
-                if (str[i] === pattern[j]) j++;
-                i++;
+            if (str[i] === pattern[j]) j++;
+            i++;
             }
             return j === pattern.length;
+        }
+
+        function scrollItemIntoView($item, $list) {
+            const listTop = $list.scrollTop();
+            const listBottom = listTop + $list.height();
+            const itemTop = $item.position().top + listTop;
+            const itemBottom = itemTop + $item.outerHeight();
+
+            if (itemBottom > listBottom) {
+            $list.scrollTop(itemBottom - $list.height());
+            } else if (itemTop < listTop) {
+            $list.scrollTop(itemTop);
             }
-        
-            // KEYBOARD NAVIGATION
-            $input.on("keydown", function (e) {
-                const $list = $(".autocomplete-list");
-                const $items = $list.find("li");
-                if ($items.length === 0) return;
+        }
 
-                if (e.key === "ArrowDown") {
-                    currentIndex = (currentIndex + 1) % $items.length;
-                    $items.removeClass("selected");
-                    const $current = $items.eq(currentIndex).addClass("selected");
-                    scrollItemIntoView($current, $list);
-                    e.preventDefault();
-                } else if (e.key === "ArrowUp") {
-                    currentIndex = (currentIndex - 1 + $items.length) % $items.length;
-                    $items.removeClass("selected");
-                    const $current = $items.eq(currentIndex).addClass("selected");
-                    scrollItemIntoView($current, $list);
-                    e.preventDefault();
-                } else if (e.key === "Enter" && currentIndex >= 0) {
-                    $items.eq(currentIndex).click();
-                    e.preventDefault();
-                }
-            });
+        // Use event delegation to attach autocomplete on any fabric input (array-style)
+        $(document).on("input", "input[name='fabric[]']", function () {
+            const $input = $(this);
+            const query = $input.val().toLowerCase();
+            let currentIndex = -1;
 
-            function scrollItemIntoView($item, $list) {
-                const listTop = $list.scrollTop();
-                const listBottom = listTop + $list.height();
-                const itemTop = $item.position().top + listTop;
-                const itemBottom = itemTop + $item.outerHeight();
+            // Find related rate, hsn, gst inputs in the same row
+            const $row = $input.closest("tr");
+            const $rate = $row.find("input[name='rate[]']");
+            const $hsn = $row.find("input[name='hsn[]']");
+            const $gst = $row.find("input[name='gst[]']");
 
-                if (itemBottom > listBottom) {
-                    $list.scrollTop(itemBottom - $list.height());
-                } else if (itemTop < listTop) {
-                    $list.scrollTop(itemTop);
-                }
+            if (!query) {
+            $rate.val('');
+            $hsn.val('');
+            $gst.val('');
+            $(".autocomplete-list").remove();
+            return;
             }
-        
-            // Close on outside click
-            $(document).on("click", function (e) {
-              if (!$(e.target).closest(".autocomplete-list, #" + fabricInputId).length) {
+
+            // Exact match autofill
+            const exactMatch = fabricsData.find(item => item.name.toLowerCase() === query);
+            if (exactMatch) {
+            $rate.val(exactMatch.rate);
+            $hsn.val(exactMatch.hsn);
+            $gst.val(exactMatch.gst);
+            $(".autocomplete-list").remove();
+            return;
+            }
+
+            // Filter and prioritize results
+            const results = fabricsData
+            .map(item => {
+                const name = item.name.toLowerCase();
+                if (name.startsWith(query)) {
+                return { ...item, priority: 1 };
+                } else if (name.includes(query)) {
+                return { ...item, priority: 2 };
+                } else if (isFuzzyMatch(name, query)) {
+                return { ...item, priority: 3 };
+                } else {
+                return null;
+                }
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.priority - b.priority);
+
+            // Build and show list near current input
+            $(".autocomplete-list").remove();
+            if (results.length === 0) return;
+
+            const $list = $("<ul>").addClass("autocomplete-list");
+            results.forEach((item, index) => {
+            const $item = $("<li>").text(item.name);
+            $item.attr("data-index", index);
+            $item.on("click", function () {
+                $input.val(item.name);
+                $rate.val(item.rate);
+                $hsn.val(item.hsn);
+                $gst.val(item.gst);
                 $(".autocomplete-list").remove();
-              }
             });
-          }
-        
-          for (let i = 1; i <= 20; i++) {
-            attachAutocomplete(`fabric${i}`, `rate${i}`, `hsn${i}`, `gst${i}`);
-          }
+            $list.append($item);
+            });
+            $input.after($list);
+
+            // Keyboard navigation inside the autocomplete list
+            $input.off("keydown.autocomplete").on("keydown.autocomplete", function (e) {
+            const $items = $list.find("li");
+            if ($items.length === 0) return;
+
+            if (e.key === "ArrowDown") {
+                currentIndex = (currentIndex + 1) % $items.length;
+                $items.removeClass("selected");
+                const $current = $items.eq(currentIndex).addClass("selected");
+                scrollItemIntoView($current, $list);
+                e.preventDefault();
+            } else if (e.key === "ArrowUp") {
+                currentIndex = (currentIndex - 1 + $items.length) % $items.length;
+                $items.removeClass("selected");
+                const $current = $items.eq(currentIndex).addClass("selected");
+                scrollItemIntoView($current, $list);
+                e.preventDefault();
+            } else if (e.key === "Enter" && currentIndex >= 0) {
+                $items.eq(currentIndex).click();
+                e.preventDefault();
+            }
+            });
+        });
+
+        // Close autocomplete list when clicking outside
+        $(document).on("click", function (e) {
+            if (!$(e.target).closest(".autocomplete-list, input[name='fabric[]']").length) {
+            $(".autocomplete-list").remove();
+            }
+        });
         });
     </script>
+
 </head>
 
 <body>
@@ -350,40 +356,58 @@
                                 <th>Blackout Required (meter)</th>
                             </tr>
                         </thead>                                        
-                        <tbody id="tableBody">
-                            <% for (let i = 1; i <= 20; i++) { %>  
+                         <tbody id="tableBody">
+                            <% if (no && no.rows && no.rows.length > 0) { %>
+                               <% for (let i = 0; i < no.rows.length; i++) { const row = no.rows[i]; %>
 
                                 <tr class="data-row">
-                                    <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>"></td>
-                                    <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>"></td>
-                                    <td><input class="table_cell" type="number" name="window_number<%= i %>" value="<%= no['window_number' + i] %>"></td>
-                                    <!--    <td><input class="table_cell" type="string" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" ></td>
-                             -->
+                                    <td><input type="number" class="table_cell" name="room_number[]" step="any" value="<%= row.room_number ?? '' %>"></td>
+                                    <td><input type="text" class="table_cell" name="room_name[]"  value="<%= row.room_name %>"></td>
+                                    <td><input type="number" class="table_cell" name="window_number[]" step="any" value="<%= row.window_number ?? '' %>"></td>
                                     <td>
-                                        <select class="table_cell hover-arrow" name="curtain<%= i %>">
-                                        <option> </option>
-                                        <option value="American" <%= no['curtain' + i] === 'American' ? 'selected' : '' %>>American</option>
-                                        <option value="Ring" <%= no['curtain' + i] === 'Ring' ? 'selected' : '' %>>Ring</option>
-                                        <option value="Roman" <%= no['curtain' + i] === 'Roman' ? 'selected' : '' %>>Roman</option>
+                                        <select name="curtain[]" class="table_cell hover-arrow">
+                                            <option value=""></option>
+                                            <option value="American" <%= row.curtain === 'American' ? 'selected' : '' %>>American</option>
+                                            <option value="Ring" <%= row.curtain === 'Ring' ? 'selected' : '' %>>Ring</option>
+                                            <option value="Roman" <%= row.curtain === 'Roman' ? 'selected' : '' %>>Roman</option>
                                         </select>
-                                    </td>                              
-
-                                    <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" ></td>
-                                    <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" ></td>
-                                    <td><input class="table_cell" type="String" id="fabric<%= i %>" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" autocomplete="off"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" ></td>
-                                    <td><input class="table_cell" type="number" step="any" name="blackout<%= i %>" value="<%= no['blackout' + i] %>"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>"></td>
-                                    <td><input  type="number"  id="rate<%= i %>" name="rate<%= i %>" value="<%= no['rate' + i] %>"></td>
-                                    <td><input  type="number"  id="hsn<%= i %>" name="hsn<%= i %>" value="<%= no['hsn' + i] %>"></td>
-                                    <td><input  type="number"  id="gst<%= i %>" name="gst<%= i %>" value="<%= no['gst' + i] %>"></td>
-                                    <td> <button type="button">Add Row</button> <button type="button">Delete Row</button> </td>
+                                    </td>
+                                    <td><input type="number" class="table_cell" step="any" name="width[]" value="<%= row.width ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="height[]" value="<%= row.height ?? '' %>"></td>
+                                    <td><input type="text" class="table_cell" name="fabric[]" value="<%= row.fabric %>" autocomplete="off" ></td>
+                                    <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
+                                    <td><input type="number" name="rate[]" step="any" value="<%= row.rate ?? '' %>"></td>
+                                    <td><input type="number" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>"></td>
+                                    <td><input type="number" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
                                 </tr>
-
-                               <!-- <input  type="hidden"  id="rate<%= i %>" name="rate<%= i %>" value="<%= no['rate' + i] %>">
-                                <input  type="hidden"  id="hsn<%= i %>" name="hsn<%= i %>" value="<%= no['hsn' + i] %>">
-                                <input  type="hidden"  id="gst<%= i %>" name="gst<%= i %>" value="<%= no['gst' + i] %>">
--->
+                            <% } %>
+                            <% } else { %>
+                                <tr class="data-row">
+                                    <td><input class="table_cell" step="any" type="number" name="room_number[]"></td>
+                                    <td><input class="table_cell"  type="text" name="room_name[]"></td>
+                                    <td><input class="table_cell" step="any" type="number" name="window_number[]"></td>
+                                    <td>
+                                        <select class="table_cell hover-arrow" name="curtain[]">
+                                            <option></option>
+                                            <option value="American">American</option>
+                                            <option value="Ring">Ring</option>
+                                            <option value="Roman">Roman</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="table_cell" type="number" step="any" name="width[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="height[]"></td>
+                                    <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
+                                    <td><input type="number" step="any" name="rate[]"></td>
+                                    <td><input type="number" step="any" name="hsn[]"></td>
+                                    <td><input type="number" step="any" name="gst[]"></td>
+                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                </tr>   
                             <% } %>
 
                             <tr class="summary-row">
@@ -429,104 +453,66 @@
         </div>
     </div>
 </body>
+
 <script>
-    $(document).ready(function () {
-        const totalRows = 20;
-    
-        // Function to check if a row contains any data
-        function hasData($row) {
-            let hasValue = false;
-            $row.find('input, select').each(function () {
-                if ($(this).val().trim() !== '') {
-                    hasValue = true;
-                    return false; // Exit loop early
-                }
-            });
-            return hasValue;
+$(document).ready(function () {
+    const $tableBody = $('#tableBody');
+
+    // Function to clear inputs/selects in a row
+    function clearRowInputs($row) {
+        $row.find('input, select').each(function () {
+            if (this.tagName === 'SELECT') {
+                $(this).val(''); // clear select
+            } else {
+                $(this).val(''); // clear input
+            }
+        });
+    }
+
+    // Add new row
+    $tableBody.on('click', '.add-row', function () {
+        const $currentRow = $(this).closest('tr');
+        const $newRow = $currentRow.clone(false); // clone without event handlers
+
+        clearRowInputs($newRow);
+
+        $newRow.insertAfter($currentRow);
+
+        // If you have an autocomplete function for fabric or other inputs, call it here
+        if (typeof attachAutocomplete === 'function') {
+            attachAutocomplete($newRow);
         }
 
-        // Show rows that have data or are the first row, hide the rest
-        $('#tableBody tr.data-row').each(function (index) {
-            if (index === 0 || hasData($(this))) {
-                $(this).show();
-            } else {
-                $(this).hide();
-            }
-        });
-   
-        // Handle Add Row
-        $('#tableBody').on('click', 'button:contains("Add Row")', function () {
-            const $currentRow = $(this).closest('tr');
-            const $nextHidden = $('#tableBody tr.data-row:hidden').first();
-    
-            if ($nextHidden.length) {
-                $nextHidden.insertAfter($currentRow).show();
-                reindexRows();
-            } else {
-                alert('All 20 rows are already visible.');
-            }
-        });
-    
-        // Handle Delete Row
-        $('#tableBody').on('click', 'button:contains("Delete Row")', function () {
-            const $row = $(this).closest('tr');
+        // Focus first input in new row for better UX
+        $newRow.find('input, select').first().focus();
 
-            // Clear all fields in the row
-            $row.find('input, select').each(function () {
-                $(this).val('');
-            });
-
-            // Do not move or hide the first row even if blank
-            const isFirstRow = $row.index() === 0;
-
-            if (!isFirstRow) {
-
-                const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
-                $row.insertBefore($beforeTotals);
-            
-            } else {
-
-                // Check if any other data rows (excluding the first one) have data
-                const $rows = $('#tableBody tr.data-row');
-                const $otherRows = $rows.slice(1); // rows 2 to 20
-
-                let otherRowsHaveData = false;
-                $otherRows.each(function () {
-                    if ($(this).find('input, select').filter(function () {
-                        return $(this).val().trim() !== '';
-                    }).length > 0) {
-                        otherRowsHaveData = true;
-                        return false; // exit loop early
-                    }
-                });
-
-                if (otherRowsHaveData) {
-                    const $beforeTotals = $('#tableBody tr').not('.data-row').first(); // first total row
-                    $row.insertBefore($beforeTotals);
-                }
-            }
-            reindexRows();
-        });
-    
-        function reindexRows() {
-            $('#tableBody tr.data-row:visible').each(function (index) {
-                const i = index + 1;
-                $(this).find('input, select').each(function () {
-                    const nameAttr = $(this).attr('name');
-                    const idAttr = $(this).attr('id');
-    
-                    if (nameAttr) {
-                        const newName = nameAttr.replace(/\d+$/, i);
-                        $(this).attr('name', newName);
-                    }
-    
-                    if (idAttr) {
-                        const newId = idAttr.replace(/\d+$/, i);
-                        $(this).attr('id', newId);
-                    }
-                });
-            });
-        }
+        updateDeleteButtonState();
     });
+
+    // Delete row
+    $tableBody.on('click', '.delete-row', function () {
+        const $rows = $tableBody.find('tr.data-row');
+        if ($rows.length > 1) {
+            $(this).closest('tr').remove();
+        }
+        updateDeleteButtonState();
+    });
+
+    // Disable Delete buttons if only one row left
+    function updateDeleteButtonState() {
+        const $rows = $tableBody.find('tr.data-row');
+        if ($rows.length <= 1) {
+            $rows.find('.delete-row').prop('disabled', true);
+        } else {
+            $rows.find('.delete-row').prop('disabled', false);
+        }
+    }
+
+    // Initial call to set button state
+    updateDeleteButtonState();
+
+});
+
 </script>
+
 </html>
