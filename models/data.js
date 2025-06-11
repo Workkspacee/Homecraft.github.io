@@ -18,6 +18,17 @@ const rowSchema = new mongoose.Schema({
     gst: { type: Number, default: null }
 });
 
+const quotationSchema = new mongoose.Schema({
+  material: String,
+  qty: Number,
+  q_rate: Number,
+  discount: Number,
+  sub_total: Number,
+  q_gst: Number,
+  grand_total: Number,
+  q_hsn: String
+});
+
 // Main schema
 const dataSchema = new mongoose.Schema({
     work_no: { type: String, required: true, unique: true },
@@ -36,7 +47,9 @@ const dataSchema = new mongoose.Schema({
     total_black_req: { type: Number, default: null  },
 
     // Infinite rows stored as array of objects
-    rows: [rowSchema]
+    rows: [rowSchema],
+    quotation: [quotationSchema],
+    total_grand_total: Number
 });
 
 const Data = mongoose.model('Data', dataSchema);

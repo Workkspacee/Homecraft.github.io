@@ -5,18 +5,18 @@ All done
 
 2. Backend nu measurement 
 
-add respective buttons ( save & exit or Back )
+add respective buttons ( save & exit or Back , print and bill )
 add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend. 
 
-3. Backend nu quotation 
+3. Backend nu quotation ( Combine with measurement)
 
 auto table
 add respective buttons and also give print button which contain quotation and measurement so they can send to client 
-so basically new white page like bill page (we can see sample in workspace mail id).
-add master file for material, Rate, Gst 
+so basically new white page like bill page (we can see sample in workspace mail id). 
 so now we need auto calculation formulas for sub total and grand total also less discounts. 
+Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
 
@@ -74,3 +74,6 @@ like [
 1. table editable
 2. save button action measure-save
 3.
+
+----> While Explaining to janmay kumar 
+kem time lagyo? aakhu measurement page j change kari nakhyu. pela only 20 windows add kari sakta, and ae pan just last ma j add kari sakta, have game tya game atli add kari sakso.
