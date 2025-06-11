@@ -261,11 +261,12 @@ router.post('/measure-save', async (req, res) => {
       f_type,
       f_status,
       w_status,
-      roman,
-      american,
-      ring,
+      roman = 0,
+      american = 0,
+      ring = 0,
       total_fab_req,
       total_black_req,
+      // measurement fields
       room_number = [],
       room_name = [],
       window_number = [],
@@ -278,12 +279,22 @@ router.post('/measure-save', async (req, res) => {
       blackout_req = [],
       rate = [],
       hsn = [],
-      gst = []
+      gst = [],
+      // quotation fields
+      material = [],
+      qty = [],
+      q_rate = [],
+      discount = [],
+      sub_total = [],
+      q_gst = [],
+      grand_total = [],
+      q_hsn = [],
+      totalQuotationGrand = 0
     } = req.body;
 
+    // ✅ Measurement Rows (filtered properly)
     const rows = [];
-
-    // Build row objects from the arrays
+    
     for (let i = 0; i < room_number.length; i++) {
       const isRowFilled =
         room_number[i]?.trim?.() ||
@@ -319,6 +330,34 @@ router.post('/measure-save', async (req, res) => {
       }
     }
 
+    // ✅ Quotation Rows
+    const quotation = [];
+    for (let i = 0; i < material.length; i++) {
+      const isFilled =
+        material[i]?.trim?.() ||
+        qty[i]?.trim?.() ||
+        q_rate[i]?.trim?.() ||
+        discount[i]?.trim?.() ||
+        sub_total[i]?.trim?.() ||
+        q_gst[i]?.trim?.() ||
+        grand_total[i]?.trim?.() ||
+        q_hsn[i]?.trim?.();
+
+      if (isFilled) {
+        quotation.push({
+          material: material[i] || '',
+          qty: parseFloat(qty[i]) || 0,
+          q_rate: parseFloat(q_rate[i]) || 0,
+          discount: parseFloat(discount[i]) || 0,
+          sub_total: parseFloat(sub_total[i]) || 0,
+          q_gst: parseFloat(q_gst[i]) || 0,
+          grand_total: parseFloat(grand_total[i]) || 0,
+          q_hsn: q_hsn[i] || ""
+        });
+      }
+    }
+
+    // ✅ Full Update Object (single save)
     const updateObject = {
       work_no,
       name,
@@ -334,23 +373,29 @@ router.post('/measure-save', async (req, res) => {
       ring: ring !== "" ? Number(ring) : null,
       total_fab_req: total_fab_req !== "" ? Number(total_fab_req) : null,
       total_black_req: total_black_req !== "" ? Number(total_black_req) : null,
-      rows
+      rows,
+      quotation,
+      total_grand_total: parseFloat(totalQuotationGrand) || 0
     };
 
+    // ✅ Save once
     const updatedData = await Data.findOneAndUpdate(
       { work_no },
       updateObject,
       { new: true, upsert: true }
     );
 
-    res.render('measurement', { no: updatedData });
+    res.render('measurement', {
+      no: updatedData,
+      quotation: updatedData.quotation || []
+    });
+
 
   } catch (error) {
     console.error('Error in /measure-save:', error);
     res.status(500).send('Error updating order');
   }
 });
-
 
 //link to quotation page on measurement page 
 router.post('/measure-quotation', async(req,res) => {
