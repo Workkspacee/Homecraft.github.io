@@ -38,18 +38,18 @@
         <br>
 
         <table style="width:100%">
-            <form action="" method="post">
+            <form action="/bill" method="post">
                 <tr>
                     <td>
                         <h4>Bill To</h4><br>
-                        <input type="text" class="input_field" placeholder="Name" class=""/><br>
-                        <input type="text" class="input_field" placeholder="Address"/><br>
-                        <label>Contact No: <input type="tel" class="input_field" maxlength="10"></label><br>
+                        <input type="text" class="input_field" placeholder="Name" class="" value="<%= no.name %>"/><br>
+                        <input type="text" class="input_field" placeholder="Address" value="<%= no.add %>"/><br>
+                        <label>Contact No: <input type="tel" class="input_field" maxlength="10" value="<%= no.p_no %>"></label><br>
                         <label>State: <input type="text" class="input_field" placeholder="State"></label>
                     </td>
                     <td>
                         <h4>Ship To</h4><br>
-                        <input type="text" class="input_field" placeholder="Address"/>
+                        <input type="text" class="input_field" placeholder="Address" value="<%= no.add %>"/>
                     </td>
                     <td>
                         <h4>Transportation Details</h4><br>
