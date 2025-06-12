@@ -8,7 +8,8 @@ All done
 add respective buttons ( save & exit or Back , print and bill )
 add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
-make readonly fields for backend. 
+make readonly fields for backend.
+ring american and roman ma colours add karva. 
 
 3. Backend nu quotation ( Combine with measurement)
 

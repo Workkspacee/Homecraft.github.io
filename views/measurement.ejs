@@ -450,8 +450,8 @@
                         </tbody> 
                     </table><br/><br/>
                     <center>
-                        <button id= "btn1" type="submit" class="submit" formaction="/measure-save" > Save </button>
-                        <button id= "btn1" type="submit" class="submit" formaction="/measure-quotation" > Quotation </button>
+                        <button type="submit" class="submit" formaction="/measure-save" > Save </button>
+                        <button type="submit" class="submit" formaction="/measure-quotation" > Quotation </button>
                     </center>
                     <hr>
 
@@ -459,70 +459,31 @@
                         <h4>Quotation Table</h4>
                         <button type="button" class="btn btn-primary" id="autofillQuotationBtn">Autofill Quotation</button>
                     </div>
-
-                    <table class="table table-bordered" id="quotationTable">
-                        <thead class="table-secondary">
-                            <tr>
-                            <th>Sr No.</th>
-                            <th>Material</th>
-                            <th>Meters / Sq.Ft.</th>
-                            <th>Rate</th>
-                            <th>Discount (%)</th>
-                            <th>Sub Total</th>
-                            <th>GST (%)</th>
-                            <th>Grand Total</th>
-                            <th>HSN (Check)</th>    
-                            <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody> <!-- Hidden row -->
-                            <tr class="quotation-template-row d-none">
-                                <td class="sr-no">1</td>
-                                <td><input type="text" class="form-control material-input" step="any" name="material[]"></td>
-                                <td><input type="number" class="form-control qty" step="any" name="qty[]"></td>
-                                <td><input type="number" class="form-control q_rate" step="any" name="q_rate[]"></td>
-                                <td><input type="number" class="form-control discount" step="any" name="discount[]"></td>
-                                <td><input type="number" class="form-control sub_total" step="any" name="sub_total[]" ></td>
-                                <td><input type="number" class="form-control q_gst" step="any" name="q_gst[]"></td>
-                                <td><input type="number" class="form-control grand_total" step="any" name="grand_total[]" ></td>
-                                <td><input type="text" class="form-control q_hsn" step="any" name="q_hsn[]"></td>
-                                <td>
-                                    <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
-                                    <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
-                                </td>
-                            </tr>
-                        </tbody>
-
-                        <tbody id="quotationTableBody">
-                            <% if (no.quotation && no.quotation.length > 0) { %>
-                                <% no.quotation.forEach((q, index) => { %>
+                    <div class="table-container">
+                        <table class="table table-hover table-bordered" id="quotationTable">
+                            <thead class="table-secondary table1">
                                 <tr>
-
-                                    <td class="sr-no"><%= index + 1 %></td>
-                                    <td><input type="text" class="form-control material-input" step="any" name="material[]" value="<%= q.material %>"></td>
-                                    <td><input type="number" class="form-control qty" step="any" name="qty[]" value="<%= q.qty %>"></td>
-                                    <td><input type="number" class="form-control q_rate" step="any" name="q_rate[]" value="<%= q.q_rate %>"></td>
-                                    <td><input type="number" class="form-control discount" step="any" name="discount[]" value="<%= q.discount %>"></td>
-                                    <td><input type="number" class="form-control sub_total" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
-                                    <td><input type="number" class="form-control q_gst" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
-                                    <td><input type="number" class="form-control grand_total" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
-                                    <td><input type="text" class="form-control q_hsn" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
-                                    <td>
-                                    <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
-                                    <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
-                                    </td>
+                                <th>Sr No.</th>
+                                <th>Material</th>
+                                <th>Meters / Sq.Ft.</th>
+                                <th>Rate</th>
+                                <th>Discount (%)</th>
+                                <th>Sub Total</th>
+                                <th>GST (%)</th>
+                                <th>Grand Total</th>
+                                <th>HSN (Check)</th>    
+                                <th>Action</th>
                                 </tr>
-                                <% }) %>
-                            <% } else { %>
-                                <!-- Show one empty row if no data -->
-                                <tr>
+                            </thead>
+                            <tbody> <!-- Hidden row -->
+                                <tr class="quotation-template-row d-none">
                                     <td class="sr-no">1</td>
                                     <td><input type="text" class="form-control material-input" step="any" name="material[]"></td>
                                     <td><input type="number" class="form-control qty" step="any" name="qty[]"></td>
                                     <td><input type="number" class="form-control q_rate" step="any" name="q_rate[]"></td>
-                                    <td><input type="number" class="form-control discount" step="any" name="discount[]" value="0"></td>
+                                    <td><input type="number" class="form-control discount" step="any" name="discount[]"></td>
                                     <td><input type="number" class="form-control sub_total" step="any" name="sub_total[]" ></td>
-                                    <td><input type="number" class="form-control q_gst" step="any" name="q_gst[]" value="0"></td>
+                                    <td><input type="number" class="form-control q_gst" step="any" name="q_gst[]"></td>
                                     <td><input type="number" class="form-control grand_total" step="any" name="grand_total[]" ></td>
                                     <td><input type="text" class="form-control q_hsn" step="any" name="q_hsn[]"></td>
                                     <td>
@@ -530,20 +491,59 @@
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
                                     </td>
                                 </tr>
-                            <% } %>
-                        </tbody>
-                        <tfoot>
-                            <tr class="table-warning">
-                            <td colspan="7" class="text-end"><strong>Total Grand Total</strong></td>
-                            <td><input type="number" id="totalQuotationGrand" name="totalQuotationGrand" class="form-control" readonly></td>
-                            <td colspan="2"></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            </tbody>
 
+                            <tbody id="quotationTableBody">
+                                <% if (no.quotation && no.quotation.length > 0) { %>
+                                    <% no.quotation.forEach((q, index) => { %>
+                                    <tr>
+
+                                        <td class="sr-no"><%= index + 1 %></td>
+                                        <td><input type="text" class="form-control material-input table_cell" step="any" name="material[]" value="<%= q.material %>"></td>
+                                        <td><input type="number" class="form-control qty table_cell" step="any" name="qty[]" value="<%= q.qty %>"></td>
+                                        <td><input type="number" class="form-control q_rate table_cell" step="any" name="q_rate[]" value="<%= q.q_rate %>"></td>
+                                        <td><input type="number" class="form-control discount table_cell" step="any" name="discount[]" value="<%= q.discount %>"></td>
+                                        <td><input type="number" class="form-control sub_total table_cell" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
+                                        <td><input type="number" class="form-control q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
+                                        <td><input type="number" class="form-control grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
+                                        <td><input type="text" class="form-control q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
+                                        <td>
+                                        <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
+                                        <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+                                <% } else { %>
+                                    <!-- Show one empty row if no data -->
+                                    <tr>
+                                        <td class="sr-no">1</td>
+                                        <td><input type="text" class="form-control material-input table_cell" step="any" name="material[]"></td>
+                                        <td><input type="number" class="form-control qty table_cell" step="any" name="qty[]"></td>
+                                        <td><input type="number" class="form-control q_rate table_cell" step="any" name="q_rate[]"></td>
+                                        <td><input type="number" class="form-control discount table_cell" step="any" name="discount[]" value="0"></td>
+                                        <td><input type="number" class="form-control sub_total table_cell" step="any" name="sub_total[]" ></td>
+                                        <td><input type="number" class="form-control q_gst table_cell" step="any" name="q_gst[]" value="0"></td>
+                                        <td><input type="number" class="form-control grand_total table_cell" step="any" name="grand_total[]" ></td>
+                                        <td><input type="text" class="form-control q_hsn table_cell" step="any" name="q_hsn[]"></td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
+                                            <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
+                                        </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                            <tfoot>
+                                <tr class="table-warning">
+                                <td colspan="7" class="text-end"><strong>Total Grand Total</strong></td>
+                                <td><input type="number" id="totalQuotationGrand" name="totalQuotationGrand" class="form-control table_cell" readonly></td>
+                                <td colspan="2"></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                     <!-- Save Button -->
                     <div class="text-end my-3">
-                    <button type="submit"  class="btn btn-success" formaction="/measure-save" > Save </button>
+                    <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
                     </div>
 
                 </div>
