@@ -791,14 +791,11 @@ let fabricData = [];
 
     $('#autofillQuotationBtn').on('click', function () {
         const fabricMap = {};
-        const stitching = { roman: 0, american: 0, ring: 0 };
-
-        $('[name="curtain[]"]').each(function (i) {
-            const type = $(this).val().toLowerCase().trim();
-            if (type in stitching) {
-                stitching[type]++;
-            }
-        });
+        const stitching = {
+            roman: parseFloat($('#roman').val()) || 0,
+            american: parseFloat($('#american').val()) || 0,
+            ring: parseFloat($('#ring').val()) || 0
+        };
 
         $('[name="fabric[]"]').each(function (i) {
             const name = $(this).val().trim();
