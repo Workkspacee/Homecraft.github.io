@@ -478,14 +478,14 @@
                             <tbody> <!-- Hidden row -->
                                 <tr class="quotation-template-row d-none">
                                     <td class="sr-no">1</td>
-                                    <td><input type="text" class="form-control material-input" step="any" name="material[]"></td>
-                                    <td><input type="number" class="form-control qty" step="any" name="qty[]"></td>
-                                    <td><input type="number" class="form-control q_rate" step="any" name="q_rate[]"></td>
-                                    <td><input type="number" class="form-control discount" step="any" name="discount[]"></td>
-                                    <td><input type="number" class="form-control sub_total" step="any" name="sub_total[]" ></td>
-                                    <td><input type="number" class="form-control q_gst" step="any" name="q_gst[]"></td>
-                                    <td><input type="number" class="form-control grand_total" step="any" name="grand_total[]" ></td>
-                                    <td><input type="text" class="form-control q_hsn" step="any" name="q_hsn[]"></td>
+                                    <td><input type="text" class="material-input" step="any" name="material[]"></td>
+                                    <td><input type="number" class="qty" step="any" name="qty[]"></td>
+                                    <td><input type="number" class="q_rate" step="any" name="q_rate[]"></td>
+                                    <td><input type="number" class="discount" step="any" name="discount[]"></td>
+                                    <td><input type="number" class="sub_total" step="any" name="sub_total[]" ></td>
+                                    <td><input type="number" class="q_gst" step="any" name="q_gst[]"></td>
+                                    <td><input type="number" class="grand_total" step="any" name="grand_total[]" ></td>
+                                    <td><input type="text" class="q_hsn" step="any" name="q_hsn[]"></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -499,14 +499,14 @@
                                     <tr>
 
                                         <td class="sr-no"><%= index + 1 %></td>
-                                        <td><input type="text" class="form-control material-input table_cell" step="any" name="material[]" value="<%= q.material %>"></td>
-                                        <td><input type="number" class="form-control qty table_cell" step="any" name="qty[]" value="<%= q.qty %>"></td>
-                                        <td><input type="number" class="form-control q_rate table_cell" step="any" name="q_rate[]" value="<%= q.q_rate %>"></td>
-                                        <td><input type="number" class="form-control discount table_cell" step="any" name="discount[]" value="<%= q.discount %>"></td>
-                                        <td><input type="number" class="form-control sub_total table_cell" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
-                                        <td><input type="number" class="form-control q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
-                                        <td><input type="number" class="form-control grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
-                                        <td><input type="text" class="form-control q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
+                                        <td><input type="text" class="material-input table_cell" step="any" name="material[]" value="<%= q.material %>"></td>
+                                        <td><input type="number" class="qty table_cell" step="any" name="qty[]" value="<%= q.qty %>"></td>
+                                        <td><input type="number" class="q_rate table_cell" step="any" name="q_rate[]" value="<%= q.q_rate %>"></td>
+                                        <td><input type="number" class="discount table_cell" step="any" name="discount[]" value="<%= q.discount %>"></td>
+                                        <td><input type="number" class="sub_total table_cell" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
+                                        <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
+                                        <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
+                                        <td><input type="text" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
                                         <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -517,7 +517,7 @@
                                     <!-- Show one empty row if no data -->
                                     <tr>
                                         <td class="sr-no">1</td>
-                                        <td><input type="text" class="form-control material-input table_cell" step="any" name="material[]"></td>
+                                        <td><input type="text" class="material-input table_cell" step="any" name="material[]"></td>
                                         <td><input type="number" class="qty table_cell" step="any" name="qty[]"></td>
                                         <td><input type="number" class="q_rate table_cell" step="any" name="q_rate[]"></td>
                                         <td><input type="number" class="discount table_cell" step="any" name="discount[]" value="0"></td>
