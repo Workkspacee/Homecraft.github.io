@@ -561,7 +561,21 @@ router.get('/admin/suggestions', async (req, res) => {
 });
 
 
+router.post('/bill', async(req,res) => {
+  const { work_no } = req.body;
 
+  try {
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('bill', { no });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
+});
 
 
 
@@ -571,6 +585,10 @@ router.get('/bill', (req,res) =>{
 
 router.get('/bill2', (req,res) =>{
   res.render('bill2');
+});
+
+router.get('/bill3', (req,res) =>{
+  res.render('bill3');
 });
 module.exports = router;
 
