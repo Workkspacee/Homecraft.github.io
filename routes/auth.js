@@ -431,9 +431,6 @@ router.post('/tai', async(req,res) => {
     }
 });
 
-router.get('/tai', async(req,res) =>{
-  res.redirect('tailor2');
-});
 
 //w_status edit karva
 router.post('/edit-tai', async (req, res) => {

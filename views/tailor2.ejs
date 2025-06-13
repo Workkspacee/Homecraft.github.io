@@ -77,99 +77,111 @@
                     </div>    <br/>
             
                     <div class="table-container">
-                        <table class="table table-hover table-bordered">
-                            <thead class="table1">
-                                <tr>
-                                    <th>Room No.</th>
-                                    <th>Room Name</th>
-                                    <th>Type of Curtain</th>
-                                    <th>Width (in)</th>
-                                    <th>Height (in)</th>
-                                    <th>Fabric</th>
-                                    <th>Fabric Required (meter)</th>
-                                    <th>Blackout</th>
-                                    <th>Blackout Required (meter)</th>
-                                </tr>
-                            </thead>                                        
-                            <tbody id="tableBody">
-                                <% let renderedAny = false; %>
-                                <% for (let i = 1; i <= 20; i++) { 
-                                    if (no['room_number' + i] || no['room_name' + i] || no['curtain' + i] || no['width' + i] || no['height' + i] || no['fabric' + i]) {
-                                        renderedAny = true;
-                                %>
+                    <table class="table table-hover table-bordered">
+                        <thead class="table1">
+                            <tr>
+                                <th>Room No.</th>
+                                <th>Room Name</th>
+                                <th>Window Number</th>
+                                <th>Type of Curtain</th>
+                                <th>Width (in)</th>
+                                <th>Height (in)</th>
+                                <th>Fabric</th>
+                                <th>Fabric Required (meter)</th>
+                                <th>Blackout</th>
+                                <th>Blackout Required (meter)</th>
+                            </tr>
+                        </thead>                                        
+                         <tbody id="tableBody">
+                            <% if (no && no.rows && no.rows.length > 0) { %>
+                               <% for (let i = 0; i < no.rows.length; i++) { const row = no.rows[i]; %>
+
                                 <tr class="data-row">
-                                <td><input class="table_cell" type="number" name="room_number<%= i %>" value="<%= no['room_number' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="text" name="room_name<%= i %>" value="<%= no['room_name' + i] %>" readonly /></td>
-                                <!--<% 
-                                let curtainType = no['curtain' + i];
-                                let curtainClass = '';
-                                if (curtainType === 'Roman') curtainClass = 'curtain-roman';      // blue
-                                else if (curtainType === 'American') CurtainClass = 'curtain-american'; // yellow
-                                else if (curtainType === 'Ring') CurtainClass = 'curtain-ring';     // green
-                                %>-->
-                                <td class="<%= curtainClass %>"><input class="table_cell" type="text" name="curtain<%= i %>" value="<%= no['curtain' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="number" step="any" name="width<%= i %>" value="<%= no['width' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="number" step="any" name="height<%= i %>" value="<%= no['height' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="text" name="fabric<%= i %>" value="<%= no['fabric' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="number" step="any" name="fabric_req<%= i %>" value="<%= no['fabric_req' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="number" step="any" name="blackout<%= i %>" value="<%= no['blackout' + i] %>" readonly /></td>
-                                <td><input class="table_cell" type="number" step="any" name="blackout_req<%= i %>" value="<%= no['blackout_req' + i] %>" readonly /></td>
+                                    <td><input type="number" class="table_cell" name="room_number[]" step="any" value="<%= row.room_number ?? '' %>"></td>
+                                    <td><input type="text" class="table_cell" name="room_name[]"  value="<%= row.room_name %>"></td>
+                                    <td><input type="number" class="table_cell" name="window_number[]" step="any" value="<%= row.window_number ?? '' %>"></td>
+                                    <td>
+                                        <select name="curtain[]" class="table_cell hover-arrow">
+                                            <option value=""></option>
+                                            <option value="American" <%= row.curtain === 'American' ? 'selected' : '' %>>American</option>
+                                            <option value="Ring" <%= row.curtain === 'Ring' ? 'selected' : '' %>>Ring</option>
+                                            <option value="Roman" <%= row.curtain === 'Roman' ? 'selected' : '' %>>Roman</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="number" class="table_cell" step="any" name="width[]" value="<%= row.width ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="height[]" value="<%= row.height ?? '' %>"></td>
+                                    <td><input type="text" class="table_cell" name="fabric[]" value="<%= row.fabric %>" autocomplete="off" ></td>
+                                    <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
+                                    <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
+                                    <td><input type="number" name="rate[]" step="any" value="<%= row.rate ?? '' %>"></td>
+                                    <td><input type="number" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>"></td>
+                                    <td><input type="number" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
                                 </tr>
-                                <% } } %>
-                                <% if (!renderedAny) { %>
-                                <tr><td colspan="9">No measurement data available.</td></tr>
-                                <% } %>
+                            <% } %>
+                            <% } else { %>
+                                <tr class="data-row">
+                                    <td><input class="table_cell" step="any" type="number" name="room_number[]"></td>
+                                    <td><input class="table_cell"  type="text" name="room_name[]"></td>
+                                    <td><input class="table_cell" step="any" type="number" name="window_number[]"></td>
+                                    <td>
+                                        <select class="table_cell hover-arrow" name="curtain[]">
+                                            <option></option>
+                                            <option value="American">American</option>
+                                            <option value="Ring">Ring</option>
+                                            <option value="Roman">Roman</option>
+                                        </select>
+                                    </td>
+                                    <td><input class="table_cell" type="number" step="any" name="width[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="height[]"></td>
+                                    <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
+                                    <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
+                                    <td><input type="number" step="any" name="rate[]"></td>
+                                    <td><input type="number" step="any" name="hsn[]"></td>
+                                    <td><input type="number" step="any" name="gst[]"></td>
+                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                </tr>   
+                            <% } %>
 
-                                <tr>
-                                    <td colspan="9">&nbsp;</td> <!-- Creates a full-width empty row -->
-                                </tr>
-                                  
-                                <tr class="summary-row">
-                                <td></td>
-                                <td>Total Parts</td>
-                                <td></td>
-                                <td style="background-color: #6e92bc;">
-                                    <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
-                                </td>
-                                <td style="background-color: #eee533;"><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
-                                <td style="background-color: #67b877;"><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                </tr>
+                            <tr class="summary-row">
+                            <td></td>
+                            <td>Total Parts</td>
+                            <td></td>
+                            <td>
+                                <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
+                            </td>
+                            <td><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
+                            <td><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
 
-                                <tr class="summary-row">
-                                <td></td>
-                                <td>Total Fabrics</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
-                                </td> 
-                                </tr>
-                            </tbody> 
-                        </table><br/><br/>
-                    </div>
-
-                    <div class="row login__field row">
-                        <h6 class="col-3">Work Order Status:</h6>
-                        <select class="login__input col-4" name="w_status">
-                            <option><%= no.w_status %></option>
-                            <option>Details Pending</option>
-                            <option>Measurement Pending</option>
-                            <option>Given for Stiching</option>
-                            <option>Delivery Pending</option>
-                            <option>Order Delivered</option>
-                        </select>
-                    </div><br/><br/>
-                    <div>
-                    <center> <button type="submit" class="but">Submit</button> </center>
+                            <tr class="summary-row">
+                            <td></td>
+                            <td>Total Fabrics</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
+                            </td>
+                            <td></td>
+                            <td>
+                                <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
+                            </td> 
+                            </tr>
+                        </tbody> 
+                    </table><br/><br/>
+                    <center>
+                        <button type="submit" class="but">Submit</button> 
+                    </center>
                     </div>
             </form>
         </div>  
