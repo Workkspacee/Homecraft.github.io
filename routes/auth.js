@@ -547,27 +547,30 @@ router.post('/admin/search', async (req, res) => {
 
 //For updating and saving data in detail page (admin)
 
-router.post('/bill', async(req,res) => {
-  const { work_no } = req.body;
 
-  try {
+router.post('/bill', async(req,res) => {
+  try{
+    const {work_no} = req.body;
+    const body = req.body;
+
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+        body ,
+      { new: true }
+    );
+
     const no = await Data.findOne({ work_no });
     if (!no) {
       return res.status(404).send('Work order not found');
     }
     res.render('bill', { no });
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
-    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
 });
 
-
-
-router.get('/bill', (req,res) =>{
-  res.render('bill');
-});
 
 router.get('/bill2', (req,res) =>{
   res.render('bill2');
