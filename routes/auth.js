@@ -494,67 +494,54 @@ router.post('/page2', async(req,res) => {
   }
 });
 
-//for geting details with their id.
-router.get('/admin/:id',async (req,res)=>{            
-       const id = req.params.id;
+//to get dropdown list for the suggestion 
+router.get('/admin/suggestions', async (req, res) => {
+    try {
+        const query = req.query.query || '';
+        const suggestions = await Data.find({
+            work_no: { $regex: `^${query}`, $options: 'i' }
+        }).select('work_no').limit(5);
+        res.json(suggestions);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
 
-        try {
-        const no = await Data.findById(id);
-        if (!no) {
-          return res.status(404).send('id not found');
-        }
-        res.render('detail', { no });
-    
-        } catch (err) {
-            console.error(err);
-        }
+//for geting details with their id.
+router.get('/admin/:id', async (req, res) => {
+    try {
+        const no = await Data.findById(req.params.id);
+        if (!no) return res.status(404).send('ID not found');
+        res.render('detail', { no }); 
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server error');
+    }
 });
 
 //to delete the order from admin page
-router.delete('/delete/:id', async (req, res) => {
-  try {
-      const { id } = req.params;
-      const deletedWork = await Data.findByIdAndDelete(id);
-      if (!deletedWork) {
-          return res.status(404).json({ success: false, message: "Work order not found" });
-      }
-      res.json({ success: true });
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: "Server error" });
-  }
+router.delete('/admin/delete/:id', async (req, res) => {
+    try {
+        const deleted = await Data.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ success: false, message: 'Not found' });
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 });
 
 //to search order
 router.post('/admin/search', async (req, res) => {
-  try {
-      const { work_no } = req.body;
-      const searchedWork = await Data.findOne({ work_no });
-      const workNumbers = await Data.find(); // Get all work orders
-
-      res.render('admin', { workNumbers, searchedWork });
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  }
-});
-
-//to get dropdown list for the suggestion 
-router.get('/admin/suggestions', async (req, res) => {
-  try {
-      const query = req.query.query;
-      if (!query) return res.json([]); // Return empty array if no input
-
-      const suggestions = await Data.find(
-          { work_no: { $regex: `^${query}`, $options: 'i' } }, // Match from the start
-          'work_no'
-      ).limit(5);
-
-      res.json(suggestions);
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  }
+    try {
+        const searchedWork = await Data.findOne({ work_no: req.body.work_no });
+        const workNumbers = await Data.find().sort({ createdAt: -1 });
+        res.render('admin', { workNumbers, searchedWork });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
 });
 
 

@@ -33,6 +33,8 @@ save button , delete quotation button.
 
 both Tailor pages are not resposive   
 colour for curtain type is remaining
+edit or delete edit-tai route 
+maybe add work status 
 
 6. Admin 
 
