@@ -251,6 +251,7 @@ router.post('/update-edit', async (req, res) => {
 // Measurement page ma data save karva and edit karva 
 router.post('/measure-save', async (req, res) => {
   try {
+    const { redirect_to = 'measurement' } = req.body;
     const {
       work_no,
       name,
@@ -385,7 +386,7 @@ router.post('/measure-save', async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.render('measurement', {
+    res.render(redirect_to, {
       no: updatedData,
       quotation: updatedData.quotation || []
     });
@@ -544,6 +545,7 @@ router.post('/admin/search', async (req, res) => {
     }
 });
 
+//For updating and saving data in detail page (admin)
 
 router.post('/bill', async(req,res) => {
   const { work_no } = req.body;

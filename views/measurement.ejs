@@ -301,6 +301,7 @@
     <div class="container">
         <div class="row jumbotron">            
             <form class="login" method="post">   
+                <input type="hidden" name="redirect_to" value="measurement"><!--For using same routes but open different page-->
                 <div class="row">                 
                     <div class="col-2 login__field">
                         <h6 align="center">Work order number : </h6>
@@ -450,7 +451,7 @@
                         </tbody> 
                     </table><br/><br/>
                     <center>
-                        <button type="submit" class="submit" formaction="/measure-save" > Save </button>
+                        <button type="submit" class="submit" formaction="/measure-save" > Save </button> <!--We should delete this both-->
                         <button type="submit" class="submit" formaction="/measure-quotation" > Quotation </button>
                     </center>
                     <hr>

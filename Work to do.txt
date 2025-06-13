@@ -10,6 +10,8 @@ add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend.
 ring american and roman ma colours add karva. 
+delete extra save and quotation buttons
+add name beside workno. in all pages like measurement and also add google map location in header.
 
 3. Backend nu quotation ( Combine with measurement)
 
@@ -26,6 +28,7 @@ Change and make easy fitter work done thing for them.
 and save button
 
 Fittermeasure page:= 
+Make readonly fields for fitter
 Add routes for their actions. 
 save button , delete quotation button. 
 
@@ -43,9 +46,12 @@ work order detail page
 admin page error: 
     1.getting suggestion of the seached order number only and new entered order, it is not displaying old orders.
     2.while searching with name , only one ouput is displyed
+ 
+6A. details page
 
-details page
 links for bill remaining
+Back or home button 
+Admin can changes any details so make every fields not readonly.
 
 7. 2 bill pages 
 
