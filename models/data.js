@@ -45,7 +45,7 @@ const dataSchema = new mongoose.Schema({
     ring: { type: Number, default: null  },
     total_fab_req: { type: Number, default: null  },
     total_black_req: { type: Number, default: null  },
-
+    state: { type: String, default: '' },
     // Infinite rows stored as array of objects
     rows: [rowSchema],
     quotation: [quotationSchema],

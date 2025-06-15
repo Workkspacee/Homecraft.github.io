@@ -46,7 +46,49 @@
                         <input type="text" class="input_field" placeholder="Name" name="name" value="<%= no.name %>" /><br>
                         <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea><br>
                         <label>Contact No: <input type="tel" class="input_field" maxlength="10" name="p_no" value="<%= no.p_no %>"></label><br>
-                        <label>State: <input type="text" class="input_field" placeholder="State"></label>
+                        <label>State: 
+                            <select name="state" required>
+                                <option value="">-- Select State --</option>
+                                <option value="01 - Jammu and Kashmir" <%= no.state === '01 - Jammu and Kashmir' ? 'selected' : '' %>>Jammu and Kashmir</option>
+                                <option value="02 - Himachal Pradesh" <%= no.state === '02 - Himachal Pradesh' ? 'selected' : '' %>>Himachal Pradesh</option>
+                                <option value="03 - Punjab" <%= no.state === '03 - Punjab' ? 'selected' : '' %>>Punjab</option>
+                                <option value="04 - Chandigarh" <%= no.state === '04 - Chandigarh' ? 'selected' : '' %>>Chandigarh</option>
+                                <option value="05 - Uttarakhand" <%= no.state === '05 - Uttarakhand' ? 'selected' : '' %>>Uttarakhand</option>
+                                <option value="06 - Haryana" <%= no.state === '06 - Haryana' ? 'selected' : '' %>>Haryana</option>
+                                <option value="07 - Delhi" <%= no.state === '07 - Delhi' ? 'selected' : '' %>>Delhi</option>
+                                <option value="08 - Rajasthan" <%= no.state === '08 - Rajasthan' ? 'selected' : '' %>>Rajasthan</option>
+                                <option value="09 - Uttar Pradesh" <%= no.state === '09 - Uttar Pradesh' ? 'selected' : '' %>>Uttar Pradesh</option>
+                                <option value="10 - Bihar" <%= no.state === '10 - Bihar' ? 'selected' : '' %>>Bihar</option>
+                                <option value="11 - Sikkim" <%= no.state === '11 - Sikkim' ? 'selected' : '' %>>Sikkim</option>
+                                <option value="12 - Arunachal Pradesh" <%= no.state === '12 - Arunachal Pradesh' ? 'selected' : '' %>>Arunachal Pradesh</option>
+                                <option value="13 - Nagaland" <%= no.state === '13 - Nagaland' ? 'selected' : '' %>>Nagaland</option>
+                                <option value="14 - Manipur" <%= no.state === '14 - Manipur' ? 'selected' : '' %>>Manipur</option>
+                                <option value="15 - Mizoram" <%= no.state === '15 - Mizoram' ? 'selected' : '' %>>Mizoram</option>
+                                <option value="16 - Tripura" <%= no.state === '16 - Tripura' ? 'selected' : '' %>>Tripura</option>
+                                <option value="17 - Meghalaya" <%= no.state === '17 - Meghalaya' ? 'selected' : '' %>>Meghalaya</option>
+                                <option value="18 - Assam" <%= no.state === '18 - Assam' ? 'selected' : '' %>>Assam</option>
+                                <option value="19 - West Bengal" <%= no.state === '19 - West Bengal' ? 'selected' : '' %>>West Bengal</option>
+                                <option value="20 - Jharkhand" <%= no.state === '20 - Jharkhand' ? 'selected' : '' %>>Jharkhand</option>
+                                <option value="21 - Odisha" <%= no.state === '21 - Odisha' ? 'selected' : '' %>>Odisha</option>
+                                <option value="22 - Chhattisgarh" <%= no.state === '22 - Chhattisgarh' ? 'selected' : '' %>>Chhattisgarh</option>
+                                <option value="23 - Madhya Pradesh" <%= no.state === '23 - Madhya Pradesh' ? 'selected' : '' %>>Madhya Pradesh</option>
+                                <option value="24 - Gujarat" <%= no.state === '24 - Gujarat' ? 'selected' : '' %>>Gujarat</option>
+                                <option value="25 - Daman and Diu" <%= no.state === '25 - Daman and Diu' ? 'selected' : '' %>>Daman and Diu</option>
+                                <option value="26 - Dadra and Nagar Haveli" <%= no.state === '26 - Dadra and Nagar Haveli' ? 'selected' : '' %>>Dadra and Nagar Haveli</option>
+                                <option value="27 - Maharashtra" <%= no.state === '27 - Maharashtra' ? 'selected' : '' %>>Maharashtra</option>
+                                <option value="28 - Andhra Pradesh (Old)" <%= no.state === '28 - Andhra Pradesh (Old)' ? 'selected' : '' %>>Andhra Pradesh (Old)</option>
+                                <option value="29 - Karnataka" <%= no.state === '29 - Karnataka' ? 'selected' : '' %>>Karnataka</option>
+                                <option value="30 - Goa" <%= no.state === '30 - Goa' ? 'selected' : '' %>>Goa</option>
+                                <option value="31 - Lakshadweep" <%= no.state === '31 - Lakshadweep' ? 'selected' : '' %>>Lakshadweep</option>
+                                <option value="32 - Kerala" <%= no.state === '32 - Kerala' ? 'selected' : '' %>>Kerala</option>
+                                <option value="33 - Tamil Nadu" <%= no.state === '33 - Tamil Nadu' ? 'selected' : '' %>>Tamil Nadu</option>
+                                <option value="34 - Puducherry" <%= no.state === '34 - Puducherry' ? 'selected' : '' %>>Puducherry</option>
+                                <option value="35 - Andaman and Nicobar Islands" <%= no.state === '35 - Andaman and Nicobar Islands' ? 'selected' : '' %>>Andaman and Nicobar Islands</option>
+                                <option value="36 - Telangana" <%= no.state === '36 - Telangana' ? 'selected' : '' %>>Telangana</option>
+                                <option value="37 - Andhra Pradesh (New)" <%= no.state === '37 - Andhra Pradesh (New)' ? 'selected' : '' %>>Andhra Pradesh (New)</option>
+                                <option value="38 - Ladakh" <%= no.state === '38 - Ladakh' ? 'selected' : '' %>>Ladakh</option>
+                            </select>
+                        </label>
                     </td>
                     <td>
                         <h4>Ship To</h4><br>
