@@ -251,6 +251,7 @@ router.post('/update-edit', async (req, res) => {
 // Measurement page ma data save karva and edit karva 
 router.post('/measure-save', async (req, res) => {
   try {
+    const { redirect_to = 'measurement' } = req.body;
     const {
       work_no,
       name,
@@ -385,7 +386,7 @@ router.post('/measure-save', async (req, res) => {
       { new: true, upsert: true }
     );
 
-    res.render('measurement', {
+    res.render(redirect_to, {
       no: updatedData,
       quotation: updatedData.quotation || []
     });
@@ -431,9 +432,6 @@ router.post('/tai', async(req,res) => {
     }
 });
 
-router.get('/tai', async(req,res) =>{
-  res.redirect('tailor2');
-});
 
 //w_status edit karva
 router.post('/edit-tai', async (req, res) => {
@@ -581,91 +579,82 @@ router.post('/page2', async(req,res) => {
   }
 });
 
-//for geting details with their id.
-router.get('/admin/:id',async (req,res)=>{            
-       const id = req.params.id;
-
-        try {
-        const no = await Data.findById(id);
-        if (!no) {
-          return res.status(404).send('id not found');
-        }
-        res.render('detail', { no });
-    
-        } catch (err) {
-            console.error(err);
-        }
-});
-
-//to delete the order from admin page
-router.delete('/delete/:id', async (req, res) => {
-  try {
-      const { id } = req.params;
-      const deletedWork = await Data.findByIdAndDelete(id);
-      if (!deletedWork) {
-          return res.status(404).json({ success: false, message: "Work order not found" });
-      }
-      res.json({ success: true });
-  } catch (error) {
-      console.error(error);
-      res.status(500).json({ success: false, message: "Server error" });
-  }
-});
-
-//to search order
-router.post('/admin/search', async (req, res) => {
-  try {
-      const { work_no } = req.body;
-      const searchedWork = await Data.findOne({ work_no });
-      const workNumbers = await Data.find(); // Get all work orders
-
-      res.render('admin', { workNumbers, searchedWork });
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  }
-});
-
 //to get dropdown list for the suggestion 
 router.get('/admin/suggestions', async (req, res) => {
-  try {
-      const query = req.query.query;
-      if (!query) return res.json([]); // Return empty array if no input
-
-      const suggestions = await Data.find(
-          { work_no: { $regex: `^${query}`, $options: 'i' } }, // Match from the start
-          'work_no'
-      ).limit(5);
-
-      res.json(suggestions);
-  } catch (error) {
-      console.error(error);
-      res.status(500).send('Server error');
-  }
+    try {
+        const query = req.query.query || '';
+        const suggestions = await Data.find({
+            work_no: { $regex: `^${query}`, $options: 'i' }
+        }).select('work_no').limit(5);
+        res.json(suggestions);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
 });
 
-
-router.post('/bill', async(req,res) => {
-  const { work_no } = req.body;
-
-  try {
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('bill', { no });
-
+//for geting details with their id.
+router.get('/admin/:id', async (req, res) => {
+    try {
+        const no = await Data.findById(req.params.id);
+        if (!no) return res.status(404).send('ID not found');
+        res.render('detail', { no }); 
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
     }
 });
 
-
-
-router.get('/bill', (req,res) =>{
-  res.render('bill');
+//to delete the order from admin page
+router.delete('/admin/delete/:id', async (req, res) => {
+    try {
+        const deleted = await Data.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ success: false, message: 'Not found' });
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Server error' });
+    }
 });
+
+//to search order
+router.post('/admin/search', async (req, res) => {
+    try {
+        const searchedWork = await Data.findOne({ work_no: req.body.work_no });
+        const workNumbers = await Data.find().sort({ createdAt: -1 });
+        res.render('admin', { workNumbers, searchedWork });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+
+//For updating and saving data in detail page (admin)
+
+
+router.post('/bill', async(req,res) => {
+  try{
+    const {work_no} = req.body;
+    const body = req.body;
+
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+        body ,
+      { new: true }
+    );
+
+    const no = await Data.findOne({ work_no });
+    if (!no) {
+      return res.status(404).send('Work order not found');
+    }
+    res.render('bill', { no });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
 
 router.get('/bill2', (req,res) =>{
   res.render('bill2');
