@@ -62,7 +62,7 @@
                     </td>
                     <td>
                         <h4>Invoice Details</h4><br>
-                        <label>Invoice No:<input type="text" class="input_field"></label><br>
+                        <label>Invoice No:<input type="text" class="input_field" value="<%= no.work_no %>" readonly></label><br>
                         <label>Date: <input type="date" class="input_field"></label><br>
                         <label>Place of supply:<input type="text" class="input_field"></label><br>
                         <label>Due Date: <input type="date" class="input_field"></label>
@@ -72,76 +72,32 @@
             </table><br>
 
             <table class="bill" cellspacing="5">
-                <tr>
-                    <th>#</th>
-                    <th colspan="2">Item Name</th>
-                    <th>HSN/SAC</th>
-                    <th>Quantity</th>
-                    <th>Unit</th>
-                    <th>Price/Unit</th>
-                    <th>GST</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td colspan="2"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <th colspan="2">Total</th>
-                    <td></td>
-                    <th></th>
-                    <td></td>
-                    <td></td>
-                    <th></th>
-                    <th></th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Item Name</th>
+                        <th>HSN/SAC</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Price/Unit</th>
+                        <th>GST</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% no.quotation.forEach((q, index) => { %>
+                        <tr>
+                            <td class="sr-no"><%= index + 1 %></td>
+                            <td><input type="text" step="any" name="material[]" value="<%= q.material || '' %>"></td>
+                            <td><input type="text" step="any" name="q_hsn[]" value="<%= q.q_hsn || '' %>"></td>
+                            <td><input type="number" step="any" name="qty[]" value="<%= q.qty || '' %>"></td>
+                            <td>Mtr</td>
+                            <td><input type="number" step="any" name="q_rate[]" value="<%= q.q_rate || '' %>"></td>
+                            <td><input type="number" step="any" name="q_gst[]" value="<%= q.q_gst || '' %>"></td>
+                            <td><input type="number" step="any" name="grand_total[]" value="<%= q.grand_total || '' %>"></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
             </table><br>
 
             <!--dont know how to make this table-->
