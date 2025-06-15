@@ -581,15 +581,30 @@ router.post('/page2', async(req,res) => {
 
 //to get dropdown list for the suggestion 
 router.get('/admin/suggestions', async (req, res) => {
+  try {
+    const query = req.query.query || '';
+    const suggestions = await Data.find({
+      $or: [
+        { work_no: { $regex: `^${query}`, $options: 'i' } },
+        { name: { $regex: `^${query}`, $options: 'i' } }
+      ]
+    })
+    .select('work_no name')
+    .limit(5);
+
+    res.json(suggestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+router.get('/admin/all-suggestions', async (req, res) => {
     try {
-        const query = req.query.query || '';
-        const suggestions = await Data.find({
-            work_no: { $regex: `^${query}`, $options: 'i' }
-        }).select('work_no').limit(5);
-        res.json(suggestions);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
+        const allWorks = await Data.find({}, 'work_no name'); // Adjust collection name
+        res.json(allWorks);
+    } catch (err) {
+        res.status(500).json({ error: 'Server error' });
     }
 });
 
@@ -618,16 +633,27 @@ router.delete('/admin/delete/:id', async (req, res) => {
 });
 
 //to search order
+// Search by work_no OR name
 router.post('/admin/search', async (req, res) => {
-    try {
-        const searchedWork = await Data.findOne({ work_no: req.body.work_no });
-        const workNumbers = await Data.find().sort({ createdAt: -1 });
-        res.render('admin', { workNumbers, searchedWork });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server error');
-    }
+  try {
+    const searchQuery = req.body.work_no?.trim();
+    const workNumbers = await Data.find().sort({ createdAt: -1 });
+
+    const searchedWork = await Data.find({
+      $or: [
+        { work_no: searchQuery },
+        { name: { $regex: new RegExp(searchQuery, 'i') } }
+      ]
+    });
+
+    res.render('admin', { workNumbers, searchedWork });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
 });
+
+
 
 //For updating and saving data in detail page (admin)
 
