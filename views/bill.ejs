@@ -37,81 +37,84 @@
         <br>
         <br>
         
-        <form action="/bill" method="post"> 
-            <table style="width:100%">
+        <form action="/bill" method="post">
+            <nav class="details" style="display: flex; flex: 1 1 22%; min-width: 250px; justify-content: space-between; align-items: center;"> 
                 <input type="hidden" name="work_no" value="<%= no.work_no %>" readonly/>
-                <tr>
-                    <td>
-                        <h4>Bill To</h4><br>
-                        <input type="text" class="input_field" placeholder="Name" name="name" value="<%= no.name %>" /><br>
-                        <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea><br>
-                        <label>Contact No: <input type="tel" class="input_field" maxlength="10" name="p_no" value="<%= no.p_no %>"></label><br>
-                        <label>State: 
-                            <select name="state" required>
-                                <option value="">-- Select State --</option>
-                                <option value="01 - Jammu and Kashmir" <%= no.state === '01 - Jammu and Kashmir' ? 'selected' : '' %>>Jammu and Kashmir</option>
-                                <option value="02 - Himachal Pradesh" <%= no.state === '02 - Himachal Pradesh' ? 'selected' : '' %>>Himachal Pradesh</option>
-                                <option value="03 - Punjab" <%= no.state === '03 - Punjab' ? 'selected' : '' %>>Punjab</option>
-                                <option value="04 - Chandigarh" <%= no.state === '04 - Chandigarh' ? 'selected' : '' %>>Chandigarh</option>
-                                <option value="05 - Uttarakhand" <%= no.state === '05 - Uttarakhand' ? 'selected' : '' %>>Uttarakhand</option>
-                                <option value="06 - Haryana" <%= no.state === '06 - Haryana' ? 'selected' : '' %>>Haryana</option>
-                                <option value="07 - Delhi" <%= no.state === '07 - Delhi' ? 'selected' : '' %>>Delhi</option>
-                                <option value="08 - Rajasthan" <%= no.state === '08 - Rajasthan' ? 'selected' : '' %>>Rajasthan</option>
-                                <option value="09 - Uttar Pradesh" <%= no.state === '09 - Uttar Pradesh' ? 'selected' : '' %>>Uttar Pradesh</option>
-                                <option value="10 - Bihar" <%= no.state === '10 - Bihar' ? 'selected' : '' %>>Bihar</option>
-                                <option value="11 - Sikkim" <%= no.state === '11 - Sikkim' ? 'selected' : '' %>>Sikkim</option>
-                                <option value="12 - Arunachal Pradesh" <%= no.state === '12 - Arunachal Pradesh' ? 'selected' : '' %>>Arunachal Pradesh</option>
-                                <option value="13 - Nagaland" <%= no.state === '13 - Nagaland' ? 'selected' : '' %>>Nagaland</option>
-                                <option value="14 - Manipur" <%= no.state === '14 - Manipur' ? 'selected' : '' %>>Manipur</option>
-                                <option value="15 - Mizoram" <%= no.state === '15 - Mizoram' ? 'selected' : '' %>>Mizoram</option>
-                                <option value="16 - Tripura" <%= no.state === '16 - Tripura' ? 'selected' : '' %>>Tripura</option>
-                                <option value="17 - Meghalaya" <%= no.state === '17 - Meghalaya' ? 'selected' : '' %>>Meghalaya</option>
-                                <option value="18 - Assam" <%= no.state === '18 - Assam' ? 'selected' : '' %>>Assam</option>
-                                <option value="19 - West Bengal" <%= no.state === '19 - West Bengal' ? 'selected' : '' %>>West Bengal</option>
-                                <option value="20 - Jharkhand" <%= no.state === '20 - Jharkhand' ? 'selected' : '' %>>Jharkhand</option>
-                                <option value="21 - Odisha" <%= no.state === '21 - Odisha' ? 'selected' : '' %>>Odisha</option>
-                                <option value="22 - Chhattisgarh" <%= no.state === '22 - Chhattisgarh' ? 'selected' : '' %>>Chhattisgarh</option>
-                                <option value="23 - Madhya Pradesh" <%= no.state === '23 - Madhya Pradesh' ? 'selected' : '' %>>Madhya Pradesh</option>
-                                <option value="24 - Gujarat" <%= no.state === '24 - Gujarat' ? 'selected' : '' %>>Gujarat</option>
-                                <option value="25 - Daman and Diu" <%= no.state === '25 - Daman and Diu' ? 'selected' : '' %>>Daman and Diu</option>
-                                <option value="26 - Dadra and Nagar Haveli" <%= no.state === '26 - Dadra and Nagar Haveli' ? 'selected' : '' %>>Dadra and Nagar Haveli</option>
-                                <option value="27 - Maharashtra" <%= no.state === '27 - Maharashtra' ? 'selected' : '' %>>Maharashtra</option>
-                                <option value="28 - Andhra Pradesh (Old)" <%= no.state === '28 - Andhra Pradesh (Old)' ? 'selected' : '' %>>Andhra Pradesh (Old)</option>
-                                <option value="29 - Karnataka" <%= no.state === '29 - Karnataka' ? 'selected' : '' %>>Karnataka</option>
-                                <option value="30 - Goa" <%= no.state === '30 - Goa' ? 'selected' : '' %>>Goa</option>
-                                <option value="31 - Lakshadweep" <%= no.state === '31 - Lakshadweep' ? 'selected' : '' %>>Lakshadweep</option>
-                                <option value="32 - Kerala" <%= no.state === '32 - Kerala' ? 'selected' : '' %>>Kerala</option>
-                                <option value="33 - Tamil Nadu" <%= no.state === '33 - Tamil Nadu' ? 'selected' : '' %>>Tamil Nadu</option>
-                                <option value="34 - Puducherry" <%= no.state === '34 - Puducherry' ? 'selected' : '' %>>Puducherry</option>
-                                <option value="35 - Andaman and Nicobar Islands" <%= no.state === '35 - Andaman and Nicobar Islands' ? 'selected' : '' %>>Andaman and Nicobar Islands</option>
-                                <option value="36 - Telangana" <%= no.state === '36 - Telangana' ? 'selected' : '' %>>Telangana</option>
-                                <option value="37 - Andhra Pradesh (New)" <%= no.state === '37 - Andhra Pradesh (New)' ? 'selected' : '' %>>Andhra Pradesh (New)</option>
-                                <option value="38 - Ladakh" <%= no.state === '38 - Ladakh' ? 'selected' : '' %>>Ladakh</option>
-                            </select>
-                        </label>
-                    </td>
-                    <td>
-                        <h4>Ship To</h4><br>
-                        <input type="text" class="input_field" placeholder="Address" />
-                    </td>
-                    <td>
-                        <h4>Transportation Details</h4><br>
-                        <label>Driver Name: <input type="text" class="input_field" placeholder="Name"/></label><br>
-                        <label>Vehicle Number: <input type="text" class="input_field" placeholder="GJ05FR9362"/></label><br>
-                        <label>Delivery Date: <input type="date" class="input_field" placeholder="date"/></label><br>
-                        <label>Location:<input type="text" class="input_field" placeholder="Surat"></label><br>
-                        <label>LR Number: <input type="text" class="input_field"></label>
-                    </td>
-                    <td>
-                        <h4>Invoice Details</h4><br>
-                        <label>Invoice No:<input type="text" class="input_field" value="<%= no.work_no %>" readonly></label><br>
-                        <label>Date: <input type="date" class="input_field"></label><br>
-                        <label>Place of supply:<input type="text" class="input_field"></label><br>
-                        <label>Due Date: <input type="date" class="input_field"></label>
-                    </td>
-                </tr>
-            
-            </table><br>
+                <div style="padding-right: 20px;">
+                    <h4>Bill To</h4><br>
+                    <input type="text" class="input_field" placeholder="Name" name="name" value="<%= no.name %>" style="font-weight: 700;" />
+                    <br>
+                    <textarea name="add" cols="20"  placeholder="Address"><%= no.add %></textarea><br>
+                    <label>Contact No: <input type="tel" class="input_field" maxlength="10" name="p_no" value="<%= no.p_no %>"></label><br>
+                    <label>State: 
+                        <select name="state" required>
+                            <option value="">-- Select State --</option>
+                            <option value="01 - Jammu and Kashmir" <%= no.state === '01 - Jammu and Kashmir' ? 'selected' : '' %>>1 - Jammu and Kashmir</option>
+                            <option value="02 - Himachal Pradesh" <%= no.state === '02 - Himachal Pradesh' ? 'selected' : '' %>>2 - Himachal Pradesh</option>
+                            <option value="03 - Punjab" <%= no.state === '03 - Punjab' ? 'selected' : '' %>>3 - Punjab</option>
+                            <option value="04 - Chandigarh" <%= no.state === '04 - Chandigarh' ? 'selected' : '' %>>4 - Chandigarh</option>
+                            <option value="05 - Uttarakhand" <%= no.state === '05 - Uttarakhand' ? 'selected' : '' %>>5 - Uttarakhand</option>
+                            <option value="06 - Haryana" <%= no.state === '06 - Haryana' ? 'selected' : '' %>>6 - Haryana</option>
+                            <option value="07 - Delhi" <%= no.state === '07 - Delhi' ? 'selected' : '' %>>7 - Delhi</option>
+                            <option value="08 - Rajasthan" <%= no.state === '08 - Rajasthan' ? 'selected' : '' %>>8 - Rajasthan</option>
+                            <option value="09 - Uttar Pradesh" <%= no.state === '09 - Uttar Pradesh' ? 'selected' : '' %>>9 - Uttar Pradesh</option>
+                            <option value="10 - Bihar" <%= no.state === '10 - Bihar' ? 'selected' : '' %>>10 - Bihar</option>
+                            <option value="11 - Sikkim" <%= no.state === '11 - Sikkim' ? 'selected' : '' %>>11 - Sikkim</option>
+                            <option value="12 - Arunachal Pradesh" <%= no.state === '12 - Arunachal Pradesh' ? 'selected' : '' %>>12 - Arunachal Pradesh</option>
+                            <option value="13 - Nagaland" <%= no.state === '13 - Nagaland' ? 'selected' : '' %>>13 - Nagaland</option>
+                            <option value="14 - Manipur" <%= no.state === '14 - Manipur' ? 'selected' : '' %>>14 - Manipur</option>
+                            <option value="15 - Mizoram" <%= no.state === '15 - Mizoram' ? 'selected' : '' %>>15 - Mizoram</option>
+                            <option value="16 - Tripura" <%= no.state === '16 - Tripura' ? 'selected' : '' %>>16 - Tripura</option>
+                            <option value="17 - Meghalaya" <%= no.state === '17 - Meghalaya' ? 'selected' : '' %>>17 - Meghalaya</option>
+                            <option value="18 - Assam" <%= no.state === '18 - Assam' ? 'selected' : '' %>>18 - Assam</option>
+                            <option value="19 - West Bengal" <%= no.state === '19 - West Bengal' ? 'selected' : '' %>>19 - West Bengal</option>
+                            <option value="20 - Jharkhand" <%= no.state === '20 - Jharkhand' ? 'selected' : '' %>>20 - Jharkhand</option>
+                            <option value="21 - Odisha" <%= no.state === '21 - Odisha' ? 'selected' : '' %>>21 - Odisha</option>
+                            <option value="22 - Chhattisgarh" <%= no.state === '22 - Chhattisgarh' ? 'selected' : '' %>>22 - Chhattisgarh</option>
+                            <option value="23 - Madhya Pradesh" <%= no.state === '23 - Madhya Pradesh' ? 'selected' : '' %>>23 - Madhya Pradesh</option>
+                            <option value="24 - Gujarat" <%= no.state === '24 - Gujarat' ? 'selected' : '' %>>24 - Gujarat</option>
+                            <option value="25 - Daman and Diu" <%= no.state === '25 - Daman and Diu' ? 'selected' : '' %>>25 - Daman and Diu</option>
+                            <option value="26 - Dadra and Nagar Haveli" <%= no.state === '26 - Dadra and Nagar Haveli' ? 'selected' : '' %>>26 - Dadra and Nagar Haveli</option>
+                            <option value="27 - Maharashtra" <%= no.state === '27 - Maharashtra' ? 'selected' : '' %>>27 - Maharashtra</option>
+                            <option value="28 - Andhra Pradesh (Old)" <%= no.state === '28 - Andhra Pradesh (Old)' ? 'selected' : '' %>>28 - Andhra Pradesh (Old)</option>
+                            <option value="29 - Karnataka" <%= no.state === '29 - Karnataka' ? 'selected' : '' %>>29 - Karnataka</option>
+                            <option value="30 - Goa" <%= no.state === '30 - Goa' ? 'selected' : '' %>>30 - Goa</option>
+                            <option value="31 - Lakshadweep" <%= no.state === '31 - Lakshadweep' ? 'selected' : '' %>>31 - Lakshadweep</option>
+                            <option value="32 - Kerala" <%= no.state === '32 - Kerala' ? 'selected' : '' %>>32 - Kerala</option>
+                            <option value="33 - Tamil Nadu" <%= no.state === '33 - Tamil Nadu' ? 'selected' : '' %>>33 - Tamil Nadu</option>
+                            <option value="34 - Puducherry" <%= no.state === '34 - Puducherry' ? 'selected' : '' %>>34 - Puducherry</option>
+                            <option value="35 - Andaman and Nicobar Islands" <%= no.state === '35 - Andaman and Nicobar Islands' ? 'selected' : '' %>>35 - Andaman and Nicobar Islands</option>
+                            <option value="36 - Telangana" <%= no.state === '36 - Telangana' ? 'selected' : '' %>>36 - Telangana</option>
+                            <option value="37 - Andhra Pradesh (New)" <%= no.state === '37 - Andhra Pradesh (New)' ? 'selected' : '' %>>37 - Andhra Pradesh (New)</option>
+                            <option value="38 - Ladakh" <%= no.state === '38 - Ladakh' ? 'selected' : '' %>>38 - Ladakh</option>
+                        </select>
+                    </label>
+                    <br><br>
+                </div>
+
+                <div style="padding-right: 40px;">
+                    <h4>Ship To</h4><br>
+                    <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea>
+                    <br><br><br><br><br>
+                </div>
+                <div style="padding-right: 40px;">
+                    <h4>Transportation Details</h4><br>
+                    <label>Driver Name: <input type="text" name="driver_name" class="input_field" placeholder="Name"/></label><br>
+                    <label>Vehicle Number: <input type="text" name="v_no"  class="input_field" placeholder="GJ05FR9362"/></label><br>
+                    <label>Delivery Date: <input type="date" name="d_date"  class="input_field" placeholder="date"/></label><br>
+                    <label>Location:<input type="text" name="loc"  class="input_field" placeholder="Surat"></label><br>
+                    <label>LR Number: <input type="text"  name="lr_no" class="input_field"></label>
+                    <br><br>
+                </div>
+                <div> 
+                    <h4>Invoice Details</h4><br>
+                    <label>Invoice No:<input type="text" name="work_no" class="input_field" value="<%= no.work_no %>" readonly></label><br>
+                    <label>Date: <input type="date" name="date" class="input_field"></label><br>
+                    <label>Place of supply:<input type="text"  name="supply_place" class="input_field"></label><br>
+                    <label>Due Date: <input type="date"  name="due_date" class="input_field"></label>
+                    <br><br><br><br>
+                </div>
+            </nav>
 
             <table class="bill" cellspacing="5">
                 <thead>

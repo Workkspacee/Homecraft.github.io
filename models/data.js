@@ -33,8 +33,8 @@ const quotationSchema = new mongoose.Schema({
 const dataSchema = new mongoose.Schema({
     work_no: { type: String, required: true, unique: true },
     name: { type: String },
-    date: { type: Date },
-    d_date: { type: Date },
+    date: { type: Date },  
+    d_date: { type: Date },  
     p_no: { type: Number },
     add: { type: String },
     f_type: { type: String },
@@ -46,6 +46,12 @@ const dataSchema = new mongoose.Schema({
     total_fab_req: { type: Number, default: null  },
     total_black_req: { type: Number, default: null  },
     state: { type: String, default: '' },
+    driver_name: { type: String },
+    v_no: { type: String },
+    loc: { type: String },
+    lr_no: { type: String }, 
+    supply_place: { type: String },
+    due_date: { type: Date },
     // Infinite rows stored as array of objects
     rows: [rowSchema],
     quotation: [quotationSchema],

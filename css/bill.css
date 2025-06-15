@@ -21,6 +21,26 @@ body{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
 }
 
+textarea{
+    border: none;
+    resize: none;  
+    overflow: hidden; /* Hide scroll bar */
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+select{
+    appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  border: none;
+  background: none;
+  font-size: 14px;
+  padding: 0;
+  margin: 0;
+  width: auto;
+}
 .but{
     width: 15%;
     padding: 0.622rem;
@@ -40,9 +60,10 @@ body{
 	background: none;
 	padding: 0.063rem;
 	padding-left: 0.063rem;
-	font-weight: 700;
-	width: 75%;
+    font-size: 16px;
+	width: 50%;
 	transition: .2s;
+    border-bottom: none;
 }
 
 .bill{
