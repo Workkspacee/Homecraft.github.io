@@ -94,11 +94,12 @@
                     <h2>View Work Order</h2>
                     <label>
                         <span>Work Order No.</span>
-                        <input type="text" name="work_no"/>
+                        <input type="text" name="work_no" <% if (typeof no !== 'undefined' && no.work_no) { %>
+                            value="<%= no.work_no %>"
+                        <% } %> />
                     </label>
                     <button class="submit" type="submit" formaction="/edit">View Order </button>
                     <button class="submit" type="submit" formaction="/mea">Open Measurement </button>
-                    <button class="submit" type="submit" formaction="/quota">Open Quotation </button>
                 </div>
             </form>
         </div>

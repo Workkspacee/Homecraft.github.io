@@ -73,7 +73,8 @@
 
   <div class="container">
     <div class="row jumbotron">
-        <form class="login" method="post" action="/fit">   
+        <form class="login" method="post">
+          <input type="hidden" name="forback" value="fiter">   
                 <div class="row">                 
                     <div class="col-2 login__field">
                         <h6 align="center">Work order number : </h6>
@@ -220,6 +221,7 @@
                     </table><br/><br/>
                     <center>
                         <button type="submit" class="submit" formaction="/fitter-save" > Save </button>
+                        <button type="submit" class="submit" formaction="/back"> Back </button>
                     </center>
         </div>
         </form>

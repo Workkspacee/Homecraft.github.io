@@ -206,23 +206,6 @@ router.post('/mea', async(req,res) => {
     }
 });
 
-// Find workno and open quotation for it in backend
-router.post('/quota', async(req,res) => {
-  const { work_no } = req.body;
-
-  try {
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('Quotation', { no });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
-    }
-});
-
 // backend 2 ma aavela data edit karva
 router.post('/update-edit', async (req, res) => {
   try {
@@ -398,16 +381,24 @@ router.post('/measure-save', async (req, res) => {
   }
 });
 
-//link to quotation page on measurement page 
-router.post('/measure-quotation', async(req,res) => {
-  const { work_no } = req.body;
-
-  try {
+// For getting back from measurement to backend , tailor2 to tailor and measurefitter to fiter 
+router.post('/back', async(req,res) => {
+  const { work_no, forback = 'backend' } = req.body;
+  
+  try {  
     const no = await Data.findOne({ work_no });
     if (!no) {
       return res.status(404).send('Work order not found');
     }
-    res.render('Quotation', { no });
+
+    // Redirect to desired page
+    if (forback === 'tailor') {
+      res.render('tailor', { no });
+    } else if (forback === 'fiter') {
+      res.render('fiter', { no });
+    } else {
+      res.render('backend', { no });
+    }
 
     } catch (err) {
         console.error(err);
@@ -441,7 +432,7 @@ router.post('/edit-tai', async (req, res) => {
     // Find the document by work_no and update it
     const updatedData = await Data.findOneAndUpdate(
       { work_no: work_no },
-      { w_status: w_status },
+      { w_status: w_status }, 
       { new: true }
     );
 
@@ -550,32 +541,6 @@ router.post('/fitter-save', async (req, res) => {
   } catch (err) {
     console.error('Error in /fitter-save:', err);
     res.status(500).send('Failed to update measurement');
-  }
-});
-
-
-// for resubmit the quotation page 
-
-router.post('/page2', async(req,res) => {
-  try{
-    const {work_no} = req.body;
-    const body = req.body;
-
-    const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-        body ,
-      { new: true }
-    );
-
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('Quotation', { no });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating order');
   }
 });
 

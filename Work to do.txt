@@ -2,9 +2,12 @@ Change work status in all
 
 on wrong passwords showing other attrative message
 
+Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya workno joiaa che ??
+
 1. Backend 
 
 All done
+want to change new order to view order ? because might they use more view order page.
 
 2. Backend nu measurement 
 
@@ -30,6 +33,7 @@ Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 add measurement page after giving work no. (done) and in this we need some other not readonly fields.
 Change and make easy fitter work done thing for them.
 and save button
+type of curtain editable
 
 Fittermeasure page:= 
 Make readonly fields for fitter

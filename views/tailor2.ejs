@@ -23,7 +23,8 @@
     </header>
     <div class="container"> 
         <div class="row jumbotron">
-            <form class="login" action="/edit-tai" method="post">
+            <form class="login" method="post">
+                <input type="hidden" name="forback" value="tailor">
                 <div class="row">
                     <div class="col-3 login__field">
                     <h6 align="center">Work order number :</h6>
@@ -180,7 +181,8 @@
                         </tbody> 
                     </table><br/><br/>
                     <center>
-                        <button type="submit" class="but">Submit</button> 
+                        <button type="submit" class="but" formaction="/edit-tai">Submit</button> 
+                        <button type="submit" class="but" formaction="/back">Back</button> 
                     </center>
                 </div>
             </form>
