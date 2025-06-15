@@ -160,16 +160,20 @@ p{
 }
 
 /* to remove the up/down arrows of the type=number in input tag*/
+/* Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
+  appearance: none; /* ✅ Standard property */
   margin: 0;
 }
 
-/* For Firefox */
+/* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield; /* ✅ Standard property */
 }
+
 
 
 @media only screen and (max-width: 768px) {

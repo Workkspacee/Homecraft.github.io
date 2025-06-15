@@ -40,6 +40,11 @@ colour for curtain type is remaining
 edit or delete edit-tai route 
 maybe add work status 
 
+
+remove add/delete row
+make everything readonly
+total parts and total fabric tailor ne joise ??
+
 6. Admin 
 
 search oder by name
