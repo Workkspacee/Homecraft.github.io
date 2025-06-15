@@ -472,6 +472,90 @@ router.post('/fit', async(req,res) => {
     }
 });
 
+router.post('/fitter-save', async (req, res) => {
+  try {
+    const {
+      work_no,
+      name,
+      date,
+      d_date,
+      p_no,
+      add,
+      room_number = [],
+      room_name = [],
+      window_number = [],
+      curtain = [],
+      width = [],
+      height = [],
+      fabric = [],
+      fabric_req = [],
+      blackout = [],
+      blackout_req = [],
+      rate = [],
+      hsn = [],
+      gst = [],
+      roman,
+      american,
+      ring,
+      total_fab_req,
+      total_black_req
+    } = req.body;
+
+    const rows = [];
+
+    for (let i = 0; i < room_name.length; i++) {
+      if (room_name[i] || fabric[i]) {
+        rows.push({
+          room_number: Number(room_number[i]) || null,
+          room_name: room_name[i] || '',
+          window_number: Number(window_number[i]) || null,
+          curtain: curtain[i] || '',
+          width: Number(width[i]) || null,
+          height: Number(height[i]) || null,
+          fabric: fabric[i] || '',
+          fabric_req: Number(fabric_req[i]) || null,
+          blackout: Number(blackout[i]) || null,
+          blackout_req: Number(blackout_req[i]) || null,
+          rate: Number(rate[i]) || null,
+          hsn: Number(hsn[i]) || null,
+          gst: Number(gst[i]) || null,
+        });
+      }
+    }
+
+    const updateObject = {
+      name,
+      date,
+      d_date,
+      p_no,
+      add,
+      rows,
+      roman: Number(roman) || 0,
+      american: Number(american) || 0,
+      ring: Number(ring) || 0,
+      total_fab_req: Number(total_fab_req) || 0,
+      total_black_req: Number(total_black_req) || 0
+    };
+
+    // ✅ Await inside async function
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no },
+      updateObject,
+      { new: true, upsert: true }
+    );
+
+    res.render('measurefitter', {
+      no: updatedData,
+      quotation: updatedData.quotation || []
+    });
+
+  } catch (err) {
+    console.error('Error in /fitter-save:', err);
+    res.status(500).send('Failed to update measurement');
+  }
+});
+
+
 // for resubmit the quotation page 
 
 router.post('/page2', async(req,res) => {
