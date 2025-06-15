@@ -686,9 +686,7 @@ router.get('/bill2', (req,res) =>{
   res.render('bill2');
 });
 
-router.get('/bill3', (req,res) =>{
-  res.render('bill3');
-});
+
 module.exports = router;
 
 

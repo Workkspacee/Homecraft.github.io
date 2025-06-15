@@ -61,59 +61,6 @@
       appearance: auto;
     }
   </style>
-
-  <script>
-    $(document).ready(function () {
-      function calculateFabricRequirement(curtainType, width, height) {
-        if (!curtainType || curtainType.trim() === "") return 0;
-        if (curtainType.toLowerCase() === "roman") {
-          return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
-        } else {
-          return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
-        }
-      }
-
-      function updateTotals() {
-        let totalFabric = 0, totalBlackout = 0, roman = 0, american = 0, ring = 0;
-
-        for (let i = 1; i <= 20; i++) {
-          let curtainType = $(`[name="curtain${i}"]`).val();
-          let width = parseFloat($(`input[name="width${i}"]`).val()) || 0;
-          let height = parseFloat($(`input[name="height${i}"]`).val()) || 0;
-          let blackout = $(`input[name="blackout${i}"]`).val().trim();
-
-          let fabricReq = calculateFabricRequirement(curtainType, width, height);
-          fabricReq = isNaN(fabricReq) ? 0 : fabricReq;
-          $(`input[name="fabric_req${i}"]`).val(fabricReq > 0 ? fabricReq.toFixed(2) : "");
-
-          let blackoutReq = blackout !== "" ? fabricReq : 0;
-          blackoutReq = isNaN(blackoutReq) ? 0 : blackoutReq;
-          $(`input[name="blackout_req${i}"]`).val(blackout !== "" && blackoutReq > 0 ? blackoutReq.toFixed(2) : "");
-
-          totalFabric += fabricReq;
-          totalBlackout += blackoutReq;
-
-          let type = (curtainType || "").toLowerCase();
-          if (type === "roman") roman += (width * height) / 144;
-          if (type === "american") american += Math.ceil(width / 20);
-          if (type === "ring") ring += Math.ceil(width / 20);
-        }
-
-        $("#roman").val(roman.toFixed(2));
-        $("#american").val(american);
-        $("#ring").val(ring);
-        $("input[name='total_fab_req']").val(totalFabric.toFixed(2));
-        $("input[name='total_black_req']").val(totalBlackout.toFixed(2));
-      }
-
-      $(document).on("input", "input[name^='width'], input[name^='height'], input[name^='curtain'], input[name^='blackout']", function () {
-        updateTotals();
-      });
-
-      updateTotals();
-    });
-  </script>
-
 </head>
 
 <body>
@@ -278,5 +225,66 @@
         </form>
     </div>
  </div>
+ 
+ <script>
+  function calculateFabricRequirement(curtainType, width, height) {
+    if (!curtainType || curtainType.trim() === "") return 0;
+    if (curtainType.toLowerCase() === "roman") {
+      return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
+    } else {
+      return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
+    }
+  }
+
+  function updateTotals() {
+    let totalFabric = 0, totalBlackout = 0, roman = 0, american = 0, ring = 0;
+
+    const rows = document.querySelectorAll("#tableBody tr.data-row");
+
+    rows.forEach(row => {
+      const curtainType = row.querySelector('input[name="curtain[]"]')?.value || "";
+      const width = parseFloat(row.querySelector('input[name="width[]"]')?.value) || 0;
+      const height = parseFloat(row.querySelector('input[name="height[]"]')?.value) || 0;
+      const blackout = row.querySelector('input[name="blackout[]"]')?.value.trim();
+
+      const fabricReq = calculateFabricRequirement(curtainType, width, height);
+      if (!isNaN(fabricReq)) {
+        row.querySelector('input[name="fabric_req[]"]').value = fabricReq.toFixed(2);
+      }
+
+      const blackoutReq = blackout !== "" ? fabricReq : 0;
+      if (!isNaN(blackoutReq)) {
+        row.querySelector('input[name="blackout_req[]"]').value = blackoutReq > 0 ? blackoutReq.toFixed(2) : "";
+      }
+
+      totalFabric += fabricReq;
+      totalBlackout += blackoutReq;
+
+      const type = curtainType.toLowerCase();
+      if (type === "roman") roman += (width * height) / 144;
+      if (type === "american") american += Math.ceil(width / 20);
+      if (type === "ring") ring += Math.ceil(width / 20);
+    });
+
+    document.getElementById("roman").value = roman.toFixed(2);
+    document.getElementById("american").value = american;
+    document.getElementById("ring").value = ring;
+    document.querySelector('input[name="total_fab_req"]').value = totalFabric.toFixed(2);
+    document.querySelector('input[name="total_black_req"]').value = totalBlackout.toFixed(2);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const inputs = document.querySelectorAll(
+      'input[name="width[]"], input[name="height[]"], input[name="curtain[]"], input[name="blackout[]"]'
+    );
+
+    inputs.forEach(input => {
+      input.addEventListener("input", updateTotals);
+    });
+
+    updateTotals(); // Initial calculation
+  });
+</script>
+
 </body>
 </html>
