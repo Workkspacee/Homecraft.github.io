@@ -302,6 +302,7 @@
         <div class="row jumbotron">            
             <form class="login" method="post">   
                 <input type="hidden" name="redirect_to" value="measurement"><!--For using same routes but open different page-->
+                <input type="hidden" name="forback" value="backend">
                 <div class="row">                 
                     <div class="col-2 login__field">
                         <h6 align="center">Work order number : </h6>
@@ -450,10 +451,7 @@
                             </tr>
                         </tbody> 
                     </table><br/><br/>
-                    <center>
-                        <button type="submit" class="submit" formaction="/measure-save" > Save </button> <!--We should delete this both-->
-                        <button type="submit" class="submit" formaction="/measure-quotation" > Quotation </button>
-                    </center>
+                    
                     <hr>
 
                     <div class="d-flex justify-content-between align-items-center my-3">
@@ -546,6 +544,7 @@
                     <div class="text-end my-3">
                     <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/bill" > Bill </button>
+                    <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>                    
                     </div>
 
                 </div>
