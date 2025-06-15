@@ -1,4 +1,7 @@
 Change work status in all 
+
+on wrong passwords showing other attrative message
+
 1. Backend 
 
 All done
@@ -6,7 +9,7 @@ All done
 2. Backend nu measurement 
 
 add respective buttons ( save & exit or Back , print and bill )
-add selection list in room name like bedroom , hall, kitchen etc. (Last ma karvu kumar ne puchi ne)
+add selection list in room name like bedroom , hall, kitchen etc. And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend.
 ring american and roman ma colours add karva. 
