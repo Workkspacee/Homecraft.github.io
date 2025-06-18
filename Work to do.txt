@@ -4,6 +4,8 @@ on wrong passwords showing other attrative message
 
 Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya workno joiaa che ??
 
+Driver name , vehicle no database ma joiaa che khari ?
+
 1. Backend 
 
 All done
@@ -72,6 +74,7 @@ auto fill everything in it.
 and main thing print buttons 
 headings right ke left karva 
 Terms and Conditions 1 line ma karva aakhu page 1 page ma aavi javu joiaa 
+add other address for ship to field
 
 8. client page 
 
