@@ -39,7 +39,6 @@
         
         <form action="/bill" method="post">
             <nav class="details" style="display: flex; flex: 1 1 22%; min-width: 250px; justify-content: space-between; align-items: center;"> 
-                <input type="hidden" name="work_no" value="<%= no.work_no %>" readonly/>
                 <div style="padding-right: 20px;">
                     <h4>Bill To</h4><br>
                     <input type="text" class="input_field" placeholder="Name" name="name" value="<%= no.name %>" style="font-weight: 700;" />
@@ -94,7 +93,7 @@
 
                 <div style="padding-right: 40px;">
                     <h4>Ship To</h4><br>
-                    <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea>
+                    <!-- <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea> -->  
                     <br><br><br><br><br>
                 </div>
                 <div style="padding-right: 40px;">
@@ -130,7 +129,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% no.quotation.forEach((q, index) => { %>
+                    <% selectedRows.forEach((q, index) => { %>
                         <tr>
                             <td class="sr-no"><%= index + 1 %></td>
                             <td><input type="text" step="any" class="bill_table" name="material[]" value="<%= q.material || '' %>" style="font-weight: bold;"></td>
@@ -181,7 +180,7 @@
                 </tr>
                 <tr>
                     <td>SGST</td>
-                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount" style="width: 30%;"></td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_sgst" style="width: 30%;"></td>
                     <td>2.5%</td>
                     <td>₹ 936.50</td>
                     <td>Sub Total</td>
@@ -193,9 +192,9 @@
                 </tr>
                 <tr>
                     <td>CGST</td>
-                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount" style="width: 80%;"></td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_cgst" style="width: 30%;"></td>
                     <td>2.5%</td>
-                    <td>₹ 936.50</td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="cgst_amount" style="width: 30%;"></td>
                     <th style="background-color: #eee;">Total</th>
                     <td></td>
                     <td></td>
@@ -324,34 +323,35 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <!-- To calculate total taxable amount-->
- <script>
-document.addEventListener('DOMContentLoaded', function () {
-    function updateTaxableAmount() {
-        const qtyInputs = document.querySelectorAll('.qty');
-        const rateInputs = document.querySelectorAll('.q_rate');
-        let totalTaxable = 0;
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTaxableAmount() {
+            const qtyInputs = document.querySelectorAll('.qty');
+            const rateInputs = document.querySelectorAll('.q_rate');
+            let totalTaxable = 0;
 
-        for (let i = 0; i < qtyInputs.length; i++) {
-            const qty = parseFloat(qtyInputs[i].value);
-            const rate = parseFloat(rateInputs[i].value);
-            if (!isNaN(qty) && !isNaN(rate)) {
-                totalTaxable += qty * rate;
+            for (let i = 0; i < qtyInputs.length; i++) {
+                const qty = parseFloat(qtyInputs[i].value);
+                const rate = parseFloat(rateInputs[i].value);
+                if (!isNaN(qty) && !isNaN(rate)) {
+                    totalTaxable += qty * rate;
+                }
             }
+
+            // Update both input fields
+            const sgstField = document.getElementById('taxable_amount_sgst');
+            const cgstField = document.getElementById('taxable_amount_cgst');
+
+            if (sgstField) sgstField.value = totalTaxable.toFixed(2);
+            if (cgstField) cgstField.value = totalTaxable.toFixed(2);
         }
 
-        document.getElementById('taxable_amount').value = totalTaxable.toFixed(2);
-    }
+        updateTaxableAmount();
 
-    // Initial calculation
-    updateTaxableAmount();
-
-    // Recalculate on any change
-    document.querySelectorAll('.qty, .q_rate').forEach(input => {
-        input.addEventListener('input', updateTaxableAmount);
+        document.querySelectorAll('.qty, .q_rate').forEach(input => {
+            input.addEventListener('input', updateTaxableAmount);
+        });
     });
-});
 </script>
-
-
 
 </html>
