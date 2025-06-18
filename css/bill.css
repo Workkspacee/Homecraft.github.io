@@ -19,6 +19,7 @@ body{
     padding: 30px;
     border: 1px solid #eee;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
 }
 
 textarea{
@@ -31,16 +32,17 @@ textarea{
 
 select{
     appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 
-  border: none;
-  background: none;
-  font-size: 14px;
-  padding: 0;
-  margin: 0;
-  width: auto;
+    border: none;
+    background: none;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    width: auto;
 }
+
 .but{
     width: 15%;
     padding: 0.622rem;
@@ -56,7 +58,6 @@ select{
 .input_field {
     position: relative;
 	border: none;
-	border-bottom: 0.125rem solid #D1D1D4;
 	background: none;
 	padding: 0.063rem;
 	padding-left: 0.063rem;
@@ -66,10 +67,35 @@ select{
     border-bottom: none;
 }
 
+.bill_table{
+    position: relative;
+	border: none;
+    font-size: 16px;
+	transition: .2s;
+    border-bottom: none;
+}
+
+/* to remove the up/down arrows of the type=number in input tag*/
+/* Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none; /* ✅ Standard property */
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield; /* ✅ Standard property */
+}
+
 .bill{
+    width: auto;
     border: 1px solid black;
-    width: 100%;
     border-collapse: collapse;
+    table-layout: auto;
+    overflow-x: auto;
 }
 
 table.bill th{
@@ -81,7 +107,6 @@ table.bill th{
 table.bill td{
     border: 1px solid black;
     padding: 8px;
-    text-align: right;
 }
 
 table.tax td{

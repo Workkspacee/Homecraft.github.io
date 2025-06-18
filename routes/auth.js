@@ -620,29 +620,42 @@ router.post('/admin/search', async (req, res) => {
 
 
 
-//For updating and saving data in detail page (admin)
+router.post('/bill', async (req, res) => {
+  try {
+    const { work_no, include_in_bill = [] } = req.body;
 
-
-router.post('/bill', async(req,res) => {
-  try{
-    const {work_no} = req.body;
-    const body = req.body;
-
+    // Save all form data to DB
     const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-        body ,
+      { work_no },
+      req.body,
       { new: true }
     );
 
-    const no = await Data.findOne({ work_no });
-    if (!no) {
-      return res.status(404).send('Work order not found');
-    }
-    res.render('bill', { no });
+    if (!updatedData) return res.status(404).send('Work order not found');
+
+    // Get full quotation array from updatedData (not req.body)
+    const allQuotations = updatedData.quotation || [];
+
+    // Always treat checkboxes as an array
+    const selectedIndices = Array.isArray(include_in_bill)
+      ? include_in_bill
+      : [include_in_bill];
+
+    // Parse to integers and safely map selected rows
+    const selectedRows = selectedIndices
+      .map(i => parseInt(i))
+      .filter(i => !isNaN(i) && i >= 0 && i < allQuotations.length)
+      .map(i => allQuotations[i]);
+
+    // Render the bill page with full data + only selected quotation rows
+    res.render('bill', {
+      no: updatedData,
+      selectedRows
+    });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating order');
+    console.error('Bill route error:', error);
+    res.status(500).send('Error generating bill');
   }
 });
 

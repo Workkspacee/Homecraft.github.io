@@ -39,7 +39,6 @@
         
         <form action="/bill" method="post">
             <nav class="details" style="display: flex; flex: 1 1 22%; min-width: 250px; justify-content: space-between; align-items: center;"> 
-                <input type="hidden" name="work_no" value="<%= no.work_no %>" readonly/>
                 <div style="padding-right: 20px;">
                     <h4>Bill To</h4><br>
                     <input type="text" class="input_field" placeholder="Name" name="name" value="<%= no.name %>" style="font-weight: 700;" />
@@ -94,14 +93,14 @@
 
                 <div style="padding-right: 40px;">
                     <h4>Ship To</h4><br>
-                    <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea>
+                    <!-- <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea> -->  
                     <br><br><br><br><br>
                 </div>
                 <div style="padding-right: 40px;">
                     <h4>Transportation Details</h4><br>
                     <label>Driver Name: <input type="text" name="driver_name" class="input_field" placeholder="Name"/></label><br>
                     <label>Vehicle Number: <input type="text" name="v_no"  class="input_field" placeholder="GJ05FR9362"/></label><br>
-                    <label>Delivery Date: <input type="date" name="d_date"  class="input_field" placeholder="date"/></label><br>
+                    <label>Delivery Date: <input type="date" name="d_date"  class="input_field" placeholder="date" /></label><br>
                     <label>Location:<input type="text" name="loc"  class="input_field" placeholder="Surat"></label><br>
                     <label>LR Number: <input type="text"  name="lr_no" class="input_field"></label>
                     <br><br>
@@ -109,14 +108,14 @@
                 <div> 
                     <h4>Invoice Details</h4><br>
                     <label>Invoice No:<input type="text" name="work_no" class="input_field" value="<%= no.work_no %>" readonly></label><br>
-                    <label>Date: <input type="date" name="date" class="input_field"></label><br>
+                    <label>Date: <input type="date" name="d_date" class="input_field"></label><br>
                     <label>Place of supply:<input type="text"  name="supply_place" class="input_field"></label><br>
                     <label>Due Date: <input type="date"  name="due_date" class="input_field"></label>
                     <br><br><br><br>
                 </div>
             </nav>
 
-            <table class="bill" cellspacing="5">
+            <table class="bill table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -130,18 +129,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <% no.quotation.forEach((q, index) => { %>
+                    <% selectedRows.forEach((q, index) => { %>
                         <tr>
                             <td class="sr-no"><%= index + 1 %></td>
-                            <td><input type="text" step="any" name="material[]" value="<%= q.material || '' %>"></td>
-                            <td><input type="text" step="any" name="q_hsn[]" value="<%= q.q_hsn || '' %>"></td>
-                            <td><input type="number" step="any" name="qty[]" value="<%= q.qty || '' %>"></td>
+                            <td><input type="text" step="any" class="bill_table" name="material[]" value="<%= q.material || '' %>" style="font-weight: bold;"></td>
+                            <td><input type="text" step="any" class="bill_table" name="q_hsn[]" value="<%= q.q_hsn || '' %>" style="width: 100%;"></td>
+                            <td><input type="number" step="any" class="bill_table qty" name="qty[]" value="<%= q.qty || '' %>" style="width: 100%;"></td>
                             <td>Mtr</td>
-                            <td><input type="number" step="any" name="q_rate[]" value="<%= q.q_rate || '' %>"></td>
-                            <td><input type="number" step="any" name="q_gst[]" value="<%= q.q_gst || '' %>"></td>
-                            <td><input type="number" step="any" name="grand_total[]" value="<%= q.grand_total || '' %>"></td>
+                            <td><input type="number" step="any" class="bill_table q_rate" name="q_rate[]" value="<%= q.q_rate || '' %>" style="width: 100%;"></td>
+                            <td><input type="number" step="any" class="bill_table" name="q_gst[]" value="<%= q.q_gst || '' %>" style="width: 100%;"></td>
+                            <td><input type="number" step="any" class="bill_table grand_total" name="grand_total[]" value="<%= q.grand_total || '' %>" style="width: 100%;"></td>
                         </tr>
                     <% }) %>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="font-weight: bold;">Total</td>
+                        <td></td>
+                        <td><input type="number" step="any" class="bill_table" name="quantity_total" style="width: 100%;"></td>
+                        <td></td>
+                        <td></td>
+                        <td><input type="number" step="any" class="bill_table" name="gst_total" style="width: 100%;"></td>
+                        <td><input type="number" step="any" class="bill_table" name="amount" id="amount_total" style="width: 100%;"></td>
+                    </tr>  <!--amount_total aa use karvani jarur nathi use Total Grand Total same j che-->
                 </tbody>
             </table><br>
 
@@ -161,7 +180,7 @@
                 </tr>
                 <tr>
                     <td>SGST</td>
-                    <td>₹ 37,460.00</td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_sgst" style="width: 30%;"></td>
                     <td>2.5%</td>
                     <td>₹ 936.50</td>
                     <td>Sub Total</td>
@@ -169,13 +188,13 @@
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td>₹ 39,333.00</td>
+                    <td>₹ 39,333.00</td> 
                 </tr>
                 <tr>
                     <td>CGST</td>
-                    <td>₹ 37,460.00</td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_cgst" style="width: 30%;"></td>
                     <td>2.5%</td>
-                    <td>₹ 936.50</td>
+                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="cgst_amount" style="width: 30%;"></td>
                     <th style="background-color: #eee;">Total</th>
                     <td></td>
                     <td></td>
@@ -247,4 +266,92 @@
     </div> -->
 
 </body>
+
+<!-- To calculate total of quantity-->
+<script>
+  function calculateQuantityTotal() {
+    let quantityInputs = document.querySelectorAll('input[name="qty[]"]');
+    let total = 0;
+
+    quantityInputs.forEach(input => {
+      const value = parseFloat(input.value);
+      if (!isNaN(value)) {
+        total += value;
+      }
+    });
+
+    const totalInput = document.querySelector('input[name="quantity_total"]');
+    if (totalInput) {
+      totalInput.value = total.toFixed(2); // Optional: round to 2 decimal places
+    }
+  }
+
+  // Recalculate on input change
+  document.addEventListener('input', function(e) {
+    if (e.target.name === 'qty[]') {
+      calculateQuantityTotal();
+    }
+  });
+
+  // Also run on page load
+  window.addEventListener('DOMContentLoaded', calculateQuantityTotal);
+</script>
+
+<!-- To calculate total amount-->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    function updateAmountTotal() {
+        const grandTotals = document.querySelectorAll('.grand_total');
+        let total = 0;
+        grandTotals.forEach(input => {
+            const value = parseFloat(input.value);
+            if (!isNaN(value)) {
+                total += value;
+            }
+        });
+        document.getElementById('amount_total').value = total.toFixed(2);
+    }
+
+    // Run once on load
+    updateAmountTotal();
+
+    // Update total on input change
+    document.querySelectorAll('.grand_total').forEach(input => {
+        input.addEventListener('input', updateAmountTotal);
+    });
+});
+</script>
+
+<!-- To calculate total taxable amount-->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function updateTaxableAmount() {
+            const qtyInputs = document.querySelectorAll('.qty');
+            const rateInputs = document.querySelectorAll('.q_rate');
+            let totalTaxable = 0;
+
+            for (let i = 0; i < qtyInputs.length; i++) {
+                const qty = parseFloat(qtyInputs[i].value);
+                const rate = parseFloat(rateInputs[i].value);
+                if (!isNaN(qty) && !isNaN(rate)) {
+                    totalTaxable += qty * rate;
+                }
+            }
+
+            // Update both input fields
+            const sgstField = document.getElementById('taxable_amount_sgst');
+            const cgstField = document.getElementById('taxable_amount_cgst');
+
+            if (sgstField) sgstField.value = totalTaxable.toFixed(2);
+            if (cgstField) cgstField.value = totalTaxable.toFixed(2);
+        }
+
+        updateTaxableAmount();
+
+        document.querySelectorAll('.qty, .q_rate').forEach(input => {
+            input.addEventListener('input', updateTaxableAmount);
+        });
+    });
+</script>
+
 </html>

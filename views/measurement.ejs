@@ -488,6 +488,7 @@
                                     <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
+                                        <input type="checkbox" class="include-in-bill" name="include_in_bill[]">
                                     </td>
                                 </tr>
                             </tbody>
@@ -509,6 +510,7 @@
                                         <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
+                                        <input type="checkbox" class="include-in-bill" name="include_in_bill[]" value="<%= index %>">
                                         </td>
                                     </tr>
                                     <% }) %>
@@ -527,6 +529,7 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                             <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
+                                            <input type="checkbox" class="include-in-bill" name="include_in_bill[]" value="<%= index %>">                                    
                                         </td>
                                     </tr>
                                 <% } %>
@@ -863,6 +866,24 @@ let fabricData = [];
         updateSrNo();
     });
 
+    //For Billing process with checkbox 
+    function updateBillCheckboxIndices() {
+    $('#quotationTableBody tr').each(function (i) {
+        const checkbox = $(this).find("input.include-in-bill");
+        if (checkbox.length) {
+        checkbox.val(i);  // Always set correct index
+        }
+    });
+    }
+
+    $(document).ready(function () {
+    updateBillCheckboxIndices();
+
+    $(document).on('click', '.add-quotation-row, .delete-quotation-row', function () {
+        setTimeout(updateBillCheckboxIndices, 10); // Delay ensures DOM is updated first
+    });
+    });
+    
 </script>
 
 </html>
