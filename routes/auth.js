@@ -396,6 +396,8 @@ router.post('/back', async(req,res) => {
       res.render('tailor', { no });
     } else if (forback === 'fiter') {
       res.render('fiter', { no });
+    } else if (forback === 'detail') {
+      res.redirect('/admin');
     } else {
       res.render('backend', { no });
     }
