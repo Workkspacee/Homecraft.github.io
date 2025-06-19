@@ -56,11 +56,16 @@ total parts and total fabric tailor ne joise ??
 
 6. Admin 
 
-
+search oder by name
+work order detail page
+admin page error: 
+    1.getting suggestion of the seached order number only and new entered order, it is not displaying old orders.
+    2.while searching with name , only one ouput is displyed
  
 6A. details page
 
-selection for bill in quotation table
+links for bill remaining
+Back or home button for that maybe use /admin
 Admin can changes any details so make every fields not readonly.
 
 7. 2 bill pages 
