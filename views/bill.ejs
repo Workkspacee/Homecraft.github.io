@@ -7,6 +7,151 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="/bill.css">
+    <script>
+    function updateGSTAndAmounts() {
+        const stateValue = document.getElementById('stateSelect').value;
+        const isGujarat = stateValue.startsWith('24'); // Gujarat
+
+        const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
+        const rateInputs = document.querySelectorAll('input[name="q_rate[]"]');
+        const gstPercentInputs = document.querySelectorAll('input[name="q_gst[]"]');
+        const gstAmtInputs = document.querySelectorAll('input[name="gst_amount[]"]');
+        const grandTotalInputs = document.querySelectorAll('input[name="grand_total[]"]');
+        const gstDisplaySpans = document.querySelectorAll('.gst-display');
+
+        let gstTotal = 0;
+        let amountTotal = 0;
+        let quantityTotal = 0;
+
+        for (let i = 0; i < qtyInputs.length; i++) {
+            const qty = parseFloat(qtyInputs[i].value) || 0;
+            const rate = parseFloat(rateInputs[i].value) || 0;
+            const gstPercent = parseFloat(gstPercentInputs[i].value) || 0;
+
+            const base = qty * rate;
+            let gstAmount = (base * gstPercent) / 100;
+            let totalAmount = base + gstAmount;
+
+            if (!isGujarat) {
+                gstAmount *= 2;
+                totalAmount = base + gstAmount;
+
+                if (gstDisplaySpans[i]) {
+                    gstDisplaySpans[i].textContent = `${gstPercent}% + ${gstPercent}% = ${gstPercent * 2}%`;
+                }
+            } else {
+                if (gstDisplaySpans[i]) {
+                    gstDisplaySpans[i].textContent = `${gstPercent}%`;
+                }
+            }
+
+            gstAmtInputs[i].value = gstAmount.toFixed(2);
+            grandTotalInputs[i].value = totalAmount.toFixed(2);
+
+            gstTotal += gstAmount;
+            amountTotal += totalAmount;
+            quantityTotal += qty;
+        }
+
+        // Update total fields
+        const gstTotalField = document.getElementById('gst_total');
+        const amountTotalField1 = document.querySelector('input[name="amount"]');
+        const amountTotalField2 = document.getElementById('amount_total');
+        const amountTotalSummary = document.getElementById('amount_total_summary');
+
+        if (gstTotalField) gstTotalField.value = gstTotal.toFixed(2);
+        if (amountTotalField1) amountTotalField1.value = amountTotal.toFixed(2);
+        if (amountTotalField2) amountTotalField2.value = amountTotal.toFixed(2);
+        if (amountTotalSummary) amountTotalSummary.value = amountTotal.toFixed(2);
+
+        const qtyTotalInput = document.querySelector('input[name="quantity_total"]');
+        if (qtyTotalInput) qtyTotalInput.value = quantityTotal.toFixed(2);
+
+        updateFinalTotal();
+        updateTaxBreakdown();
+    }
+
+    function updateFinalTotal() {
+        const subTotal = parseFloat(document.getElementById('amount_total')?.value) || 0;
+        const roundOff = parseFloat(document.getElementById('round_off')?.value) || 0;
+        const final = subTotal + roundOff;
+        const finalTotalInput = document.getElementById('final_total');
+        if (finalTotalInput) finalTotalInput.value = final.toFixed(2);
+    }
+
+    function updateTaxBreakdown() {
+        const state = document.getElementById('stateSelect').value;
+        const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
+        const rateInputs = document.querySelectorAll('input[name="q_rate[]"]');
+        const gstInputs = document.querySelectorAll('input[name="q_gst[]"]');
+
+        const taxMap = {}; // Key: `${type}-${rate}`, Value: {taxable, taxAmt}
+        const fullKey = (type, rate) => `${type}-${rate}`;
+
+        for (let i = 0; i < qtyInputs.length; i++) {
+            const qty = parseFloat(qtyInputs[i].value);
+            const rate = parseFloat(rateInputs[i].value);
+            const gst = parseFloat(gstInputs[i].value);
+
+            if (!isNaN(qty) && !isNaN(rate) && !isNaN(gst)) {
+                const taxable = qty * rate;
+
+                if (state === '24') {
+                    const halfRate = gst / 2;
+                    const halfTax = (taxable * halfRate) / 100;
+
+                    [['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
+                        const key = fullKey(type, r);
+                        if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
+                        taxMap[key].taxable += taxable;
+                        taxMap[key].taxAmt += t;
+                    });
+                } else {
+                    const fullTax = (taxable * gst) / 100;
+                    const halfRate = gst / 2;
+                    const halfTax = (taxable * halfRate) / 100;
+
+                    [['IGST', gst, fullTax], ['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
+                        const key = fullKey(type, r);
+                        if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
+                        taxMap[key].taxable += taxable;
+                        taxMap[key].taxAmt += t;
+                    });
+                }
+            }
+        }
+
+        // Render breakdown table
+        const tbody = document.getElementById('taxBreakdownBody');
+        if (tbody) {
+            tbody.innerHTML = '';
+            Object.values(taxMap).forEach(entry => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${entry.type}</td>
+                    <td>${entry.taxable.toFixed(2)}</td>
+                    <td>${entry.rate.toFixed(2)}%</td>
+                    <td>${entry.taxAmt.toFixed(2)}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+    }
+
+    // Attach events
+    document.addEventListener('DOMContentLoaded', () => {
+        const inputs = document.querySelectorAll('input[name="qty[]"], input[name="q_rate[]"], input[name="q_gst[]"]');
+        inputs.forEach(input => input.addEventListener('input', updateGSTAndAmounts));
+
+        document.getElementById('stateSelect').addEventListener('change', updateGSTAndAmounts);
+        document.getElementById('round_off').addEventListener('input', updateFinalTotal);
+
+        // Initial calculation
+        updateGSTAndAmounts();
+    });
+    </script>
+
+
 </head>
 <body>
 
@@ -46,48 +191,49 @@
                     <textarea name="add" cols="20"  placeholder="Address"><%= no.add %></textarea><br>
                     <label>Contact No: <input type="tel" class="input_field" maxlength="10" name="p_no" value="<%= no.p_no %>"></label><br>
                     <label>State: 
-                        <select name="state" required>
+                        <select name="state" id="stateSelect" required>
                             <option value="">-- Select State --</option>
-                            <option value="01 - Jammu and Kashmir" <%= no.state === '01 - Jammu and Kashmir' ? 'selected' : '' %>>1 - Jammu and Kashmir</option>
-                            <option value="02 - Himachal Pradesh" <%= no.state === '02 - Himachal Pradesh' ? 'selected' : '' %>>2 - Himachal Pradesh</option>
-                            <option value="03 - Punjab" <%= no.state === '03 - Punjab' ? 'selected' : '' %>>3 - Punjab</option>
-                            <option value="04 - Chandigarh" <%= no.state === '04 - Chandigarh' ? 'selected' : '' %>>4 - Chandigarh</option>
-                            <option value="05 - Uttarakhand" <%= no.state === '05 - Uttarakhand' ? 'selected' : '' %>>5 - Uttarakhand</option>
-                            <option value="06 - Haryana" <%= no.state === '06 - Haryana' ? 'selected' : '' %>>6 - Haryana</option>
-                            <option value="07 - Delhi" <%= no.state === '07 - Delhi' ? 'selected' : '' %>>7 - Delhi</option>
-                            <option value="08 - Rajasthan" <%= no.state === '08 - Rajasthan' ? 'selected' : '' %>>8 - Rajasthan</option>
-                            <option value="09 - Uttar Pradesh" <%= no.state === '09 - Uttar Pradesh' ? 'selected' : '' %>>9 - Uttar Pradesh</option>
-                            <option value="10 - Bihar" <%= no.state === '10 - Bihar' ? 'selected' : '' %>>10 - Bihar</option>
-                            <option value="11 - Sikkim" <%= no.state === '11 - Sikkim' ? 'selected' : '' %>>11 - Sikkim</option>
-                            <option value="12 - Arunachal Pradesh" <%= no.state === '12 - Arunachal Pradesh' ? 'selected' : '' %>>12 - Arunachal Pradesh</option>
-                            <option value="13 - Nagaland" <%= no.state === '13 - Nagaland' ? 'selected' : '' %>>13 - Nagaland</option>
-                            <option value="14 - Manipur" <%= no.state === '14 - Manipur' ? 'selected' : '' %>>14 - Manipur</option>
-                            <option value="15 - Mizoram" <%= no.state === '15 - Mizoram' ? 'selected' : '' %>>15 - Mizoram</option>
-                            <option value="16 - Tripura" <%= no.state === '16 - Tripura' ? 'selected' : '' %>>16 - Tripura</option>
-                            <option value="17 - Meghalaya" <%= no.state === '17 - Meghalaya' ? 'selected' : '' %>>17 - Meghalaya</option>
-                            <option value="18 - Assam" <%= no.state === '18 - Assam' ? 'selected' : '' %>>18 - Assam</option>
-                            <option value="19 - West Bengal" <%= no.state === '19 - West Bengal' ? 'selected' : '' %>>19 - West Bengal</option>
-                            <option value="20 - Jharkhand" <%= no.state === '20 - Jharkhand' ? 'selected' : '' %>>20 - Jharkhand</option>
-                            <option value="21 - Odisha" <%= no.state === '21 - Odisha' ? 'selected' : '' %>>21 - Odisha</option>
-                            <option value="22 - Chhattisgarh" <%= no.state === '22 - Chhattisgarh' ? 'selected' : '' %>>22 - Chhattisgarh</option>
-                            <option value="23 - Madhya Pradesh" <%= no.state === '23 - Madhya Pradesh' ? 'selected' : '' %>>23 - Madhya Pradesh</option>
-                            <option value="24 - Gujarat" <%= no.state === '24 - Gujarat' ? 'selected' : '' %>>24 - Gujarat</option>
-                            <option value="25 - Daman and Diu" <%= no.state === '25 - Daman and Diu' ? 'selected' : '' %>>25 - Daman and Diu</option>
-                            <option value="26 - Dadra and Nagar Haveli" <%= no.state === '26 - Dadra and Nagar Haveli' ? 'selected' : '' %>>26 - Dadra and Nagar Haveli</option>
-                            <option value="27 - Maharashtra" <%= no.state === '27 - Maharashtra' ? 'selected' : '' %>>27 - Maharashtra</option>
-                            <option value="28 - Andhra Pradesh (Old)" <%= no.state === '28 - Andhra Pradesh (Old)' ? 'selected' : '' %>>28 - Andhra Pradesh (Old)</option>
-                            <option value="29 - Karnataka" <%= no.state === '29 - Karnataka' ? 'selected' : '' %>>29 - Karnataka</option>
-                            <option value="30 - Goa" <%= no.state === '30 - Goa' ? 'selected' : '' %>>30 - Goa</option>
-                            <option value="31 - Lakshadweep" <%= no.state === '31 - Lakshadweep' ? 'selected' : '' %>>31 - Lakshadweep</option>
-                            <option value="32 - Kerala" <%= no.state === '32 - Kerala' ? 'selected' : '' %>>32 - Kerala</option>
-                            <option value="33 - Tamil Nadu" <%= no.state === '33 - Tamil Nadu' ? 'selected' : '' %>>33 - Tamil Nadu</option>
-                            <option value="34 - Puducherry" <%= no.state === '34 - Puducherry' ? 'selected' : '' %>>34 - Puducherry</option>
-                            <option value="35 - Andaman and Nicobar Islands" <%= no.state === '35 - Andaman and Nicobar Islands' ? 'selected' : '' %>>35 - Andaman and Nicobar Islands</option>
-                            <option value="36 - Telangana" <%= no.state === '36 - Telangana' ? 'selected' : '' %>>36 - Telangana</option>
-                            <option value="37 - Andhra Pradesh (New)" <%= no.state === '37 - Andhra Pradesh (New)' ? 'selected' : '' %>>37 - Andhra Pradesh (New)</option>
-                            <option value="38 - Ladakh" <%= no.state === '38 - Ladakh' ? 'selected' : '' %>>38 - Ladakh</option>
+                            <option value="01" <%= no.state === '01' ? 'selected' : '' %>>01 - Jammu and Kashmir</option>
+                            <option value="02" <%= no.state === '02' ? 'selected' : '' %>>02 - Himachal Pradesh</option>
+                            <option value="03" <%= no.state === '03' ? 'selected' : '' %>>03 - Punjab</option>
+                            <option value="04" <%= no.state === '04' ? 'selected' : '' %>>04 - Chandigarh</option>
+                            <option value="05" <%= no.state === '05' ? 'selected' : '' %>>05 - Uttarakhand</option>
+                            <option value="06" <%= no.state === '06' ? 'selected' : '' %>>06 - Haryana</option>
+                            <option value="07" <%= no.state === '07' ? 'selected' : '' %>>07 - Delhi</option>
+                            <option value="08" <%= no.state === '08' ? 'selected' : '' %>>08 - Rajasthan</option>
+                            <option value="09" <%= no.state === '09' ? 'selected' : '' %>>09 - Uttar Pradesh</option>
+                            <option value="10" <%= no.state === '10' ? 'selected' : '' %>>10 - Bihar</option>
+                            <option value="11" <%= no.state === '11' ? 'selected' : '' %>>11 - Sikkim</option>
+                            <option value="12" <%= no.state === '12' ? 'selected' : '' %>>12 - Arunachal Pradesh</option>
+                            <option value="13" <%= no.state === '13' ? 'selected' : '' %>>13 - Nagaland</option>
+                            <option value="14" <%= no.state === '14' ? 'selected' : '' %>>14 - Manipur</option>
+                            <option value="15" <%= no.state === '15' ? 'selected' : '' %>>15 - Mizoram</option>
+                            <option value="16" <%= no.state === '16' ? 'selected' : '' %>>16 - Tripura</option>
+                            <option value="17" <%= no.state === '17' ? 'selected' : '' %>>17 - Meghalaya</option>
+                            <option value="18" <%= no.state === '18' ? 'selected' : '' %>>18 - Assam</option>
+                            <option value="19" <%= no.state === '19' ? 'selected' : '' %>>19 - West Bengal</option>
+                            <option value="20" <%= no.state === '20' ? 'selected' : '' %>>20 - Jharkhand</option>
+                            <option value="21" <%= no.state === '21' ? 'selected' : '' %>>21 - Odisha</option>
+                            <option value="22" <%= no.state === '22' ? 'selected' : '' %>>22 - Chhattisgarh</option>
+                            <option value="23" <%= no.state === '23' ? 'selected' : '' %>>23 - Madhya Pradesh</option>
+                            <option value="24" <%= no.state === '24' ? 'selected' : '' %>>24 - Gujarat</option>
+                            <option value="25" <%= no.state === '25' ? 'selected' : '' %>>25 - Daman and Diu</option>
+                            <option value="26" <%= no.state === '26' ? 'selected' : '' %>>26 - Dadra and Nagar Haveli</option>
+                            <option value="27" <%= no.state === '27' ? 'selected' : '' %>>27 - Maharashtra</option>
+                            <option value="28" <%= no.state === '28' ? 'selected' : '' %>>28 - Andhra Pradesh (Old)</option>
+                            <option value="29" <%= no.state === '29' ? 'selected' : '' %>>29 - Karnataka</option>
+                            <option value="30" <%= no.state === '30' ? 'selected' : '' %>>30 - Goa</option>
+                            <option value="31" <%= no.state === '31' ? 'selected' : '' %>>31 - Lakshadweep</option>
+                            <option value="32" <%= no.state === '32' ? 'selected' : '' %>>32 - Kerala</option>
+                            <option value="33" <%= no.state === '33' ? 'selected' : '' %>>33 - Tamil Nadu</option>
+                            <option value="34" <%= no.state === '34' ? 'selected' : '' %>>34 - Puducherry</option>
+                            <option value="35" <%= no.state === '35' ? 'selected' : '' %>>35 - Andaman and Nicobar Islands</option>
+                            <option value="36" <%= no.state === '36' ? 'selected' : '' %>>36 - Telangana</option>
+                            <option value="37" <%= no.state === '37' ? 'selected' : '' %>>37 - Andhra Pradesh (New)</option>
+                            <option value="38" <%= no.state === '38' ? 'selected' : '' %>>38 - Ladakh</option>
                         </select>
                     </label>
+
                     <br><br>
                 </div>
 
@@ -135,9 +281,9 @@
                             <td><input type="text" step="any" class="bill_table" name="material[]" value="<%= q.material || '' %>" style="font-weight: bold;"></td>
                             <td><input type="text" step="any" class="bill_table" name="q_hsn[]" value="<%= q.q_hsn || '' %>" style="width: 100%;"></td>
                             <td><input type="number" step="any" class="bill_table qty" name="qty[]" value="<%= q.qty || '' %>" style="width: 100%;"></td>
-                            <td>Mtr</td>
+                            <td>Mtr</td>.. 
                             <td><input type="number" step="any" class="bill_table q_rate" name="q_rate[]" value="<%= q.q_rate || '' %>" style="width: 100%;"></td>
-                            <td><input type="number" step="any" class="bill_table" name="q_gst[]" value="<%= q.q_gst || '' %>" style="width: 100%;"></td>
+                            <td><input type="hidden" step="any" class="bill_table" name="q_gst[]" value="<%= q.q_gst || '' %>" style="width: 100%;"><span class="gst-display"></span> RS ( )<input type="number" name="gst_amount[]" class="gst_amount bill_table" readonly></td>
                             <td><input type="number" step="any" class="bill_table grand_total" name="grand_total[]" value="<%= q.grand_total || '' %>" style="width: 100%;"></td>
                         </tr>
                     <% }) %>
@@ -158,53 +304,44 @@
                         <td><input type="number" step="any" class="bill_table" name="quantity_total" style="width: 100%;"></td>
                         <td></td>
                         <td></td>
-                        <td><input type="number" step="any" class="bill_table" name="gst_total" style="width: 100%;"></td>
+                        <td><input type="number" step="any" class="bill_table" id="gst_total" name="gst_total" style="width: 100%;"></td>
                         <td><input type="number" step="any" class="bill_table" name="amount" id="amount_total" style="width: 100%;"></td>
-                    </tr>  <!--amount_total aa use karvani jarur nathi use Total Grand Total same j che-->
+                    </tr>  
                 </tbody>
             </table><br>
 
-            <!--dont know how to make this table-->
-            <table class="tax" style="width: 100%;">
-                <tr>
-                    <th>Tax Type</th>
-                    <th>Taxable amount</th>
-                    <th>Rate</th>
-                    <th>Tax amount</th>
-                    <th>Amounts</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>SGST</td>
-                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_sgst" style="width: 30%;"></td>
-                    <td>2.5%</td>
-                    <td>₹ 936.50</td>
-                    <td>Sub Total</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>₹ 39,333.00</td> 
-                </tr>
-                <tr>
-                    <td>CGST</td>
-                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="taxable_amount_cgst" style="width: 30%;"></td>
-                    <td>2.5%</td>
-                    <td><input type="number" step="any" class="bill_table" name="taxable_amount" id="cgst_amount" style="width: 30%;"></td>
-                    <th style="background-color: #eee;">Total</th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td style="background-color: #eee;">₹ 39,333.00</td> 
-                </tr>
-                <tr></tr>
-                <tr></tr>
-            </table><br>
+            <div style="display: flex; align-items: flex-start; gap: 20px;">
+                <table class="tax" id="taxBreakdownTable" style="width: 60%;">
+                    <thead>
+                        <tr>
+                            <th>Tax Type</th>
+                            <th>Taxable Amount</th>
+                            <th>Rate</th>
+                            <th>Tax Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taxBreakdownBody">
+                        
+                    </tbody>
+                </table>
+                <table class="tax" style="width: 35%; min-width: 250px;">
+                    <tbody>
+                    <tr>
+                        <td style="text-align: right;"><strong>Sub Total (₹):</strong></td>
+                        <td><input type="number" id="amount_total_summary" name="amount_total" readonly class="form-control" style="width: 100%;" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right;"><strong>Round Off (₹):</strong></td>
+                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control" style="width: 100%;" /></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: right; border-top: 2px solid black;"><strong>Final Total (₹):</strong></td>
+                        <td><input type="number" id="final_total" name="final_total" readonly class="form-control" style="width: 100%; font-weight: bold;" /></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
             <table class="ivoice_words">
                 <tr>
@@ -267,91 +404,5 @@
 
 </body>
 
-<!-- To calculate total of quantity-->
-<script>
-  function calculateQuantityTotal() {
-    let quantityInputs = document.querySelectorAll('input[name="qty[]"]');
-    let total = 0;
-
-    quantityInputs.forEach(input => {
-      const value = parseFloat(input.value);
-      if (!isNaN(value)) {
-        total += value;
-      }
-    });
-
-    const totalInput = document.querySelector('input[name="quantity_total"]');
-    if (totalInput) {
-      totalInput.value = total.toFixed(2); // Optional: round to 2 decimal places
-    }
-  }
-
-  // Recalculate on input change
-  document.addEventListener('input', function(e) {
-    if (e.target.name === 'qty[]') {
-      calculateQuantityTotal();
-    }
-  });
-
-  // Also run on page load
-  window.addEventListener('DOMContentLoaded', calculateQuantityTotal);
-</script>
-
-<!-- To calculate total amount-->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    function updateAmountTotal() {
-        const grandTotals = document.querySelectorAll('.grand_total');
-        let total = 0;
-        grandTotals.forEach(input => {
-            const value = parseFloat(input.value);
-            if (!isNaN(value)) {
-                total += value;
-            }
-        });
-        document.getElementById('amount_total').value = total.toFixed(2);
-    }
-
-    // Run once on load
-    updateAmountTotal();
-
-    // Update total on input change
-    document.querySelectorAll('.grand_total').forEach(input => {
-        input.addEventListener('input', updateAmountTotal);
-    });
-});
-</script>
-
-<!-- To calculate total taxable amount-->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        function updateTaxableAmount() {
-            const qtyInputs = document.querySelectorAll('.qty');
-            const rateInputs = document.querySelectorAll('.q_rate');
-            let totalTaxable = 0;
-
-            for (let i = 0; i < qtyInputs.length; i++) {
-                const qty = parseFloat(qtyInputs[i].value);
-                const rate = parseFloat(rateInputs[i].value);
-                if (!isNaN(qty) && !isNaN(rate)) {
-                    totalTaxable += qty * rate;
-                }
-            }
-
-            // Update both input fields
-            const sgstField = document.getElementById('taxable_amount_sgst');
-            const cgstField = document.getElementById('taxable_amount_cgst');
-
-            if (sgstField) sgstField.value = totalTaxable.toFixed(2);
-            if (cgstField) cgstField.value = totalTaxable.toFixed(2);
-        }
-
-        updateTaxableAmount();
-
-        document.querySelectorAll('.qty, .q_rate').forEach(input => {
-            input.addEventListener('input', updateTaxableAmount);
-        });
-    });
-</script>
 
 </html>
