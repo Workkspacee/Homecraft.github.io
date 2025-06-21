@@ -12,6 +12,7 @@ All done
 want to change new order to view order ? because might they use more view order page. (done but one situation)
 ---->view order pela rakhia to ena hisabe container ni height bov nani thai jai che 
 so ena mate me height 145% kari to aa phone nd tablet ma bov lambu thai jai che (kind of static height thai che) 
+niche no part nano kar thodo 
 
 2. Backend nu measurement 
 
