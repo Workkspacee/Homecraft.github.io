@@ -75,6 +75,8 @@ and main thing print buttons
 headings right ke left karva 
 Terms and Conditions 1 line ma karva aakhu page 1 page ma aavi javu joiaa 
 add other address for ship to field
+address na fonts change karva 
+gst na cell nano karvo 
 
 8. client page 
 

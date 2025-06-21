@@ -8,122 +8,133 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="/bill.css">
     <script>
-    function updateGSTAndAmounts() {
-        const stateValue = document.getElementById('stateSelect').value;
-        const isGujarat = stateValue.startsWith('24'); // Gujarat
+        function updateGSTAndAmounts() {
+            const stateValue = document.getElementById('stateSelect').value;
+            const isGujarat = stateValue.startsWith('24'); // Gujarat
 
-        const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
-        const rateInputs = document.querySelectorAll('input[name="q_rate[]"]');
-        const gstPercentInputs = document.querySelectorAll('input[name="q_gst[]"]');
-        const gstAmtInputs = document.querySelectorAll('input[name="gst_amount[]"]');
-        const grandTotalInputs = document.querySelectorAll('input[name="grand_total[]"]');
-        const gstDisplaySpans = document.querySelectorAll('.gst-display');
+            const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
+            const rateInputs = document.querySelectorAll('input[name="q_rate[]"]');
+            const discountInputs = document.querySelectorAll('input[name="discount[]"]');
+            const priceInputs = document.querySelectorAll('input[name="price_per_unit[]"]');
+            const gstPercentInputs = document.querySelectorAll('input[name="q_gst[]"]');
+            const gstAmtInputs = document.querySelectorAll('input[name="gst_amount[]"]');
+            const grandTotalInputs = document.querySelectorAll('input[name="grand_total[]"]');
+            const gstDisplaySpans = document.querySelectorAll('.gst-display');
 
-        let gstTotal = 0;
-        let amountTotal = 0;
-        let quantityTotal = 0;
+            let gstTotal = 0;
+            let amountTotal = 0;
+            let quantityTotal = 0;
 
-        for (let i = 0; i < qtyInputs.length; i++) {
-            const qty = parseFloat(qtyInputs[i].value) || 0;
-            const rate = parseFloat(rateInputs[i].value) || 0;
-            const gstPercent = parseFloat(gstPercentInputs[i].value) || 0;
+            const rowCount = Math.min(
+                qtyInputs.length,
+                rateInputs.length,
+                discountInputs.length,
+                priceInputs.length,
+                gstPercentInputs.length,
+                gstAmtInputs.length,
+                grandTotalInputs.length
+            );
 
-            const base = qty * rate;
-            let gstAmount = (base * gstPercent) / 100;
-            let totalAmount = base + gstAmount;
+            for (let i = 0; i < rowCount; i++) {
+                const qty = parseFloat(qtyInputs[i].value) || 0;
+                const rate = parseFloat(rateInputs[i].value) || 0;
+                const discount = parseFloat(discountInputs[i].value) || 0;
+                const gstPercent = parseFloat(gstPercentInputs[i].value) || 0;
 
-            if (!isGujarat) {
-                gstAmount *= 2;
-                totalAmount = base + gstAmount;
+                const pricePerUnit = rate - (rate * discount / 100);
+                priceInputs[i].value = pricePerUnit.toFixed(2);
 
-                if (gstDisplaySpans[i]) {
-                    gstDisplaySpans[i].textContent = `${gstPercent}% + ${gstPercent}% = ${gstPercent * 2}%`;
-                }
-            } else {
-                if (gstDisplaySpans[i]) {
-                    gstDisplaySpans[i].textContent = `${gstPercent}%`;
-                }
-            }
+                const base = qty * pricePerUnit;
+                let gstAmount = (base * gstPercent) / 100;
+                let totalAmount = base + gstAmount;
 
-            gstAmtInputs[i].value = gstAmount.toFixed(2);
-            grandTotalInputs[i].value = totalAmount.toFixed(2);
-
-            gstTotal += gstAmount;
-            amountTotal += totalAmount;
-            quantityTotal += qty;
-        }
-
-        // Update total fields
-        const gstTotalField = document.getElementById('gst_total');
-        const amountTotalField1 = document.querySelector('input[name="amount"]');
-        const amountTotalField2 = document.getElementById('amount_total');
-        const amountTotalSummary = document.getElementById('amount_total_summary');
-
-        if (gstTotalField) gstTotalField.value = gstTotal.toFixed(2);
-        if (amountTotalField1) amountTotalField1.value = amountTotal.toFixed(2);
-        if (amountTotalField2) amountTotalField2.value = amountTotal.toFixed(2);
-        if (amountTotalSummary) amountTotalSummary.value = amountTotal.toFixed(2);
-
-        const qtyTotalInput = document.querySelector('input[name="quantity_total"]');
-        if (qtyTotalInput) qtyTotalInput.value = quantityTotal.toFixed(2);
-
-        updateFinalTotal();
-        updateTaxBreakdown();
-    }
-
-    function updateFinalTotal() {
-        const subTotal = parseFloat(document.getElementById('amount_total')?.value) || 0;
-        const roundOff = parseFloat(document.getElementById('round_off')?.value) || 0;
-        const final = subTotal + roundOff;
-        const finalTotalInput = document.getElementById('final_total');
-        if (finalTotalInput) finalTotalInput.value = final.toFixed(2);
-    }
-
-    function updateTaxBreakdown() {
-        const state = document.getElementById('stateSelect').value;
-        const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
-        const rateInputs = document.querySelectorAll('input[name="q_rate[]"]');
-        const gstInputs = document.querySelectorAll('input[name="q_gst[]"]');
-
-        const taxMap = {}; // Key: `${type}-${rate}`, Value: {taxable, taxAmt}
-        const fullKey = (type, rate) => `${type}-${rate}`;
-
-        for (let i = 0; i < qtyInputs.length; i++) {
-            const qty = parseFloat(qtyInputs[i].value);
-            const rate = parseFloat(rateInputs[i].value);
-            const gst = parseFloat(gstInputs[i].value);
-
-            if (!isNaN(qty) && !isNaN(rate) && !isNaN(gst)) {
-                const taxable = qty * rate;
-
-                if (state === '24') {
-                    const halfRate = gst / 2;
-                    const halfTax = (taxable * halfRate) / 100;
-
-                    [['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
-                        const key = fullKey(type, r);
-                        if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
-                        taxMap[key].taxable += taxable;
-                        taxMap[key].taxAmt += t;
-                    });
+                if (!isGujarat) {
+                    gstAmount *= 2;
+                    totalAmount = base + gstAmount;
+                    if (gstDisplaySpans[i]) {
+                        gstDisplaySpans[i].textContent = `${gstPercent}% + ${gstPercent}% = ${gstPercent * 2}%`;
+                    }
                 } else {
-                    const fullTax = (taxable * gst) / 100;
-                    const halfRate = gst / 2;
-                    const halfTax = (taxable * halfRate) / 100;
-
-                    [['IGST', gst, fullTax], ['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
-                        const key = fullKey(type, r);
-                        if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
-                        taxMap[key].taxable += taxable;
-                        taxMap[key].taxAmt += t;
-                    });
+                    if (gstDisplaySpans[i]) {
+                        gstDisplaySpans[i].textContent = `${gstPercent}%`;
+                    }
                 }
+
+                gstAmtInputs[i].value = gstAmount.toFixed(2);
+                grandTotalInputs[i].value = totalAmount.toFixed(2);
+
+                gstTotal += gstAmount;
+                amountTotal += totalAmount;
+                quantityTotal += qty;
             }
+
+            // Update total fields
+            document.getElementById('gst_total').value = gstTotal.toFixed(2);
+            document.querySelector('input[name="amount"]').value = amountTotal.toFixed(2);
+            document.getElementById('amount_total').value = amountTotal.toFixed(2);
+            document.getElementById('amount_total_summary').value = amountTotal.toFixed(2);
+            document.querySelector('input[name="quantity_total"]').value = quantityTotal.toFixed(2);
+
+            updateFinalTotal();
+            updateTaxBreakdown();
         }
 
-        // Render breakdown table
-        const tbody = document.getElementById('taxBreakdownBody');
-        if (tbody) {
+        function updateFinalTotal() {
+            const subTotal = parseFloat(document.getElementById('amount_total')?.value) || 0;
+            const roundOff = parseFloat(document.getElementById('round_off')?.value) || 0;
+            const final = subTotal + roundOff;
+
+            const finalTotalInput = document.getElementById('final_total');
+            if (finalTotalInput) finalTotalInput.value = final.toFixed(2);
+
+            const words = numberToWords(final);
+            const wordsCell = document.getElementById('finalTotalInWords');
+            if (wordsCell) wordsCell.textContent = words;
+        }
+
+        function updateTaxBreakdown() {
+            const state = document.getElementById('stateSelect').value;
+            const qtyInputs = document.querySelectorAll('input[name="qty[]"]');
+            const rateInputs = document.querySelectorAll('input[name="price_per_unit[]"]');
+            const gstInputs = document.querySelectorAll('input[name="q_gst[]"]');
+
+            const taxMap = {};
+            const fullKey = (type, rate) => `${type}-${rate}`;
+
+            for (let i = 0; i < qtyInputs.length; i++) {
+                const qty = parseFloat(qtyInputs[i].value);
+                const rate = parseFloat(rateInputs[i].value);
+                const gst = parseFloat(gstInputs[i].value);
+
+                if (!isNaN(qty) && !isNaN(rate) && !isNaN(gst)) {
+                    const taxable = qty * rate;
+
+                    if (state === '24') {
+                        const halfRate = gst / 2;
+                        const halfTax = (taxable * halfRate) / 100;
+
+                        [['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
+                            const key = fullKey(type, r);
+                            if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
+                            taxMap[key].taxable += taxable;
+                            taxMap[key].taxAmt += t;
+                        });
+                    } else {
+                        const fullTax = (taxable * gst) / 100;
+                        const halfRate = gst / 2;
+                        const halfTax = (taxable * halfRate) / 100;
+
+                        [['IGST', gst, fullTax], ['CGST', halfRate, halfTax], ['SGST', halfRate, halfTax]].forEach(([type, r, t]) => {
+                            const key = fullKey(type, r);
+                            if (!taxMap[key]) taxMap[key] = { type, rate: r, taxable: 0, taxAmt: 0 };
+                            taxMap[key].taxable += taxable;
+                            taxMap[key].taxAmt += t;
+                        });
+                    }
+                }
+            }
+
+            const tbody = document.getElementById('taxBreakdownBody');
             tbody.innerHTML = '';
             Object.values(taxMap).forEach(entry => {
                 const row = document.createElement('tr');
@@ -136,21 +147,47 @@
                 tbody.appendChild(row);
             });
         }
-    }
 
-    // Attach events
-    document.addEventListener('DOMContentLoaded', () => {
-        const inputs = document.querySelectorAll('input[name="qty[]"], input[name="q_rate[]"], input[name="q_gst[]"]');
-        inputs.forEach(input => input.addEventListener('input', updateGSTAndAmounts));
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input[name="qty[]"], input[name="q_rate[]"], input[name="q_gst[]"], input[name="discount[]"]');
+            inputs.forEach(input => input.addEventListener('input', updateGSTAndAmounts));
 
-        document.getElementById('stateSelect').addEventListener('change', updateGSTAndAmounts);
-        document.getElementById('round_off').addEventListener('input', updateFinalTotal);
+            document.getElementById('stateSelect').addEventListener('change', updateGSTAndAmounts);
+            document.getElementById('round_off').addEventListener('input', updateFinalTotal);
 
-        // Initial calculation
-        updateGSTAndAmounts();
-    });
+            updateGSTAndAmounts(); // Initial call
+        });
     </script>
 
+<script>
+// Convert number to words
+function numberToWords(n) {
+    const a = [
+        '', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven',
+        'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen',
+        'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'
+    ];
+    const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+    function numToWords(num) {
+        if (num < 20) return a[num];
+        if (num < 100) return b[Math.floor(num / 10)] + (num % 10 ? ' ' + a[num % 10] : '');
+        if (num < 1000) return a[Math.floor(num / 100)] + ' Hundred' + (num % 100 ? ' ' + numToWords(num % 100) : '');
+        if (num < 100000) return numToWords(Math.floor(num / 1000)) + ' Thousand' + (num % 1000 ? ' ' + numToWords(num % 1000) : '');
+        if (num < 10000000) return numToWords(Math.floor(num / 100000)) + ' Lakh' + (num % 100000 ? ' ' + numToWords(num % 100000) : '');
+        return numToWords(Math.floor(num / 10000000)) + ' Crore' + (num % 10000000 ? ' ' + numToWords(num % 10000000) : '');
+    }
+
+    const rupees = Math.floor(n);
+    const paise = Math.round((n - rupees) * 100);
+    let result = '';
+
+    if (rupees > 0) result += numToWords(rupees) + ' Rupees';
+    if (paise > 0) result += ' and ' + numToWords(paise) + ' Paise';
+    if (result === '') result = 'Zero Rupees';
+    return result + ' only';
+}
+</script>
 
 </head>
 <body>
@@ -281,22 +318,19 @@
                             <td><input type="text" step="any" class="bill_table" name="material[]" value="<%= q.material || '' %>" style="font-weight: bold;"></td>
                             <td><input type="text" step="any" class="bill_table" name="q_hsn[]" value="<%= q.q_hsn || '' %>" style="width: 100%;"></td>
                             <td><input type="number" step="any" class="bill_table qty" name="qty[]" value="<%= q.qty || '' %>" style="width: 100%;"></td>
-                            <td>Mtr</td>.. 
-                            <td><input type="number" step="any" class="bill_table q_rate" name="q_rate[]" value="<%= q.q_rate || '' %>" style="width: 100%;"></td>
-                            <td><input type="hidden" step="any" class="bill_table" name="q_gst[]" value="<%= q.q_gst || '' %>" style="width: 100%;"><span class="gst-display"></span> RS ( )<input type="number" name="gst_amount[]" class="gst_amount bill_table" readonly></td>
+                            <td>Mtr</td>...
+                            <td>
+                                <input type="number" step="any" class="bill_table price_per_unit" name="price_per_unit[]" readonly style="width: 100%;">
+                                <input type="hidden" class="q_rate" name="q_rate[]" value="<%= q.q_rate || '' %>">
+                                <input type="hidden" class="discount" name="discount[]" value="<%= q.discount || 0 %>">
+                            </td>    
+                            <td>
+                                <input type="hidden" class="bill_table q_gst" name="q_gst[]" value="<%= q.q_gst || '' %>">
+                                <span class="gst-display"></span> ₹<input type="number" name="gst_amount[]" class="gst_amount bill_table" readonly>
+                            </td>                            
                             <td><input type="number" step="any" class="bill_table grand_total" name="grand_total[]" value="<%= q.grand_total || '' %>" style="width: 100%;"></td>
                         </tr>
                     <% }) %>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                     <tr>
                         <td></td>
                         <td style="font-weight: bold;">Total</td>
@@ -324,19 +358,19 @@
                         
                     </tbody>
                 </table>
-                <table class="tax" style="width: 35%; min-width: 250px;">
+                <table class="tax" style="width: 40%; min-width: 250px;">
                     <tbody>
                     <tr>
                         <td style="text-align: right;"><strong>Sub Total (₹):</strong></td>
-                        <td><input type="number" id="amount_total_summary" name="amount_total" readonly class="form-control" style="width: 100%;" /></td>
+                        <td><input type="number" id="amount_total_summary" name="amount_total" readonly class="form-control bill_table" style="width: 100%;" /></td>
                     </tr>
                     <tr>
                         <td style="text-align: right;"><strong>Round Off (₹):</strong></td>
-                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control" style="width: 100%;" /></td>
+                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control bill_table" style="width: 100%;" /></td>
                     </tr>
                     <tr>
                         <td style="text-align: right; border-top: 2px solid black;"><strong>Final Total (₹):</strong></td>
-                        <td><input type="number" id="final_total" name="final_total" readonly class="form-control" style="width: 100%; font-weight: bold;" /></td>
+                        <td><input type="number" id="final_total" name="final_total" readonly class="form-control bill_table" style="width: 100%; font-weight: bold;" /></td>
                     </tr>
                     </tbody>
                 </table>
@@ -350,7 +384,7 @@
                 <tr></tr>
                 <tr></tr><tr></tr>
                 <tr>
-                    <td>Thirty Nine Thousand Three Hundred Thirty Three Rupees only</td>
+                    <td id="finalTotalInWords"></td>
                 </tr>
             </table><br>
 
