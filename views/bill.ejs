@@ -274,12 +274,12 @@ function numberToWords(n) {
                     <br><br>
                 </div>
 
-                <div style="padding-right: 40px;">
+                <div style="padding-right: 20px;">
                     <h4>Ship To</h4><br>
-                    <!-- <textarea name="add" cols="20" rows="3" placeholder="Address"><%= no.add %></textarea> -->  
+                    <textarea name="add" cols="20" rows="3" placeholder="Shipping Address"></textarea>  
                     <br><br><br><br><br>
                 </div>
-                <div style="padding-right: 40px;">
+                <div style="padding-right: 20px;">
                     <h4>Transportation Details</h4><br>
                     <label>Driver Name: <input type="text" name="driver_name" class="input_field" placeholder="Name"/></label><br>
                     <label>Vehicle Number: <input type="text" name="v_no"  class="input_field" placeholder="GJ05FR9362"/></label><br>
@@ -326,7 +326,7 @@ function numberToWords(n) {
                             </td>    
                             <td>
                                 <input type="hidden" class="bill_table q_gst" name="q_gst[]" value="<%= q.q_gst || '' %>">
-                                <span class="gst-display"></span> ₹<input type="number" name="gst_amount[]" class="gst_amount bill_table" readonly>
+                                <span class="gst-display"></span> <input type="number" name="gst_amount[]" class="gst_amount bill_table" readonly>
                             </td>                            
                             <td><input type="number" step="any" class="bill_table grand_total" name="grand_total[]" value="<%= q.grand_total || '' %>" style="width: 100%;"></td>
                         </tr>
@@ -338,8 +338,8 @@ function numberToWords(n) {
                         <td><input type="number" step="any" class="bill_table" name="quantity_total" style="width: 100%;"></td>
                         <td></td>
                         <td></td>
-                        <td><input type="number" step="any" class="bill_table" id="gst_total" name="gst_total" style="width: 100%;"></td>
-                        <td><input type="number" step="any" class="bill_table" name="amount" id="amount_total" style="width: 100%;"></td>
+                        <td style="white-space: nowrap;">₹<input type="number" step="any" class="bill_table" id="gst_total" name="gst_total" style="width: 90%;"></td>
+                        <td style="white-space: nowrap;">₹<input type="number" step="any" class="bill_table" name="amount" id="amount_total" style="width: 98%;"></td>
                     </tr>  
                 </tbody>
             </table><br>
@@ -362,19 +362,19 @@ function numberToWords(n) {
                     <tbody>
                     <tr>
                         <td style="text-align: right;"><strong>Sub Total (₹):</strong></td>
-                        <td><input type="number" id="amount_total_summary" name="amount_total" readonly class="form-control bill_table" style="width: 100%;" /></td>
+                        <td style="white-space: nowrap;">₹<input type="number" id="amount_total_summary" name="amount_total" readonly class="form-control bill_table" style="width: 60%;" /></td>
                     </tr>
                     <tr>
                         <td style="text-align: right;"><strong>Round Off (₹):</strong></td>
-                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control bill_table" style="width: 100%;" /></td>
+                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control bill_table" style="width: 60%;" /></td>
                     </tr>
                     <tr>
                         <td style="text-align: right; border-top: 2px solid black;"><strong>Final Total (₹):</strong></td>
-                        <td><input type="number" id="final_total" name="final_total" readonly class="form-control bill_table" style="width: 100%; font-weight: bold;" /></td>
+                        <td style="white-space: nowrap;">₹<input type="number" id="final_total" name="final_total" readonly class="form-control bill_table" style="width: 60%; font-weight: bold;" /></td>
                     </tr>
                     </tbody>
                 </table>
-            </div>
+            </div><br>
 
 
             <table class="ivoice_words">
@@ -392,13 +392,12 @@ function numberToWords(n) {
                 <tr>
                     <td>
                         <h3>Terms and Conditions</h3>
-                        <p>- We reserve the right of recovery before due date at any time.</p>
-                        <p>- Goods once sold cannot be returned. Any defect in the material</p>
-                        <p>received should be brought into notice withim the 48 hours of delivery.</p>
-                        <p>- The sale is understood to have been made after due consideration of </p>
-                        <p>the quality of goods and prevailing rates.</p>
-                        <p>- The payment of this bill shall be made by the due date failing which interest</p>
-                        <p>@ 1.5% Per Month shall be charged from the due date.</p>
+                        <ul>
+                            <li>We reserve the right of recovery before due date at any time.</li>
+                            <li>Goods once sold cannot be returned. Any defect in the material received should be brought into notice within 48 hours of delivery.</li>
+                            <li>The sale is understood to have been made after due consideration of the quality of goods and prevailing rates.</li>
+                            <li>The payment of this bill shall be made by the due date, failing which interest @ 1.5% per month shall be charged from the due date.</li>
+                        </ul>
                     </td>
                 </tr>
             </table><br>
@@ -423,7 +422,7 @@ function numberToWords(n) {
 
             <center>
                 <button type="submit" class="but">Submit</button>   
-                <button type="button" class="but">Print</button>
+                <button type="button" class="but" onclick="window.print()">Print</button>
             </center>
         </form>
 

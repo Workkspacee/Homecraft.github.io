@@ -150,27 +150,27 @@ router.get('/details', async(req,res) => {
 });
 
 
-// // For opening measurement page with saving details and showing that details 
-// router.post('/measure', async(req,res) => {
-//   try {
-//     const {work_no, name, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
+// For opening measurement page with saving details and showing that details 
+router.post('/measure', async(req,res) => {
+  try {
+    const {work_no, name, date, d_date, p_no, add, f_type, f_status, w_status} = req.body;
     
-//     // Check if work order no already exists
-//     const existingno = await Data.findOne({ work_no });
-//     if (existingno) {
-//       return res.status(400).json({ message: 'Order number already exists' });
-//     }
+    // Check if work order no already exists
+    const existingno = await Data.findOne({ work_no });
+    if (existingno) {
+      return res.status(400).json({ message: 'Order number already exists' });
+    }
 
-//     const data = new Data({work_no, name, date, d_date, p_no, add, f_type, f_status, w_status});
-//     await data.save()
+    const data = new Data({work_no, name, date, d_date, p_no, add, f_type, f_status, w_status});
+    await data.save()
     
-//     const no = await Data.findOne({ work_no });
-//     res.render('measurement',{ no });
-//   }
-//     catch (error) {
-//       console.log(err);
-//     }
-//  });
+    const no = await Data.findOne({ work_no });
+    res.render('measurement',{ no });
+  }
+    catch (error) {
+      console.log(err);
+    }
+ });
 
 //searching data from work_no in backend
 router.post('/edit', async(req,res) => {
