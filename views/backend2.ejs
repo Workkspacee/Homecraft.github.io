@@ -1,92 +1,105 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Backend 2</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> 
   <link rel="stylesheet" href="/backend.css">
 
+  <style>
+  .form.sign-in {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateX(0%) !important;
+  }
+</style>
+
 </head>
 <body>
 
-    <div class="header1">
-        <nav>
-            <img src="/logo.png" alt="logo">
-            <h3><a href="/logout">Log out</a></h3>
-        </nav>
-    </div>
-    
-<!-- partial:index.partial.html -->
-<br>
-<br>
-    <div class="cont">
-        <form action="/update-edit" method="post">
-            <div class="form sign-in">
-                <h2>Edit Work Order</h2>
-                <label>
-                    <span>Work Order No</span>
-                    <input type="text" name="work_no" value="<%= no.work_no %>" readonly />
-                </label>
-                <label>
-                    <span>Name:</span>
-                    <input type="text" name="name" value="<%= no.name %>" required/>
-                </label>
-                <label> 
-                    <span>Date</span>
-                    <input type="date" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> />
-                </label>
-                <label>
-                    <span>Delivery Date</span>
-                    <input type="date" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> />
-                </label>
-                <label>
-                    <span>Phone Number</span>
-                    <input type="tel" maxlength="10" name="p_no" value="<%= no.p_no %>" />
-                </label>
-                <label>
-                    <span>Address</span>
-                    <textarea name="add" cols="30" rows="5" ><%= no.add %></textarea><br>
-                </label>
-                <label>
-                    <span>Fabric Type</span>
-                    <input type="text" name="f_type" value="<%= no.f_type %>"/>
-                </label>
-                <label>
-                    <span>Fabric Order Status</span>
-                    <select name="f_status">
-                        <option><%= no.f_status %></option>
-                        <option value="Order Pending">Order Pending</option>
-                        <option value="Delivery Pending">Delivery Pending</option>
-                        <option value="Delivered">Delivered</option>
-                    </select>
-                </label>
-                <label>
-                    <span>Work Order Status</span>
-                    <select name="w_status">
-                        <option><%= no.w_status %></option>
-                        <option value="Details Pending">Details Pending</option>
-                        <option value="Measurement Pending">Measurement Pending</option>
-                        <option value="Given for Stiching">Given for Stiching</option>
-                        <option value="Delivery Pending">Delivery Pending</option>
-                        <option value="Order Delivered">Order Delivered</option>
-                    </select>
-                </label>
-                <button type="submit" class="submit">Submit</button>
-            
-            </div>
-        </form>
-        <div class="sub-cont">
-            <div class="img">
-            </div>
-        </div>
-    </div>
+<div class="header1">
+    <nav>
+        <img src="/logo.png" alt="logo">
+        <h3><a href="/logout">Log out</a></h3>
+    </nav>
+</div>
 
-    <footer class="footer">
-        <nav>
-            <p> &copy; 2024 All Rights Reserved.</p>
-            <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
-        </nav>
-    </footer>
+<br><br>
+
+<div class="cont">
+  <% if (no) { %>
+    <form action="/update-edit" method="post">
+        <div class="form sign-in">
+            <h2>Edit Work Order</h2>
+            <label>
+                <span>Work Order No</span>
+                <input type="text" name="work_no" value="<%= no.work_no || '' %>" readonly />
+            </label>
+            <label>
+                <span>Name:</span>
+                <input type="text" name="name" value="<%= no.name || '' %>" required />
+            </label>
+            <label>
+                <span>Date</span>
+                <input type="date" name="date" 
+                  <% if (no.date) { %> value="<%= new Date(no.date).toISOString().split('T')[0] %>" <% } %> />
+            </label>
+            <label>
+                <span>Delivery Date</span>
+                <input type="date" name="d_date" 
+                  <% if (no.d_date) { %> value="<%= new Date(no.d_date).toISOString().split('T')[0] %>" <% } %> />
+            </label>
+            <label>
+                <span>Phone Number</span>
+                <input type="tel" maxlength="10" name="p_no" value="<%= no.p_no || '' %>" />
+            </label>
+            <label>
+                <span>Address</span>
+                <textarea name="add" cols="30" rows="5"><%= no.add || '' %></textarea>
+            </label>
+            <label>
+                <span>Fabric Type</span>
+                <input type="text" name="f_type" value="<%= no.f_type || '' %>" />
+            </label>
+            <label>
+                <span>Fabric Order Status</span>
+                <select name="f_status">
+                    <option selected><%= no.f_status || 'Order Pending' %></option>
+                    <option value="Order Pending">Order Pending</option>
+                    <option value="Delivery Pending">Delivery Pending</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </label>
+            <label>
+                <span>Work Order Status</span>
+                <select name="w_status">
+                    <option selected><%= no.w_status || 'Details Pending' %></option>
+                    <option value="Details Pending">Details Pending</option>
+                    <option value="Measurement Pending">Measurement Pending</option>
+                    <option value="Quotation approval Pending">Quotation approval Pending</option>
+                    <option value="Given for Stiching">Given for Stiching</option>
+                    <option value="Delivery Pending">Delivery Pending</option>
+                    <option value="Order Delivered">Order Delivered</option>
+                </select>
+            </label>
+            <button type="submit" class="submit">Submit</button>
+        </div>
+    </form>
+  <% } else { %>
+    <h2 style="text-align:center; color:red;">No Work Order Data Found.</h2>
+  <% } %>
+
+  <div class="sub-cont">
+      <div class="img"></div>
+  </div>
+</div>
+
+<footer class="footer">
+    <nav>
+        <p>&copy; 2024 All Rights Reserved.</p>
+        <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
+    </nav>
+</footer>
 
 </body>
 </html>
