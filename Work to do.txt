@@ -4,8 +4,7 @@ on wrong passwords showing other attrative message
 
 Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya workno joiaa che ??
 
-Driver name , vehicle no database ma joiaa che khari ?
-
+Driver name , vehicle no database ma joiaa che khari ? 5 mail (user 1 , auth 2 ,otpmailer 2)
 1. Backend 
 
 All done

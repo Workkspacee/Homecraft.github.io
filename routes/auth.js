@@ -4,8 +4,17 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const Data = require('../models/data');
+const sendOTP = require('../Script/otpMailer');
+const session = require('express-session');
+
 
 const router = express.Router();
+
+router.use(session({
+  secret: 'otp-secret',
+  resave: false,
+  saveUninitialized: true
+}));
 
 router.get('/', (req, res) => {
   res.render('login');
@@ -21,26 +30,50 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', async (req, res) => {
   try {
-    const { username, password, conpassword, role} = req.body;
-    
-    // Check if username already exists
-    const existingUser = await User.findOne({ username });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Username already exists' });
-    }
+    const { username, password, conpassword, role, enteredOtp } = req.body;
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Check if passwords match
     if (password !== conpassword) {
       return res.status(400).send("Passwords don't match");
     }
 
-    const user = new User({ username, password: hashedPassword, role });
+    if (enteredOtp !== req.session.generatedOtp) {
+      return res.status(400).send("Invalid OTP");
+    }
+
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).send("Username already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = new User({
+      username,
+      password: hashedPassword,
+      role,
+      email: 'parikharjun2002@gmail.com'
+    });
+
     await user.save();
+
+    req.session.generatedOtp = null; // clear OTP after successful signup
+
     res.redirect('/login');
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.post('/send-otp', async (req, res) => {
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const fixedEmail = 'parikharjun2002@gmail.com'; // Your fixed admin email
+
+  try {
+    await sendOTP(fixedEmail, otp);
+    req.session.generatedOtp = otp;
+    res.json({ message: 'OTP sent to admin email' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to send OTP', error: err.message });
   }
 });
 
