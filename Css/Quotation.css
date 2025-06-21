@@ -18,6 +18,10 @@ body{
 	padding-top: 3.125rem;
 }
 
+.jumbotron {
+    background-color: white !important;
+}
+
 .login {
 	width: 68.75rem;
 	padding: 1.875rem;
@@ -46,7 +50,7 @@ body{
 	background: none;
 	padding: 0.063rem;
 	padding-left: 0.063rem;
-	width: 200px;
+	width: 12.5rem;
     height: auto;
 	transition: .2s;
 }
@@ -108,7 +112,7 @@ nav a:hover {color: #4EA685; text-decoration: none; }
     background-color: white;
     border-bottom: #000000;
     padding-top: 2.468rem;
-    margin-bottom: 0px;
+    margin-bottom: 0rem;
 }
 
 p{
@@ -143,7 +147,7 @@ p{
 }
 
 .submit:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 3px;
+  box-shadow: rgba(46, 164, 79, .4) 0 0 0 0.188rem;
   outline: none;
 }
 
@@ -156,7 +160,7 @@ p{
 
 .submit:active {
   background-color: #4EA685;
-  box-shadow: rgba(20, 70, 32, .2) 0 1px 0 inset;
+  box-shadow: rgba(20, 70, 32, .2) 0 0.063rem 0 inset;
 }
 
 /* to remove the up/down arrows of the type=number in input tag*/
@@ -176,7 +180,7 @@ input[type=number] {
 
 
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 48rem) {
     .container {
         padding-top: 2rem;
     }
@@ -186,7 +190,7 @@ input[type=number] {
     }
 }
 
-@media only screen and (max-width: 480px) {
+@media only screen and (max-width: 30rem) {
     .container {
         padding-top: 1rem;
     }

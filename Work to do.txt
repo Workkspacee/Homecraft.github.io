@@ -19,13 +19,11 @@ add selection list in room name like bedroom , hall, kitchen etc. And roller add
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend.
 ring american and roman ma colours add karva. 
-add name beside workno. in all pages like measurement and also add google map location in header.
-Add footer in all pages like measurement 
+add google map location in header.
 date and d_date (ask kumar)
 
 3. Backend nu quotation ( Combine with measurement)
 
-auto table
 add respective buttons and also give print button which contain quotation and measurement so they can send to client 
 so basically new white page like bill page (we can see sample in workspace mail id). 
 so now we need auto calculation formulas for sub total and grand total also less discounts. 
@@ -33,9 +31,6 @@ Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
 
-add measurement page after giving work no. (done) and in this we need some other not readonly fields.
-Change and make easy fitter work done thing for them.
-and save button
 type of curtain editable
 
 Fittermeasure page:= 
@@ -100,4 +95,13 @@ like [
 3.
 
 ----> While Explaining to janmay kumar 
-kem time lagyo? aakhu measurement page j change kari nakhyu. pela only 20 windows add kari sakta, and ae pan just last ma j add kari sakta, have game tya game atli add kari sakso.
+kem time lagyo? aakhu measurement page j change kari nakhyu. pela only 20 windows add kari sakta, 
+and ae pan just last ma j add kari sakta, have game tya game atli add kari sakso.
+quotation page autofill karyu 
+selective items for bill (aa feature add karyu)
+
+
+
+px to rem (.css file)
+
+backend quotation done
