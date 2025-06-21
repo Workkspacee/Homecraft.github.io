@@ -30,7 +30,7 @@ button {
     position: relative;
     max-width: 56rem;
     width: 90%;
-    height: auto;
+    height: 160%;
     margin: 6.2rem auto ;
     background: #fff;
     box-shadow: -0.62rem -0.62rem 0.93rem  , 0.62rem 0.62rem 0.93rem  , inset -0.62rem -0.62rem 0.93rem rgba(255, 255, 255, 0.3), inset 0.62rem 0.62rem 0.93rem rgba(70, 70, 70, 0.15);
@@ -269,12 +269,12 @@ select {
     text-transform: uppercase;
 }
 
-.sign-in {
+.sign-up {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
 }
 
-.cont.s--signup .sign-in {
+.cont.s--signup .sign-up {
     -webkit-transition-timing-function: ease-in-out;
     transition-timing-function: ease-in-out;
     -webkit-transition-duration: 1.2s;
@@ -283,12 +283,12 @@ select {
     transform: translate3d(40rem, 0, 0);
 }
 
-.sign-up {
+.sign-in {
     -webkit-transform: translate3d(-56rem, 0, 0);
     transform: translate3d(-56rem, 0, 0);
 }
 
-.cont.s--signup .sign-up {
+.cont.s--signup .sign-in {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }

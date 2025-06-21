@@ -304,42 +304,63 @@
                 <input type="hidden" name="redirect_to" value="measurement"><!--For using same routes but open different page-->
                 <input type="hidden" name="forback" value="backend">
                 <div class="row">                 
-                    <div class="col-2 login__field">
-                        <h6 align="center">Work order number : </h6>
-                    </div>  
-                    <div class="col-1"></div> 
-                    <div class="col-3 login__field">
-                        <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly/>
-                    </div>
-                    <div class="col-2 login__field">
-                        <h6 align="center">Date : </h6>
-                    </div>  
-                    <div class="col-1"></div> 
-                    <div class="col-3 login__field">
-                        <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                    </div>
+                <!-- Work order number -->
+                <div class="col-2 login__field">
+                    <h6 align="center">Work order number:</h6>
+                </div>  
+                <div class="col-1"></div> 
+                <div class="col-3 login__field">
+                    <input type="text" class="login__input" name="work_no" value="<%= no.work_no %>" readonly />
+                </div>
 
-                    <div class="col-2 login__field">
-                        <h6 align="center">Phone no. : </h6>
-                    </div>  
-                    <div class="col-1"></div> 
-                    <div class="col-3 login__field">
-                        <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
-                    </div>
-                    <div class="col-2 login__field">
-                        <h6 align="center">Delivery Date : </h6>
-                    </div>  
-                    <div class="col-1"></div> 
-                    <div class="col-3 login__field">
-                        <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>"<% } %> readonly/>
-                    </div>
-                    <div class="col-2 login__field">
-                        <h6 align="center">Address</h6>
-                    </div>
-                    <div class="col-10 login__field">
-                        <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
-                    </div>
-                </div>    
+                <!-- Name -->
+                <div class="col-2 login__field">
+                    <h6 align="center">Name:</h6>
+                </div>  
+                <div class="col-1"></div> 
+                <div class="col-3 login__field">
+                    <input type="text" class="login__input" name="name" value="<%= no.name %>" readonly />
+                </div>
+
+                <!-- Date -->
+                <div class="col-2 login__field">
+                    <h6 align="center">Date:</h6>
+                </div>  
+                <div class="col-1"></div> 
+                <div class="col-3 login__field">
+                    <input type="date" class="login__input" name="date" <% if (no.date) { %> value="<%= no.date.toISOString().split('T')[0] %>" <% } %> readonly />
+                </div>
+
+                <!-- Phone no. -->
+                <div class="col-2 login__field">
+                    <h6 align="center">Phone no.:</h6>
+                </div>  
+                <div class="col-1"></div> 
+                <div class="col-3 login__field">
+                    <input type="text" class="login__input" name="p_no" value="<%= no.p_no %>" readonly />
+                </div>
+
+                <!-- Delivery Date -->
+                <div class="col-2 login__field">
+                    <h6 align="center">Delivery Date:</h6>
+                </div>  
+                <div class="col-1"></div> 
+                <div class="col-3 login__field">
+                    <input type="date" class="login__input" name="d_date" <% if (no.d_date) { %> value="<%= no.d_date.toISOString().split('T')[0] %>" <% } %> readonly />
+                </div>
+
+                <!-- Force next element to new line -->
+                <div class="w-100"></div>
+
+                <!-- Address -->
+                <div class="col-2 login__field mt-2">
+                    <h6 align="center">Address:</h6>
+                </div>
+                <div class="col-10 login__field mt-2">
+                    <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
+                </div>
+            </div>
+    
                 <br/> <br/>
                 <div class="row">
                     <div class="col-4"></div>
