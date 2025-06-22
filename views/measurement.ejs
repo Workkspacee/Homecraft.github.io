@@ -287,6 +287,33 @@
         });
     </script>
 
+    <script> //for colour in type of curtain 
+        function updateCurtainColor(selectElement) {
+            const td = selectElement.closest('td');
+            const value = selectElement.value;
+
+            // Clear existing background
+            td.style.backgroundColor = '';
+
+            // Set background based on value
+            if (value === 'American') {
+                td.style.backgroundColor = 'rgb(239, 239, 95)';
+            } else if (value === 'Ring') {
+                td.style.backgroundColor = 'rgb(106, 170, 106)';
+            } else if (value === 'Roman') {
+                td.style.backgroundColor = 'rgba(79, 140, 221, 0.824)';
+            }
+        }
+
+        // Trigger the color update on page load for pre-selected options
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.curtain-select').forEach(select => {
+                updateCurtainColor(select);
+            });
+        });
+    </script>
+
+
 </head>
 
 <body>
@@ -294,7 +321,7 @@
     <div class="header1">
         <nav>
             <img src="/logo.png" alt="logo">
-            <h3><a href="/logout">Log out</a></h3>
+            <h3 style="font-weight: 700;"><a href="/logout">Log out</a></h3>
         </nav>
     </div>
 
@@ -393,8 +420,8 @@
                                     <td><input type="number" class="table_cell" name="room_number[]" step="any" value="<%= row.room_number ?? '' %>"></td>
                                     <td><input type="text" class="table_cell" name="room_name[]"  value="<%= row.room_name %>"></td>
                                     <td><input type="number" class="table_cell" name="window_number[]" step="any" value="<%= row.window_number ?? '' %>"></td>
-                                    <td>
-                                        <select name="curtain[]" class="table_cell hover-arrow">
+                                    <td class="curtain-cell">
+                                        <select name="curtain[]" class="table_cell hover-arrow curtain-select" onchange="updateCurtainColor(this)">
                                             <option value=""></option>
                                             <option value="American" <%= row.curtain === 'American' ? 'selected' : '' %>>American</option>
                                             <option value="Ring" <%= row.curtain === 'Ring' ? 'selected' : '' %>>Ring</option>
@@ -443,11 +470,11 @@
                             <td></td>
                             <td>Total Parts</td>
                             <td></td>
-                            <td>
+                            <td style="background-color: rgba(79, 140, 221, 0.824);">
                                 <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
                             </td>
-                            <td><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
-                            <td><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>
+                            <td style="background-color: rgb(239, 239, 95);"><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
+                            <td style="background-color: rgb(106, 170, 106);"><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>
                             <td></td>
                             <td></td>
                             <td></td>
