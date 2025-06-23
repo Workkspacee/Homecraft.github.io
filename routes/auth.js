@@ -264,7 +264,7 @@ router.post('/update-edit', async (req, res) => {
   }
 });
 
-// Measurement page ma data save karva and edit karva 
+// Measurement page ma data save karva and edit karva also for detail page
 router.post('/measure-save', async (req, res) => {
   try {
     const { redirect_to = 'measurement' } = req.body;
