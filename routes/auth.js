@@ -458,27 +458,6 @@ router.post('/tai', async(req,res) => {
     }
 });
 
-
-//w_status edit karva
-router.post('/edit-tai', async (req, res) => {
-  try {
-    const { work_no, w_status } = req.body;
-
-    // Find the document by work_no and update it
-    const updatedData = await Data.findOneAndUpdate(
-      { work_no: work_no },
-      { w_status: w_status }, 
-      { new: true }
-    );
-
-    // Redirect to a success page after the update
-    res.render('tailor');
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error updating order');
-  }
-});
-
 // for fiter order details from database
 router.post('/fit', async(req,res) => {
   const { work_no } = req.body;
