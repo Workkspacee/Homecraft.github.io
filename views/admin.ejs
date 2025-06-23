@@ -275,7 +275,7 @@
     <form id="searchForm" class="container" action="/admin/search" method="POST" autocomplete="off">
         <input type="text" id="workNoInput" name="work_no" class="input-field" placeholder="Enter work number"
                oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px;">
-        <div id="suggestions" class="suggestions-box"></div>
+        <div id="suggestions" class="suggestions-box"></div><br>
         <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
     </form>
 </center>
@@ -293,7 +293,7 @@
         </div>
     <% }); %>
     <% } %>
-    <h2>All Work Orders</h2>
+    <h2>All Work Orders</h2><br>
     <div class="work-orders">
         <% workNumbers.forEach(work => { %>
             <div class="work-order">

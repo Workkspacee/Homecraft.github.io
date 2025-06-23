@@ -598,6 +598,15 @@
                     <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>                    
                     </div>
 
+                    <select id="statusSelect" name = "w_status" onchange="updateProgress()">
+                    <option value="Details Pending" <%= no.w_status === 'Details Pending' ? 'selected' : '' %>>Details Pending</option>
+                    <option value="Measurement Pending" <%= no.w_status === 'Measurement Pending' ? 'selected' : '' %>>Measurement Pending</option>
+                    <option value="Quotation approval Pending" <%= no.w_status === 'Quotation approval Pending' ? 'selected' : '' %>>Quotation approval Pending</option>
+                    <option value="Given for Stiching" <%= no.w_status === 'Given for Stiching' ? 'selected' : '' %>>Given for Stiching</option>
+                    <option value="Delivery Pending" <%= no.w_status === 'Delivery Pending' ? 'selected' : '' %>>Delivery Pending</option>
+                    <option value="Order Delivered" <%= no.w_status === 'Order Delivered' ? 'selected' : '' %>>Order Delivered</option>
+                    </select>
+
                 </div>
             </form>
         </div>

@@ -9,22 +9,23 @@ Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya w
 1. Backend 
 
 All done
-
+want to change new order to view order ? because might they use more view order page. (done but one situation)
+---->view order pela rakhia to ena hisabe container ni height bov nani thai jai che 
+so ena mate me height 145% kari to aa phone nd tablet ma bov lambu thai jai che (kind of static height thai che) 
+niche no part nano kar thodo 
 
 2. Backend nu measurement 
 
 add selection list in room name like bedroom , hall, kitchen etc. And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend.
-ring american and roman ma colours add karva. 
 add google map location in header.
 date and d_date (ask kumar)
 
 3. Backend nu quotation ( Combine with measurement)
 
-add respective buttons and also give print button which contain quotation and measurement so they can send to client 
+give print button which contain quotation and measurement so they can send to client 
 so basically new white page like bill page (we can see sample in workspace mail id). 
-so now we need auto calculation formulas for sub total and grand total also less discounts. 
 Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
@@ -32,37 +33,23 @@ Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 type of curtain editable
 
 Fittermeasure page:= 
-Make readonly fields for fitter
-Add routes for their actions. 
-
+fitter ne total parts and total fabric joise? (ask kumar)
 
 5. Tailor (not resposive)
 
 both Tailor pages are not resposive   
-colour for curtain type is remaining
-edit or delete edit-tai route 
-maybe add work status 
-
-
-remove add/delete row
-make everything readonly
-total parts and total fabric tailor ne joise ??
+total parts and total fabric tailor ne joise ?? (ask kumar)
 
 6. Admin 
  
 6A. details page
 
 selection for bill in quotation table
-Admin can changes any details so make every fields not readonly.
+
 
 7. bill pages 
 
 remove submit button 
-auto fill everything in it.
-and main thing print buttons 
-headings right ke left karva 
-Terms and Conditions 1 line ma karva aakhu page 1 page ma aavi javu joiaa 
-add other address for ship to field
 address na fonts change karva 
 gst na cell nano karvo 
 
@@ -100,6 +87,3 @@ selective items for bill (aa feature add karyu)
 
 
 
-px to rem (.css file)
-
-backend quotation done
