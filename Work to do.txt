@@ -9,10 +9,6 @@ Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya w
 1. Backend 
 
 All done
-want to change new order to view order ? because might they use more view order page. (done but one situation)
----->view order pela rakhia to ena hisabe container ni height bov nani thai jai che 
-so ena mate me height 145% kari to aa phone nd tablet ma bov lambu thai jai che (kind of static height thai che) 
-niche no part nano kar thodo 
 
 2. Backend nu measurement 
 
@@ -30,10 +26,9 @@ Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
 
-type of curtain editable
-
 Fittermeasure page:= 
 fitter ne total parts and total fabric joise? (ask kumar)
+curtains fitter add karse ?? ena mate editable rakhvana che ?? (ask kumar)
 
 5. Tailor (not resposive)
 

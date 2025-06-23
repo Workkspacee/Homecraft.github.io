@@ -436,9 +436,9 @@
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
                                     <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
-                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
-                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
-                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>">
+                                    <input type="hidden" name="rate[]" step="any">
+                                    <input type="hidden" name="hsn[]" step="any">
+                                    <input type="hidden" name="gst[]" step="any">
                                 </tr>
                             <% } %>
                             <% } else { %>
@@ -461,9 +461,9 @@
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
                                     <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
-                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
-                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
-                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>">
+                                    <input type="hidden" name="rate[]" step="any">
+                                    <input type="hidden" name="hsn[]" step="any">
+                                    <input type="hidden" name="gst[]" step="any">
                                 </tr>   
                             <% } %>
 
@@ -577,7 +577,6 @@
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                             <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
-                                            <input type="checkbox" class="include-in-bill" name="include_in_bill[]" value="<%= index %>">                                    
                                         </td>
                                     </tr>
                                 <% } %>
