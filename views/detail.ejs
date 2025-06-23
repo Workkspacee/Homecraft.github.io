@@ -516,15 +516,15 @@
                         <table class="table table-hover table-bordered" id="quotationTable">
                             <thead class="table-secondary table1">
                                 <tr>
-                                <th>Sr No.</th>
+                                <th style="width: 3.188rem;">Sr No.</th>
                                 <th>Material</th>
-                                <th>Meters / Sq.Ft.</th>
-                                <th>Rate</th>
-                                <th>Discount (%)</th>
-                                <th>Sub Total</th>
-                                <th>GST (%)</th>
-                                <th>Grand Total</th>    
-                                <th>Action</th>
+                                <th style="width: 5.625rem;">Meters / Sq.Ft.</th>
+                                <th style="width: 5rem;">Rate</th>
+                                <th style="width: 5.938rem;">Discount (%)</th>
+                                <th style="width: 7.188rem;">Sub Total</th>
+                                <th style="width: 5.938rem;">GST (%)</th>
+                                <th style="width: 8.125rem;">Grand Total</th>
+                                <th style="width: 6.875rem;">Action</th>
                                 </tr>
                             </thead>
                             <tbody> <!-- Hidden row -->
@@ -600,7 +600,7 @@
                     <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/bill" > Bill </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>
-                    </div>
+                    </div><br>
                     
                     <select id="statusSelect" name = "w_status" onchange="updateProgress()">
                     <option value="Details Pending" <%= no.w_status === 'Details Pending' ? 'selected' : '' %>>Details Pending</option>
@@ -609,7 +609,7 @@
                     <option value="Given for Stiching" <%= no.w_status === 'Given for Stiching' ? 'selected' : '' %>>Given for Stiching</option>
                     <option value="Delivery Pending" <%= no.w_status === 'Delivery Pending' ? 'selected' : '' %>>Delivery Pending</option>
                     <option value="Order Delivered" <%= no.w_status === 'Order Delivered' ? 'selected' : '' %>>Order Delivered</option>
-                    </select>
+                    </select><br><br><br>
 
                     <div class="wizard-progress" id="progressBar">
                         <div class="step" data-step="0">
