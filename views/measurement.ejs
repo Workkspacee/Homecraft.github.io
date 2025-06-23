@@ -75,6 +75,32 @@
             appearance: auto;
         }
 
+        /* For Printing */
+        @media print {
+            @page {
+                size: A4;
+                margin: 0; /* Removes default browser print margin */
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
+            .container-print {
+                width: 100vw; /* Full page width */
+                min-height: 100vh; /* Full page height */
+                margin: 0;
+                padding: 0;
+                font-size: 12pt;
+                color: black;
+            }
+
+            #printBtn {
+                display: none !important;
+            }
+        }
     </style> 
 
     <script> // For calculation 
@@ -614,6 +640,7 @@
             </form>
         </div>
     </div>
+    <center><button onclick="printContainer()" class="btn btn-primary" id="printBtn">Print</button></center><br/>
 </body>
 
 <script>
@@ -946,4 +973,15 @@ let fabricData = [];
     
 </script>
 
+<script>
+function printContainer() {
+  const originalContents = document.body.innerHTML;
+  const printContents = document.querySelector('.container').innerHTML;
+
+  document.body.innerHTML = `<div class="container-print">${printContents}</div>`;
+  window.print();
+  document.body.innerHTML = originalContents;
+  location.reload(); // Reload the page to restore full layout
+}
+</script>
 </html>
