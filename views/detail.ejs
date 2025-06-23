@@ -386,6 +386,13 @@
                     <div class="col-10 login__field mt-2">
                         <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
                     </div>
+
+                    <% if (no.map_link) { %>
+                    <p>
+                        <a href="<%= no.map_link %>" target="_blank">📍 View Location on Google Maps</a>
+                    </p>
+                    <% } %>
+
                 </div>    
                 <br/> <br/>
                 <div class="row">
