@@ -37,6 +37,7 @@ const dataSchema = new mongoose.Schema({
     d_date: { type: Date },  
     p_no: { type: Number },
     add: { type: String },
+    map_link: { type: String, default: '' },
     f_type: { type: String },
     f_status: { type: String, enum: ['Order Pending', 'Delivery Pending', 'Delivered'] },
     w_status: { type: String, enum: ['Details Pending', 'Measurement Pending', 'Quotation approval Pending' , 'Given for Stiching', 'Delivery Pending', 'Order Delivered'] },
