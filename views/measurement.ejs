@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Measurement</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -410,6 +410,7 @@
                                 <th>Fabric Required (meter)</th>
                                 <th>Blackout</th>
                                 <th>Blackout Required (meter)</th>
+                                <th>Action</th>
                             </tr>
                         </thead>                                        
                          <tbody id="tableBody">
@@ -434,10 +435,10 @@
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
-                                    <td><input type="number" name="rate[]" step="any" value="<%= row.rate ?? '' %>"></td>
-                                    <td><input type="number" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>"></td>
-                                    <td><input type="number" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
-                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
+                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
+                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
+                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>">
                                 </tr>
                             <% } %>
                             <% } else { %>
@@ -459,10 +460,10 @@
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
-                                    <td><input type="number" step="any" name="rate[]"></td>
-                                    <td><input type="number" step="any" name="hsn[]"></td>
-                                    <td><input type="number" step="any" name="gst[]"></td>
-                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
+                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
+                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
+                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>">
                                 </tr>   
                             <% } %>
 
@@ -518,7 +519,6 @@
                                 <th>Sub Total</th>
                                 <th>GST (%)</th>
                                 <th>Grand Total</th>
-                                <th>HSN (Check)</th>    
                                 <th>Action</th>
                                 </tr>
                             </thead>
@@ -532,7 +532,7 @@
                                     <td><input type="number" class="sub_total" step="any" name="sub_total[]" ></td>
                                     <td><input type="number" class="q_gst" step="any" name="q_gst[]"></td>
                                     <td><input type="number" class="grand_total" step="any" name="grand_total[]" ></td>
-                                    <td><input type="text" class="q_hsn" step="any" name="q_hsn[]"></td>
+                                    <input type="hidden" class="q_hsn" step="any" name="q_hsn[]">
                                     <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -554,7 +554,7 @@
                                         <td><input type="number" class="sub_total table_cell" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
                                         <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
-                                        <td><input type="text" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
+                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>">
                                         <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -573,7 +573,7 @@
                                         <td><input type="number" class="sub_total table_cell" step="any" name="sub_total[]" ></td>
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="0"></td>
                                         <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" ></td>
-                                        <td><input type="text" class="q_hsn table_cell" step="any" name="q_hsn[]"></td>
+                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]">
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                             <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -586,7 +586,7 @@
                                 <tr class="table-warning">
                                 <td colspan="7" class="text-end"><strong>Total Grand Total</strong></td>
                                 <td><input type="number" id="totalQuotationGrand" name="totalQuotationGrand" class="form-control table_cell" readonly></td>
-                                <td colspan="2"></td>
+                                <td colspan="1"></td>
                                 </tr>
                             </tfoot>
                         </table>
