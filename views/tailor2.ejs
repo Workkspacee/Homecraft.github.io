@@ -94,7 +94,7 @@
                     <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
                 </div>
 
-                <br/> <br/>
+                <br/>
                     <div class="row">
                         <div class="col-4"></div>
                         <div class="col-6">
@@ -107,16 +107,16 @@
                     <table class="table table-hover table-bordered">
                         <thead class="table1">
                             <tr>
-                                <th>Room No.</th>
+                                <th style="width: 4.378rem;">Room No.</th>
                                 <th>Room Name</th>
-                                <th>Window Number</th>
-                                <th>Type of Curtain</th>
-                                <th>Width (in)</th>
-                                <th>Height (in)</th>
+                                <th style="width: 5.375rem;">Window No.</th>
+                                <th style="width: 5.813rem;">Type of Curtain</th>
+                                <th style="width: 4.375rem;">Width (in)</th>
+                                <th style="width: 4.688rem;">Height (in)</th>
                                 <th>Fabric</th>
-                                <th>Fabric Required (meter)</th>
-                                <th>Blackout</th>
-                                <th>Blackout Required (meter)</th>
+                                <th style="width: 5.938rem;">Fabric Required (meter)</th>
+                                <th style="width: 5.813rem;">Blackout</th>
+                                <th style="width: 5.938rem;">Blackout Required (meter)</th>
                             </tr>
                         </thead>                                        
                          <tbody id="tableBody">
@@ -136,9 +136,9 @@
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>" readonly></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>" readonly></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>" readonly></td>
-                                    <td><input type="number" name="rate[]" step="any" value="<%= row.rate ?? '' %>"></td>
-                                    <td><input type="number" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>"></td>
-                                    <td><input type="number" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                    <input type="hidden" name="rate[]" step="any">
+                                    <input type="hidden" name="hsn[]" step="any">
+                                    <input type="hidden" name="gst[]" step="any">
                                 </tr>
                             <% } %>
                             <% } else { %>
@@ -160,10 +160,9 @@
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
-                                    <td><input type="number" step="any" name="rate[]"></td>
-                                    <td><input type="number" step="any" name="hsn[]"></td>
-                                    <td><input type="number" step="any" name="gst[]"></td>
-                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                    <input type="hidden" step="any" name="rate[]">
+                                    <input type="hidden" step="any" name="hsn[]">
+                                    <input type="hidden" step="any" name="gst[]">
                                 </tr>   
                             <% } %>
 

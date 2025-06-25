@@ -237,9 +237,16 @@
                 </div>
                 <div class="col-10 login__field mt-2">
                     <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
-                </div>
+                </div><br>
+
+
+                <% if (no.map_link) { %>
+                    <p>
+                        <a href="<%= no.map_link %>" target="_blank">📍 View Location on Google Maps</a>
+                    </p>
+                <% } %>
               </div>    
-              <br/> <br/>
+              <br/>
 
         <div class="row">
           <div class="col-4"></div>
@@ -253,16 +260,16 @@
                     <table class="table table-hover table-bordered">
                         <thead class="table1">
                             <tr>
-                                <th>Room No.</th>
-                                <th>Room Name</th>
-                                <th>Window Number</th>
-                                <th>Type of Curtain</th>
-                                <th>Width (in)</th>
-                                <th>Height (in)</th>
-                                <th>Fabric</th>
-                                <th>Fabric Required (meter)</th>
-                                <th>Blackout</th>
-                                <th>Blackout Required (meter)</th>
+                              <th style="width: 4.378rem;">Room No.</th>
+                              <th>Room Name</th>
+                              <th style="width: 5.375rem;">Window No.</th>
+                              <th style="width: 5.813rem;">Type of Curtain</th>
+                              <th style="width: 4.375rem;">Width (in)</th>
+                              <th style="width: 4.688rem;">Height (in)</th>
+                              <th>Fabric</th>
+                              <th style="width: 5.938rem;">Fabric Required (meter)</th>
+                              <th style="width: 5.813rem;">Blackout</th>
+                              <th style="width: 5.938rem;">Blackout Required (meter)</th>
                             </tr>
                         </thead>                                        
                          <tbody id="tableBody">
@@ -287,34 +294,33 @@
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
-                                    <td><input type="number" name="rate[]" step="any" value="<%= row.rate ?? '' %>"></td>
-                                    <td><input type="number" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>"></td>
-                                    <td><input type="number" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                    <input type="hidden" name="rate[]" step="any">
+                                    <input type="hidden" name="hsn[]" step="any">
+                                    <input type="hidden" name="gst[]" step="any">
                                 </tr>
                             <% } %>
                             <% } else { %>
                                 <tr class="data-row">
-                                    <td><input class="table_cell" step="any" type="number" name="room_number[]"></td>
-                                    <td><input class="table_cell"  type="text" name="room_name[]"></td>
-                                    <td><input class="table_cell" step="any" type="number" name="window_number[]"></td>
-                                    <td>
-                                        <select class="table_cell hover-arrow" name="curtain[]">
-                                            <option></option>
-                                            <option value="American">American</option>
-                                            <option value="Ring">Ring</option>
-                                            <option value="Roman">Roman</option>
-                                        </select>
-                                    </td>
-                                    <td><input class="table_cell" type="number" step="any" name="width[]"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="height[]"></td>
-                                    <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
-                                    <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
-                                    <td><input type="number" step="any" name="rate[]"></td>
-                                    <td><input type="number" step="any" name="hsn[]"></td>
-                                    <td><input type="number" step="any" name="gst[]"></td>
-                                    <td><button type="button" class="add-row">Add Row</button> <button type="button" class="delete-row">Delete Row</button></td>
+                                  <td><input class="table_cell" step="any" type="number" name="room_number[]"></td>
+                                  <td><input class="table_cell"  type="text" name="room_name[]"></td>
+                                  <td><input class="table_cell" step="any" type="number" name="window_number[]"></td>
+                                  <td>
+                                      <select class="table_cell hover-arrow" name="curtain[]">
+                                          <option></option>
+                                          <option value="American">American</option>
+                                          <option value="Ring">Ring</option>
+                                          <option value="Roman">Roman</option>
+                                      </select>
+                                  </td>
+                                  <td><input class="table_cell" type="number" step="any" name="width[]"></td>
+                                  <td><input class="table_cell" type="number" step="any" name="height[]"></td>
+                                  <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                  <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
+                                  <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
+                                  <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
+                                  <input type="hidden" step="any" name="rate[]">
+                                  <input type="hidden" step="any" name="hsn[]">
+                                  <input type="hidden" step="any" name="gst[]">
                                 </tr>   
                             <% } %>
 
@@ -323,7 +329,7 @@
                             <td>Total Parts</td>
                             <td></td>
                             <td style="background-color: rgba(79, 140, 221, 0.824);">
-                                <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
+                              <input type="number" id="roman" name="roman" class="login__input" value="<%= no.roman %>" readonly>
                             </td>
                             <td style="background-color: rgb(239, 239, 95);"><input type="number" id="american" name="american" class="login__input" value="<%= no.american %>" readonly></td>
                             <td style="background-color: rgb(106, 170, 106);"><input type="number" id="ring" name="ring" class="login__input" value="<%= no.ring %>" readonly></td>

@@ -274,9 +274,9 @@
     <!-- Search Form -->
     <form id="searchForm" class="container" action="/admin/search" method="POST" autocomplete="off">
         <input type="text" id="workNoInput" name="work_no" class="input-field" placeholder="Enter work number"
-               oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px;">
+               oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px; width: 500px;">
         <div id="suggestions" class="suggestions-box"></div><br>
-        <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+        <button type="submit" class="search-btn">Search</button>
     </form>
 </center>
 
@@ -284,7 +284,7 @@
 <div class="work-no-list">
     <!-- Search Result -->
     <% if (searchedWork && searchedWork.length > 0) { %>
-    <h3>Search Results:</h3>
+    <h3>Search Results:</h3><br>
     <% searchedWork.forEach(function(work) { %>
         <div class="work-order">
         <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - 
@@ -307,8 +307,8 @@
 <!-- Delete Modal -->
 <div id="deleteModal" class="modal">
     <div class="modal-content">
-        <i class='fas fa-exclamation-triangle' style='font-size:48px;color:orange'></i>
-        <p class="modal-message">Are you sure you want to delete this order?</p>
+        <i class='fas fa-exclamation-circle' style='font-size:48px;color:orange'></i>
+        <p class="modal-message">Are you sure?</p>
         <p class="modal-subtext">You won't be able to retrieve it.</p>
         <button class="confirm-btn" onclick="confirmDelete()">Yes, delete</button>
         <button class="cancel-btn" onclick="closeModal()">Cancel</button>
