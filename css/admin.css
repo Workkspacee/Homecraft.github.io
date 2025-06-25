@@ -16,6 +16,18 @@ body {
 	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
 }
 
+.cont {
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    overflow-x: auto;
+    background-color: white;
+    border-radius: 0.988rem;
+}
+
 form{
     margin-top: 3.75rem;
 }

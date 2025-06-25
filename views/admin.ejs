@@ -263,64 +263,66 @@
 </head>
 <body>
 
-<div class="header1">
-    <nav>
-        <img src="/logo.png" alt="logo">
-        <h3 style="font-weight: 700;"><a href="/logout">Log out</a></h3>
-    </nav>
-</div>
+    <div class="header1">
+        <nav>
+            <img src="/logo.png" alt="logo">
+            <h3 style="font-weight: 700;"><a href="/logout">Log out</a></h3>
+        </nav>
+    </div>
 
-<center>
-    <!-- Search Form -->
-    <form id="searchForm" class="container" action="/admin/search" method="POST" autocomplete="off">
-        <input type="text" id="workNoInput" name="work_no" class="input-field" placeholder="Enter work number"
-               oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px; width: 500px;">
-        <div id="suggestions" class="suggestions-box"></div><br>
-        <button type="submit" class="search-btn">Search</button>
-    </form>
-</center>
+    <div class="cont">
+        <center>
+            <!-- Search Form -->
+            <form id="searchForm" class="container" action="/admin/search" method="POST" autocomplete="off">
+                <input type="text" id="workNoInput" name="work_no" class="input-field" placeholder="Enter work number"
+                    oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px; width: 500px;">
+                <div id="suggestions" class="suggestions-box"></div><br>
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </center>
 
-<!-- All Work Orders -->
-<div class="work-no-list">
-    <!-- Search Result -->
-    <% if (searchedWork && searchedWork.length > 0) { %>
-    <h3>Search Results:</h3><br>
-    <% searchedWork.forEach(function(work) { %>
-        <div class="work-order">
-        <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - 
-        <span class="work-name"><%= work.name %></span>
-        <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
-        </div>
-    <% }); %>
-    <% } %>
-    <h2>All Work Orders</h2><br>
-    <div class="work-orders">
-        <% workNumbers.forEach(work => { %>
-            <div class="work-order">
-                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - <span class="work-name"><%= work.name %></span>
+        <!-- All Work Orders -->
+        <div class="work-no-list">
+            <!-- Search Result -->
+            <% if (searchedWork && searchedWork.length > 0) { %>
+            <h3>Search Results:</h3><br>
+            <% searchedWork.forEach(function(work) { %>
+                <div class="work-order">
+                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - 
+                <span class="work-name"><%= work.name %></span>
                 <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                </div>
+            <% }); %>
+            <% } %>
+            <h2>All Work Orders</h2><br>
+            <div class="work-orders">
+                <% workNumbers.forEach(work => { %>
+                    <div class="work-order">
+                        <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - <span class="work-name"><%= work.name %></span>
+                        <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                    </div>
+                <% }); %>
             </div>
-        <% }); %>
-    </div>
-</div>
+        </div>
 
-<!-- Delete Modal -->
-<div id="deleteModal" class="modal">
-    <div class="modal-content">
-        <i class='fas fa-exclamation-circle' style='font-size:48px;color:orange'></i>
-        <p class="modal-message">Are you sure?</p>
-        <p class="modal-subtext">You won't be able to retrieve it.</p>
-        <button class="confirm-btn" onclick="confirmDelete()">Yes, delete</button>
-        <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+        <!-- Delete Modal -->
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <i class='fas fa-exclamation-circle' style='font-size:48px;color:orange'></i>
+                <p class="modal-message">Are you sure?</p>
+                <p class="modal-subtext">You won't be able to retrieve it.</p>
+                <button class="confirm-btn" onclick="confirmDelete()">Yes, delete</button>
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="footer">
-    <nav>
-        <p>© 2024 All Rights Reserved.</p>
-        <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
-    </nav>
-</div>
+    <div class="footer">
+        <nav>
+            <p>© 2024 All Rights Reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
+        </nav>
+    </div>
 
 </body>
 </html>
