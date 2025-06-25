@@ -77,24 +77,23 @@
 
         /* For Printing */
         @media print {
-            @page {
-                size: A4;
-                margin: 0; /* Removes default browser print margin */
+            body * {
+                visibility: hidden;
             }
 
-            body {
-                margin: 0;
-                padding: 0;
-                background: white;
+            .print-only, .print-only * {
+                visibility: visible;
             }
 
-            .container-print {
-                width: 100vw; /* Full page width */
-                min-height: 100vh; /* Full page height */
-                margin: 0;
-                padding: 0;
-                font-size: 12pt;
-                color: black;
+            .print-only {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
             }
 
             #printBtn {
@@ -339,7 +338,6 @@
         });
     </script>
 
-
 </head>
 
 <body>
@@ -353,7 +351,7 @@
 
     <div class="container">
         <div class="row jumbotron">            
-            <form class="login" method="post">   
+            <form class="login print-only" method="post">   
                 <input type="hidden" name="redirect_to" value="measurement"><!--For using same routes but open different page-->
                 <input type="hidden" name="forback" value="backend">
                 <div class="row">                 
@@ -413,7 +411,7 @@
                     <input type="text" class="login__input" name="add" value="<%= no.add %>" readonly />
                 </div>
                 <% if (no.map_link) { %>
-                    <p>
+                    <p class="no-print">
                         <a href="<%= no.map_link %>" target="_blank">📍 View Location on Google Maps</a>
                     </p>
                 <% } %>
@@ -441,7 +439,7 @@
                                 <th style="width: 5.938rem;">Fabric Required (meter)</th>
                                 <th style="width: 5.813rem;">Blackout</th>
                                 <th style="width: 5.938rem;">Blackout Required (meter)</th>
-                                <th style="width: 4.875rem;">Action</th>
+                                <th style="width: 4.875rem;" class="no-print">Action</th>
                             </tr>
                         </thead>                                        
                          <tbody id="tableBody">
@@ -466,7 +464,7 @@
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
-                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
+                                    <td class="no-print" ><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
                                     <input type="hidden" name="rate[]" step="any">
                                     <input type="hidden" name="hsn[]" step="any">
                                     <input type="hidden" name="gst[]" step="any">
@@ -491,7 +489,7 @@
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
-                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
+                                    <td class="no-print"><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
                                     <input type="hidden" name="rate[]" step="any">
                                     <input type="hidden" name="hsn[]" step="any">
                                     <input type="hidden" name="gst[]" step="any">
@@ -536,7 +534,7 @@
 
                     <div class="d-flex justify-content-between align-items-center my-3">
                         <h4>Quotation Table</h4>
-                        <button type="button" class="btn btn-primary" id="autofillQuotationBtn">Autofill Quotation</button>
+                        <button type="button" class="btn btn-primary no-print" id="autofillQuotationBtn">Autofill Quotation</button>
                     </div>
                     <div class="table-container">
                         <table class="table table-hover table-bordered" id="quotationTable">
@@ -550,7 +548,7 @@
                                 <th style="width: 7.188rem;">Sub Total</th>
                                 <th style="width: 5.938rem;">GST (%)</th>
                                 <th style="width: 8.125rem;">Grand Total</th>
-                                <th style="width: 6.875rem;">Action</th>
+                                <th style="width: 6.875rem;" class="no-print">Action</th>
                                 </tr>
                             </thead>
                             <tbody> <!-- Hidden row -->
@@ -564,7 +562,7 @@
                                     <td><input type="number" class="q_gst" step="any" name="q_gst[]"></td>
                                     <td><input type="number" class="grand_total" step="any" name="grand_total[]" ></td>
                                     <input type="hidden" class="q_hsn" step="any" name="q_hsn[]">
-                                    <td>
+                                    <td class="no-print">
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
                                         <input type="checkbox" class="include-in-bill" name="include_in_bill[]">
@@ -586,7 +584,7 @@
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
                                         <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
                                         <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>">
-                                        <td>
+                                        <td class="no-print">
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
                                         <input type="checkbox" class="include-in-bill" name="include_in_bill[]" value="<%= index %>">
@@ -605,7 +603,7 @@
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="0"></td>
                                         <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" ></td>
                                         <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]">
-                                        <td>
+                                        <td class="no-print">
                                             <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                             <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
                                         </td>
@@ -616,19 +614,19 @@
                                 <tr class="table-warning">
                                 <td colspan="7" class="text-end"><strong>Total Grand Total</strong></td>
                                 <td><input type="number" id="totalQuotationGrand" name="totalQuotationGrand" class="form-control table_cell" readonly></td>
-                                <td colspan="1"></td>
+                                <td colspan="1" class="no-print"></td>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
                     <!-- Save Button -->
-                    <div class="text-end my-3">
+                    <div class="text-end my-3 no-print">
                     <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/bill" > Bill </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>                    
                     </div>
 
-                    <select id="statusSelect" name = "w_status" onchange="updateProgress()">
+                    <select id="statusSelect" name = "w_status" onchange="updateProgress()" class="no-print">
                     <option value="Details Pending" <%= no.w_status === 'Details Pending' ? 'selected' : '' %>>Details Pending</option>
                     <option value="Measurement Pending" <%= no.w_status === 'Measurement Pending' ? 'selected' : '' %>>Measurement Pending</option>
                     <option value="Quotation approval Pending" <%= no.w_status === 'Quotation approval Pending' ? 'selected' : '' %>>Quotation approval Pending</option>
