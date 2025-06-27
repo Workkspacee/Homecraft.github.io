@@ -8,11 +8,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
 
-body{
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(90deg, #bee6d8, #3c9f7a);
-    background-attachment: fixed;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  background: linear-gradient(
+    135deg,
+    #fef5f0 0%,       /* Soft peach/white base */
+    #ffe3d0 25%,      /* Light orange tint */
+    #e6f0ff 60%,      /* Light blue background */
+    #dbe8ff 85%,      /* Soft pastel blue */
+    #f7faff 100%      /* Almost white for blend */
+  );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: 'Poppins', sans-serif;
 }
+
 
 .container {
 	padding-top: 3.125rem;
