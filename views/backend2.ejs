@@ -17,6 +17,12 @@
 </head>
 <body>
 
+<% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
+  <script>
+    alert("<%= popupMessage %>");
+  </script>
+<% } %>
+
 <div class="header1">
     <nav>
         <img src="/logo.png" alt="logo">

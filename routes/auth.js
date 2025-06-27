@@ -33,16 +33,22 @@ router.post('/signup', async (req, res) => {
     const { username, password, conpassword, role, enteredOtp } = req.body;
 
     if (password !== conpassword) {
-      return res.status(400).send("Passwords don't match");
+      return res.status(400).render("login", {
+        popupMessage: "Error: Passwords do not match",
+      });
     }
 
     if (enteredOtp !== req.session.generatedOtp) {
-      return res.status(400).send("Invalid OTP");
+      return res.status(400).render("login", {
+        popupMessage: "Error: Invalid OTP",
+      });
     }
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).send("Username already exists");
+      return res.status(400).render("login", {
+        popupMessage: "Error: Username already exists",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -82,11 +88,15 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-      return res.status(401).json({ message: 'User name is not matched' });
+      return res.status(401).render("login", {
+        popupMessage: "Error: User name is not matched",
+      });
     }
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'Password is wrong' });
+      return res.status(401).render("login", {
+        popupMessage: "Error: Password is wrong",
+      });
     }
     req.session.user = { id: user._id, username: user.username, role: user.role };
     res.redirect('/dashboard');
@@ -166,7 +176,9 @@ router.post('/details', async(req,res) => {
     // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
     if (existingno) {
-      return res.status(400).json({ message: 'Order number already exists' });
+      return res.status(400).render("backend", {
+        popupMessage: "Error: Order number already exists",
+      });
     }
 
     const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status});
@@ -191,7 +203,9 @@ router.post('/measure', async(req,res) => {
     // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
     if (existingno) {
-      return res.status(400).json({ message: 'Order number already exists' });
+      return res.status(400).render("backend", {
+        popupMessage: "Error: Order number already exists",
+      });
     }
 
     const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status});
@@ -212,7 +226,9 @@ router.post('/edit', async(req,res) => {
   try {
     const no = await Data.findOne({ work_no });
     if (!no) {
-      return res.status(404).send('Work order not found');
+      return res.status(404).render("backend", {
+        popupMessage: "Error: Work order not found",
+      });
     }
     res.render('backend2', { no });
 
@@ -229,7 +245,9 @@ router.post('/mea', async(req,res) => {
   try {
     const no = await Data.findOne({ work_no });
     if (!no) {
-      return res.status(404).send('Work order not found');
+      return res.status(404).render("backend", {
+        popupMessage: "Error: Work order not found",
+      });
     }
     res.render('measurement', { no });
 
@@ -253,7 +271,9 @@ router.post('/update-edit', async (req, res) => {
 
     if (!updatedData) {
       // If the document with the specified work_no is not found, return an error
-      return res.status(404).send('Order not found');
+      return res.status(404).render("backend2", {
+        popupMessage: "Error: Order not found",
+      });
     }
 
     // Redirect to a success page after the update
@@ -450,7 +470,9 @@ router.post('/tai', async(req,res) => {
   try {
     const no = await Data.findOne({ work_no });
     if (!no) {
-      return res.status(404).send('Work order not found');
+      return res.status(404).render("tailor", {
+        popupMessage: "Error: Work order not found",
+      });
     }
     res.render('tailor2', { no });
 
@@ -467,7 +489,9 @@ router.post('/fit', async(req,res) => {
   try {
     const no = await Data.findOne({ work_no });
     if (!no) {
-      return res.status(404).send('Work order not found');
+      return res.status(404).render("fiter", {
+        popupMessage: "Error: Work order not found",
+      });
     }
     res.render('measurefitter', { no });
 

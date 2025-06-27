@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/backend.css">
 </head>
 <body>
+
+<% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
+  <script>
+    alert("<%= popupMessage %>");
+  </script>
+<% } %>
+
 <!-- partial:index.partial.html -->
     <div class="header1">
         <nav>

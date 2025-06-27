@@ -19,6 +19,13 @@
 </head>
 
 <body>
+
+<% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
+  <script>
+    alert("<%= popupMessage %>");
+  </script>
+<% } %>
+
 <!-- partial:index.partial.html -->
 <div id="container" class="container"> <!--for whole page-->
 		<!-- FORM SECTION -->
