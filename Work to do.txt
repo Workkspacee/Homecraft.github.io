@@ -1,9 +1,3 @@
-Change work status in all 
-
-on wrong passwords showing other attrative message
-
-Badha page par back button par jaiaa to button dabavathi je page par jaiaa tya workno joiaa che ??
-
 5 mail (user 1 , auth 2 ,otpmailer 2)
 
 1. Backend 
@@ -14,13 +8,10 @@ All done
 
 add selection list in room name like bedroom , hall, kitchen etc. And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
-make readonly fields for backend.
 date and d_date (ask kumar)
 
 3. Backend nu quotation ( Combine with measurement)
 
-give print button which contain quotation and measurement so they can send to client 
-so basically new white page like bill page (we can see sample in workspace mail id). 
 Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
@@ -36,16 +27,12 @@ total parts and total fabric tailor ne joise ?? (ask kumar)
 
 6. Admin 
  
-6A. details page
-
-selection for bill in quotation table
-
+all done
 
 7. bill pages 
 
 remove submit button 
 address na fonts change karva 
-gst na cell nano karvo 
 
 8. client page 
 
@@ -68,10 +55,6 @@ like [
         "gst": "18%"
     } ] this. 
 
--> Backend ma shu shu karyu ?
-1. table editable
-2. save button action measure-save
-3.
 
 ----> While Explaining to janmay kumar 
 kem time lagyo? aakhu measurement page j change kari nakhyu. pela only 20 windows add kari sakta, 
