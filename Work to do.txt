@@ -15,7 +15,6 @@ All done
 add selection list in room name like bedroom , hall, kitchen etc. And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 make readonly fields for backend.
-add google map location in header.
 date and d_date (ask kumar)
 
 3. Backend nu quotation ( Combine with measurement)

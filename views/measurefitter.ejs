@@ -356,7 +356,28 @@
                             </td> 
                             </tr>
                         </tbody> 
-                    </table><br/><br/>
+                    </table><br/><br>
+
+                    <table>
+                      <tr>
+                        <td>Work Order Status:</td>
+                        <td>
+                          <select name="w_status" class="login__input" style="width: auto;">
+                            <option selected><%= no.w_status || 'Details Completed' %></option>
+                            <option value="Details Completed">Details Completed</option>
+                            <option value="Measurement Done">Measurement Done</option>
+                            <option value="Quotation approved">Quotation Approved</option>
+                            <option value="Stiching Done">Stiching Done</option>
+                            <option value="Delivery Pending">Delivery Pending</option>
+                            <option value="Order Delivered">Order Delivered</option>
+                          </select>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                      </table><br><br><br>
+
                     <center>
                         <button type="submit" class="submit" formaction="/fitter-save" > Save </button>
                         <button type="submit" class="submit" formaction="/back"> Back </button>

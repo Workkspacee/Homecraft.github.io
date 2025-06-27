@@ -229,19 +229,13 @@ h2 {
     background: #0056b3;
 }
 
-.suggestions-box {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
-    width: 250px;
-    max-height: 150px;
-    overflow-y: auto;
-}
 
 .suggestion-item {
     padding: 10px 16px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
+    background-color: transparent;
+    transition: background-color 0.2s ease;
 }
 
 .suggestion-item:hover,
@@ -273,5 +267,6 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* optional subtle shadow */
     z-index: 1000;
     margin-top: 2px;
+    list-style: none;
 }
 

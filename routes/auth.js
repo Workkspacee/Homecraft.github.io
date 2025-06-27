@@ -482,6 +482,34 @@ router.post('/tai', async(req,res) => {
     }
 });
 
+//to save the data to tailor page
+router.post('/tai-save', async (req, res) => {
+  try {
+    const { work_no, w_status } = req.body;
+
+    // Find the document by work_no and update it
+    const updatedData = await Data.findOneAndUpdate(
+      { work_no: work_no },
+      { w_status: w_status },
+      { new: true }
+    );
+
+    if (!updatedData) {
+      // If the document with the specified work_no is not found, return an error
+      return res.status(404).render("tailor2", {
+        popupMessage: "Error: Order not found",
+      });
+    } else {
+      const no = updatedData;
+      res.render('tailor2', { no });
+    }
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error updating order');
+  }
+});
+
 // for fiter order details from database
 router.post('/fit', async(req,res) => {
   const { work_no } = req.body;
@@ -528,7 +556,8 @@ router.post('/fitter-save', async (req, res) => {
       american,
       ring,
       total_fab_req,
-      total_black_req
+      total_black_req,
+      w_status
     } = req.body;
 
     const rows = [];
@@ -559,6 +588,7 @@ router.post('/fitter-save', async (req, res) => {
       d_date,
       p_no,
       add,
+      w_status,
       map_link,
       rows,
       roman: Number(roman) || 0,

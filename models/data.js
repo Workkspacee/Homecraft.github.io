@@ -40,7 +40,7 @@ const dataSchema = new mongoose.Schema({
     map_link: { type: String, default: '' },
     f_type: { type: String },
     f_status: { type: String, enum: ['Order Pending', 'Delivery Pending', 'Delivered'] },
-    w_status: { type: String, enum: ['Details Pending', 'Measurement Pending', 'Quotation approval Pending' , 'Given for Stiching', 'Delivery Pending', 'Order Delivered'] },
+    w_status: { type: String, enum: ['Details Completed', 'Measurement Done', 'Quotation approved' , 'Stiching Done', 'Delivery Pending', 'Order Delivered'] },
     roman: { type: Number, default: null  },
     american: { type: Number, default: null  },
     ring: { type: Number, default: null  },

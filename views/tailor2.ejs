@@ -41,6 +41,13 @@
 
 </head>
 <body>
+    
+    <% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
+    <script>
+        alert("<%= popupMessage %>");
+    </script>
+    <% } %>
+
     <header class="header1">
         <nav>
             <img src="/logo.png" alt="logo">
@@ -199,7 +206,29 @@
                             </tr>
                         </tbody> 
                     </table><br/><br/>
+
+                    <table>
+                      <tr>
+                        <td>Work Order Status:</td>
+                        <td>
+                          <select name="w_status" class="login__input" style="width: auto;">
+                            <option selected><%= no.w_status || 'Details Completed' %></option>
+                            <option value="Details Completed">Details Completed</option>
+                            <option value="Measurement Done">Measurement Done</option>
+                            <option value="Quotation approved">Quotation Approved</option>
+                            <option value="Stiching Done">Stiching Done</option>
+                            <option value="Delivery Pending">Delivery Pending</option>
+                            <option value="Order Delivered">Order Delivered</option>
+                          </select>
+                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </table><br><br><br>
+
                     <center>
+                        <button type="submit" class="but" formaction="/tai-save">Submit</button>
                         <button type="submit" class="but" formaction="/back">Back</button> 
                     </center>
                 </div>
