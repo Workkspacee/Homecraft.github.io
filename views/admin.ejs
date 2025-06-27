@@ -197,16 +197,7 @@
 
                 if (results.length === 0) return;
 
-                const $list = $("<ul>").addClass("autocomplete-list suggestions-box").css({
-                    position: "absolute",
-                    width: $input.outerWidth(),
-                    zIndex: 1000,
-                    background: "#fff",
-                    border: "1px solid #ccc",
-                    marginTop: "2px",
-                    maxHeight: "200px",
-                    overflowY: "auto",
-                });
+                const $list = $("<ul>").addClass("autocomplete-list suggestions-box")
 
                 results.forEach((item, index) => {
                     const $item = $("<li>").addClass("suggestion-item").text(`${item.work_no} - ${item.name}`);
@@ -275,8 +266,8 @@
             <!-- Search Form -->
             <form id="searchForm" class="container" action="/admin/search" method="POST" autocomplete="off">
                 <input type="text" id="workNoInput" name="work_no" class="input-field" placeholder="Enter work number"
-                    oninput="fetchSuggestions(this.value)" autocomplete="off" style="font-size: 20px; width: 500px;">
-                <div id="suggestions" class="suggestions-box"></div><br>
+                 autocomplete="off" style="font-size: 20px; width: 500px;">
+                <br>
                 <button type="submit" class="search-btn">Search</button>
             </form>
         </center>
