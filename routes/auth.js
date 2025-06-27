@@ -6,7 +6,8 @@ const User = require('../models/user');
 const Data = require('../models/data');
 const sendOTP = require('../Script/otpMailer');
 const session = require('express-session');
-
+const multer = require('multer');
+const upload = multer({ storage: multer.memoryStorage() });
 
 const router = express.Router();
 
@@ -734,6 +735,55 @@ router.post('/bill', async (req, res) => {
 
 router.get('/bill2', (req,res) =>{
   res.render('bill2');
+});
+
+// Session check middleware
+function isAdmin(req, res, next) {
+  if (req.session?.user?.role === 'admin') return next();
+  return res.status(403).send('Access denied: Admins only');
+}
+
+// GET backup page
+router.get('/backup', isAdmin, (req, res) => {
+  res.render('backup', { username: req.session.user.username });
+});
+
+// EXPORT backup
+router.post('/export', isAdmin, async (req, res) => {
+  try {
+    const { month, year } = req.body;
+
+    const from = new Date(`${year}-${month}-01`);
+    const to = new Date(from);
+    to.setMonth(to.getMonth() + 1);
+
+    const data = await Data.find({ date: { $gte: from, $lt: to } });
+
+    const filename = `backup-${year}-${month}.json`;
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(data, null, 2));
+  } catch (error) {
+    console.error('Export Error:', error);
+    res.status(500).send('Failed to export backup');
+  }
+});
+
+// IMPORT restore
+router.post('/import', isAdmin, upload.single('backupFile'), async (req, res) => {
+  try {
+    const backupData = JSON.parse(req.file.buffer.toString());
+
+    for (const doc of backupData) {
+      const { work_no } = doc;
+      await Data.findOneAndUpdate({ work_no }, doc, { upsert: true, new: true });
+    }
+
+    res.send('Backup restored successfully!');
+  } catch (error) {
+    console.error('Import Error:', error);
+    res.status(500).send('Failed to import backup');
+  }
 });
 
 

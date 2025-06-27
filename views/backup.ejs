@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Backup & Restore</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; }
+    .section { margin-bottom: 2rem; }
+    label { display: block; margin-top: 1rem; }
+    button { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>Welcome, <%= username %> 👋</h2>
+
+  <div class="section">
+    <h3>📤 Export Backup</h3>
+    <form action="/export" method="POST">
+      <label>Month</label>
+      <select name="month" required>
+        <% for (let i = 1; i <= 12; i++) { %>
+          <option value="<%= i.toString().padStart(2, '0') %>"><%= i.toString().padStart(2, '0') %></option>
+        <% } %>
+      </select>
+
+      <label>Year</label>
+      <select name="year" required>
+        <% const thisYear = new Date().getFullYear();
+           for (let y = thisYear; y >= 2022; y--) { %>
+          <option value="<%= y %>"><%= y %></option>
+        <% } %>
+      </select>
+
+      <button type="submit">Download JSON</button>
+    </form>
+  </div>
+
+  <div class="section">
+    <h3>📥 Import Backup</h3>
+    <form action="/import" method="POST" enctype="multipart/form-data">
+      <label>Select JSON File</label>
+      <input type="file" name="backupFile" accept=".json" required>
+      <button type="submit">Upload & Restore</button>
+    </form>
+  </div>
+</body>
+</html>
