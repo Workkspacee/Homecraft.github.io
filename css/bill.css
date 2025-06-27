@@ -26,8 +26,9 @@ textarea{
     border: none;
     resize: none;  
     overflow: hidden; /* Hide scroll bar */
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.4;
+    font-family: 'Poppins', sans-serif;
 }
 
 select{
@@ -56,23 +57,23 @@ select{
 }
 
 .input_field {
-    position: relative;
+  position: relative;
 	border: none;
 	background: none;
 	padding: 0.063rem;
 	padding-left: 0.063rem;
-    font-size: 16px;
+  font-size: 16px;
 	width: 50%;
 	transition: .2s;
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .bill_table{
-    position: relative;
+  position: relative;
 	border: none;
-    font-size: 16px;
+  font-size: 16px;
 	transition: .2s;
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* to remove the up/down arrows of the type=number in input tag*/
@@ -91,27 +92,27 @@ input[type=number] {
 }
 
 .bill{
-    width: auto;
-    border: 1px solid black;
-    border-collapse: collapse;
-    table-layout: auto;
-    overflow-x: auto;
+  width: auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+  table-layout: auto;
+  overflow-x: auto;
 }
 
 table.bill th{
-    border: 1px solid black;
-    padding: 8px;
-    text-align: left;
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
 }
 
 table.bill td{
-    border: 1px solid black;
-    padding: 8px;
+  border: 1px solid black;
+  padding: 8px;
 }
 
 table.tax td{
-    padding: 8px;
-    text-align: center;
+  padding: 8px;
+  text-align: center;
 }
 
 @media print {
