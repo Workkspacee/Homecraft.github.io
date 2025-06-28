@@ -123,11 +123,32 @@ router.get('/dashboard', (req, res) => {
   }
 });
 
+// Admin main page with all work orders + filters
 router.get('/admin', async (req, res) => {
   if (req.session.user && req.session.user.role === 'admin') {
     try {
-      const workNumbers = await Data.find({}, 'work_no name'); // Fetch all work_no
-      res.render('admin', { username: req.session.user.username, workNumbers, searchedWork: null});
+      const workNumbers = await Data.find({}, 'work_no name date').sort({ date: -1 });
+
+      // Extract unique months & years for filters
+      const monthYearMap = {};
+      const yearSet = new Set();
+      workNumbers.forEach((order) => {
+        const d = new Date(order.date);
+        const year = d.getFullYear();
+        const month = d.toLocaleString('default', { month: 'long' });
+        const key = `${month} ${year}`;
+        if (!monthYearMap[key]) monthYearMap[key] = [];
+        monthYearMap[key].push(order);
+        yearSet.add(year);
+      });
+
+      res.render('admin', {
+        username: req.session.user.username,
+        workNumbers,
+        searchedWork: null,
+        filters: monthYearMap,
+        years: Array.from(yearSet).sort((a, b) => b - a)
+      });
     } catch (error) {
       console.error(error);
       res.status(500).send('Server error');
@@ -617,7 +638,20 @@ router.post('/fitter-save', async (req, res) => {
   }
 });
 
-//to get dropdown list for the suggestion 
+// Delete multiple work orders
+router.post('/admin/delete-multiple', async (req, res) => {
+  try {
+    const { ids } = req.body;
+    if (!ids || !Array.isArray(ids)) return res.json({ success: false });
+    await Data.deleteMany({ _id: { $in: ids } });
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Bulk delete error:', err);
+    res.json({ success: false });
+  }
+});
+
+// Other existing routes remain unchanged
 router.get('/admin/suggestions', async (req, res) => {
   try {
     const query = req.query.query || '';
@@ -627,8 +661,8 @@ router.get('/admin/suggestions', async (req, res) => {
         { name: { $regex: `^${query}`, $options: 'i' } }
       ]
     })
-    .select('work_no name')
-    .limit(5);
+      .select('work_no name')
+      .limit(5);
 
     res.json(suggestions);
   } catch (error) {
@@ -638,60 +672,52 @@ router.get('/admin/suggestions', async (req, res) => {
 });
 
 router.get('/admin/all-suggestions', async (req, res) => {
-    try {
-        const allWorks = await Data.find({}, 'work_no name'); // Adjust collection name
-        res.json(allWorks);
-    } catch (err) {
-        res.status(500).json({ error: 'Server error' });
-    }
+  try {
+    const allWorks = await Data.find({}, 'work_no name');
+    res.json(allWorks);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
-//for geting details with their id.
 router.get('/admin/:id', async (req, res) => {
-    try {
-        const no = await Data.findById(req.params.id);
-        if (!no) return res.status(404).send('ID not found');
-        res.render('detail', { no }); 
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Server error');
-    }
+  try {
+    const no = await Data.findById(req.params.id);
+    if (!no) return res.status(404).send('ID not found');
+    res.render('detail', { no });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server error');
+  }
 });
 
-//to delete the order from admin page
 router.delete('/admin/delete/:id', async (req, res) => {
-    try {
-        const deleted = await Data.findByIdAndDelete(req.params.id);
-        if (!deleted) return res.status(404).json({ success: false, message: 'Not found' });
-        res.json({ success: true });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ success: false, message: 'Server error' });
-    }
+  try {
+    const deleted = await Data.findByIdAndDelete(req.params.id);
+    if (!deleted) return res.status(404).json({ success: false, message: 'Not found' });
+    res.json({ success: true });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
 });
 
-//to search order
-// Search by work_no OR name
 router.post('/admin/search', async (req, res) => {
   try {
     const searchQuery = req.body.work_no?.trim();
     const workNumbers = await Data.find().sort({ createdAt: -1 });
-
     const searchedWork = await Data.find({
       $or: [
         { work_no: searchQuery },
         { name: { $regex: new RegExp(searchQuery, 'i') } }
       ]
     });
-
     res.render('admin', { workNumbers, searchedWork });
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');
   }
 });
-
-
 
 router.post('/bill', async (req, res) => {
   try {

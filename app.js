@@ -22,6 +22,7 @@ app.set('view engine','ejs');
 app.use(express.static('css'));
 app.use(express.static('Script'));
 app.use(express.static('Json'));
+app.use(express.json());
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));

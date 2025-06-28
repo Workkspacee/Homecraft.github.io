@@ -245,28 +245,53 @@
             <a href="/backup" class="search-btn" >Backup / Restore</a>
         </center>
 
-        <!-- All Work Orders -->
+        <!-- Filter + Work Orders Section -->
         <div class="work-no-list">
             <!-- Search Result -->
             <% if (searchedWork && searchedWork.length > 0) { %>
-            <h3>Search Results:</h3><br>
-            <% searchedWork.forEach(function(work) { %>
+                <h3>Search Results:</h3><br>
+                <% searchedWork.forEach(function(work) { %>
                 <div class="work-order">
-                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - 
-                <span class="work-name"><%= work.name %></span>
-                <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                    <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - 
+                    <span class="work-name"><%= work.name %></span>
+                    <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
                 </div>
-            <% }); %>
-            <% } %>
-            <h2>All Work Orders</h2><br>
-            <div class="work-orders">
-                <% workNumbers.forEach(work => { %>
-                    <div class="work-order">
-                        <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - <span class="work-name"><%= work.name %></span>
-                        <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
-                    </div>
                 <% }); %>
+            <% } %>
+                
+            <!-- Filter Controls -->
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <h2>All Work Orders</h2>
+                <div style="display: flex; gap: 10px;">
+                <select id="monthFilter">
+                    <option value="">All Months</option>
+                    <% for (let m = 1; m <= 12; m++) { %>
+                    <option value="<%= m %>"><%= new Date(0, m - 1).toLocaleString('default', { month: 'long' }) %></option>
+                    <% } %>
+                </select>
+
+                <select id="yearFilter">
+                    <option value="">All Years</option>
+                    <% const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))]; %>
+                    <% years.forEach(year => { %>
+                    <option value="<%= year %>"><%= year %></option>
+                    <% }) %>
+                </select>
+
+                <button onclick="deleteSelected()" class="search-btn">Delete Selected</button>
+                <button type="button" onclick="toggleSelectAllBtn()" class="search-btn" id="selectAllBtn">Select All</button>
             </div>
+        </div><br>
+
+        <div class="work-orders" id="workOrderList">
+            <% workNumbers.forEach(work => { %>
+            <div class="work-order" data-month="<%= new Date(work.date).getMonth() + 1 %>" data-year="<%= new Date(work.date).getFullYear() %>">
+                <input type="checkbox" class="select-order" value="<%= work._id %>">
+                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - <span class="work-name"><%= work.name %></span>
+                <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+            </div>
+            <% }); %>
+        </div>
         </div>
 
         <!-- Delete Modal -->
@@ -287,6 +312,82 @@
             <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
         </nav>
     </div>
+    
+
+    <script>
+    // Filter logic
+    document.getElementById('monthFilter').addEventListener('change', filterWorkOrders);
+    document.getElementById('yearFilter').addEventListener('change', filterWorkOrders);
+
+    function filterWorkOrders() {
+        const selectedMonth = document.getElementById('monthFilter').value;
+        const selectedYear = document.getElementById('yearFilter').value;
+
+        document.querySelectorAll('#workOrderList .work-order').forEach(el => {
+        const month = el.getAttribute('data-month');
+        const year = el.getAttribute('data-year');
+        const show = (!selectedMonth || month === selectedMonth) && (!selectedYear || year === selectedYear);
+        el.style.display = show ? 'flex' : 'none';
+        });
+        // Reset "Select All" button
+        document.getElementById('selectAllBtn').innerText = 'Select All';
+        allSelected = false;
+    }
+
+    // Multi-delete function
+    function deleteSelected() {
+        const selected = Array.from(document.querySelectorAll('.select-order:checked')).map(cb => cb.value);
+        if (selected.length === 0) {
+        alert("Please select at least one order.");
+        return;
+        }
+        if (!confirm("Are you sure you want to delete selected orders?")) return;
+
+        fetch('/admin/delete-multiple', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids: selected })
+        })
+        .then(res => res.json())
+        .then(data => {
+        if (data.success) {
+            alert("Selected orders deleted.");
+            location.reload();
+        } else {
+            alert("Error deleting orders.");
+        }
+        });
+    }
+
+    let allSelected = false;
+
+    function toggleSelectAllBtn() {
+        const visibleCheckboxes = Array.from(document.querySelectorAll('.work-order'))
+            .filter(el => el.style.display !== 'none')
+            .map(el => el.querySelector('.select-order'));
+
+        allSelected = !allSelected;
+
+        visibleCheckboxes.forEach(cb => cb.checked = allSelected);
+
+        document.getElementById('selectAllBtn').innerText = allSelected ? 'Unselect All' : 'Select All';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.select-order').forEach(cb => {
+            cb.addEventListener('change', () => {
+            const visibleCheckboxes = Array.from(document.querySelectorAll('.work-order'))
+                .filter(el => el.style.display !== 'none')
+                .map(el => el.querySelector('.select-order'));
+
+            const allVisibleChecked = visibleCheckboxes.every(cb => cb.checked);
+            allSelected = allVisibleChecked;
+            document.getElementById('selectAllBtn').innerText = allSelected ? 'Unselect All' : 'Select All';
+            });
+        });
+    });
+    
+    </script>
 
 </body>
 </html>
