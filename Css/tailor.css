@@ -67,7 +67,7 @@ form {
 .submit-btn {
     width: 25%;
     padding: 0.622rem;
-    background-color: #4EA685;
+    background-color: #4d7dbb;
     color: #fff;
     border: none;
     border-radius: 0.373rem;
@@ -76,7 +76,7 @@ form {
 }
 
 .submit-btn:hover {
-    background-color: #179c6b;
+    background-color: #5e97e3;
 }
 
 .header1 {
@@ -104,7 +104,7 @@ nav h3{
 }
 
 nav a{
-    color: #4EA685;
+    color: #4d7dbb;
     display: block;
     text-decoration: none;
 }
@@ -119,7 +119,7 @@ nav a{
 
 p{
     font-size: 1.244rem;
-    color: #4EA685;
+    color: #4d7dbb;
 }
 
 @media screen and (max-width: 700px) {

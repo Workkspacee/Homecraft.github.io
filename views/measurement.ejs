@@ -642,14 +642,22 @@
                     <!-- Save Button -->
                     <div class="text-end my-3 no-print">
                     <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
+                    <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/bill" > Bill </button>
-                    <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>                    
+                    <button onclick="printContainer()" class="submit" class="btn btn-primary" id="printBtn"> Print </button>                   
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <center><button onclick="printContainer()" class="btn btn-primary" id="printBtn">Print</button></center><br/>
+
+    <footer class="footer">
+    <nav>
+        <p>&copy; 2024 All Rights Reserved.</p>
+        <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
+    </nav>
+</footer>
+
 </body>
 
 <script>

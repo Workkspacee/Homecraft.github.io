@@ -86,8 +86,9 @@ nav h3{
 }
 
 nav a{
-    color: #4EA685;
+    color: #4d7dbb;
     display: block;
+    text-decoration: none;
 }
 
 .footer{
@@ -103,7 +104,7 @@ nav a{
 
 p{
     font-size: 1.2444rem;
-    color: #4EA685;
+    color: #4d7dbb;
 }
 
 .work-no-list {
@@ -153,7 +154,7 @@ h2 {
 .search-btn {
     width: 130px;
     padding: 0.622rem;
-    background-color: #4EA685;
+    background-color: #4d7dbb;
     color: #fff;
     border: none;
     border-radius: 0.373rem;
@@ -214,7 +215,7 @@ h2 {
 }
 
 .confirm-btn {
-    background: rgb(3, 162, 3);
+    background: #4d7dbb;
     color: white;
     border: none;
     padding: 8px 15px;
