@@ -33,6 +33,10 @@ html, body {
     overflow-x: auto;
 }
 
+.jumbotron {
+    background-color: white !important;
+}
+
 .table-container {
     max-width: 100%;
     overflow-x: auto;
@@ -82,7 +86,7 @@ table {
 }
 
 .table1 {
-	background: #c8c4c4;
+	background: #b5d1f5;
 }
 
 input[type="number"] {
@@ -96,16 +100,6 @@ input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none; /* For Chrome, Safari, and Opera */
     margin: 0;
 }
-
-/*.curtain-roman {
-    background-color: #6e92bc;
-}
-.curtain-american {
-    background-color: #eee533;
-}
-.curtain-ring {
-    background-color: #67b877;
-}*/
 
 
 .header1 {
@@ -135,13 +129,13 @@ nav h3{
 }
 
 nav a{
-    color: #4EA685;
+    color: #4d7dbb;
     display: block;
     text-decoration: none;
 }
 
 a:hover{
-    color: #4EA685;
+    color: #4d7dbb;
     text-decoration: none;
 }
 .footer{
@@ -155,13 +149,13 @@ a:hover{
 
 p{
     font-size: 1.244rem;
-    color: #4EA685;
+    color: #4d7dbb;
 }
 
 .but{
     width: 15%;
     padding: 0.622rem;
-    background-color: #817e7e;
+    background-color: #4d7dbb;
     color: #fff;
     border: none;
     border-radius: 0.373rem;

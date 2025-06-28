@@ -394,7 +394,53 @@
                     <% } %>
 
                 </div>    
-                <br/> <br/>
+                <br/> <br/><br/>
+
+                <div class="wizard-progress" id="progressBar">
+                        <div class="step" data-step="0">
+                            <div class="step-icon">
+                            <i class="fas fa-file-alt"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Details Completed</div>
+                        </div>
+                        <div class="step" data-step="1">
+                            <div class="step-icon">
+                            <i class="fas fa-drafting-compass"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Measurement Done</div> 
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-icon">
+                            <i class="fas fa-file-signature"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Quotation approved</div> 
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-icon">
+                            <i class="fas fa-scissors"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Stiching DOne</div> 
+                        </div>
+                        <div class="step" data-step="4">
+                            <div class="step-icon">
+                            <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Delivery Pending</div> 
+                        </div>
+                        <div class="step" data-step="5">
+                            <div class="step-icon">
+                            <i class="fas fa-circle-check"></i>
+                            </div>
+                            <div class="node"></div>
+                            <div class="step-label">Order Delivered</div> 
+                        </div>
+                    </div><br><br>
+
                 <div class="row">
                     <div class="col-4"></div>
                     <div class="col-4">
@@ -620,56 +666,19 @@
                     <button type="submit" class="submit" class="btn btn-success" formaction="/measure-save" > Save </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/bill" > Bill </button>
                     <button type="submit" class="submit" class="btn btn-success" formaction="/back" > Back </button>
-                    </div><br>
-
-                    <div class="wizard-progress" id="progressBar">
-                        <div class="step" data-step="0">
-                            <div class="step-icon">
-                            <i class="fas fa-file-alt"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Details Completed</div>
-                        </div>
-                        <div class="step" data-step="1">
-                            <div class="step-icon">
-                            <i class="fas fa-drafting-compass"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Measurement Done</div> 
-                        </div>
-                        <div class="step" data-step="2">
-                            <div class="step-icon">
-                            <i class="fas fa-file-signature"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Quotation approved</div> 
-                        </div>
-                        <div class="step" data-step="3">
-                            <div class="step-icon">
-                            <i class="fas fa-scissors"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Stiching DOne</div> 
-                        </div>
-                        <div class="step" data-step="4">
-                            <div class="step-icon">
-                            <i class="fas fa-truck"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Delivery Pending</div> 
-                        </div>
-                        <div class="step" data-step="5">
-                            <div class="step-icon">
-                            <i class="fas fa-circle-check"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Order Delivered</div> 
-                        </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+
+    <div class="footer">
+        <nav>
+            <p> &copy; 2024 All Rights Reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
+        </nav>
+    </div>
+
 </body>
 
 <script>

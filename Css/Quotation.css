@@ -70,13 +70,13 @@ html, body {
 }
 
 .table1 {
-	background: linear-gradient(90deg, #bee6d8, #3c9f7a);
+	background: #b5d1f5;
 }
 
 .but{
     width: 15%;
     padding: 0.622rem;
-    background-color: #4EA685;
+    background-color: #4d7dbb;
     color: #fff;
     border: none;
     border-radius: 0.373rem;
@@ -111,12 +111,12 @@ nav h3{
 }
 
 nav a{
-    color: #4EA685;
+    color: #4d7dbb;
     display: block;
     text-decoration: none;
 }
 
-nav a:hover {color: #4EA685; text-decoration: none; }
+nav a:hover {color: #4d7dbb; text-decoration: none; }
 
 
 
@@ -131,7 +131,7 @@ nav a:hover {color: #4EA685; text-decoration: none; }
 
 p{
     font-size: 1.2444rem;
-    color: #4EA685;
+    color: #4d7dbb;
 }
 
 .table-container {
@@ -143,12 +143,14 @@ p{
 .submit {
     width: 15%;
     padding: 0.622rem;
-    background-color: #4EA685;
+    background-color: #4d7dbb;
     color: white;
     border: none;
     border-radius: 0.373rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: large;
+    font-weight: 700;
 }
 
 .submit:focus:not(:focus-visible):not(.focus-visible) {
@@ -157,23 +159,23 @@ p{
 }
 
 .submit:hover {
-  background-color: #4EA685;
+  background-color: #4d7dbb;
 }
 
 .submit:focus {
-  box-shadow: rgba(46, 164, 79, .4) 0 0 0 0.188rem;
+  box-shadow: #4d7dbb 0 0 0 0.188rem;
   outline: none;
 }
 
 .submit:disabled {
-  background-color: #94d3a2;
+  background-color: #8eafda;
   border-color: rgba(27, 31, 35, .1);
   color: rgba(255, 255, 255, .8);
   cursor: default;
 }
 
 .submit:active {
-  background-color: #4EA685;
+  background-color: #4d7dbb;
   box-shadow: rgba(20, 70, 32, .2) 0 0.063rem 0 inset;
 }
 
