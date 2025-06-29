@@ -29,6 +29,7 @@ html, body {
 
 .container {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
@@ -41,6 +42,7 @@ html, body {
 	height: 37.5rem;
 	width: 22.5rem;
 	box-shadow: 0 0 1.5rem #000000;
+	flex: 1;
 }
 
 .screen__content {
@@ -198,9 +200,15 @@ nav a {
 	height: 6.25rem;
 	background-color: white;
 	border-bottom: #000000;
-	padding-top: 2.5rem;
+	padding-top: 2.468rem;
 	margin-top: 5.625rem;
 }
+
+.footer nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 4.66rem 1rem 1.556rem;}
 
 p {
 	font-size: 1.25rem;

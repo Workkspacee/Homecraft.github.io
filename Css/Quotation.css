@@ -73,6 +73,11 @@ html, body {
 	background: #b5d1f5;
 }
 
+thead.table-secondary:hover {
+  background-color: #b5d1f5 !important;
+  cursor: default;
+}
+
 .but{
     width: 15%;
     padding: 0.622rem;
