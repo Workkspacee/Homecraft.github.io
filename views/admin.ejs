@@ -296,59 +296,61 @@
                 <% }); %>
             <% } %>
                 
-            <!-- Filter Controls -->
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-                <h2>All Work Orders</h2>
-                <div style="display: flex; gap: 10px;">
-                    <select id="monthFilter">
-                        <option value="">All Months</option>
-                        <% for (let m = 1; m <= 12; m++) { %>
-                        <option value="<%= m %>"><%= new Date(0, m - 1).toLocaleString('default', { month: 'long' }) %></option>
+            <% if (!searchedWork || searchedWork.length === 0) { %>
+                <!-- Filter Controls -->
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <h2>All Work Orders</h2>
+                    <div style="display: flex; gap: 10px;">
+                        <select id="monthFilter">
+                            <option value="">All Months</option>
+                            <% for (let m = 1; m <= 12; m++) { %>
+                            <option value="<%= m %>"><%= new Date(0, m - 1).toLocaleString('default', { month: 'long' }) %></option>
+                            <% } %>
+                        </select>
+
+                        <select id="yearFilter">
+                            <option value="">All Years</option>
+                            <% const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))]; %>
+                            <% years.forEach(year => { %>
+                            <option value="<%= year %>"><%= year %></option>
+                            <% }) %>
+                        </select>
+
+                        <button onclick="deleteSelected()" class="search-btn">Delete Selected</button>
+                        <button type="button" onclick="toggleSelectAllBtn()" class="search-btn" id="selectAllBtn">Select All</button>
+                    </div>
+                </div><br/>
+
+                <div class="work-orders-wrapper" id="workOrderList">
+                    <% if (!searchedWork) { %>
+                        <% for (let group in groupedOrders) { %>
+                        <div class="month-group">
+                            <h3><%= group %></h3>
+                            <div class="orders-in-month">
+                            <% groupedOrders[group].forEach(work => { %>
+                                <div class="work-order"
+                                    data-month="<%= new Date(work.date).getMonth() + 1 %>"
+                                    data-year="<%= new Date(work.date).getFullYear() %>">
+                                <input type="checkbox" class="select-order" value="<%= work._id %>" style="margin-left: 10px;">
+                                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
+                                <span class="work-name"><%= work.name %></span>
+                                <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')" style="margin-right: 10px;"></i>
+                                </div>
+                            <% }) %>
+                            </div>
+                        </div>
                         <% } %>
-                    </select>
-
-                    <select id="yearFilter">
-                        <option value="">All Years</option>
-                        <% const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))]; %>
-                        <% years.forEach(year => { %>
-                        <option value="<%= year %>"><%= year %></option>
-                        <% }) %>
-                    </select>
-
-                    <button onclick="deleteSelected()" class="search-btn">Delete Selected</button>
-                    <button type="button" onclick="toggleSelectAllBtn()" class="search-btn" id="selectAllBtn">Select All</button>
-                </div>
-            </div><br/>
-
-            <div class="work-orders-wrapper" id="workOrderList">
-                <% if (!searchedWork) { %>
-                    <% for (let group in groupedOrders) { %>
-                    <div class="month-group">
-                        <h3><%= group %></h3>
-                        <div class="orders-in-month">
-                        <% groupedOrders[group].forEach(work => { %>
-                            <div class="work-order"
-                                data-month="<%= new Date(work.date).getMonth() + 1 %>"
-                                data-year="<%= new Date(work.date).getFullYear() %>">
-                            <input type="checkbox" class="select-order" value="<%= work._id %>" style="margin-left: 10px;">
+                    <% } else { %>
+                        <% searchedWork.forEach(work => { %>
+                        <div class="work-order">
                             <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
                             <span class="work-name"><%= work.name %></span>
-                            <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')" style="margin-right: 10px;"></i>
-                            </div>
-                        <% }) %>
+                            <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
                         </div>
-                    </div>
+                        <% }) %>
                     <% } %>
-                <% } else { %>
-                    <% searchedWork.forEach(work => { %>
-                    <div class="work-order">
-                        <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
-                        <span class="work-name"><%= work.name %></span>
-                        <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
-                    </div>
-                    <% }) %>
-                <% } %>
-            </div>
+                </div>
+            <% } %>
         </div>
 
         <!-- Delete Modal -->
