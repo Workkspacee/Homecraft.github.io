@@ -330,10 +330,10 @@
                             <div class="work-order"
                                 data-month="<%= new Date(work.date).getMonth() + 1 %>"
                                 data-year="<%= new Date(work.date).getFullYear() %>">
-                            <input type="checkbox" class="select-order" value="<%= work._id %>">
+                            <input type="checkbox" class="select-order" value="<%= work._id %>" style="margin-left: 10px;">
                             <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
                             <span class="work-name"><%= work.name %></span>
-                            <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                            <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')" style="margin-right: 10px;"></i>
                             </div>
                         <% }) %>
                         </div>
