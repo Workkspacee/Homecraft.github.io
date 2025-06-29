@@ -48,7 +48,7 @@
             <label>
                 <span>Date</span>
                 <input type="date" name="date" 
-                  <% if (no.date) { %> value="<%= new Date(no.date).toISOString().split('T')[0] %>" <% } %> />
+                  <% if (no.date) { %> value="<%= new Date(no.date).toISOString().split('T')[0] %>" <% } %> required />
             </label>
             <label>
                 <span>Delivery Date</span>

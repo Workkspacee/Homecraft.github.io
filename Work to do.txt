@@ -1,10 +1,8 @@
 5 mail (user 1 , auth 2 ,otpmailer 2)
 
-check all pages for footer, add wherever remainning 
-
 1. Backend 
 
-make date require 
+make date require (done)
 
 2. Backend nu measurement 
 
@@ -21,7 +19,7 @@ Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 Fittermeasure page:= 
 fitter ne total parts and total fabric joise? (ask kumar)
 curtains fitter add karse ?? ena mate editable rakhvana che ?? (ask kumar)
-only 2 options kumar ne puchi ne z
+only 2 options kumar ne puchi ne 
 
 5. Tailor (not resposive)
 
