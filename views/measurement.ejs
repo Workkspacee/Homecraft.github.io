@@ -548,7 +548,9 @@
                                 <th style="width: 7.188rem;">Sub Total</th>
                                 <th style="width: 5.938rem;">GST (%)</th>
                                 <th style="width: 8.125rem;">Grand Total</th>
-                                <th style="width: 6.875rem;" class="no-print">Action</th>
+                                <th style="width: 6.875rem;" class="no-print">Action
+                                    <input type="checkbox" id="selectAllCheckbox" class="no-print">
+                                </th>
                                 </tr>
                             </thead>
                             <tbody> <!-- Hidden row -->
@@ -1003,4 +1005,14 @@ function printContainer() {
   location.reload(); // Reload the page to restore full layout
 }
 </script>
+
+<script> //select all row for bill checkbox
+document.getElementById('selectAllCheckbox').addEventListener('change', function() {
+    const isChecked = this.checked;
+    document.querySelectorAll('.include-in-bill').forEach(checkbox => {
+        checkbox.checked = isChecked;
+    });
+});
+</script>
+
 </html>
