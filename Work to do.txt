@@ -12,6 +12,8 @@ date and d_date (ask kumar)
 
 3. Backend nu quotation ( Combine with measurement)
 
+autofill karya pachi quotation table ma kai changes karine direct bill banvse to changes save ni thse ??
+
 Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
 
 4. Fitter 
