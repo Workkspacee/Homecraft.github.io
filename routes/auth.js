@@ -129,25 +129,25 @@ router.get('/admin', async (req, res) => {
     try {
       const workNumbers = await Data.find({}, 'work_no name date').sort({ date: -1 });
 
-      // Extract unique months & years for filters
-      const monthYearMap = {};
-      const yearSet = new Set();
+      // Group by Month-Year
+      const groupedOrders = {};
       workNumbers.forEach((order) => {
         const d = new Date(order.date);
-        const year = d.getFullYear();
-        const month = d.toLocaleString('default', { month: 'long' });
-        const key = `${month} ${year}`;
-        if (!monthYearMap[key]) monthYearMap[key] = [];
-        monthYearMap[key].push(order);
-        yearSet.add(year);
+        const key = `${d.toLocaleString('default', { month: 'long' })} ${d.getFullYear()}`;
+
+        if (!groupedOrders[key]) groupedOrders[key] = [];
+        groupedOrders[key].push(order);
       });
+
+      // Extract available years for filter
+      const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))];
 
       res.render('admin', {
         username: req.session.user.username,
         workNumbers,
         searchedWork: null,
-        filters: monthYearMap,
-        years: Array.from(yearSet).sort((a, b) => b - a)
+        groupedOrders,
+        years
       });
     } catch (error) {
       console.error(error);
@@ -157,6 +157,7 @@ router.get('/admin', async (req, res) => {
     return res.redirect('/login');
   }
 });
+
 
 // Similarly, add routes for 'backend', 'fiter', and 'tailor'
 router.get('/backend', (req, res) => {

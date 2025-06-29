@@ -49,7 +49,44 @@
             margin: 10px;
         }
         
-        
+        /* Prevent horizontal layout */
+        .work-orders-wrapper {
+            display: block;
+            width: 100%;
+        }
+
+        .month-group {
+            margin-bottom: 40px;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .month-group h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            color: #444;
+        }
+
+        .orders-in-month {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .work-order {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .work-name {
+            font-weight: 500;
+            color: #333;
+        }
     </style>
 
     <script>
@@ -243,7 +280,7 @@
                 <button type="submit" class="search-btn">Search</button>
             </form><br/>
             <a href="/backup" class="search-btn" style="text-decoration: none;">Backup / Restore</a>
-        </center>
+        </center><br/>
 
         <!-- Filter + Work Orders Section -->
         <div class="work-no-list">
@@ -263,35 +300,55 @@
             <div style="display: flex; align-items: center; justify-content: space-between;">
                 <h2>All Work Orders</h2>
                 <div style="display: flex; gap: 10px;">
-                <select id="monthFilter">
-                    <option value="">All Months</option>
-                    <% for (let m = 1; m <= 12; m++) { %>
-                    <option value="<%= m %>"><%= new Date(0, m - 1).toLocaleString('default', { month: 'long' }) %></option>
+                    <select id="monthFilter">
+                        <option value="">All Months</option>
+                        <% for (let m = 1; m <= 12; m++) { %>
+                        <option value="<%= m %>"><%= new Date(0, m - 1).toLocaleString('default', { month: 'long' }) %></option>
+                        <% } %>
+                    </select>
+
+                    <select id="yearFilter">
+                        <option value="">All Years</option>
+                        <% const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))]; %>
+                        <% years.forEach(year => { %>
+                        <option value="<%= year %>"><%= year %></option>
+                        <% }) %>
+                    </select>
+
+                    <button onclick="deleteSelected()" class="search-btn">Delete Selected</button>
+                    <button type="button" onclick="toggleSelectAllBtn()" class="search-btn" id="selectAllBtn">Select All</button>
+                </div>
+            </div><br/>
+
+            <div class="work-orders-wrapper" id="workOrderList">
+                <% if (!searchedWork) { %>
+                    <% for (let group in groupedOrders) { %>
+                    <div class="month-group">
+                        <h3><%= group %></h3>
+                        <div class="orders-in-month">
+                        <% groupedOrders[group].forEach(work => { %>
+                            <div class="work-order"
+                                data-month="<%= new Date(work.date).getMonth() + 1 %>"
+                                data-year="<%= new Date(work.date).getFullYear() %>">
+                            <input type="checkbox" class="select-order" value="<%= work._id %>">
+                            <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
+                            <span class="work-name"><%= work.name %></span>
+                            <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                            </div>
+                        <% }) %>
+                        </div>
+                    </div>
                     <% } %>
-                </select>
-
-                <select id="yearFilter">
-                    <option value="">All Years</option>
-                    <% const years = [...new Set(workNumbers.map(w => new Date(w.date).getFullYear()))]; %>
-                    <% years.forEach(year => { %>
-                    <option value="<%= year %>"><%= year %></option>
+                <% } else { %>
+                    <% searchedWork.forEach(work => { %>
+                    <div class="work-order">
+                        <a href="/admin/<%= work._id %>"><%= work.work_no %></a> -
+                        <span class="work-name"><%= work.name %></span>
+                        <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
+                    </div>
                     <% }) %>
-                </select>
-
-                <button onclick="deleteSelected()" class="search-btn">Delete Selected</button>
-                <button type="button" onclick="toggleSelectAllBtn()" class="search-btn" id="selectAllBtn">Select All</button>
+                <% } %>
             </div>
-        </div><br>
-
-        <div class="work-orders" id="workOrderList">
-            <% workNumbers.forEach(work => { %>
-            <div class="work-order" data-month="<%= new Date(work.date).getMonth() + 1 %>" data-year="<%= new Date(work.date).getFullYear() %>">
-                <input type="checkbox" class="select-order" value="<%= work._id %>">
-                <a href="/admin/<%= work._id %>"><%= work.work_no %></a> - <span class="work-name"><%= work.name %></span>
-                <i class="fas fa-trash delete-icon" onclick="showDeletePopup('<%= work._id %>')"></i>
-            </div>
-            <% }); %>
-        </div>
         </div>
 
         <!-- Delete Modal -->
@@ -323,15 +380,23 @@
         const selectedMonth = document.getElementById('monthFilter').value;
         const selectedYear = document.getElementById('yearFilter').value;
 
-        document.querySelectorAll('#workOrderList .work-order').forEach(el => {
+        // Loop over all work-order divs and show/hide based on filter
+        document.querySelectorAll('.work-order').forEach(el => {
         const month = el.getAttribute('data-month');
         const year = el.getAttribute('data-year');
-        const show = (!selectedMonth || month === selectedMonth) && (!selectedYear || year === selectedYear);
+
+        const show = (!selectedMonth || month === selectedMonth) &&
+                    (!selectedYear || year === selectedYear);
         el.style.display = show ? 'flex' : 'none';
         });
-        // Reset "Select All" button
-        document.getElementById('selectAllBtn').innerText = 'Select All';
-        allSelected = false;
+
+        // Now loop over each .month-group and hide it if it contains no visible orders
+        document.querySelectorAll('.month-group').forEach(group => {
+        const anyVisible = [...group.querySelectorAll('.work-order')].some(
+            el => el.style.display !== 'none'
+        );
+        group.style.display = anyVisible ? 'block' : 'none';
+        });
     }
 
     // Multi-delete function
