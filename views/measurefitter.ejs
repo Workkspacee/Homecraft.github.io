@@ -68,10 +68,19 @@
             if (!curtainType || curtainType.trim() === "") {
                 return 0;
             }
-            if (curtainType.toLowerCase() === "roman") {
-                return Math.ceil(((height + 12) / 39) * Math.ceil(width / 50) * 4) / 4;
+
+            curtainType = curtainType.trim().toLowerCase();
+
+            if (curtainType === "roller") {
+                return (width * height) / 144;
+            }
+
+            const multiplier = (height + 12) / 39;
+
+            if (curtainType === "roman") {
+                return Math.ceil(multiplier * Math.ceil(width / 50) * 4) / 4;
             } else {
-                return Math.ceil(((height + 12) / 39) * Math.ceil(width / 20) * 4) / 4;
+                return Math.ceil(multiplier * Math.ceil(width / 20) * 4) / 4;
             }
         }
 
@@ -311,7 +320,7 @@
                                           <option value="American">American</option>
                                           <option value="Ring">Ring</option>
                                           <option value="Roman">Roman</option>
-                                          <option value="Roman">Roller</option>
+                                          <option value="Roller">Roller</option>
                                       </select>
                                   </td>
                                   <td><input class="table_cell" type="number" step="any" name="width[]"></td>
@@ -320,9 +329,9 @@
                                   <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                   <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                   <td><input class="table_cell" type="number" step="any" name="blackout_req[]">
-                                  <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
-                                  <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
-                                  <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                  <input type="hidden" name="rate[]" step="any">
+                                  <input type="hidden" name="hsn[]" step="any">
+                                  <input type="hidden" name="gst[]" step="any"></td>
                                 </tr>   
                             <% } %>
 
@@ -345,9 +354,9 @@
                             <td></td>
                             <td>Total Fabrics</td>
                             <td></td>
-                            <td style="background-color: rgb(247, 120, 35);"><input type="number" id="ring" name="ring" class="login__input" value="<%= no.roller %>" readonly></td>                            
-                            <td></td>
-                            <td></td>
+                            <td style="background-color: rgb(247, 120, 35);"><input type="number" id="roller" name="roller" class="login__input" value="<%= no.roller %>" readonly></td>                            
+                            <td style="background-color: rgb(239, 239, 95);"><input type="number" id="aluminum" name="aluminum" class="login__input" value="<%= no.aluminum %>" readonly></td>
+                            <td style="background-color: rgb(106, 170, 106);"><input type="number" id="ri_2" name="ri_2" class="login__input" value="<%= no.ri_2 %>" readonly></td>
                             <td></td>
                             <td>
                                 <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>

@@ -44,6 +44,8 @@ const dataSchema = new mongoose.Schema({
     american: { type: Number, default: null  },
     ring: { type: Number, default: null  },
     roller: { type: Number, default: null  },
+    aluminum: { type: Number, default: null  },
+    ri_2: { type: Number, default: null  },
     total_fab_req: { type: Number, default: null  },
     total_black_req: { type: Number, default: null  },
     state: { type: String, default: '' },

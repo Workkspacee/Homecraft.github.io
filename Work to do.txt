@@ -68,9 +68,12 @@ like [
 
 work to do imp 
 
-backend page;-
-1. remove fabric type
-in quotation table blackout require 
+backend page:-
+remove fabric type  (done)
+f_type remove karyu atle backend and backend2 nu table box nanu karje 
+add color in roller + 1st time entry time par colours nathi aavta ring roman roller na 
+- no red color different che measurement and quotation ma 
+in quotation table blackout require 	
 fitting charges
 shiping address
 roller chanel 
@@ -83,7 +86,7 @@ add terms and condition in quotation page
 tailor:- 
 1. add new column for fabric recived or not yes or no with colour 
 
-bill page
+bill page:-
 fabric mtr
 amer / ring stichung part
 roller / roman sq.ft
@@ -99,4 +102,6 @@ admin fabrics status
 universal
 edit work status 
 
+
+=(SUM(IF(D12="Ring",E12,0),IF(D13="Ring",E13,0),IF(D14="Ring",E14,0),IF(D15="Ring",E15,0),IF(D16="Ring",E16,0),IF(D17="Ring",E17,0),IF(D18="Ring",E18,0),IF(D19="Ring",E19,0),IF(D20="Ring",E20,0),IF(D21="Ring",E21,0),IF(D22="Ring",E22,0),IF(D23="Ring",E23,0),IF(D24="Ring",E24,0),IF(D25="Ring",E25,0),IF(D26="Ring",E26,0)))/12
 
