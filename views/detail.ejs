@@ -479,6 +479,7 @@
                                             <option value="American" <%= row.curtain === 'American' ? 'selected' : '' %>>American</option>
                                             <option value="Ring" <%= row.curtain === 'Ring' ? 'selected' : '' %>>Ring</option>
                                             <option value="Roman" <%= row.curtain === 'Roman' ? 'selected' : '' %>>Roman</option>
+                                            <option value="Roller" <%= row.curtain === 'Roller' ? 'selected' : '' %>>Roller</option>
                                         </select>
                                     </td>
                                     <td><input type="number" class="table_cell" step="any" name="width[]" value="<%= row.width ?? '' %>"></td>
@@ -487,10 +488,10 @@
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
-                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
-                                    <input type="hidden" name="rate[]" step="any">
-                                    <input type="hidden" name="hsn[]" step="any">
-                                    <input type="hidden" name="gst[]" step="any">
+                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button>
+                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
+                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
+                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
                                 </tr>
                             <% } %>
                             <% } else { %>
@@ -504,6 +505,7 @@
                                             <option value="American">American</option>
                                             <option value="Ring">Ring</option>
                                             <option value="Roman">Roman</option>
+                                            <option value="Roman">Roller</option>
                                         </select>
                                     </td>
                                     <td><input class="table_cell" type="number" step="any" name="width[]"></td>
@@ -512,10 +514,10 @@
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
-                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
-                                    <input type="hidden" name="rate[]" step="any">
-                                    <input type="hidden" name="hsn[]" step="any">
-                                    <input type="hidden" name="gst[]" step="any">
+                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button>
+                                    <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
+                                    <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
+                                    <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
                                 </tr>   
                             <% } %>
 
@@ -538,7 +540,7 @@
                             <td></td>
                             <td>Total Fabrics</td>
                             <td></td>
-                            <td></td>
+                            <td style="background-color: rgb(247, 120, 35);"><input type="number" id="ring" name="ring" class="login__input" value="<%= no.roller %>" readonly></td>                            
                             <td></td>
                             <td></td>
                             <td></td>
@@ -584,8 +586,8 @@
                                     <td><input type="number" class="discount" step="any" name="discount[]"></td>
                                     <td><input type="number" class="sub_total" step="any" name="sub_total[]" ></td>
                                     <td><input type="number" class="q_gst" step="any" name="q_gst[]"></td>
-                                    <td><input type="number" class="grand_total" step="any" name="grand_total[]" ></td>
-                                    <input type="hidden" class="q_hsn" step="any" name="q_hsn[]">
+                                    <td><input type="number" class="grand_total" step="any" name="grand_total[]" >
+                                    <input type="hidden" class="q_hsn" step="any" name="q_hsn[]"></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -606,8 +608,8 @@
                                         <td><input type="number" class="discount table_cell" step="any" name="discount[]" value="<%= q.discount %>"></td>
                                         <td><input type="number" class="sub_total table_cell" step="any" name="sub_total[]" value="<%= q.sub_total %>" ></td>
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="<%= q.q_gst %>"></td>
-                                        <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" ></td>
-                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>">
+                                        <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" value="<%= q.grand_total %>" >
+                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]" value="<%= q.q_hsn %>"></td>
                                         <td>
                                         <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                         <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>
@@ -625,8 +627,8 @@
                                         <td><input type="number" class="discount table_cell" step="any" name="discount[]" value="0"></td>
                                         <td><input type="number" class="sub_total table_cell" step="any" name="sub_total[]" ></td>
                                         <td><input type="number" class="q_gst table_cell" step="any" name="q_gst[]" value="0"></td>
-                                        <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" ></td>
-                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]">
+                                        <td><input type="number" class="grand_total table_cell" step="any" name="grand_total[]" >
+                                        <input type="hidden" class="q_hsn table_cell" step="any" name="q_hsn[]"></td>
                                         <td>
                                             <button type="button" class="btn btn-sm btn-success add-quotation-row">+</button>
                                             <button type="button" class="btn btn-sm btn-danger delete-quotation-row">−</button>                                   

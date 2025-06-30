@@ -194,7 +194,7 @@ router.get('/logout', (req, res) => {
 //saving data in datadase from backend
 router.post('/details', async(req,res) => {
   try {
-    const {work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status} = req.body;
+    const {work_no, name, date, d_date, p_no, add, map_link, f_status, w_status} = req.body;
     
     // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
@@ -204,7 +204,7 @@ router.post('/details', async(req,res) => {
       });
     }
 
-    const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status});
+    const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_status, w_status});
     await data.save()
     res.redirect('/dashboard');
   }
@@ -221,7 +221,7 @@ router.get('/details', async(req,res) => {
 // For opening measurement page with saving details and showing that details 
 router.post('/measure', async(req,res) => {
   try {
-    const {work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status} = req.body;
+    const {work_no, name, date, d_date, p_no, add, map_link, f_status, w_status} = req.body;
     
     // Check if work order no already exists
     const existingno = await Data.findOne({ work_no });
@@ -231,7 +231,7 @@ router.post('/measure', async(req,res) => {
       });
     }
 
-    const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status});
+    const data = new Data({work_no, name, date, d_date, p_no, add, map_link, f_status, w_status});
     await data.save()
     
     const no = await Data.findOne({ work_no });
@@ -283,12 +283,12 @@ router.post('/mea', async(req,res) => {
 // backend 2 ma aavela data edit karva
 router.post('/update-edit', async (req, res) => {
   try {
-    const { work_no, name, date, d_date, p_no, add, map_link, f_type, f_status, w_status } = req.body;
+    const { work_no, name, date, d_date, p_no, add, map_link, f_status, w_status } = req.body;
 
     // Find the document by work_no and update it
     const updatedData = await Data.findOneAndUpdate(
       { work_no: work_no },
-      { date: date, name: name, d_date: d_date, p_no: p_no, add: add, map_link: map_link, f_type: f_type, f_status: f_status, w_status: w_status },
+      { date: date, name: name, d_date: d_date, p_no: p_no, add: add, map_link: map_link, f_status: f_status, w_status: w_status },
       { new: true }
     );
 
@@ -319,7 +319,6 @@ router.post('/measure-save', async (req, res) => {
       p_no,
       add,
       map_link,
-      f_type,
       f_status,
       w_status,
       roman = 0,
@@ -427,7 +426,6 @@ router.post('/measure-save', async (req, res) => {
       p_no,
       add,
       map_link,
-      f_type,
       f_status,
       w_status,
       roman: roman !== "" ? Number(roman) : null,

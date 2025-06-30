@@ -6,7 +6,7 @@ order no - 5 exist but 05 can also be made
 
 2. Backend nu measurement 
 
-add selection list in room name like bedroom , hall, kitchen etc. And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
+And roller add karvanu che? type of curtain ma.(Last ma karvu kumar ne puchi ne)
 backend and fitter bane 1 time par 1 field bhare to shu thase?
 date and d_date (ask kumar)
 
@@ -14,16 +14,16 @@ date and d_date (ask kumar)
 
 autofill karya pachi quotation table ma kai changes karine direct bill banvse to changes save ni thse ??
 
-Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne)
+Do you need readonly sub total and grand total (Last ma karvu kumar ne puchi ne) yes 
 
 4. Fitter 
 
 Fittermeasure page:= 
 fitter ne total parts and total fabric joise? (ask kumar)
-curtains fitter add karse ?? ena mate editable rakhvana che ?? (ask kumar)
+curtains fitter add karse ?? (yes) ena mate editable rakhvana che ?? (ask kumar) fitter mate yes and back mate pan 
 only 2 options kumar ne puchi ne 
 
-5. Tailor (not resposive)
+5. Tailor (not resposive) tailor and fitter responsive joise j 
 
 both Tailor pages are not resposive   
 total parts and total fabric tailor ne joise ?? (ask kumar)
@@ -58,11 +58,45 @@ like [
     } ] this. 
 
 
-----> While Explaining to janmay kumar 
-kem time lagyo? aakhu measurement page j change kari nakhyu. pela only 20 windows add kari sakta, 
-and ae pan just last ma j add kari sakta, have game tya game atli add kari sakso.
-quotation page autofill karyu 
-selective items for bill (aa feature add karyu)
 
+
+
+
+
+
+
+
+work to do imp 
+
+backend page;-
+1. remove fabric type
+in quotation table blackout require 
+fitting charges
+shiping address
+roller chanel 
+type of curtian ma add 
+aluminum channel 
+readonly sub total & grand total 
+add suggestion list of names 
+add terms and condition in quotation page
+
+tailor:- 
+1. add new column for fabric recived or not yes or no with colour 
+
+bill page
+fabric mtr
+amer / ring stichung part
+roller / roman sq.ft
+chanle ft
+fitting charges pcs 
+round off auto
+add sign
+update bank details 
+
+admin fabrics status  
+
+
+universal
+edit work status 
 
 
