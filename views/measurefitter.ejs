@@ -90,6 +90,8 @@
             let roman = 0;
             let american = 0;
             let ring = 0;
+            let rollerTotal = 0;
+            let aluminumWidthTotal = 0;
 
             // Get arrays of all inputs by their names (jQuery returns array-like objects)
             const curtains = $("select[name='curtain[]'], input[name='curtain[]']");
@@ -127,9 +129,13 @@
                 }
                 if (type === "american") {
                     american += Math.ceil(width / 20);
+                    aluminumWidthTotal += width;
                 }
                 if (type === "ring") {
                     ring += Math.ceil(width / 20);
+                }
+                if (type === "roller") {
+                    rollerTotal += fabricReq;
                 }
             }
 
@@ -139,6 +145,8 @@
             $("#ring").val(ring);
             $("input[name='total_fab_req']").val(totalFabric.toFixed(2));
             $("input[name='total_black_req']").val(totalBlackout.toFixed(2));
+            $("#roller").val(rollerTotal.toFixed(2));
+            $("#aluminum").val((aluminumWidthTotal / 12).toFixed(2));
         }
 
         // Event listeners on dynamic inputs
