@@ -70,23 +70,22 @@ work to do imp
 
 backend page:- maru done taru baki
 remove fabric type  (done)
-add color in roller (done) + 1st time entry time par colours nathi aavta ring roman roller na (Anshu)
--(minus) no red color different che measurement and quotation ma maybe(Anshu) (same aj che)
+f_type remove karyu atle backend and backend2 nu table box nanu motu karvu padse niche joo shipping add pan add karvanu che (Anshu)
+add color in roller + 1st time entry time par colours nathi aavta ring roman roller na (Anshu)
+-(minus) no red color different che measurement and quotation ma maybe(Anshu)
 in quotation table blackout require 	5 ( roller stiching , blackout req , alumium channel , ring_2 channel, fitting charges)  (Done)
 fitting charges (Done)
-shiping address add karvu backend page ma (Anshu) (done)
-f_type remove karyu atle backend and backend2 nu table box nanu motu karvu padse niche joo shipping add pan add karvanu che (Anshu) (done)
+shiping address add karvu backend page ma (Anshu)
 roller chanel (Done)
 type of curtian ma add (Done)
 aluminum channel (Done)
-readonly sub total & grand total (Anshu) (done) 
-add suggestion list of names 
-add terms and condition in quotation page (Anshu)  (done)
-add new column for fabric recived or not yes or no with colour also in admin (not in fitter) yes - green and no - red (Anshu) (done)
-curtain and fabric recevied colour in print (done)
+readonly sub total & grand total (Anshu)
+add suggestion list of names (Done)
+add terms and condition in quotation page (Anshu)
+add new column for fabric recived or not yes or no with colour also in admin (not in fitter) yes - green and no - red (Anshu) 
 
 tailor:- 
-1. add new column for fabric recived or not yes or no with colour readonly (done)
+1. add new column for fabric recived or not yes or no with colour readonly (Anshu)
 
 bill page:-
 [fabric = mtr
@@ -97,13 +96,15 @@ fitting charges = pcs] (Done)
 
 round off auto   (Done)
 add sign (Anshu) homecraft na folder ma che 
-update bank details (Anshu) Wp karse kumar  
+update bank details (Anshu) Wp karse kumar 
+roller color in fitter (anshu) (new)
 
-admin fabrics status add karvu (Anshu) (done)
+admin fabrics status add karvu (Anshu)
 
 
 universal
 edit work status (Anshu)
+
 
 
 =(SUM(IF(D12="Ring",E12,0),IF(D13="Ring",E13,0),IF(D14="Ring",E14,0),IF(D15="Ring",E15,0),IF(D16="Ring",E16,0),IF(D17="Ring",E17,0),IF(D18="Ring",E18,0),IF(D19="Ring",E19,0),IF(D20="Ring",E20,0),IF(D21="Ring",E21,0),IF(D22="Ring",E22,0),IF(D23="Ring",E23,0),IF(D24="Ring",E24,0),IF(D25="Ring",E25,0),IF(D26="Ring",E26,0)))/12

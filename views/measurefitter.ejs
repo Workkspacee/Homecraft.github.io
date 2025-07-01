@@ -188,6 +188,65 @@
         });
   </script>
 
+  <script>// For adding and deleting row
+  $(document).ready(function () {
+      const $tableBody = $('#tableBody');
+
+      // Function to clear inputs/selects in a row
+      function clearRowInputs($row) {
+          $row.find('input, select').each(function () {
+              if (this.tagName === 'SELECT') {
+                  $(this).val(''); // clear select
+              } else {
+                  $(this).val(''); // clear input
+              }
+          });
+      }
+
+      // Add new row
+      $tableBody.on('click', '.add-row', function () {
+          const $currentRow = $(this).closest('tr');
+          const $newRow = $currentRow.clone(false); // clone without event handlers
+
+          clearRowInputs($newRow);
+
+          $newRow.insertAfter($currentRow);
+
+          // If you have an autocomplete function for fabric or other inputs, call it here
+          if (typeof attachAutocomplete === 'function') {
+              attachAutocomplete($newRow);
+          }
+
+          // Focus first input in new row for better UX
+          $newRow.find('input, select').first().focus();
+
+          updateDeleteButtonState();
+      });
+
+      // Delete row
+      $tableBody.on('click', '.delete-row', function () {
+          const $rows = $tableBody.find('tr.data-row');
+          if ($rows.length > 1) {
+              $(this).closest('tr').remove();
+          }
+          updateDeleteButtonState();
+      });
+
+      // Disable Delete buttons if only one row left
+      function updateDeleteButtonState() {
+          const $rows = $tableBody.find('tr.data-row');
+          if ($rows.length <= 1) {
+              $rows.find('.delete-row').prop('disabled', true);
+          } else {
+              $rows.find('.delete-row').prop('disabled', false);
+          }
+      }
+
+      // Initial call to set button state
+      updateDeleteButtonState();
+
+  });
+  </script>
 </head>
 
 <body>
@@ -290,6 +349,7 @@
                               <th style="width: 5.938rem;">Fabric Required (meter)</th>
                               <th style="width: 5.813rem;">Blackout</th>
                               <th style="width: 5.938rem;">Blackout Required (meter)</th>
+                              <th style="width: 4.875rem;">Action</th>
                             </tr>
                         </thead>                                        
                          <tbody id="tableBody">
@@ -297,9 +357,9 @@
                                <% for (let i = 0; i < no.rows.length; i++) { const row = no.rows[i]; %>
 
                                 <tr class="data-row">
-                                    <td><input type="number" class="table_cell" name="room_number[]" step="any" value="<%= row.room_number ?? '' %>" readonly></td>
-                                    <td><input type="text" class="table_cell" name="room_name[]"  value="<%= row.room_name %>" readonly></td>
-                                    <td><input type="number" class="table_cell" name="window_number[]" step="any" value="<%= row.window_number ?? '' %>" readonly></td>
+                                    <td><input type="number" class="table_cell" name="room_number[]" step="any" value="<%= row.room_number ?? '' %>" ></td>
+                                    <td><input type="text" class="table_cell" name="room_name[]"  value="<%= row.room_name %>" ></td>
+                                    <td><input type="number" class="table_cell" name="window_number[]" step="any" value="<%= row.window_number ?? '' %>" ></td>
                                     <td class="curtain-cell">
                                         <select name="curtain[]" class="table_cell hover-arrow curtain-select" onchange="updateCurtainColor(this)">
                                             <option value=""></option>
@@ -318,6 +378,7 @@
                                     <input type="hidden" name="rate[]" step="any" value="<%= row.rate ?? '' %>">
                                     <input type="hidden" name="hsn[]" step="any" value="<%= row.hsn ?? '' %>">
                                     <input type="hidden" name="gst[]" step="any" value="<%= row.gst ?? '' %>"></td>
+                                    <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
                                 </tr>
                             <% } %>
                             <% } else { %>
@@ -336,13 +397,14 @@
                                   </td>
                                   <td><input class="table_cell" type="number" step="any" name="width[]"></td>
                                   <td><input class="table_cell" type="number" step="any" name="height[]"></td>
-                                  <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                  <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off" readonly></td>
                                   <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                   <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                   <td><input class="table_cell" type="number" step="any" name="blackout_req[]">
                                   <input type="hidden" name="rate[]" step="any">
                                   <input type="hidden" name="hsn[]" step="any">
                                   <input type="hidden" name="gst[]" step="any"></td>
+                                  <td><button type="button" class="btn btn-sm btn-success add-row">+</button> <button type="button" class="btn btn-sm btn-danger delete-row">-</button></td>
                                 </tr>   
                             <% } %>
 

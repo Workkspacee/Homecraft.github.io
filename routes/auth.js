@@ -345,6 +345,9 @@ router.post('/measure-save', async (req, res) => {
       roman = 0,
       american = 0,
       ring = 0,
+      roller = 0,
+      aluminum = 0, 
+      ri_2 = 0,
       total_fab_req,
       total_black_req,
       // measurement fields
@@ -455,6 +458,9 @@ router.post('/measure-save', async (req, res) => {
       roman: roman !== "" ? Number(roman) : null,
       american: american !== "" ? Number(american) : null,
       ring: ring !== "" ? Number(ring) : null,
+      roller: roller !== "" ? Number(roller) : null,
+      aluminum: aluminum !== "" ? Number(aluminum) : null,
+      ri_2: ri_2 !== "" ? Number(ri_2) : null,
       total_fab_req: total_fab_req !== "" ? Number(total_fab_req) : null,
       total_black_req: total_black_req !== "" ? Number(total_black_req) : null,
       rows,
@@ -600,6 +606,9 @@ router.post('/fitter-save', async (req, res) => {
       roman,
       american,
       ring,
+      roller,
+      aluminum,
+      ri_2,
       total_fab_req,
       total_black_req,
       w_status
@@ -607,40 +616,59 @@ router.post('/fitter-save', async (req, res) => {
 
     const rows = [];
 
-    for (let i = 0; i < room_name.length; i++) {
-      if (room_name[i] || fabric[i]) {
+    for (let i = 0; i < room_number.length; i++) {
+      const isRowFilled =
+        room_number[i]?.trim?.() ||
+        room_name[i]?.trim?.() ||
+        window_number[i]?.trim?.() ||
+        curtain[i]?.trim?.() ||
+        width[i]?.trim?.() ||
+        height[i]?.trim?.() ||
+        fabric[i]?.trim?.() ||
+        fabric_req[i]?.trim?.() ||
+        blackout[i]?.trim?.() ||
+        blackout_req[i]?.trim?.() ||
+        rate[i]?.trim?.() ||
+        hsn[i]?.trim?.() ||
+        gst[i]?.trim?.();
+        
+      if (isRowFilled) {
         rows.push({
-          room_number: Number(room_number[i]) || null,
+          room_number: room_number[i] !== "" ? Number(room_number[i]) : null,
           room_name: room_name[i] || '',
-          window_number: Number(window_number[i]) || null,
+          window_number: window_number[i] !== "" ? Number(window_number[i]) : null,
           curtain: curtain[i] || '',
-          width: Number(width[i]) || null,
-          height: Number(height[i]) || null,
+          width: width[i] !== "" ? Number(width[i]) : null,
+          height: height[i] !== "" ? Number(height[i]) : null,
           fabric: fabric[i] || '',
-          fabric_req: Number(fabric_req[i]) || null,
-          blackout: Number(blackout[i]) || null,
-          blackout_req: Number(blackout_req[i]) || null,
-          rate: Number(rate[i]) || null,
-          hsn: Number(hsn[i]) || null,
-          gst: Number(gst[i]) || null,
+          fabric_req: fabric_req[i] !== "" ? Number(fabric_req[i]) : null,
+          blackout: blackout[i] || '',
+          blackout_req: blackout_req[i] !== "" ? Number(blackout_req[i]) : null,
+          rate: rate[i] !== "" ? Number(rate[i]) : null,
+          hsn: hsn[i] !== "" ? Number(hsn[i]) : null,
+          gst: gst[i] !== "" ? Number(gst[i]) : null
         });
       }
     }
 
     const updateObject = {
+      work_no,
       name,
       date,
       d_date,
       p_no,
       add,
-      w_status,
       map_link,
-      rows,
-      roman: Number(roman) || 0,
-      american: Number(american) || 0,
-      ring: Number(ring) || 0,
-      total_fab_req: Number(total_fab_req) || 0,
-      total_black_req: Number(total_black_req) || 0
+      w_status,
+      roman: roman !== "" ? Number(roman) : null,
+      american: american !== "" ? Number(american) : null,
+      ring: ring !== "" ? Number(ring) : null,
+      roller: roller !== "" ? Number(roller) : null,
+      aluminum: aluminum !== "" ? Number(aluminum) : null,
+      ri_2: ri_2 !== "" ? Number(ri_2) : null,
+      total_fab_req: total_fab_req !== "" ? Number(total_fab_req) : null,
+      total_black_req: total_black_req !== "" ? Number(total_black_req) : null,
+      rows
     };
 
     // ✅ Await inside async function
