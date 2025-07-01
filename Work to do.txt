@@ -79,13 +79,14 @@ f_type remove karyu atle backend and backend2 nu table box nanu motu karvu padse
 roller chanel (Done)
 type of curtian ma add (Done)
 aluminum channel (Done)
-readonly sub total & grand total (Anshu)
+readonly sub total & grand total (Anshu) (done) 
 add suggestion list of names 
-add terms and condition in quotation page (Anshu)
-add new column for fabric recived or not yes or no with colour also in admin (not in fitter) yes - green and no - red (Anshu) 
+add terms and condition in quotation page (Anshu)  (done)
+add new column for fabric recived or not yes or no with colour also in admin (not in fitter) yes - green and no - red (Anshu) (done)
+curtain and fabric recevied colour in print (done)
 
 tailor:- 
-1. add new column for fabric recived or not yes or no with colour readonly
+1. add new column for fabric recived or not yes or no with colour readonly 
 
 bill page:-
 [fabric = mtr
