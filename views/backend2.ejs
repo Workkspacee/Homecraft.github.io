@@ -12,23 +12,7 @@
     opacity: 1 !important;
     transform: translateX(0%) !important;
   }
-</style>
-
-    <script>
-  function copyAddress() {
-    const main = document.getElementById('main_address');
-    const shipping = document.getElementById('shipping_address');
-    const checkbox = document.getElementById('sameAddress');
-
-    if (checkbox.checked) {
-      shipping.value = main.value;
-      shipping.readOnly = true; // optional
-    } else {
-      shipping.value = '';
-      shipping.readOnly = false;
-    }
-  }
-</script> 
+</style> 
 
 <script>
   function copyAddress() {
