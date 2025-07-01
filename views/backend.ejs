@@ -5,6 +5,54 @@
     <title>Backend</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" /> 
     <link rel="stylesheet" href="/backend.css">
+
+    <style>
+        .autocomplete-container {
+            position: relative;
+            width: 50%;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+
+        .autocomplete-input {
+            width: 100%;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            z-index: 99;
+            background-color: white;
+            width: 41%;
+            max-height: 100px;
+            overflow-y: auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        .autocomplete-item {
+            padding: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .autocomplete-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        @media (max-width: 600px) {
+            .autocomplete-input {
+            font-size: 16px;
+            padding: 8px;
+            }
+
+            .autocomplete-item {
+            font-size: 15px;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
@@ -32,11 +80,15 @@
                 <h2>View Work Order</h2>
                 <label>
                     <span>Work Order No.</span>
-                    <input type="text" name="work_no" <% if (typeof no !== 'undefined' && no.work_no) { %>
-                        value="<%= no.work_no %>"
-                    <% } %> />
+                    <input type="text" name="work_no" id="workNoInput" autocomplete="off"
+                        <% if (typeof no !== 'undefined' && no.work_no) { %>
+                            value="<%= no.work_no %>"
+                        <% } %>
+                        class="autocomplete-input"
+                    />
+                    <div id="autocomplete-list" class="autocomplete-items"></div>
                 </label>
-                <button class="submit" type="submit" formaction="/edit">View Order </button>
+                <button class="submit" type="submit" formaction="/edit">Edit Order </button>
                 <button class="submit" type="submit" formaction="/mea">Open Measurement </button>
             </div>
         </form>
@@ -130,5 +182,39 @@
     </script>
 <!-- partial -->
   
+    <script> // For suggestion list 
+        document.addEventListener("DOMContentLoaded", () => {
+        const input = document.getElementById("workNoInput");
+        const list = document.getElementById("autocomplete-list");
+
+        input.addEventListener("input", async () => {
+            const query = input.value.trim();
+            list.innerHTML = "";
+            if (!query) return;
+
+            try {
+            const res = await fetch(`/backend/suggestions?query=${encodeURIComponent(query)}`);
+            const suggestions = await res.json();
+
+            suggestions.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "autocomplete-item";
+                div.textContent = item;
+                div.addEventListener("click", () => {
+                input.value = item.split(" - ")[0]; // Only set work_no
+                list.innerHTML = "";
+                });
+                list.appendChild(div);
+            });
+            } catch (err) {
+            console.error("Autocomplete fetch error:", err);
+            }
+        });
+
+        document.addEventListener("click", function(e) {
+            if (e.target !== input) list.innerHTML = "";
+        });
+        });
+    </script>
 </body>
 </html>

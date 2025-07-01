@@ -191,6 +191,27 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 });
 
+// For Backend Suggestions
+router.get('/backend/suggestions', async (req, res) => {
+  try {
+    const query = req.query.query || '';
+    const suggestions = await Data.find({
+      $or: [
+        { work_no: { $regex: `^${query}`, $options: 'i' } },
+        { name: { $regex: `^${query}`, $options: 'i' } }
+      ]
+    })
+    .select('work_no name')
+    .limit(10);
+
+    const results = suggestions.map(s => `${s.work_no} - ${s.name}`);
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json([]);
+  }
+});
+
 //saving data in datadase from backend
 router.post('/details', async(req,res) => {
   try {
