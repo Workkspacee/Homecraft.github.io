@@ -949,9 +949,14 @@ let fabricData = [];
         const stitching = {
             roman: parseFloat($('#roman').val()) || 0,
             american: parseFloat($('#american').val()) || 0,
-            ring: parseFloat($('#ring').val()) || 0
+            ring: parseFloat($('#ring').val()) || 0,
+            roller: parseFloat($('#roller').val()) || 0, 
+            blackout: parseFloat($('[name="total_black_req"]').val()) || 0, 
+            aluminum1: parseFloat($('#aluminum').val()) || 0, 
+            aluminum2: parseFloat($('#ri_2').val()) || 0 
         };
 
+        // Fabric totals
         $('[name="fabric[]"]').each(function (i) {
             const name = $(this).val().trim();
             if (!name) return;
@@ -967,9 +972,10 @@ let fabricData = [];
             }
         });
 
+        // Clear existing table
         $('#quotationTableBody').html('');
 
-        // Inside $('#autofillQuotationBtn').on('click', function () {
+        // Append fabric rows
         Object.entries(fabricMap).forEach(([material, data]) => {
             const newRow = $('.quotation-template-row').clone().removeClass('quotation-template-row d-none');
             newRow.find('input').val('');
@@ -982,19 +988,48 @@ let fabricData = [];
             $('#quotationTableBody').append(newRow);
         });
 
-        for (const [key, qty] of Object.entries(stitching)) {
-            if (qty > 0) {
+        // Add stitching-like items
+        const customItems = [
+            { label: "Roman Stitching", value: stitching.roman },
+            { label: "American Stitching", value: stitching.american },
+            { label: "Ring Stitching", value: stitching.ring },
+            { label: "Roller Stitching", value: stitching.roller },
+            { label: "Blackout", value: stitching.blackout },
+            { label: "Aluminum Chanel", value: stitching.aluminum1 },
+            { label: "Aluminum Chanel", value: stitching.aluminum2 }
+        ];
+
+        customItems.forEach(item => {
+            if (item.value > 0) {
                 const newRow = $('.quotation-template-row').clone().removeClass('quotation-template-row d-none');
                 newRow.find('input').val('');
-                newRow.find('.material-input').val(key.charAt(0).toUpperCase() + key.slice(1) + ' Stitching');
-                newRow.find('.qty').val(qty);
-                newRow.find('.q_rate').val(0); // Default rate
-                newRow.find('.discount').val(0); // Default discount
-                newRow.find('.q_gst').val(0); // Default GST
-                newRow.find('.q_hsn').val(''); // Optional or blank
+                newRow.find('.material-input').val(item.label);
+                newRow.find('.qty').val(item.value);
+                newRow.find('.q_rate').val(0);
+                newRow.find('.discount').val(0);
+                newRow.find('.q_gst').val(0);
+                newRow.find('.q_hsn').val('');
                 calculateQuotationRow(newRow);
                 $('#quotationTableBody').append(newRow);
             }
+        });
+
+        // Add Fitting Charges
+        const fittingCount = $('[name="window_number[]"]').filter(function () {
+            return $(this).val().trim() !== '';
+        }).length;
+
+        if (fittingCount > 0) {
+            const newRow = $('.quotation-template-row').clone().removeClass('quotation-template-row d-none');
+            newRow.find('input').val('');
+            newRow.find('.material-input').val('Fitting Charges');
+            newRow.find('.qty').val(fittingCount);
+            newRow.find('.q_rate').val(0);
+            newRow.find('.discount').val(0);
+            newRow.find('.q_gst').val(0);
+            newRow.find('.q_hsn').val('');
+            calculateQuotationRow(newRow);
+            $('#quotationTableBody').append(newRow);
         }
 
         updateSrNo();

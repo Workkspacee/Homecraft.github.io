@@ -68,17 +68,17 @@ like [
 
 work to do imp 
 
-backend page:-
+backend page:- maru done taru baki
 remove fabric type  (done)
 f_type remove karyu atle backend and backend2 nu table box nanu karje (Anshu)
 add color in roller + 1st time entry time par colours nathi aavta ring roman roller na (Anshu)
 -(minus) no red color different che measurement and quotation ma (Anshu)
-in quotation table blackout require 	5 ( roller stiching , blackout req , alumium channel , ring_2 channel, fitting charges)
-fitting charges
+in quotation table blackout require 	5 ( roller stiching , blackout req , alumium channel , ring_2 channel, fitting charges)  (Done)
+fitting charges (Done)
 shiping address add karvu backend page ma (Anshu)
-roller chanel 
+roller chanel (Done)
 type of curtian ma add (Done)
-aluminum channel 
+aluminum channel (Done)
 readonly sub total & grand total (Anshu)
 add suggestion list of names 
 add terms and condition in quotation page (Anshu)
