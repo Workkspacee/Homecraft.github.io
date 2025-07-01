@@ -727,8 +727,15 @@
                                 </select>
                             </td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>Fabric Order Status</td>
+                            <td>
+                                <select name="f_status" class="login__input" style="width: auto;">
+                                    <option selected><%= no.f_status || 'Order Pending' %></option>
+                                    <option value="Order Pending">Order Pending</option>
+                                    <option value="Delivery Pending">Delivery Pending</option>
+                                    <option value="Delivered">Delivered</option>
+                                </select>
+                            </td>
                         </tr>
                     </table><br>
 
