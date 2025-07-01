@@ -175,6 +175,37 @@ function numberToWords(n) {
     return result + ' only';
 }
 </script>
+<script> // For auto coming units
+    function updateUnits() {
+        const materialInputs = document.querySelectorAll('input[name="material[]"]');
+        const unitInputs = document.querySelectorAll('input[name="unit[]"]');
+
+        const getUnit = (material) => {
+            material = material.trim().toLowerCase();
+
+            if (material === 'american stitching' || material === 'ring stitching') return 'Part';
+            if (material === 'roller stitching' || material === 'roman stitching') return 'Sq.ft';
+            if (material === 'aluminum chanel') return 'ft';
+            if (material === 'fitting charges') return 'Pcs';
+            return 'Mtr';
+        };
+
+        for (let i = 0; i < materialInputs.length; i++) {
+            const material = materialInputs[i].value || '';
+            const unit = getUnit(material);
+            unitInputs[i].value = unit;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateUnits(); // Call once on page load
+
+        const materialInputs = document.querySelectorAll('input[name="material[]"]');
+        materialInputs.forEach(input => {
+            input.addEventListener('input', updateUnits); // Update as user types
+        });
+    });
+</script>
 
 </head>
 <body>
@@ -305,7 +336,7 @@ function numberToWords(n) {
                             <td><input type="text" step="any" class="bill_table" name="material[]" value="<%= q.material || '' %>" style="font-weight: bold;"></td>
                             <td><input type="text" step="any" class="bill_table" name="q_hsn[]" value="<%= q.q_hsn || '' %>" style="width: 100%;"></td>
                             <td><input type="number" step="any" class="bill_table qty" name="qty[]" value="<%= q.qty || '' %>" style="width: 100%;"></td>
-                            <td>Mtr</td>
+                            <td><input type="text" name="unit[]" class="bill_table unit" style="width: 100%;"/></td>
                             <td>
                                 <input type="number" step="any" class="bill_table price_per_unit" name="price_per_unit[]" readonly style="width: 100%;">
                                 <input type="hidden" class="q_rate" name="q_rate[]" value="<%= q.q_rate || '' %>">
