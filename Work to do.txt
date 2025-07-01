@@ -70,18 +70,18 @@ work to do imp
 
 backend page:-
 remove fabric type  (done)
-f_type remove karyu atle backend and backend2 nu table box nanu karje 
-add color in roller + 1st time entry time par colours nathi aavta ring roman roller na 
-- no red color different che measurement and quotation ma 
-in quotation table blackout require 	
+f_type remove karyu atle backend and backend2 nu table box nanu karje (Anshu)
+add color in roller + 1st time entry time par colours nathi aavta ring roman roller na (Anshu)
+-(minus) no red color different che measurement and quotation ma (Anshu)
+in quotation table blackout require 	5 ( roller stiching , blackout req , alumium channel , ring_2 channel, fitting charges)
 fitting charges
-shiping address
+shiping address add karvu backend page ma (Anshu)
 roller chanel 
-type of curtian ma add 
+type of curtian ma add (Done)
 aluminum channel 
-readonly sub total & grand total 
+readonly sub total & grand total (Anshu)
 add suggestion list of names 
-add terms and condition in quotation page
+add terms and condition in quotation page (Anshu)
 
 tailor:- 
 1. add new column for fabric recived or not yes or no with colour 
