@@ -15,7 +15,8 @@ const rowSchema = new mongoose.Schema({
     blackout_req: { type: Number, default: null },
     rate: { type: Number, default: null },
     hsn: { type: Number, default: null },
-    gst: { type: Number, default: null }
+    gst: { type: Number, default: null },
+    fabric_received: { type: String, enum: ['Yes', 'No', ''], default: '' }
 });
 
 const quotationSchema = new mongoose.Schema({
@@ -37,6 +38,7 @@ const dataSchema = new mongoose.Schema({
     d_date: { type: Date },  
     p_no: { type: Number },
     add: { type: String },
+    s_add: { type: String },
     map_link: { type: String, default: '' },
     f_status: { type: String, enum: ['Order Pending', 'Delivery Pending', 'Delivered'] },
     w_status: { type: String, enum: ['Details Completed', 'Measurement Done', 'Quotation approved' , 'Stiching Done', 'Delivery Pending', 'Order Delivered'] },

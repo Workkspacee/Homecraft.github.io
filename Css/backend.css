@@ -43,7 +43,7 @@ button {
     position: relative;
     max-width: 56rem;
     width: 90%;
-    height: 160%;
+    height: 195%;
     margin: 6.2rem auto ;
     background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
@@ -60,6 +60,14 @@ button {
     transition: transform 1.2s ease-in-out, -webkit-transform 1.2s ease-in-out;
     padding: 3.11rem 1.87rem 0;
     
+}
+
+textarea{
+    resize: none;  
+    overflow: hidden; /* Hide scroll bar */
+    font-size: 15px;
+    line-height: 1.4;
+    font-family: 'Poppins', sans-serif;
 }
 
 .sub-cont {

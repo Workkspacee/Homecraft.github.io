@@ -361,6 +361,7 @@ router.post('/measure-save', async (req, res) => {
       rate = [],
       hsn = [],
       gst = [],
+      fabric_received = [], // ✅ NEW FIELD
       // quotation fields
       material = [],
       qty = [],
@@ -375,7 +376,7 @@ router.post('/measure-save', async (req, res) => {
 
     // ✅ Measurement Rows (filtered properly)
     const rows = [];
-    
+
     for (let i = 0; i < room_number.length; i++) {
       const isRowFilled =
         room_number[i]?.trim?.() ||
@@ -390,7 +391,8 @@ router.post('/measure-save', async (req, res) => {
         blackout_req[i]?.trim?.() ||
         rate[i]?.trim?.() ||
         hsn[i]?.trim?.() ||
-        gst[i]?.trim?.();
+        gst[i]?.trim?.() ||
+        fabric_received[i]?.trim?.(); // ✅ INCLUDE IN CHECK
 
       if (isRowFilled) {
         rows.push({
@@ -406,7 +408,8 @@ router.post('/measure-save', async (req, res) => {
           blackout_req: blackout_req[i] !== "" ? Number(blackout_req[i]) : null,
           rate: rate[i] !== "" ? Number(rate[i]) : null,
           hsn: hsn[i] !== "" ? Number(hsn[i]) : null,
-          gst: gst[i] !== "" ? Number(gst[i]) : null
+          gst: gst[i] !== "" ? Number(gst[i]) : null,
+          fabric_received: fabric_received[i] || '' // ✅ ADD FIELD TO OBJECT
         });
       }
     }
@@ -471,12 +474,12 @@ router.post('/measure-save', async (req, res) => {
       quotation: updatedData.quotation || []
     });
 
-
   } catch (error) {
     console.error('Error in /measure-save:', error);
     res.status(500).send('Error updating order');
   }
 });
+
 
 // For getting back from measurement to backend , tailor2 to tailor and measurefitter to fiter 
 router.post('/back', async(req,res) => {

@@ -52,6 +52,21 @@
             }
         }
     </style>
+    <script>
+        function copyAddress() {
+            const main = document.getElementById('main_address');
+            const shipping = document.getElementById('shipping_address');
+            const checkbox = document.getElementById('sameAddress');
+
+            if (checkbox.checked) {
+            shipping.value = main.value;
+            shipping.readOnly = true; // optional
+            } else {
+            shipping.value = '';
+            shipping.readOnly = false;
+            }
+        }
+    </script>    
 
 </head>
 <body>
@@ -117,7 +132,7 @@
                         <input type="text" name="work_no" required/>
                     </label>
                     <label>
-                        <span>Name:</span>
+                        <span>Name</span>
                         <input type="text" name="name" required/>
                     </label>
                     <label>
@@ -134,11 +149,22 @@
                     </label>
                     <label>
                         <span>Address</span>
-                        <textarea name="add" cols="30" rows="5"></textarea><br>
+                        <textarea id="main_address" name="add" cols="30" rows="5"></textarea><br>
                     </label>
                     <label>
                         <span>Google Maps Location</span>
                         <input type="url" name="map_link" placeholder="Paste Google Maps URL" >
+                    </label>
+                    <label>
+                        <span>Shipping Address</span> 
+                        <table style="margin-left: 60px;">
+                            <tr>
+                                <td></td>
+                                <td> <input type="checkbox" id="sameAddress" onclick="copyAddress()"></td>
+                                <td>Same as address</td>
+                            </tr>
+                        </table>
+                        <textarea id="shipping_address" name="s_add" cols="30" rows="5"></textarea><br>
                     </label>
                     <label>
                         <span>Fabric Order Status</span>

@@ -322,6 +322,8 @@
                 td.style.backgroundColor = 'rgb(106, 170, 106)';
             } else if (value === 'Roman') {
                 td.style.backgroundColor = 'rgba(79, 140, 221, 0.824)';
+            } else if (value === 'Roller') {
+                td.style.backgroundColor = 'rgb(247, 120, 35)';
             }
         }
 
@@ -333,6 +335,34 @@
         });
     </script>
 
+    <script>
+        function updateFabricStatusColor(selectEl) {
+            const td = selectEl.closest('td');
+            if (!td) return;
+
+            // Remove old color classes
+            td.classList.remove('green', 'red');
+
+            // Add new color class based on selection
+            if (selectEl.value === 'Yes') {
+            td.classList.add('green');
+            } else if (selectEl.value === 'No') {
+            td.classList.add('red');
+            }
+        }
+
+        // ✅ On page load: apply color to all select elements
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('select[name="fabric_received[]"]').forEach(select => {
+            updateFabricStatusColor(select);
+
+            // ✅ Also update color whenever user changes value
+            select.addEventListener('change', function () {
+                updateFabricStatusColor(this);
+            });
+            });
+        });
+    </script>
 
 </head>
 
@@ -479,6 +509,7 @@
                                 <th style="width: 4.375rem;">Width (in)</th>
                                 <th style="width: 4.688rem;">Height (in)</th>
                                 <th>Fabric</th>
+                                <th style="width: 5.938rem;">Fabric Received</th>
                                 <th style="width: 5.938rem;">Fabric Required (meter)</th>
                                 <th style="width: 5.813rem;">Blackout</th>
                                 <th style="width: 5.938rem;">Blackout Required (meter)</th>
@@ -505,6 +536,13 @@
                                     <td><input type="number" class="table_cell" step="any" name="width[]" value="<%= row.width ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="height[]" value="<%= row.height ?? '' %>"></td>
                                     <td><input type="text" class="table_cell" name="fabric[]" value="<%= row.fabric %>" autocomplete="off" ></td>
+                                    <td class="fabric-status-cell">
+                                        <select class="table_cell hover-arrow fabric-status" name="fabric_received[]" onchange="updateFabricStatusColor(this)">
+                                            <option value="" <%= row.fabric_received === '' ? 'selected' : '' %>></option>
+                                            <option value="Yes" <%= row.fabric_received === 'Yes' ? 'selected' : '' %>>Yes</option>
+                                            <option value="No" <%= row.fabric_received === 'No' ? 'selected' : '' %>>No</option>
+                                        </select>
+                                    </td>
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>"></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>"></td>
@@ -531,6 +569,13 @@
                                     <td><input class="table_cell" type="number" step="any" name="width[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="height[]"></td>
                                     <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                    <td>
+                                        <select class="table_cell hover-arrow" name="fabric_received[]">
+                                            <option value=""></option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </td>
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
@@ -554,23 +599,25 @@
                             <td></td>
                             <td></td>
                             <td></td>
+                            <td></td>
                             </tr>
 
                             <tr class="summary-row">
-                            <td></td>
-                            <td>Total Fabrics</td>
-                            <td></td>
-                            <td style="background-color: rgb(247, 120, 35);"><input type="number" id="roller" name="roller" class="login__input" value="<%= no.roller %>" readonly></td>                            
-                            <td style="background-color: rgb(239, 239, 95);"><input type="number" id="aluminum" name="aluminum" class="login__input" value="<%= no.aluminum %>" readonly></td>
-                            <td style="background-color: rgb(106, 170, 106);"><input type="number" id="ri_2" name="ri_2" class="login__input" value="<%= no.ri_2 %>" readonly></td>
-                            <td></td>
-                            <td>
-                                <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
-                            </td>
-                            <td></td>
-                            <td>
-                                <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
-                            </td> 
+                                <td></td>
+                                <td>Total Fabrics</td>
+                                <td></td>
+                                <td style="background-color: rgb(247, 120, 35);"><input type="number" id="roller" name="roller" class="login__input" value="<%= no.roller %>" readonly></td>                            
+                                <td style="background-color: rgb(239, 239, 95);"><input type="number" id="aluminum" name="aluminum" class="login__input" value="<%= no.aluminum %>" readonly></td>
+                                <td style="background-color: rgb(106, 170, 106);"><input type="number" id="ri_2" name="ri_2" class="login__input" value="<%= no.ri_2 %>" readonly></td>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <input type="number" step="any" class="login__input" name="total_fab_req"  value="<%= no.total_fab_req %>" readonly>
+                                </td>
+                                <td></td>
+                                <td>
+                                    <input type="number" step="any" class="login__input" name="total_black_req"  value="<%= no.total_black_req %>" readonly>
+                                </td>
                             </tr>
                         </tbody> 
                     </table><br/><br/>
