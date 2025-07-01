@@ -64,13 +64,19 @@
 
         function updateFinalTotal() {
             const subTotal = parseFloat(document.getElementById('amount_total')?.value) || 0;
-            const roundOff = parseFloat(document.getElementById('round_off')?.value) || 0;
-            const final = subTotal + roundOff;
 
+            // ✅ Calculate round off automatically
+            const rounded = Math.round(subTotal);
+            const roundOff = (rounded - subTotal);
+
+            const roundOffInput = document.getElementById('round_off');
             const finalTotalInput = document.getElementById('final_total');
-            if (finalTotalInput) finalTotalInput.value = final.toFixed(2);
 
-            const words = numberToWords(final);
+            if (roundOffInput) roundOffInput.value = roundOff.toFixed(2);
+            if (finalTotalInput) finalTotalInput.value = rounded.toFixed(2);
+
+            // ✅ Convert to words
+            const words = numberToWords(rounded);
             const wordsCell = document.getElementById('finalTotalInWords');
             if (wordsCell) wordsCell.textContent = words;
         }
@@ -347,7 +353,7 @@ function numberToWords(n) {
                     </tr>
                     <tr>
                         <td style="text-align: right;"><strong>Round Off (₹):</strong></td>
-                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control bill_table" style="width: 60%;" /></td>
+                        <td><input type="number" id="round_off" name="round_off" step="any" class="form-control bill_table" style="width: 60%;" readonly/></td>
                     </tr>
                     <tr>
                         <td style="text-align: right; border-top: 2px solid black;"><strong>Final Total (₹):</strong></td>

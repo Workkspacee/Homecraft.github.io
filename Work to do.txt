@@ -94,7 +94,7 @@ roller / roman = sq.ft
 chanle = ft
 fitting charges = pcs] (Anshu) 
 
-round off auto
+round off auto   (Done)
 add sign (Anshu) homecraft na folder ma che 
 update bank details (Anshu) Wp karse kumar 
 
