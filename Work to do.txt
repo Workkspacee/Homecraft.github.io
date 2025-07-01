@@ -86,7 +86,7 @@ add new column for fabric recived or not yes or no with colour also in admin (no
 curtain and fabric recevied colour in print (done)
 
 tailor:- 
-1. add new column for fabric recived or not yes or no with colour readonly 
+1. add new column for fabric recived or not yes or no with colour readonly (done)
 
 bill page:-
 [fabric = mtr
@@ -97,7 +97,7 @@ fitting charges = pcs] (Done)
 
 round off auto   (Done)
 add sign (Anshu) homecraft na folder ma che 
-update bank details (Anshu) Wp karse kumar 
+update bank details (Anshu) Wp karse kumar  
 
 admin fabrics status add karvu (Anshu)
 

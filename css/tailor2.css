@@ -89,6 +89,14 @@ table {
 	background: #b5d1f5;
 }
 
+.fabric-status-cell.green {
+  background-color: #61e54f !important; /* Light green */
+}
+
+.fabric-status-cell.red {
+  background-color: #e83737 !important; /* Light red */
+}
+
 input[type="number"] {
     -moz-appearance: textfield; /* For Firefox */
     -webkit-appearance: none;   /* For Chrome, Safari, and Opera */

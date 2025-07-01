@@ -39,6 +39,37 @@
         });
     </script>
 
+    <script>
+    function updateFabricStatusColor(inputEl) {
+        const td = inputEl.closest('td');
+        if (!td) return;
+
+        // Remove old color classes
+        td.classList.remove('green', 'red');
+
+        // Add new color class based on value
+        const value = inputEl.value.trim().toLowerCase();
+        if (value === 'yes') {
+            td.classList.add('green');
+        } else if (value === 'no') {
+            td.classList.add('red');
+        }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        // Apply color on all fabric status inputs on page load
+        document.querySelectorAll('input[name="fabric_received[]"]').forEach(input => {
+            updateFabricStatusColor(input);
+
+            // If these inputs are ever changed manually with JS, listen for custom events
+            input.addEventListener('input', function () {
+                updateFabricStatusColor(this);
+            });
+        });
+    });
+</script>
+
+
 </head>
 <body>
     
@@ -121,6 +152,7 @@
                                 <th style="width: 4.375rem;">Width (in)</th>
                                 <th style="width: 4.688rem;">Height (in)</th>
                                 <th>Fabric</th>
+                                <th style="width: 5.938rem;">Fabric Received</th>
                                 <th style="width: 5.938rem;">Fabric Required (meter)</th>
                                 <th style="width: 5.813rem;">Blackout</th>
                                 <th style="width: 5.938rem;">Blackout Required (meter)</th>
@@ -140,6 +172,9 @@
                                     <td><input type="number" class="table_cell" step="any" name="width[]" value="<%= row.width ?? '' %>" readonly></td>
                                     <td><input type="number" class="table_cell" step="any" name="height[]" value="<%= row.height ?? '' %>" readonly></td>
                                     <td><input type="text" class="table_cell" name="fabric[]" value="<%= row.fabric %>" autocomplete="off" readonly></td>
+                                    <td class="fabric-status-cell">
+                                        <input type="text" class="table_cell hover-arrow fabric-status" name="fabric_received[]" onchange="updateFabricStatusColor(this)" value="<%= row.fabric_received %>" readonly>
+                                    </td>
                                     <td><input type="number" class="table_cell" step="any" name="fabric_req[]" value="<%= row.fabric_req ?? '' %>" readonly></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout[]" value="<%= row.blackout ?? '' %>" readonly></td>
                                     <td><input type="number" class="table_cell" step="any" name="blackout_req[]" value="<%= row.blackout_req ?? '' %>" readonly></td>
@@ -164,6 +199,13 @@
                                     <td><input class="table_cell" type="number" step="any" name="width[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="height[]"></td>
                                     <td><input class="table_cell" type="text" name="fabric[]" autocomplete="off"></td>
+                                    <td>
+                                        <select class="table_cell hover-arrow" name="fabric_received[]">
+                                            <option value=""></option>
+                                            <option value="Yes">Yes</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </td>
                                     <td><input class="table_cell" type="number" step="any" name="fabric_req[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout[]"></td>
                                     <td><input class="table_cell" type="number" step="any" name="blackout_req[]"></td>
