@@ -304,29 +304,6 @@ input[type=number] {
   word-break: break-word;
 }
 
-
-
-@media only screen and (max-width: 48rem) {
-    .container {
-        padding-top: 2rem;
-    }
-
-    .login {
-        width: 90%;
-    }
-}
-
-@media only screen and (max-width: 30rem) {
-    .container {
-        padding-top: 1rem;
-    }
-
-    .login {
-        width: 95%;
-    }
-}
-
-
 @media print {
     body {
         margin: 0;
@@ -515,6 +492,18 @@ input[type=number] {
     }
 }
 
-
+@media only screen and (max-width: 935px) 
+{
+  body {
+    width: 68.75rem;
+  }
+  .container {
+    width: 68.75rem;
+    margin: 0rem 0rem 0rem 0rem;
+  }
+  .jumbotron {
+    width: 68.75rem;
+  }
+}
 
 

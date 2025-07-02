@@ -171,22 +171,18 @@ p{
     transition: background-color 0.3s ease;
 
 }
-@media screen and (max-width: 700px) {
-    .container {
-        margin: 1.244rem auto;
-        margin-top: 8rem;
-        padding: 1.244rem;
-    }
 
-    body{
-        background-size: 137rem;
-    }
-
-    .footer{
-        width: 81rem;
-    }
-
-    .header1{
-        width: 81rem;
-    }
+@media only screen and (max-width: 935px) 
+{
+  body {
+    width: 68.75rem;
+  }
+  .container {
+    width: 68.75rem;
+    margin: 0rem 0rem 0rem 0rem;
+    
+  }
+  .jumbotron {
+    width: 68.75rem;
+  }
 }
