@@ -9,33 +9,38 @@
 </head>
 <body>
 
-    <% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
-    <script>
-        alert("<%= popupMessage %>");
-    </script>
-    <% } %>
+    <div class="page-wrapper">
+        
+        <% if (typeof popupMessage !== 'undefined' && popupMessage) { %>
+        <script>
+            alert("<%= popupMessage %>");
+        </script>
+        <% } %>
 
-    <header class="header1">
-        <nav>
-            <img src="/logo.png" alt="logo">
-            <h3 style="font-weight: 700;"><a href="/logout">Log out</a></h3>
-        </nav>
-    </header>
-    
-    <div class="container">
-        <h2>Enter Work Order Number</h2>
-        <form action="/tai" method="post">
-            <input type="text" class="input-field" placeholder="Enter work order number here" name="work_no">
-            <center><button type="submit" class="submit-btn">Submit</button></center>
-        </form>
+        <header class="header1">
+            <nav>
+                <img src="/logo.png" alt="logo">
+                <h3 style="font-weight: 700;"><a href="/logout">Log out</a></h3>
+            </nav>
+        </header>
+        
+        <div class="container">
+            <h2>Enter Work Order Number</h2>
+            <form action="/tai" method="post">
+                <input type="text" class="input-field" placeholder="Enter work order number here" name="work_no">
+                <center><button type="submit" class="submit-btn">Submit</button></center>
+            </form>
+            
+        </div>
+
+        <footer class="footer">
+            <nav>
+                <p> &copy; 2024 All Rights Reserved.</p>
+                <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
+            </nav>
+        </footer>
+
     </div>
-
-    <footer class="footer">
-        <nav>
-            <p> &copy; 2024 All Rights Reserved.</p>
-            <p>Designed with <i class="fas fa-heart" style="color:red"></i></p>
-        </nav>
-    </footer>
 
 </body>
 </html>
