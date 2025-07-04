@@ -121,7 +121,7 @@ table.tax td{
   /* Page setup */
   @page {
     size: A4 portrait;
-    margin: 10mm;
+    margin: 8mm;
   }
 
   /* Hide elements not needed in print */
@@ -129,107 +129,72 @@ table.tax td{
     display: none !important;
   }
 
-  body {
-    font-size: 10pt;
-    background: white;
-    color: black;
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: white !important;
+    color: black !important;
+    font-size: 9pt !important;
+    overflow: hidden !important;
   }
 
   .container {
-    width: 190mm;
+    width: 100%;
+    padding: 0;
     margin: 0 auto;
-    padding: 5mm;
+    transform: scale(0.95); /* Adjust scale to fit on one page */
+    transform-origin: top left;
     box-shadow: none;
     border: none;
     overflow: hidden;
   }
 
-  /* General table settings */
   table {
     width: 100% !important;
     border-collapse: collapse;
-    table-layout: auto !important;
+    table-layout: fixed;
   }
 
-  /* Bill table */
   table.bill {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: auto !important;
+    font-size: 8pt;
   }
 
   table.bill th,
   table.bill td {
-    font-size: 9pt;
-    padding: 4px;
+    padding: 2px !important;
     border: 1px solid black;
-    vertical-align: top;
-    word-wrap: break-word;
     word-break: break-word;
   }
 
-  /* Shrink # column */
   table.bill th:nth-child(1),
   table.bill td:nth-child(1) {
-    width: 25px !important;
+    width: 20px !important;
     text-align: center;
   }
 
-  /* Expand Item Name / Fabric column */
   table.bill th:nth-child(2),
   table.bill td:nth-child(2) {
     width: 30% !important;
-    white-space: normal !important;
-    word-wrap: break-word;
-    word-break: break-word;
   }
 
-  /* Fix Unit column (5th column) */
   table.bill th:nth-child(5),
   table.bill td:nth-child(5) {
-    width: 50px !important;
+    width: 45px !important;
     text-align: center;
-    white-space: nowrap;
   }
 
-  /* Ensure input fields in td wrap properly */
   table.bill td input[type="text"] {
     max-width: 100%;
-    white-space: normal;
-    word-break: break-word;
+    font-size: 7pt;
   }
 
-  /* Fix vehicle number input */
-  input[name="vehicle_number"],
-  .vehicle-number {
-    width: 100% !important;
-    font-size: 10pt;
-    white-space: normal !important;
-    word-break: break-word;
-    overflow: visible !important;
-  }
-
-  /* Hide borders in tax table */
-  table.tax,
-  table.tax td,
-  table.tax th {
-    border: none !important;
-  }
-
-  table.tax td,
-  table.tax th {
-    padding: 4px;
-    font-size: 9pt;
-    text-align: center;
-  }
-
-  /* Input & form fields formatting */
   input, textarea, select {
-    font-size: 10pt;
-    width: 100%;
+    font-size: 9pt;
     border: none;
-    background: none;
-    box-sizing: border-box;
+    background: none !important;
+    width: 100%;
+    padding: 0;
+    margin: 0;
   }
 
   input[readonly], input[disabled] {
@@ -237,19 +202,25 @@ table.tax td{
   }
 
   textarea {
-    overflow: visible;
     resize: none;
+    overflow: hidden;
   }
 
   input[type="date"] {
-    width: 100% !important;
-    font-size: 10pt;
+    font-size: 9pt;
     padding: 0;
   }
 
-  /* Prevent breaking important sections */
-  tr, td, th, div, p {
-    page-break-inside: avoid;
+  /* Tax table cleanup */
+  table.tax, table.tax th, table.tax td {
+    border: none !important;
+    font-size: 9pt;
+  }
+
+  /* Prevent page breaks in rows */
+  table, tr, td, th, div, p {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
   .page-break {
