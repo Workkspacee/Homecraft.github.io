@@ -30,7 +30,6 @@ html, body {
 
 .container {
     padding-top: 3.125rem;
-    overflow-x: auto;
 }
 
 .jumbotron {
@@ -180,7 +179,6 @@ p{
   .container {
     width: 68.75rem;
     margin: 0rem 0rem 0rem 0rem;
-    
   }
   .jumbotron {
     width: 68.75rem;
