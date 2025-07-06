@@ -477,13 +477,6 @@
                         </div>
                         <div class="step" data-step="4">
                             <div class="step-icon">
-                            <i class="fas fa-truck"></i>
-                            </div>
-                            <div class="node"></div>
-                            <div class="step-label">Delivery Pending</div> 
-                        </div>
-                        <div class="step" data-step="5">
-                            <div class="step-icon">
                             <i class="fas fa-circle-check"></i>
                             </div>
                             <div class="node"></div>
@@ -722,7 +715,6 @@
                                     <option value="Measurement Done" <%= no.w_status === 'Measurement Done' ? 'selected' : '' %>>Measurement Done</option>
                                     <option value="Quotation approved" <%= no.w_status === 'Quotation approved' ? 'selected' : '' %>>Quotation approved</option>
                                     <option value="Stiching Done" <%= no.w_status === 'Stiching Done' ? 'selected' : '' %>>Stiching Done</option>
-                                    <option value="Delivery Pending" <%= no.w_status === 'Delivery Pending' ? 'selected' : '' %>>Delivery Pending</option>
                                     <option value="Order Delivered" <%= no.w_status === 'Order Delivered' ? 'selected' : '' %>>Order Delivered</option>
                                 </select>
                             </td>
@@ -1132,8 +1124,7 @@ let fabricData = [];
     'Measurement Done': 1,
     'Quotation approved': 2,
     'Stiching Done': 3,
-    'Delivery Pending': 4,
-    'Order Delivered': 5
+    'Order Delivered': 4
   };
 
   function updateProgress() {

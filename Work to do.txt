@@ -95,15 +95,15 @@ chanle = ft
 fitting charges = pcs] (Done)
 
 round off auto   (Done)
-add sign (Anshu) homecraft na folder ma che 
-update bank details (Anshu) Wp karse kumar 
+add sign (Anshu) homecraft na folder ma che (done)
+update bank details (Anshu) Wp karse kumar (done)
 roller color in fitter (anshu) (new) (done)
 
-admin fabrics status add karvu (Anshu)
+admin fabrics status add karvu (Anshu) (done)
 
 
 universal
-edit work status (Anshu)
+edit work status (Anshu) (done)
 
 
 
